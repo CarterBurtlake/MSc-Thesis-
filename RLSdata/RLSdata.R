@@ -22,5 +22,5 @@ library(ggspatial)
 library(sf)
 
 # Load and manipulate data -----------------------------------------------------
-abalone <- read_csv("RLSdata/RLSBarkelySound_Inverts2021-2024.csv") # this is the averaged abalone data from RLS
+abalone <- read_csv("Data/abalone_RLS.csv") # this is the averaged abalone data from RLS
 
