@@ -1,2 +1,2 @@
-# MSc-Thesis-
-Code for all of the work related to my MSc thesis work
+# MSc-Thesis-Chapter2-
+Code for all of the work related to my MSc thesis second chapter work
