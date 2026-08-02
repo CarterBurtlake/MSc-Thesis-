@@ -25,3 +25,6 @@ library(sf)
 abalone <- read_csv("Data/abalone_RLS.csv") # this is the averaged abalone data from RLS
 
 #test
+View(abalone)
+#okay so this data seems to only have data up until 2024
+#I should redo this process with the complete dataset... 
