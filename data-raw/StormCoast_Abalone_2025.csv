@@ -1,0 +1,3984 @@
+﻿Date,Diver,Site ID,Transect ID,Quadrat #,Abalone Shell Length (cm),Alive or Dead
+2025-01-22,DVM,Second Beach,SDB01,1,1,alive
+2025-01-22,DVM,Second Beach,SDB01,1,13,alive
+2025-01-22,DVM,Second Beach,SDB01,2,11,alive
+2025-01-22,DVM,Second Beach,SDB01,3,0,na
+2025-01-22,DVM,Second Beach,SDB01,4,0,na
+2025-01-22,DVM,Second Beach,SDB01,5,0,na
+2025-01-22,DVM,Second Beach,SDB01,6,9,alive
+2025-01-22,DVM,Second Beach,SDB01,7,0,na
+2025-01-22,DVM,Second Beach,SDB01,8,9,alive
+2025-01-22,DVM,Second Beach,SDB01,9,0,na
+2025-01-22,DVM,Second Beach,SDB01,10,0,na
+2025-01-22,DVM,Second Beach,SDB01,11,0,na
+2025-01-22,DVM,Second Beach,SDB01,12,0,na
+2025-01-22,DVM,Second Beach,SDB01,13,0,na
+2025-01-22,DVM,Second Beach,SDB01,14,0,na
+2025-01-22,DVM,Second Beach,SDB01,15,0,na
+2025-01-22,DVM,Edward King East,EKE01,1,0,na
+2025-01-22,DVM,Edward King East,EKE01,2,0,na
+2025-01-22,DVM,Edward King East,EKE01,3,10,alive
+2025-01-22,DVM,Edward King East,EKE01,3,6,alive
+2025-01-22,DVM,Edward King East,EKE01,4,6,alive
+2025-01-22,DVM,Edward King East,EKE01,4,8,alive
+2025-01-22,DVM,Edward King East,EKE01,5,4,alive
+2025-01-22,DVM,Edward King East,EKE01,5,4.5,alive
+2025-01-22,DVM,Edward King East,EKE01,5,11,alive
+2025-01-22,DVM,Edward King East,EKE01,6,4.5,alive
+2025-01-22,DVM,Edward King East,EKE01,6,7,alive
+2025-01-22,DVM,Edward King East,EKE01,6,6,alive
+2025-01-22,DVM,Edward King East,EKE01,7,7,alive
+2025-01-22,DVM,Edward King East,EKE01,8,5.5,alive
+2025-01-22,DVM,Edward King East,EKE01,8,5,alive
+2025-01-22,DVM,Edward King East,EKE01,8,6,alive
+2025-01-22,DVM,Edward King East,EKE01,8,4,alive
+2025-01-22,DVM,Edward King East,EKE01,8,5.5,alive
+2025-01-22,DVM,Edward King East,EKE01,8,4,alive
+2025-01-22,DVM,Edward King East,EKE01,8,6,alive
+2025-01-22,DVM,Edward King East,EKE01,9,2,alive
+2025-01-22,DVM,Edward King East,EKE01,9,5,alive
+2025-01-22,DVM,Edward King East,EKE01,9,5,alive
+2025-01-22,DVM,Edward King East,EKE01,10,3,alive
+2025-01-22,DVM,Edward King East,EKE01,11,4,dead
+2025-01-22,DVM,Edward King East,EKE01,12,8.5,alive
+2025-01-22,DVM,Edward King East,EKE01,12,4,alive
+2025-01-22,DVM,Edward King East,EKE01,12,2,alive
+2025-01-22,DVM,Edward King East,EKE01,13,4,alive
+2025-01-22,DVM,Edward King East,EKE01,14,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,30,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,29,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,28,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,27,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,26,6,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,26,6,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,26,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,26,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,26,9,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,25,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,24,8,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,24,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,23,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,23,7,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,23,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,22,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,22,6,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,21,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,21,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,20,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,19,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,18,5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,17,0,na
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,16,6,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,16,6.5,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,15,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,15,3,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,14,3,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,14,4,alive
+2025-01-22,AJM,Edward King SW Pyramid,SWP01,14,7,alive
+2025-01-22,AJM,Eagle Bay,EGB01,30,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,29,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,28,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,27,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,26,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,25,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,24,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,23,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,22,0,na
+2025-01-22,AJM,Eagle Bay,EGB01,21,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,21,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,21,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,20,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,20,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,20,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,20,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,20,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,0.5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,19,6,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,6,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,18,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,17,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,6,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,16,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,15,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,6,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,6,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,14,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,13,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,5,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,4,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,1,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,3,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,2,alive
+2025-01-22,AJM,Eagle Bay,EGB01,12,3,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,1,6,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,2,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,3,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,3,6.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,4.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,4,7.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,5,5.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,5,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,5,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,5,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,6,5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,6,4,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,7,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,7,8.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,7,5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,7,6,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,7,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,8,4,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,8,4,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,9,5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,9,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,9,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,9,6,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,9,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,10,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,10,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,10,8.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,11,7.5,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,11,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,11,8,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,12,7,alive
+2025-01-22,DVM,Ohiat Islet,OHI01,13,0,na
+2025-01-22,DVM,Ohiat Islet,OHI01,14,0,na
+2025-01-22,DVM,Ohiat Islet,OHI01,15,0,na
+2025-01-22,AJM,Second Beach,SDB01,30,0,na
+2025-01-22,AJM,Second Beach,SDB01,29,0,na
+2025-01-22,AJM,Second Beach,SDB01,28,0,na
+2025-01-22,AJM,Second Beach,SDB01,27,0,na
+2025-01-22,AJM,Second Beach,SDB01,26,0,na
+2025-01-22,AJM,Second Beach,SDB01,25,0,na
+2025-01-22,AJM,Second Beach,SDB01,23,0,na
+2025-01-22,AJM,Second Beach,SDB01,22,0,na
+2025-01-22,AJM,Second Beach,SDB01,21,0,na
+2025-01-22,AJM,Second Beach,SDB01,20,7,alive
+2025-01-22,AJM,Second Beach,SDB01,20,4,alive
+2025-01-22,AJM,Second Beach,SDB01,19,0,na
+2025-01-22,AJM,Second Beach,SDB01,18,0,na
+2025-01-22,AJM,Second Beach,SDB01,17,7,alive
+2025-01-22,AJM,Second Beach,SDB01,16,0,na
+2025-01-22,DVM,Kirby,KBY01,1,11,alive
+2025-01-22,DVM,Kirby,KBY01,2,0,na
+2025-01-22,DVM,Kirby,KBY01,3,0,na
+2025-01-22,DVM,Kirby,KBY01,4,7,alive
+2025-01-22,DVM,Kirby,KBY01,5,8,alive
+2025-01-22,DVM,Kirby,KBY01,5,9,alive
+2025-01-22,DVM,Kirby,KBY01,6,0,na
+2025-01-22,DVM,Kirby,KBY01,7,7,alive
+2025-01-22,DVM,Kirby,KBY01,7,5,dead
+2025-01-22,DVM,Kirby,KBY01,8,0,na
+2025-01-22,DVM,Kirby,KBY01,9,0,na
+2025-01-22,DVM,Kirby,KBY01,10,9.5,alive
+2025-01-22,DVM,Kirby,KBY01,11,0,na
+2025-01-22,DVM,Kirby,KBY01,12,0,na
+2025-01-22,DVM,Kirby,KBY01,13,1,alive
+2025-01-22,DVM,Kirby,KBY01,13,1.5,alive
+2025-01-22,DVM,Kirby,KBY01,14,6,dead
+2025-01-22,DVM,Kirby,KBY01,14,7,alive
+2025-01-22,DVM,Kirby,KBY01,15,0,na
+2025-01-22,DVM,Kirby,KBY01,16,0,na
+2025-01-22,AJM,Kirby,KBY01,30,0,na
+2025-01-22,AJM,Kirby,KBY01,29,0,na
+2025-01-22,AJM,Kirby,KBY01,28,0,na
+2025-01-22,AJM,Kirby,KBY01,27,0,na
+2025-01-22,AJM,Kirby,KBY01,26,0,na
+2025-01-22,AJM,Kirby,KBY01,25,0,na
+2025-01-22,AJM,Kirby,KBY01,24,0,na
+2025-01-22,AJM,Kirby,KBY01,23,1,alive
+2025-01-22,AJM,Kirby,KBY01,23,4,alive
+2025-01-22,AJM,Kirby,KBY01,22,0,na
+2025-01-22,AJM,Kirby,KBY01,21,0,na
+2025-01-22,AJM,Kirby,KBY01,20,11,alive
+2025-01-22,AJM,Kirby,KBY01,19,0,na
+2025-01-22,AJM,Kirby,KBY01,18,0,na
+2025-01-22,AJM,Kirby,KBY01,17,0,na
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,1,9,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,2,4,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,2,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,2,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,2,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,2,8,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,3,9,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,3,8,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,9,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,4,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,5,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,5,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,6,0,na
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,7,0,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,8,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,8,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,8,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,9,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,9,5.5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,9,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,9,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,9,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,4,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,6.5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,10,8,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,2,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,4,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,6,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,11,3,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,5.5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,5.5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,4,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,3,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,7,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,12,5,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,13,3,alive
+2025-01-22,DVM,Edward King SW Pyramid,SWP01,13,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,1,10,alive
+2025-01-22,DVM,Eagle Bay,EGB01,1,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,1,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,1,10,alive
+2025-01-22,DVM,Eagle Bay,EGB01,1,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,10,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,2,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,9,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,3,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,4,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,4,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,4,10,alive
+2025-01-22,DVM,Eagle Bay,EGB01,4,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,5,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,6,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,2.5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,6,dead
+2025-01-22,DVM,Eagle Bay,EGB01,7,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,7,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,1,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,1,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,1,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,1.5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,8,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,12,dead
+2025-01-22,DVM,Eagle Bay,EGB01,9,2.5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,9,7,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,10,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,9,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,10,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,6,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,5,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,4,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,2,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,3,alive
+2025-01-22,DVM,Eagle Bay,EGB01,11,7,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,30,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,29,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,28,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,27,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,26,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,25,3.5,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,24,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,23,2,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,22,4,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,22,4,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,21,5,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,20,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,19,7,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,18,5,alive
+2025-01-22,AJM,Ohiat Islet,OHI01,17,0,na
+2025-01-22,AJM,Ohiat Islet,OHI01,16,0,na
+2025-01-22,AJM,Edward King East,EKE01,30,0,na
+2025-01-22,AJM,Edward King East,EKE01,29,0,na
+2025-01-22,AJM,Edward King East,EKE01,28,7,alive
+2025-01-22,AJM,Edward King East,EKE01,27,0,na
+2025-01-22,AJM,Edward King East,EKE01,26,0,na
+2025-01-22,AJM,Edward King East,EKE01,25,0,na
+2025-01-22,AJM,Edward King East,EKE01,24,7,alive
+2025-01-22,AJM,Edward King East,EKE01,24,8,alive
+2025-01-22,AJM,Edward King East,EKE01,23,4,alive
+2025-01-22,AJM,Edward King East,EKE01,23,4,alive
+2025-01-22,AJM,Edward King East,EKE01,22,5,alive
+2025-01-22,AJM,Edward King East,EKE01,21,0,na
+2025-01-22,AJM,Edward King East,EKE01,20,2.5,alive
+2025-01-22,AJM,Edward King East,EKE01,19,0,na
+2025-01-22,AJM,Edward King East,EKE01,18,0,na
+2025-01-22,AJM,Edward King East,EKE01,17,4,alive
+2025-01-22,AJM,Edward King East,EKE01,17,3,alive
+2025-01-22,AJM,Edward King East,EKE01,16,3,alive
+2025-01-22,AJM,Edward King East,EKE01,16,5,alive
+2025-01-22,AJM,Edward King East,EKE01,15,1,alive
+2025-01-23,JOC,Diana SE,DSE01,1,11,alive
+2025-01-23,JOC,Diana SE,DSE01,1,6,alive
+2025-01-23,JOC,Diana SE,DSE01,1,6,alive
+2025-01-23,JOC,Diana SE,DSE01,1,7,dead
+2025-01-23,JOC,Diana SE,DSE01,2,6.5,alive
+2025-01-23,JOC,Diana SE,DSE01,3,7,alive
+2025-01-23,JOC,Diana SE,DSE01,3,5,alive
+2025-01-23,JOC,Diana SE,DSE01,3,7,alive
+2025-01-23,JOC,Diana SE,DSE01,4,5,alive
+2025-01-23,JOC,Diana SE,DSE01,4,8,dead
+2025-01-23,JOC,Diana SE,DSE01,4,7,alive
+2025-01-23,JOC,Diana SE,DSE01,4,6,alive
+2025-01-23,JOC,Diana SE,DSE01,4,7,alive
+2025-01-23,JOC,Diana SE,DSE01,5,8,alive
+2025-01-23,JOC,Diana SE,DSE01,5,7,alive
+2025-01-23,JOC,Diana SE,DSE01,6,4,alive
+2025-01-23,JOC,Diana SE,DSE01,6,6,alive
+2025-01-23,JOC,Diana SE,DSE01,6,10,dead
+2025-01-23,JOC,Diana SE,DSE01,6,4,alive
+2025-01-23,JOC,Diana SE,DSE01,6,5,alive
+2025-01-23,JOC,Diana SE,DSE01,6,5,alive
+2025-01-23,JOC,Diana SE,DSE01,7,5,alive
+2025-01-23,JOC,Diana SE,DSE01,7,6.5,alive
+2025-01-23,JOC,Diana SE,DSE01,7,7,alive
+2025-01-23,JOC,Diana SE,DSE01,7,8,dead
+2025-01-23,JOC,Diana SE,DSE01,8,7,alive
+2025-01-23,JOC,Diana SE,DSE01,8,6,alive
+2025-01-23,JOC,Diana SE,DSE01,8,8,alive
+2025-01-23,JOC,Diana SE,DSE01,9,4,alive
+2025-01-23,JOC,Diana SE,DSE01,9,6,alive
+2025-01-23,JOC,Diana SE,DSE01,9,6,alive
+2025-01-23,JOC,Diana SE,DSE01,9,5,alive
+2025-01-23,JOC,Diana SE,DSE01,9,5,alive
+2025-01-23,JOC,Diana SE,DSE01,9,6,alive
+2025-01-23,JOC,Diana SE,DSE01,10,6,alive
+2025-01-23,JOC,Diana SE,DSE01,11,5,alive
+2025-01-23,JOC,Diana SE,DSE01,11,7,alive
+2025-01-23,JOC,Diana SE,DSE01,11,6,dead
+2025-01-23,JOC,Diana SE,DSE01,12,7.5,alive
+2025-01-23,DVM,Helby SW,HSW01,30,0,na
+2025-01-23,DVM,Helby SW,HSW01,29,10,alive
+2025-01-23,DVM,Helby SW,HSW01,29,9,alive
+2025-01-23,DVM,Helby SW,HSW01,28,9,alive
+2025-01-23,DVM,Helby SW,HSW01,28,9,alive
+2025-01-23,DVM,Helby SW,HSW01,28,10,alive
+2025-01-23,DVM,Helby SW,HSW01,27,10,alive
+2025-01-23,DVM,Helby SW,HSW01,27,10,alive
+2025-01-23,DVM,Helby SW,HSW01,27,9,alive
+2025-01-23,DVM,Helby SW,HSW01,27,9,alive
+2025-01-23,DVM,Helby SW,HSW01,27,9,alive
+2025-01-23,DVM,Helby SW,HSW01,26,8,alive
+2025-01-23,DVM,Helby SW,HSW01,26,7,alive
+2025-01-23,DVM,Helby SW,HSW01,25,8,alive
+2025-01-23,DVM,Helby SW,HSW01,25,10,alive
+2025-01-23,DVM,Helby SW,HSW01,25,8,alive
+2025-01-23,DVM,Helby SW,HSW01,25,8,alive
+2025-01-23,DVM,Helby SW,HSW01,24,9,alive
+2025-01-23,DVM,Helby SW,HSW01,24,8,alive
+2025-01-23,DVM,Helby SW,HSW01,23,10,alive
+2025-01-23,DVM,Helby SW,HSW01,23,7,alive
+2025-01-23,DVM,Helby SW,HSW01,23,7,alive
+2025-01-23,DVM,Helby SW,HSW01,22,10,alive
+2025-01-23,DVM,Helby SW,HSW01,21,0,na
+2025-01-23,DVM,Helby SW,HSW01,20,0,na
+2025-01-23,DVM,Helby SW,HSW01,19,9,alive
+2025-01-23,DVM,Helby SW,HSW01,19,9,alive
+2025-01-23,DVM,Helby SW,HSW01,18,9,alive
+2025-01-23,DVM,Helby SW,HSW01,18,14,dead
+2025-01-23,DVM,Helby SW,HSW01,18,7,alive
+2025-01-23,DVM,Helby SW,HSW01,18,8,alive
+2025-01-23,DVM,Helby SW,HSW01,18,5,alive
+2025-01-23,DVM,Helby SW,HSW01,18,8,alive
+2025-01-23,DVM,Helby SW,HSW01,17,10,dead
+2025-01-23,DVM,Helby SW,HSW01,17,12,dead
+2025-01-23,DVM,Helby SW,HSW01,16,7,alive
+2025-01-23,DVM,Helby SW,HSW01,15,9,alive
+2025-01-23,DVM,Helby SW,HSW01,15,9.5,alive
+2025-01-23,DVM,Helby SW,HSW01,15,9,alive
+2025-01-23,DVM,Helby SW,HSW01,14,8,alive
+2025-01-23,DVM,Helby SW,HSW01,31,8,dead
+2025-01-23,JOC,Taylor Rock,TAR01,1,9,alive
+2025-01-23,JOC,Taylor Rock,TAR01,1,4,alive
+2025-01-23,JOC,Taylor Rock,TAR01,1,7,alive
+2025-01-23,JOC,Taylor Rock,TAR01,1,7,alive
+2025-01-23,JOC,Taylor Rock,TAR01,2,8,alive
+2025-01-23,JOC,Taylor Rock,TAR01,2,7,alive
+2025-01-23,JOC,Taylor Rock,TAR01,3,6,alive
+2025-01-23,JOC,Taylor Rock,TAR01,4,0,na
+2025-01-23,JOC,Taylor Rock,TAR01,5,11,alive
+2025-01-23,JOC,Taylor Rock,TAR01,5,9,alive
+2025-01-23,JOC,Taylor Rock,TAR01,5,10,alive
+2025-01-23,JOC,Taylor Rock,TAR01,6,4,dead
+2025-01-23,JOC,Taylor Rock,TAR01,7,0,na
+2025-01-23,JOC,Taylor Rock,TAR01,8,8,alive
+2025-01-23,JOC,Taylor Rock,TAR01,9,0,na
+2025-01-23,JOC,Taylor Rock,TAR01,10,9,dead
+2025-01-23,JOC,Taylor Rock,TAR01,10,8,alive
+2025-01-23,JOC,Taylor Rock,TAR01,10,7,alive
+2025-01-23,JOC,Taylor Rock,TAR01,11,0,na
+2025-01-23,JOC,Taylor Rock,TAR01,12,6,alive
+2025-01-23,JOC,Taylor Rock,TAR01,13,9,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,5,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,7,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,6,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,6,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,8,alive
+2025-01-23,JOC,Taylor Rock,TAR01,14,8,alive
+2025-01-23,DVM,Wizard South,WZS01,30,6,alive
+2025-01-23,DVM,Wizard South,WZS01,29,7,alive
+2025-01-23,DVM,Wizard South,WZS01,28,6.5,alive
+2025-01-23,DVM,Wizard South,WZS01,27,0,na
+2025-01-23,DVM,Wizard South,WZS01,26,0,na
+2025-01-23,DVM,Wizard South,WZS01,25,0,na
+2025-01-23,DVM,Wizard South,WZS01,24,0,na
+2025-01-23,DVM,Wizard South,WZS01,23,0,na
+2025-01-23,DVM,Wizard South,WZS01,22,0,na
+2025-01-23,DVM,Wizard South,WZS01,21,0,na
+2025-01-23,DVM,Wizard South,WZS01,20,0,na
+2025-01-23,DVM,Wizard South,WZS01,19,9,alive
+2025-01-23,DVM,Wizard South,WZS01,19,7,alive
+2025-01-23,DVM,Wizard South,WZS01,19,7,alive
+2025-01-23,DVM,Wizard South,WZS01,19,6,alive
+2025-01-23,DVM,Wizard South,WZS01,18,7,alive
+2025-01-23,DVM,Wizard South,WZS01,17,8.5,alive
+2025-01-23,DVM,Wizard South,WZS01,17,10,alive
+2025-01-23,DVM,Wizard South,WZS01,16,8,alive
+2025-01-23,DVM,Wizard South,WZS01,16,7,alive
+2025-01-23,DVM,Wizard South,WZS01,16,7,alive
+2025-01-23,DVM,Wizard South,WZS01,15,0,na
+2025-01-23,DVM,Wizard South,WZS01,31,8,alive
+2025-01-23,DVM,Wizard South,WZS01,31,7,alive
+2025-01-23,JOC,Helby SW,HSW01,1,6,alive
+2025-01-23,JOC,Helby SW,HSW01,1,12,alive
+2025-01-23,JOC,Helby SW,HSW01,1,10,alive
+2025-01-23,JOC,Helby SW,HSW01,1,7,alive
+2025-01-23,JOC,Helby SW,HSW01,1,10,alive
+2025-01-23,JOC,Helby SW,HSW01,1,5,alive
+2025-01-23,JOC,Helby SW,HSW01,1,9,alive
+2025-01-23,JOC,Helby SW,HSW01,1,7,alive
+2025-01-23,JOC,Helby SW,HSW01,1,6,alive
+2025-01-23,JOC,Helby SW,HSW01,1,11,alive
+2025-01-23,JOC,Helby SW,HSW01,2,7,alive
+2025-01-23,JOC,Helby SW,HSW01,2,6,alive
+2025-01-23,JOC,Helby SW,HSW01,2,6,alive
+2025-01-23,JOC,Helby SW,HSW01,2,2,alive
+2025-01-23,JOC,Helby SW,HSW01,3,6,alive
+2025-01-23,JOC,Helby SW,HSW01,3,8,alive
+2025-01-23,JOC,Helby SW,HSW01,3,6,alive
+2025-01-23,JOC,Helby SW,HSW01,3,7,alive
+2025-01-23,JOC,Helby SW,HSW01,3,7,alive
+2025-01-23,JOC,Helby SW,HSW01,4,6,alive
+2025-01-23,JOC,Helby SW,HSW01,4,5,alive
+2025-01-23,JOC,Helby SW,HSW01,4,7,alive
+2025-01-23,JOC,Helby SW,HSW01,5,8,alive
+2025-01-23,JOC,Helby SW,HSW01,5,7,alive
+2025-01-23,JOC,Helby SW,HSW01,6,8,alive
+2025-01-23,JOC,Helby SW,HSW01,6,4,alive
+2025-01-23,JOC,Helby SW,HSW01,6,4.5,alive
+2025-01-23,JOC,Helby SW,HSW01,6,5,alive
+2025-01-23,JOC,Helby SW,HSW01,6,7,alive
+2025-01-23,JOC,Helby SW,HSW01,7,7,alive
+2025-01-23,JOC,Helby SW,HSW01,7,6,alive
+2025-01-23,JOC,Helby SW,HSW01,7,5,alive
+2025-01-23,JOC,Helby SW,HSW01,7,4,alive
+2025-01-23,JOC,Helby SW,HSW01,7,6,alive
+2025-01-23,JOC,Helby SW,HSW01,8,6,alive
+2025-01-23,JOC,Helby SW,HSW01,8,5,alive
+2025-01-23,JOC,Helby SW,HSW01,8,2,alive
+2025-01-23,JOC,Helby SW,HSW01,8,1,alive
+2025-01-23,JOC,Helby SW,HSW01,8,8,alive
+2025-01-23,JOC,Helby SW,HSW01,8,4,alive
+2025-01-23,JOC,Helby SW,HSW01,9,5,alive
+2025-01-23,JOC,Helby SW,HSW01,9,3,alive
+2025-01-23,JOC,Helby SW,HSW01,10,7,alive
+2025-01-23,JOC,Helby SW,HSW01,10,6,alive
+2025-01-23,JOC,Helby SW,HSW01,10,5,alive
+2025-01-23,JOC,Helby SW,HSW01,10,7,alive
+2025-01-23,JOC,Helby SW,HSW01,10,8.5,alive
+2025-01-23,JOC,Helby SW,HSW01,10,3,alive
+2025-01-23,JOC,Helby SW,HSW01,10,7,alive
+2025-01-23,JOC,Helby SW,HSW01,11,6,alive
+2025-01-23,JOC,Helby SW,HSW01,11,7,alive
+2025-01-23,JOC,Helby SW,HSW01,11,6,alive
+2025-01-23,JOC,Helby SW,HSW01,12,7,alive
+2025-01-23,JOC,Helby SW,HSW01,13,6,alive
+2025-01-23,JOC,Helby SW,HSW01,13,9,dead
+2025-01-23,JOC,Helby SW,HSW01,13,8,alive
+2025-01-23,JOC,Helby SW,HSW01,13,4,dead
+2025-01-23,DVM,Aguilar,AGU01,30,0,na
+2025-01-23,DVM,Aguilar,AGU01,29,0,na
+2025-01-23,DVM,Aguilar,AGU01,28,0,na
+2025-01-23,DVM,Aguilar,AGU01,27,0,na
+2025-01-23,DVM,Aguilar,AGU01,26,0,na
+2025-01-23,DVM,Aguilar,AGU01,25,0,na
+2025-01-23,DVM,Aguilar,AGU01,24,0,na
+2025-01-23,DVM,Aguilar,AGU01,23,12,dead
+2025-01-23,DVM,Aguilar,AGU01,22,0,na
+2025-01-23,DVM,Aguilar,AGU01,21,0,na
+2025-01-23,DVM,Aguilar,AGU01,20,0,na
+2025-01-23,DVM,Aguilar,AGU01,19,0,na
+2025-01-23,DVM,Aguilar,AGU01,18,0,na
+2025-01-23,DVM,Aguilar,AGU01,17,2,alive
+2025-01-23,DVM,Aguilar,AGU01,17,8,alive
+2025-01-23,DVM,Aguilar,AGU01,16,0,na
+2025-01-23,DVM,Aguilar,AGU01,15,0,na
+2025-01-23,DVM,Aguilar,AGU01,14,2,alive
+2025-01-23,DVM,Aguilar,AGU01,14,2,alive
+2025-01-23,DVM,Aguilar,AGU01,14,2,alive
+2025-01-23,DVM,Aguilar,AGU01,14,3,alive
+2025-01-23,JOC,Wizard South,WZS01,1,6,alive
+2025-01-23,JOC,Wizard South,WZS01,1,7,alive
+2025-01-23,JOC,Wizard South,WZS01,1,8,alive
+2025-01-23,JOC,Wizard South,WZS01,2,6,alive
+2025-01-23,JOC,Wizard South,WZS01,3,6,alive
+2025-01-23,JOC,Wizard South,WZS01,3,7,alive
+2025-01-23,JOC,Wizard South,WZS01,4,8,alive
+2025-01-23,JOC,Wizard South,WZS01,5,0,na
+2025-01-23,JOC,Wizard South,WZS01,6,6.5,alive
+2025-01-23,JOC,Wizard South,WZS01,7,7,alive
+2025-01-23,JOC,Wizard South,WZS01,7,6,alive
+2025-01-23,JOC,Wizard South,WZS01,7,7,alive
+2025-01-23,JOC,Wizard South,WZS01,8,6,dead
+2025-01-23,JOC,Wizard South,WZS01,8,7,alive
+2025-01-23,JOC,Wizard South,WZS01,8,6,alive
+2025-01-23,JOC,Wizard South,WZS01,8,6,alive
+2025-01-23,JOC,Wizard South,WZS01,9,5,alive
+2025-01-23,JOC,Wizard South,WZS01,9,7,alive
+2025-01-23,JOC,Wizard South,WZS01,9,7,alive
+2025-01-23,JOC,Wizard South,WZS01,10,7,alive
+2025-01-23,JOC,Wizard South,WZS01,10,6,alive
+2025-01-23,JOC,Wizard South,WZS01,11,0,na
+2025-01-23,JOC,Wizard South,WZS01,12,0,na
+2025-01-23,JOC,Wizard South,WZS01,13,6,alive
+2025-01-23,JOC,Wizard South,WZS01,13,4,alive
+2025-01-23,JOC,Wizard South,WZS01,13,4,alive
+2025-01-23,JOC,Wizard South,WZS01,14,0,na
+2025-01-23,DVM,Wizard North,WZN01,30,0,na
+2025-01-23,DVM,Wizard North,WZN01,29,0,na
+2025-01-23,DVM,Wizard North,WZN01,28,0,na
+2025-01-23,DVM,Wizard North,WZN01,27,8,alive
+2025-01-23,DVM,Wizard North,WZN01,26,6,alive
+2025-01-23,DVM,Wizard North,WZN01,25,0,na
+2025-01-23,DVM,Wizard North,WZN01,24,0,na
+2025-01-23,DVM,Wizard North,WZN01,23,7,alive
+2025-01-23,DVM,Wizard North,WZN01,22,7,alive
+2025-01-23,DVM,Wizard North,WZN01,21,8,alive
+2025-01-23,DVM,Wizard North,WZN01,20,0,na
+2025-01-23,DVM,Wizard North,WZN01,19,5,alive
+2025-01-23,DVM,Wizard North,WZN01,18,8,alive
+2025-01-23,DVM,Wizard North,WZN01,18,7.5,alive
+2025-01-23,DVM,Wizard North,WZN01,18,8,alive
+2025-01-23,DVM,Wizard North,WZN01,17,0,na
+2025-01-23,DVM,Wizard North,WZN01,16,7,alive
+2025-01-23,JOC,Aguilar,AGU01,1,4,alive
+2025-01-23,JOC,Aguilar,AGU01,1,6,alive
+2025-01-23,JOC,Aguilar,AGU01,1,8,alive
+2025-01-23,JOC,Aguilar,AGU01,1,4,alive
+2025-01-23,JOC,Aguilar,AGU01,1,5,alive
+2025-01-23,JOC,Aguilar,AGU01,1,4,alive
+2025-01-23,JOC,Aguilar,AGU01,1,6,alive
+2025-01-23,JOC,Aguilar,AGU01,1,5,alive
+2025-01-23,JOC,Aguilar,AGU01,1,7,dead
+2025-01-23,JOC,Aguilar,AGU01,2,5,alive
+2025-01-23,JOC,Aguilar,AGU01,2,4,alive
+2025-01-23,JOC,Aguilar,AGU01,2,5,alive
+2025-01-23,JOC,Aguilar,AGU01,2,5,alive
+2025-01-23,JOC,Aguilar,AGU01,2,6,alive
+2025-01-23,JOC,Aguilar,AGU01,3,6,alive
+2025-01-23,JOC,Aguilar,AGU01,3,5,alive
+2025-01-23,JOC,Aguilar,AGU01,3,4,alive
+2025-01-23,JOC,Aguilar,AGU01,4,5,alive
+2025-01-23,JOC,Aguilar,AGU01,4,4,alive
+2025-01-23,JOC,Aguilar,AGU01,4,5,alive
+2025-01-23,JOC,Aguilar,AGU01,4,5,alive
+2025-01-23,JOC,Aguilar,AGU01,5,2,alive
+2025-01-23,JOC,Aguilar,AGU01,5,5,alive
+2025-01-23,JOC,Aguilar,AGU01,5,6,alive
+2025-01-23,JOC,Aguilar,AGU01,5,4,alive
+2025-01-23,JOC,Aguilar,AGU01,5,5,alive
+2025-01-23,JOC,Aguilar,AGU01,6,0,na
+2025-01-23,JOC,Aguilar,AGU01,7,3,alive
+2025-01-23,JOC,Aguilar,AGU01,7,5,dead
+2025-01-23,JOC,Aguilar,AGU01,7,4,dead
+2025-01-23,JOC,Aguilar,AGU01,7,5,alive
+2025-01-23,JOC,Aguilar,AGU01,7,2,alive
+2025-01-23,JOC,Aguilar,AGU01,8,4,alive
+2025-01-23,JOC,Aguilar,AGU01,8,5,alive
+2025-01-23,JOC,Aguilar,AGU01,8,6,alive
+2025-01-23,JOC,Aguilar,AGU01,9,7,alive
+2025-01-23,JOC,Aguilar,AGU01,9,6,alive
+2025-01-23,JOC,Aguilar,AGU01,10,0,na
+2025-01-23,JOC,Aguilar,AGU01,11,6,alive
+2025-01-23,JOC,Aguilar,AGU01,11,5,alive
+2025-01-23,JOC,Aguilar,AGU01,11,8,alive
+2025-01-23,JOC,Aguilar,AGU01,12,5,alive
+2025-01-23,JOC,Aguilar,AGU01,13,1.5,alive
+2025-01-23,JOC,Aguilar,AGU01,13,1,alive
+2025-01-23,JOC,Aguilar,AGU01,13,1,alive
+2025-01-23,JOC,Wizard North,WZN01,1,9,alive
+2025-01-23,JOC,Wizard North,WZN01,2,8,alive
+2025-01-23,JOC,Wizard North,WZN01,2,9,alive
+2025-01-23,JOC,Wizard North,WZN01,3,6,alive
+2025-01-23,JOC,Wizard North,WZN01,3,13,alive
+2025-01-23,JOC,Wizard North,WZN01,4,6,alive
+2025-01-23,JOC,Wizard North,WZN01,4,8,alive
+2025-01-23,JOC,Wizard North,WZN01,4,5,alive
+2025-01-23,JOC,Wizard North,WZN01,4,6,alive
+2025-01-23,JOC,Wizard North,WZN01,4,10,alive
+2025-01-23,JOC,Wizard North,WZN01,4,7,alive
+2025-01-23,JOC,Wizard North,WZN01,5,8,alive
+2025-01-23,JOC,Wizard North,WZN01,5,7,alive
+2025-01-23,JOC,Wizard North,WZN01,5,7,alive
+2025-01-23,JOC,Wizard North,WZN01,5,6,alive
+2025-01-23,JOC,Wizard North,WZN01,5,6,alive
+2025-01-23,JOC,Wizard North,WZN01,5,7,alive
+2025-01-23,JOC,Wizard North,WZN01,5,10,alive
+2025-01-23,JOC,Wizard North,WZN01,6,0,na
+2025-01-23,JOC,Wizard North,WZN01,7,0,na
+2025-01-23,JOC,Wizard North,WZN01,8,0,na
+2025-01-23,JOC,Wizard North,WZN01,9,7,alive
+2025-01-23,JOC,Wizard North,WZN01,10,5,alive
+2025-01-23,JOC,Wizard North,WZN01,10,6,alive
+2025-01-23,JOC,Wizard North,WZN01,11,0,na
+2025-01-23,JOC,Wizard North,WZN01,12,7,alive
+2025-01-23,JOC,Wizard North,WZN01,13,8,alive
+2025-01-23,JOC,Wizard North,WZN01,13,7,alive
+2025-01-23,JOC,Wizard North,WZN01,14,0,na
+2025-01-23,JOC,Wizard North,WZN01,15,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,30,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,29,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,28,9,alive
+2025-01-23,DVM,Taylor Rock,TAR01,28,3,alive
+2025-01-23,DVM,Taylor Rock,TAR01,27,6,alive
+2025-01-23,DVM,Taylor Rock,TAR01,27,10,alive
+2025-01-23,DVM,Taylor Rock,TAR01,26,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,25,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,24,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,23,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,23,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,22,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,21,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,20,10,alive
+2025-01-23,DVM,Taylor Rock,TAR01,19,0,na
+2025-01-23,DVM,Taylor Rock,TAR01,18,11,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,9,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,9,alive
+2025-01-23,DVM,Taylor Rock,TAR01,18,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,10,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,17,7,alive
+2025-01-23,DVM,Taylor Rock,TAR01,16,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,16,8,alive
+2025-01-23,DVM,Taylor Rock,TAR01,15,0,na
+2025-01-23,DVM,Diana SE,DSE01,30,0,na
+2025-01-23,DVM,Diana SE,DSE01,29,0,na
+2025-01-23,DVM,Diana SE,DSE01,28,0,na
+2025-01-23,DVM,Diana SE,DSE01,27,0,na
+2025-01-23,DVM,Diana SE,DSE01,26,0,na
+2025-01-23,DVM,Diana SE,DSE01,25,0,na
+2025-01-23,DVM,Diana SE,DSE01,24,0,na
+2025-01-23,DVM,Diana SE,DSE01,23,0,na
+2025-01-23,DVM,Diana SE,DSE01,22,9.5,alive
+2025-01-23,DVM,Diana SE,DSE01,21,7,alive
+2025-01-23,DVM,Diana SE,DSE01,21,7,alive
+2025-01-23,DVM,Diana SE,DSE01,21,6,alive
+2025-01-23,DVM,Diana SE,DSE01,20,0,na
+2025-01-23,DVM,Diana SE,DSE01,20,8,alive
+2025-01-23,DVM,Diana SE,DSE01,20,5,alive
+2025-01-23,DVM,Diana SE,DSE01,19,0,na
+2025-01-23,DVM,Diana SE,DSE01,18,0,na
+2025-01-23,DVM,Diana SE,DSE01,17,0,na
+2025-01-23,DVM,Diana SE,DSE01,16,0,na
+2025-01-23,DVM,Diana SE,DSE01,15,0,na
+2025-01-23,DVM,Diana SE,DSE01,14,5,alive
+2025-01-23,DVM,Diana SE,DSE01,13,5,alive
+2025-01-23,DVM,Diana SE,DSE01,13,7,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,6,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,7,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,6,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,1,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,7,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,2,4.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,6,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,6,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,3,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,4,5,dead
+2025-01-24,JOC,Dixon Southwest,DIX01,4,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,4,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,4,2.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,5,1.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,6,0,na
+2025-01-24,JOC,Dixon Southwest,DIX01,7,0,na
+2025-01-24,JOC,Dixon Southwest,DIX01,8,7,dead
+2025-01-24,JOC,Dixon Southwest,DIX01,9,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,9,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,1.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,10,6,dead
+2025-01-24,JOC,Dixon Southwest,DIX01,11,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,11,5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,11,2.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,11,1,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,11,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,12,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,12,2.5,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,12,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,12,2,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,13,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,13,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,13,4,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,14,3,alive
+2025-01-24,JOC,Dixon Southwest,DIX01,14,2.5,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,30,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,29,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,28,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,27,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,26,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,25,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,24,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,23,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,22,0,na
+2025-01-24,AJM,Dixon Southwest,DIX01,21,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,3,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,12,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,1,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,20,1,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,3,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,3,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,1,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,19,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,18,1,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,17,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,16,3,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,16,2,alive
+2025-01-24,AJM,Dixon Southwest,DIX01,16,3,dead
+2025-01-24,AJM,Dixon Southwest,DIX01,15,3,alive
+2025-01-24,JOC,Goby Town,GOT01,1,7,alive
+2025-01-24,JOC,Goby Town,GOT01,1,8,alive
+2025-01-24,JOC,Goby Town,GOT01,1,6,alive
+2025-01-24,JOC,Goby Town,GOT01,1,6,alive
+2025-01-24,JOC,Goby Town,GOT01,1,7,alive
+2025-01-24,JOC,Goby Town,GOT01,2,6,alive
+2025-01-24,JOC,Goby Town,GOT01,2,7,alive
+2025-01-24,JOC,Goby Town,GOT01,2,8,alive
+2025-01-24,JOC,Goby Town,GOT01,2,7,alive
+2025-01-24,JOC,Goby Town,GOT01,2,9,alive
+2025-01-24,JOC,Goby Town,GOT01,3,4,alive
+2025-01-24,JOC,Goby Town,GOT01,3,6,alive
+2025-01-24,JOC,Goby Town,GOT01,3,4,alive
+2025-01-24,JOC,Goby Town,GOT01,3,7,alive
+2025-01-24,JOC,Goby Town,GOT01,4,8,alive
+2025-01-24,JOC,Goby Town,GOT01,4,8,alive
+2025-01-24,JOC,Goby Town,GOT01,4,7,alive
+2025-01-24,JOC,Goby Town,GOT01,4,6,alive
+2025-01-24,JOC,Goby Town,GOT01,4,9,dead
+2025-01-24,JOC,Goby Town,GOT01,4,4,alive
+2025-01-24,JOC,Goby Town,GOT01,5,7,alive
+2025-01-24,JOC,Goby Town,GOT01,5,5,alive
+2025-01-24,JOC,Goby Town,GOT01,5,3,alive
+2025-01-24,JOC,Goby Town,GOT01,5,6,alive
+2025-01-24,JOC,Goby Town,GOT01,6,4,alive
+2025-01-24,JOC,Goby Town,GOT01,6,5,alive
+2025-01-24,JOC,Goby Town,GOT01,6,5,alive
+2025-01-24,JOC,Goby Town,GOT01,6,4,alive
+2025-01-24,JOC,Goby Town,GOT01,7,2,alive
+2025-01-24,JOC,Goby Town,GOT01,7,5,alive
+2025-01-24,JOC,Goby Town,GOT01,7,3,alive
+2025-01-24,JOC,Goby Town,GOT01,7,4,alive
+2025-01-24,JOC,Goby Town,GOT01,7,5,alive
+2025-01-24,JOC,Goby Town,GOT01,8,2,alive
+2025-01-24,JOC,Goby Town,GOT01,8,5,alive
+2025-01-24,JOC,Goby Town,GOT01,8,3,alive
+2025-01-24,JOC,Goby Town,GOT01,8,2.5,alive
+2025-01-24,JOC,Goby Town,GOT01,8,5,alive
+2025-01-24,JOC,Goby Town,GOT01,8,4,alive
+2025-01-24,JOC,Goby Town,GOT01,8,3,alive
+2025-01-24,JOC,Goby Town,GOT01,8,2,alive
+2025-01-24,JOC,Goby Town,GOT01,9,4,alive
+2025-01-24,JOC,Goby Town,GOT01,9,3,alive
+2025-01-24,JOC,Goby Town,GOT01,9,3,alive
+2025-01-24,JOC,Goby Town,GOT01,9,4,alive
+2025-01-24,JOC,Goby Town,GOT01,9,1.5,alive
+2025-01-24,JOC,Goby Town,GOT01,9,1,alive
+2025-01-24,JOC,Goby Town,GOT01,10,2,alive
+2025-01-24,JOC,Goby Town,GOT01,10,2.5,alive
+2025-01-24,JOC,Goby Town,GOT01,10,5,alive
+2025-01-24,JOC,Goby Town,GOT01,10,2,alive
+2025-01-24,JOC,Goby Town,GOT01,10,1.5,alive
+2025-01-24,JOC,Goby Town,GOT01,10,3,alive
+2025-01-24,JOC,Goby Town,GOT01,10,1,alive
+2025-01-24,JOC,Goby Town,GOT01,10,2,alive
+2025-01-24,JOC,Goby Town,GOT01,10,1.5,alive
+2025-01-24,JOC,Goby Town,GOT01,11,5,alive
+2025-01-24,JOC,Goby Town,GOT01,11,2,alive
+2025-01-24,JOC,Goby Town,GOT01,11,1.5,alive
+2025-01-24,JOC,Goby Town,GOT01,11,3,alive
+2025-01-24,JOC,Goby Town,GOT01,11,2,alive
+2025-01-24,JOC,Goby Town,GOT01,11,2,alive
+2025-01-24,JOC,Goby Town,GOT01,11,3,alive
+2025-01-24,JOC,Goby Town,GOT01,11,7,alive
+2025-01-24,JOC,Goby Town,GOT01,11,4,alive
+2025-01-24,JOC,Goby Town,GOT01,11,4,alive
+2025-01-24,JOC,Goby Town,GOT01,12,2,alive
+2025-01-24,JOC,Goby Town,GOT01,12,5,alive
+2025-01-24,JOC,Goby Town,GOT01,12,5,alive
+2025-01-24,JOC,Goby Town,GOT01,12,3,alive
+2025-01-24,JOC,Goby Town,GOT01,12,7,alive
+2025-01-24,JOC,Goby Town,GOT01,12,2,alive
+2025-01-24,JOC,Slug Island,SLI01,1,7,dead
+2025-01-24,JOC,Slug Island,SLI01,2,8,alive
+2025-01-24,JOC,Slug Island,SLI01,3,11,dead
+2025-01-24,JOC,Slug Island,SLI01,3,5,alive
+2025-01-24,JOC,Slug Island,SLI01,4,4,alive
+2025-01-24,JOC,Slug Island,SLI01,4,12,dead
+2025-01-24,JOC,Slug Island,SLI01,5,1.5,alive
+2025-01-24,JOC,Slug Island,SLI01,5,2,alive
+2025-01-24,JOC,Slug Island,SLI01,5,5,alive
+2025-01-24,JOC,Slug Island,SLI01,6,4,alive
+2025-01-24,JOC,Slug Island,SLI01,7,4.5,alive
+2025-01-24,JOC,Slug Island,SLI01,8,4,dead
+2025-01-24,JOC,Slug Island,SLI01,8,8,dead
+2025-01-24,JOC,Slug Island,SLI01,8,12,dead
+2025-01-24,JOC,Slug Island,SLI01,8,3,alive
+2025-01-24,JOC,Slug Island,SLI01,9,5,alive
+2025-01-24,JOC,Slug Island,SLI01,9,1,alive
+2025-01-24,JOC,Slug Island,SLI01,9,2,alive
+2025-01-24,JOC,Slug Island,SLI01,9,4,dead
+2025-01-24,JOC,Slug Island,SLI01,10,5,alive
+2025-01-24,JOC,Slug Island,SLI01,10,7,alive
+2025-01-24,JOC,Slug Island,SLI01,10,6,dead
+2025-01-24,JOC,Flemming 112,FLM01,1,10,alive
+2025-01-24,JOC,Flemming 112,FLM01,1,8,alive
+2025-01-24,JOC,Flemming 112,FLM01,1,9,alive
+2025-01-24,JOC,Flemming 112,FLM01,1,9,alive
+2025-01-24,JOC,Flemming 112,FLM01,1,7,dead
+2025-01-24,JOC,Flemming 112,FLM01,1,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,1,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,4,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,8,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,3,alive
+2025-01-24,JOC,Flemming 112,FLM01,2,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,3,8,alive
+2025-01-24,JOC,Flemming 112,FLM01,3,9,alive
+2025-01-24,JOC,Flemming 112,FLM01,3,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,3,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,3,9,dead
+2025-01-24,JOC,Flemming 112,FLM01,4,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,8,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,9,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,8,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,4,4,alive
+2025-01-24,JOC,Flemming 112,FLM01,5,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,5,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,5,6,alive
+2025-01-24,JOC,Flemming 112,FLM01,5,5,alive
+2025-01-24,JOC,Flemming 112,FLM01,6,0,na
+2025-01-24,JOC,Flemming 112,FLM01,7,10,alive
+2025-01-24,JOC,Flemming 112,FLM01,7,7,alive
+2025-01-24,JOC,Flemming 112,FLM01,8,7.5,alive
+2025-01-24,JOC,Flemming 112,FLM01,9,0,na
+2025-01-24,JOC,Flemming 112,FLM01,10,0,na
+2025-01-24,AJM,Goby Town,GOT01,30,0,na
+2025-01-24,AJM,Goby Town,GOT01,29,0,na
+2025-01-24,AJM,Goby Town,GOT01,28,0,na
+2025-01-24,AJM,Goby Town,GOT01,27,0,na
+2025-01-24,AJM,Goby Town,GOT01,26,0,na
+2025-01-24,AJM,Goby Town,GOT01,25,0,na
+2025-01-24,AJM,Goby Town,GOT01,24,0,na
+2025-01-24,AJM,Goby Town,GOT01,23,0,na
+2025-01-24,AJM,Goby Town,GOT01,22,0,na
+2025-01-24,AJM,Goby Town,GOT01,21,0,na
+2025-01-24,AJM,Goby Town,GOT01,20,0,na
+2025-01-24,AJM,Goby Town,GOT01,19,0,na
+2025-01-24,AJM,Goby Town,GOT01,18,0,na
+2025-01-24,AJM,Goby Town,GOT01,17,0,na
+2025-01-24,AJM,Goby Town,GOT01,16,0,na
+2025-01-24,AJM,Goby Town,GOT01,15,6,na
+2025-01-24,AJM,Goby Town,GOT01,15,4.5,na
+2025-01-24,AJM,Goby Town,GOT01,15,6,na
+2025-01-24,AJM,Goby Town,GOT01,14,2.5,na
+2025-01-24,AJM,Goby Town,GOT01,14,2,na
+2025-01-24,AJM,Goby Town,GOT01,14,3,na
+2025-01-24,AJM,Goby Town,GOT01,13,2,na
+2025-01-24,AJM,Goby Town,GOT01,13,3.5,na
+2025-01-24,AJM,Goby Town,GOT01,13,3,na
+2025-01-24,AJM,Goby Town,GOT01,13,5,na
+2025-01-24,AJM,Goby Town,GOT01,13,2,na
+2025-01-24,AJM,Goby Town,GOT01,13,2,na
+2025-01-24,AJM,Goby Town,GOT01,13,2,na
+2025-01-24,AJM,Goby Town,GOT01,13,3,na
+2025-01-24,JOC,Ellis Bay,ELI01,1,10,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,10,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,8,dead
+2025-01-24,JOC,Ellis Bay,ELI01,1,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,12,alive
+2025-01-24,JOC,Ellis Bay,ELI01,1,11,alive
+2025-01-24,JOC,Ellis Bay,ELI01,2,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,2,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,13,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,10,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,10,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,3,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,4,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,5,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,5,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,5,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,6,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,12,alive
+2025-01-24,JOC,Ellis Bay,ELI01,7,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,6.5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,10,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,8,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,9,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,6.5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,10,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,6.5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,6.5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,11,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,12,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,13,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,13,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,13,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,13,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,13,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,8,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,9,alive
+2025-01-24,JOC,Ellis Bay,ELI01,14,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,15,7,alive
+2025-01-24,JOC,Ellis Bay,ELI01,15,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,15,6,alive
+2025-01-24,JOC,Ellis Bay,ELI01,15,5,alive
+2025-01-24,JOC,Ellis Bay,ELI01,15,8,alive
+2025-01-24,AJM,Slug Island,SLI01,30,9,dead
+2025-01-24,AJM,Slug Island,SLI01,30,7,dead
+2025-01-24,AJM,Slug Island,SLI01,29,0,na
+2025-01-24,AJM,Slug Island,SLI01,28,0,na
+2025-01-24,AJM,Slug Island,SLI01,27,0,na
+2025-01-24,AJM,Slug Island,SLI01,26,0,na
+2025-01-24,AJM,Slug Island,SLI01,25,0,na
+2025-01-24,AJM,Slug Island,SLI01,24,0,na
+2025-01-24,AJM,Slug Island,SLI01,23,0,na
+2025-01-24,AJM,Slug Island,SLI01,22,0,na
+2025-01-24,AJM,Slug Island,SLI01,21,0,na
+2025-01-24,AJM,Slug Island,SLI01,20,0,na
+2025-01-24,AJM,Slug Island,SLI01,19,0,na
+2025-01-24,AJM,Slug Island,SLI01,18,0,na
+2025-01-24,AJM,Slug Island,SLI01,17,0,na
+2025-01-24,AJM,Slug Island,SLI01,16,0,na
+2025-01-24,AJM,Slug Island,SLI01,15,0,na
+2025-01-24,AJM,Slug Island,SLI01,14,0,na
+2025-01-24,AJM,Slug Island,SLI01,13,4,alive
+2025-01-24,AJM,Slug Island,SLI01,13,4,alive
+2025-01-24,AJM,Slug Island,SLI01,13,4,alive
+2025-01-24,AJM,Slug Island,SLI01,13,2,alive
+2025-01-24,AJM,Slug Island,SLI01,12,4,alive
+2025-01-24,AJM,Slug Island,SLI01,12,5.5,alive
+2025-01-24,AJM,Slug Island,SLI01,11,4,alive
+2025-01-24,AJM,Slug Island,SLI01,11,7,alive
+2025-01-24,AJM,Slug Island,SLI01,11,1,alive
+2025-01-24,AJM,Ellis Bay,ELI01,30,7,dead
+2025-01-24,AJM,Ellis Bay,ELI01,29,3,alive
+2025-01-24,AJM,Ellis Bay,ELI01,28,0,alive
+2025-01-24,AJM,Ellis Bay,ELI01,27,0,alive
+2025-01-24,AJM,Ellis Bay,ELI01,26,4,alive
+2025-01-24,AJM,Ellis Bay,ELI01,26,6.5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,26,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,25,9,alive
+2025-01-24,AJM,Ellis Bay,ELI01,24,0,alive
+2025-01-24,AJM,Ellis Bay,ELI01,23,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,22,11,dead
+2025-01-24,AJM,Ellis Bay,ELI01,22,3,alive
+2025-01-24,AJM,Ellis Bay,ELI01,22,3,alive
+2025-01-24,AJM,Ellis Bay,ELI01,21,4,alive
+2025-01-24,AJM,Ellis Bay,ELI01,21,2,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,4,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,4,alive
+2025-01-24,AJM,Ellis Bay,ELI01,20,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,5.5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,7,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,8,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,5.5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,19,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,18,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,18,4.5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,7,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,7,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,6,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,2,alive
+2025-01-24,AJM,Ellis Bay,ELI01,17,3,alive
+2025-01-24,AJM,Ellis Bay,ELI01,16,4.5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,16,5,alive
+2025-01-24,AJM,Ellis Bay,ELI01,16,2,alive
+2025-01-24,JOC,Danger Rock,DAN01,1,5,alive
+2025-01-24,JOC,Danger Rock,DAN01,1,5,alive
+2025-01-24,JOC,Danger Rock,DAN01,2,0,na
+2025-01-24,JOC,Danger Rock,DAN01,3,0,na
+2025-01-24,JOC,Danger Rock,DAN01,4,0,na
+2025-01-24,JOC,Danger Rock,DAN01,5,0,na
+2025-01-24,JOC,Danger Rock,DAN01,6,0,na
+2025-01-24,JOC,Danger Rock,DAN01,7,0,na
+2025-01-24,JOC,Danger Rock,DAN01,8,0,na
+2025-01-24,JOC,Danger Rock,DAN01,9,0,na
+2025-01-24,JOC,Danger Rock,DAN01,10,0,na
+2025-01-24,JOC,Danger Rock,DAN01,11,0,na
+2025-01-24,JOC,Danger Rock,DAN01,12,0,na
+2025-01-24,JOC,Danger Rock,DAN01,13,0,na
+2025-01-24,JOC,Danger Rock,DAN01,14,0,na
+2025-01-24,AJM,Flemming 112,FLM01,30,0,na
+2025-01-24,AJM,Flemming 112,FLM01,29,0,na
+2025-01-24,AJM,Flemming 112,FLM01,28,0,na
+2025-01-24,AJM,Flemming 112,FLM01,27,0,na
+2025-01-24,AJM,Flemming 112,FLM01,26,0,na
+2025-01-24,AJM,Flemming 112,FLM01,25,0,na
+2025-01-24,AJM,Flemming 112,FLM01,24,0,na
+2025-01-24,AJM,Flemming 112,FLM01,23,0,na
+2025-01-24,AJM,Flemming 112,FLM01,22,0,na
+2025-01-24,AJM,Flemming 112,FLM01,21,4,dead
+2025-01-24,AJM,Flemming 112,FLM01,20,0,na
+2025-01-24,AJM,Flemming 112,FLM01,19,0,na
+2025-01-24,AJM,Flemming 112,FLM01,18,0,na
+2025-01-24,AJM,Flemming 112,FLM01,17,0,na
+2025-01-24,AJM,Flemming 112,FLM01,16,0,na
+2025-01-24,AJM,Flemming 112,FLM01,15,0,na
+2025-01-24,AJM,Flemming 112,FLM01,14,4,dead
+2025-01-24,AJM,Flemming 112,FLM01,13,0,na
+2025-01-24,AJM,Flemming 112,FLM01,12,0,na
+2025-01-24,AJM,Flemming 112,FLM01,11,5,alive
+2025-01-24,AJM,Flemming 112,FLM01,31,4,alive
+2025-01-24,AJM,Danger Rock,DAN01,30,0,na
+2025-01-24,AJM,Danger Rock,DAN01,29,0,na
+2025-01-24,AJM,Danger Rock,DAN01,28,0,na
+2025-01-24,AJM,Danger Rock,DAN01,27,0,na
+2025-01-24,AJM,Danger Rock,DAN01,26,0,na
+2025-01-24,AJM,Danger Rock,DAN01,25,0,na
+2025-01-24,AJM,Danger Rock,DAN01,24,0,na
+2025-01-24,AJM,Danger Rock,DAN01,23,0,na
+2025-01-24,AJM,Danger Rock,DAN01,22,0,na
+2025-01-24,AJM,Danger Rock,DAN01,21,0,na
+2025-01-24,AJM,Danger Rock,DAN01,20,0,na
+2025-01-24,AJM,Danger Rock,DAN01,19,0,na
+2025-01-24,AJM,Danger Rock,DAN01,18,0,na
+2025-01-24,AJM,Danger Rock,DAN01,17,0,na
+2025-01-24,AJM,Danger Rock,DAN01,16,0,na
+2025-01-24,AJM,Danger Rock,DAN01,15,0,na
+2025-01-24,AJM,Fry Island,FRY01,30,5,alive
+2025-01-25,AJM,Fry Island,FRY01,30,5,alive
+2025-01-25,AJM,Fry Island,FRY01,30,4,alive
+2025-01-25,AJM,Fry Island,FRY01,29,4,alive
+2025-01-25,AJM,Fry Island,FRY01,29,5,alive
+2025-01-25,AJM,Fry Island,FRY01,29,7,alive
+2025-01-25,AJM,Fry Island,FRY01,29,3,alive
+2025-01-25,AJM,Fry Island,FRY01,29,4,alive
+2025-01-25,AJM,Fry Island,FRY01,29,5,alive
+2025-01-25,AJM,Fry Island,FRY01,29,9,dead
+2025-01-25,AJM,Fry Island,FRY01,29,7,alive
+2025-01-25,AJM,Fry Island,FRY01,28,4,alive
+2025-01-25,AJM,Fry Island,FRY01,28,6,alive
+2025-01-25,AJM,Fry Island,FRY01,28,4,alive
+2025-01-25,AJM,Fry Island,FRY01,28,7,alive
+2025-01-25,AJM,Fry Island,FRY01,27,6,alive
+2025-01-25,AJM,Fry Island,FRY01,27,5,alive
+2025-01-25,AJM,Fry Island,FRY01,26,0,na
+2025-01-25,AJM,Fry Island,FRY01,25,0,na
+2025-01-25,AJM,Fry Island,FRY01,24,0,na
+2025-01-25,AJM,Fry Island,FRY01,23,0,na
+2025-01-25,AJM,Fry Island,FRY01,22,0,na
+2025-01-25,AJM,Fry Island,FRY01,21,0,na
+2025-01-25,AJM,Fry Island,FRY01,20,0,na
+2025-01-25,AJM,Fry Island,FRY01,19,0,na
+2025-01-25,AJM,Fry Island,FRY01,18,0,na
+2025-01-25,AJM,Fry Island,FRY01,17,8,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,1,0,na
+2025-01-25,DVM,Swiss Boy Island,SBI01,2,0,na
+2025-01-25,DVM,Swiss Boy Island,SBI01,3,9,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,3,9,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,3,8,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,3,8,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,4,0,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,5,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,5,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,5,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,6,7,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,6,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,7,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,7,7,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,7,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,7,6,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,8,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,8,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,8,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,9,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,10,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,10,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,11,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,11,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,11,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,11,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,11,6,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,12,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,12,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,12,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,13,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,13,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,13,5,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,13,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,13,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,14,6,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,2,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,2,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,15,10,dead
+2025-01-25,DVM,Swiss Boy Island,SBI01,16,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,17,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,17,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,17,1,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,18,2,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,18,2,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,18,4,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,18,3,alive
+2025-01-25,DVM,Swiss Boy Island,SBI01,18,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,30,0,na
+2025-01-25,AJM,Swiss Boy Island,SBI01,29,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,28,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,28,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,28,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,27,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,26,0,na
+2025-01-25,AJM,Swiss Boy Island,SBI01,25,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,25,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,25,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,25,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,24,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,24,4,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,0.5,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,23,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,22,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,21,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,0.5,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,0.5,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,1,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,0.5,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,3,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,4,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,20,4,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,19,4,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,19,4,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,19,2,alive
+2025-01-25,AJM,Swiss Boy Island,SBI01,19,3,alive
+2025-01-25,DVM,Diplock Island,DIP01,1,0,na
+2025-01-25,DVM,Diplock Island,DIP01,2,5.5,alive
+2025-01-25,DVM,Diplock Island,DIP01,2,9,alive
+2025-01-25,DVM,Diplock Island,DIP01,2,4,alive
+2025-01-25,DVM,Diplock Island,DIP01,3,6,alive
+2025-01-25,DVM,Diplock Island,DIP01,4,5,alive
+2025-01-25,DVM,Diplock Island,DIP01,4,4,alive
+2025-01-25,DVM,Diplock Island,DIP01,5,5,alive
+2025-01-25,DVM,Diplock Island,DIP01,5,6.5,alive
+2025-01-25,DVM,Diplock Island,DIP01,6,0,na
+2025-01-25,DVM,Diplock Island,DIP01,7,4.5,alive
+2025-01-25,DVM,Diplock Island,DIP01,8,6,alive
+2025-01-25,DVM,Diplock Island,DIP01,9,7,alive
+2025-01-25,DVM,Diplock Island,DIP01,9,3,alive
+2025-01-25,DVM,Diplock Island,DIP01,9,5,alive
+2025-01-25,DVM,Diplock Island,DIP01,9,2,alive
+2025-01-25,DVM,Diplock Island,DIP01,10,5,alive
+2025-01-25,DVM,Diplock Island,DIP01,10,5.5,alive
+2025-01-25,DVM,Diplock Island,DIP01,11,7,alive
+2025-01-25,DVM,Diplock Island,DIP01,12,1,alive
+2025-01-25,DVM,Diplock Island,DIP01,12,3,alive
+2025-01-25,DVM,Diplock Island,DIP01,12,4,alive
+2025-01-25,DVM,Diplock Island,DIP01,13,0,na
+2025-01-25,DVM,Diplock Island,DIP01,14,0,na
+2025-01-25,DVM,Diplock Island,DIP01,15,3,alive
+2025-01-25,DVM,Diplock Island,DIP01,16,5,dead
+2025-01-25,AJM,Diplock Island,DIP01,30,0,na
+2025-01-25,AJM,Diplock Island,DIP01,29,0,na
+2025-01-25,AJM,Diplock Island,DIP01,28,0,na
+2025-01-25,AJM,Diplock Island,DIP01,27,0,na
+2025-01-25,AJM,Diplock Island,DIP01,26,0,na
+2025-01-25,AJM,Diplock Island,DIP01,25,0,na
+2025-01-25,AJM,Diplock Island,DIP01,24,0,na
+2025-01-25,AJM,Diplock Island,DIP01,23,2,alive
+2025-01-25,AJM,Diplock Island,DIP01,23,2,alive
+2025-01-25,AJM,Diplock Island,DIP01,23,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,23,2,alive
+2025-01-25,AJM,Diplock Island,DIP01,23,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,23,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,22,2,alive
+2025-01-25,AJM,Diplock Island,DIP01,22,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,22,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,21,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,21,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,20,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,20,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,19,5,alive
+2025-01-25,AJM,Diplock Island,DIP01,19,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,19,2,alive
+2025-01-25,AJM,Diplock Island,DIP01,18,0,na
+2025-01-25,AJM,Diplock Island,DIP01,17,1,alive
+2025-01-25,AJM,Diplock Island,DIP01,17,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,17,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,17,4,alive
+2025-01-25,AJM,Diplock Island,DIP01,17,3,alive
+2025-01-25,AJM,Diplock Island,DIP01,17,4,alive
+2025-01-25,DVM,Fry Island,FRY01,1,9,alive
+2025-01-25,DVM,Fry Island,FRY01,1,8,alive
+2025-01-25,DVM,Fry Island,FRY01,2,10,alive
+2025-01-25,DVM,Fry Island,FRY01,2,9,alive
+2025-01-25,DVM,Fry Island,FRY01,2,9,alive
+2025-01-25,DVM,Fry Island,FRY01,3,12,alive
+2025-01-25,DVM,Fry Island,FRY01,3,10,alive
+2025-01-25,DVM,Fry Island,FRY01,3,9,alive
+2025-01-25,DVM,Fry Island,FRY01,3,10,alive
+2025-01-25,DVM,Fry Island,FRY01,3,9,alive
+2025-01-25,DVM,Fry Island,FRY01,3,9,alive
+2025-01-25,DVM,Fry Island,FRY01,3,10,alive
+2025-01-25,DVM,Fry Island,FRY01,4,8,alive
+2025-01-25,DVM,Fry Island,FRY01,4,2,alive
+2025-01-25,DVM,Fry Island,FRY01,4,7.5,alive
+2025-01-25,DVM,Fry Island,FRY01,4,8,alive
+2025-01-25,DVM,Fry Island,FRY01,4,10,alive
+2025-01-25,DVM,Fry Island,FRY01,5,9.5,alive
+2025-01-25,DVM,Fry Island,FRY01,5,10,alive
+2025-01-25,DVM,Fry Island,FRY01,6,7,alive
+2025-01-25,DVM,Fry Island,FRY01,6,8,alive
+2025-01-25,DVM,Fry Island,FRY01,6,9,alive
+2025-01-25,DVM,Fry Island,FRY01,6,8,alive
+2025-01-25,DVM,Fry Island,FRY01,6,10,alive
+2025-01-25,DVM,Fry Island,FRY01,6,3,alive
+2025-01-25,DVM,Fry Island,FRY01,7,8,alive
+2025-01-25,DVM,Fry Island,FRY01,8,0,na
+2025-01-25,DVM,Fry Island,FRY01,9,0,na
+2025-01-25,DVM,Fry Island,FRY01,10,0,na
+2025-01-25,DVM,Fry Island,FRY01,11,0,na
+2025-01-25,DVM,Fry Island,FRY01,12,0,na
+2025-01-25,DVM,Fry Island,FRY01,13,0,na
+2025-01-25,DVM,Fry Island,FRY01,14,0,na
+2025-01-25,DVM,Fry Island,FRY01,15,0,na
+2025-01-25,DVM,Fry Island,FRY01,16,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,1,8,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,2,5,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,3,5,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,4,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,5,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,6,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,7,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,8,3,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,9,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,10,0,na
+2025-01-25,DVM,Flemming Northeast,FLM02,11,8,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,12,6,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,13,8,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,13,9,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,13,7,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,14,5,alive
+2025-01-25,DVM,Flemming Northeast,FLM02,15,5,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,30,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,29,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,28,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,27,8,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,26,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,25,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,24,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,23,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,22,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,21,5,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,20,0,na
+2025-01-25,AJM,Flemming Northeast,FLM02,19,9,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,19,6,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,18,4,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,17,7,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,16,8,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,16,2,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,16,6,alive
+2025-01-25,AJM,Flemming Northeast,FLM02,16,7,alive
+2025-01-25,AJM,Turf Island,TRF01,30,6,alive
+2025-01-25,AJM,Turf Island,TRF01,30,4,alive
+2025-01-25,AJM,Turf Island,TRF01,29,0,na
+2025-01-25,AJM,Turf Island,TRF01,28,7,alive
+2025-01-25,AJM,Turf Island,TRF01,28,7,alive
+2025-01-25,AJM,Turf Island,TRF01,27,5,alive
+2025-01-25,AJM,Turf Island,TRF01,27,6,alive
+2025-01-25,AJM,Turf Island,TRF01,26,5,alive
+2025-01-25,AJM,Turf Island,TRF01,26,5,alive
+2025-01-25,AJM,Turf Island,TRF01,26,7,alive
+2025-01-25,AJM,Turf Island,TRF01,26,8,alive
+2025-01-25,AJM,Turf Island,TRF01,26,7,alive
+2025-01-25,AJM,Turf Island,TRF01,25,6,alive
+2025-01-25,AJM,Turf Island,TRF01,24,0,na
+2025-01-25,AJM,Turf Island,TRF01,23,6,alive
+2025-01-25,AJM,Turf Island,TRF01,22,0,na
+2025-01-25,AJM,Turf Island,TRF01,21,0,na
+2025-01-25,AJM,Turf Island,TRF01,20,6,alive
+2025-01-25,AJM,Turf Island,TRF01,20,6,alive
+2025-01-25,AJM,Turf Island,TRF01,19,0,na
+2025-01-25,AJM,Turf Island,TRF01,18,9,alive
+2025-01-25,AJM,Turf Island,TRF01,17,6,alive
+2025-01-25,AJM,Turf Island,TRF01,17,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,30,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,30,3,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,29,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,3,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,28,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,27,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,26,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,26,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,26,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,26,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,25,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,25,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,25,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,25,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,25,9,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,24,2,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,23,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,23,1,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,9,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,22,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,21,6,dead
+2025-01-25,AJM,Flemming Northwest,FLM03,21,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,21,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,21,7,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,20,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,4,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,7,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,19,6,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,18,4.5,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,18,10,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,18,7,alive
+2025-01-25,AJM,Flemming Northwest,FLM03,18,4,alive
+2025-01-26,JOC,Folger Island,FOL01,1,0,na
+2025-01-26,JOC,Folger Island,FOL01,2,0,na
+2025-01-26,JOC,Folger Island,FOL01,3,0,na
+2025-01-26,JOC,Folger Island,FOL01,4,0,na
+2025-01-26,JOC,Folger Island,FOL01,5,0,na
+2025-01-26,JOC,Folger Island,FOL01,6,0,na
+2025-01-26,JOC,Folger Island,FOL01,7,0,na
+2025-01-26,JOC,Folger Island,FOL01,8,0,na
+2025-01-26,JOC,Folger Island,FOL01,9,1.5,alive
+2025-01-26,JOC,Folger Island,FOL01,9,4,alive
+2025-01-26,JOC,Folger Island,FOL01,10,4,alive
+2025-01-26,JOC,Folger Island,FOL01,11,3,alive
+2025-01-26,JOC,Folger Island,FOL01,12,1.5,alive
+2025-01-26,JOC,Folger Island,FOL01,13,0,na
+2025-01-26,JOC,Folger Island,FOL01,14,0,na
+2025-01-26,JOC,Folger Island,FOL01,15,9,dead
+2025-01-26,DVM,Blowhole,BHO01,30,0,na
+2025-01-26,DVM,Blowhole,BHO01,29,0,na
+2025-01-26,DVM,Blowhole,BHO01,28,0,na
+2025-01-26,DVM,Blowhole,BHO01,27,0,na
+2025-01-26,DVM,Blowhole,BHO01,26,0,na
+2025-01-26,DVM,Blowhole,BHO01,25,0,na
+2025-01-26,DVM,Blowhole,BHO01,24,0,na
+2025-01-26,DVM,Blowhole,BHO01,23,0,na
+2025-01-26,DVM,Blowhole,BHO01,22,11,alive
+2025-01-26,DVM,Blowhole,BHO01,21,5,alive
+2025-01-26,DVM,Blowhole,BHO01,20,0,na
+2025-01-26,DVM,Blowhole,BHO01,19,5,alive
+2025-01-26,DVM,Blowhole,BHO01,19,10,alive
+2025-01-26,DVM,Blowhole,BHO01,18,0,na
+2025-01-26,DVM,Blowhole,BHO01,17,5,alive
+2025-01-26,DVM,Blowhole,BHO01,16,0,na
+2025-01-26,JOC,Leach,LEA01,1,0,na
+2025-01-26,JOC,Leach,LEA01,2,7,alive
+2025-01-26,JOC,Leach,LEA01,3,6,alive
+2025-01-26,JOC,Leach,LEA01,3,4,alive
+2025-01-26,JOC,Leach,LEA01,3,5,alive
+2025-01-26,JOC,Leach,LEA01,4,10,alive
+2025-01-26,JOC,Leach,LEA01,5,0,na
+2025-01-26,JOC,Leach,LEA01,6,5,alive
+2025-01-26,JOC,Leach,LEA01,6,7,alive
+2025-01-26,JOC,Leach,LEA01,6,6,alive
+2025-01-26,JOC,Leach,LEA01,6,4,alive
+2025-01-26,JOC,Leach,LEA01,6,7,alive
+2025-01-26,JOC,Leach,LEA01,7,6,alive
+2025-01-26,JOC,Leach,LEA01,8,4,alive
+2025-01-26,JOC,Leach,LEA01,8,6,alive
+2025-01-26,JOC,Leach,LEA01,8,6,alive
+2025-01-26,JOC,Leach,LEA01,9,7,alive
+2025-01-26,JOC,Leach,LEA01,10,0,na
+2025-01-26,JOC,Leach,LEA01,11,4,alive
+2025-01-26,JOC,Leach,LEA01,12,4,alive
+2025-01-26,JOC,Leach,LEA01,12,8,alive
+2025-01-26,JOC,Leach,LEA01,13,3,alive
+2025-01-26,JOC,Leach,LEA01,13,2.5,alive
+2025-01-26,JOC,Leach,LEA01,14,0,na
+2025-01-26,JOC,Leach,LEA01,15,0,na
+2025-01-26,JOC,Bourdelais,BOR01,1,0,na
+2025-01-26,JOC,Bourdelais,BOR01,2,0,na
+2025-01-26,JOC,Bourdelais,BOR01,3,0,na
+2025-01-26,JOC,Bourdelais,BOR01,4,0,na
+2025-01-26,JOC,Bourdelais,BOR01,5,0,na
+2025-01-26,JOC,Bourdelais,BOR01,6,0,na
+2025-01-26,JOC,Bourdelais,BOR01,7,0,na
+2025-01-26,JOC,Bourdelais,BOR01,8,0,na
+2025-01-26,JOC,Bourdelais,BOR01,9,0,na
+2025-01-26,JOC,Bourdelais,BOR01,10,12,alive
+2025-01-26,JOC,Bourdelais,BOR01,11,0,na
+2025-01-26,JOC,Bourdelais,BOR01,12,0,na
+2025-01-26,JOC,Bourdelais,BOR01,13,0,na
+2025-01-26,JOC,Bourdelais,BOR01,14,8,alive
+2025-01-26,JOC,Bourdelais,BOR01,15,0,na
+2025-01-26,DVM,Edward King East,EKE02,30,8,alive
+2025-01-26,DVM,Edward King East,EKE02,29,6,alive
+2025-01-26,DVM,Edward King East,EKE02,29,8,alive
+2025-01-26,DVM,Edward King East,EKE02,29,6,alive
+2025-01-26,DVM,Edward King East,EKE02,29,6,alive
+2025-01-26,DVM,Edward King East,EKE02,29,5,alive
+2025-01-26,DVM,Edward King East,EKE02,28,0,na
+2025-01-26,DVM,Edward King East,EKE02,27,7.5,alive
+2025-01-26,DVM,Edward King East,EKE02,26,0,na
+2025-01-26,DVM,Edward King East,EKE02,25,0,na
+2025-01-26,DVM,Edward King East,EKE02,24,6,alive
+2025-01-26,DVM,Edward King East,EKE02,23,0,na
+2025-01-26,DVM,Edward King East,EKE02,22,7,alive
+2025-01-26,DVM,Edward King East,EKE02,22,6,alive
+2025-01-26,DVM,Edward King East,EKE02,22,7,alive
+2025-01-26,DVM,Edward King East,EKE02,21,7,alive
+2025-01-26,DVM,Edward King East,EKE02,20,5,alive
+2025-01-26,DVM,Edward King East,EKE02,19,6,alive
+2025-01-26,DVM,Edward King East,EKE02,19,6,alive
+2025-01-26,DVM,Edward King East,EKE02,19,7,alive
+2025-01-26,DVM,Edward King East,EKE02,19,1,alive
+2025-01-26,DVM,Edward King East,EKE02,19,1,alive
+2025-01-26,DVM,Edward King East,EKE02,18,5,alive
+2025-01-26,DVM,Edward King East,EKE02,18,6,alive
+2025-01-26,DVM,Edward King East,EKE02,17,7,alive
+2025-01-26,DVM,Edward King East,EKE02,16,1.5,alive
+2025-01-26,DVM,Edward King East,EKE02,16,8,alive
+2025-01-26,DVM,Edward King East,EKE02,16,7,alive
+2025-01-26,DVM,Edward King East,EKE02,16,7,alive
+2025-01-25,DVM,Turf Island,TRF01,1,0,na
+2025-01-25,DVM,Turf Island,TRF01,2,8,alive
+2025-01-25,DVM,Turf Island,TRF01,3,0,na
+2025-01-25,DVM,Turf Island,TRF01,4,6,alive
+2025-01-25,DVM,Turf Island,TRF01,4,6,alive
+2025-01-25,DVM,Turf Island,TRF01,5,0,na
+2025-01-25,DVM,Turf Island,TRF01,6,0,na
+2025-01-25,DVM,Turf Island,TRF01,7,0,na
+2025-01-25,DVM,Turf Island,TRF01,8,6.5,alive
+2025-01-25,DVM,Turf Island,TRF01,9,6,alive
+2025-01-25,DVM,Turf Island,TRF01,9,7,alive
+2025-01-25,DVM,Turf Island,TRF01,10,7,alive
+2025-01-25,DVM,Turf Island,TRF01,11,7,alive
+2025-01-25,DVM,Turf Island,TRF01,12,7,alive
+2025-01-25,DVM,Turf Island,TRF01,12,5,alive
+2025-01-25,DVM,Turf Island,TRF01,13,6,alive
+2025-01-25,DVM,Turf Island,TRF01,13,6,alive
+2025-01-25,DVM,Turf Island,TRF01,14,7,alive
+2025-01-25,DVM,Turf Island,TRF01,14,6,alive
+2025-01-25,DVM,Turf Island,TRF01,14,7,alive
+2025-01-25,DVM,Turf Island,TRF01,15,7,alive
+2025-01-25,DVM,Turf Island,TRF01,16,0,na
+2025-01-26,JOC,Edward King SE,ESE01,1,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,1,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,1,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,1,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,2,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,2,10,alive
+2025-01-26,JOC,Edward King SE,ESE01,2,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,2,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,2,4,dead
+2025-01-26,JOC,Edward King SE,ESE01,3,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,3,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,3,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,3,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,3,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,3,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,4,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,4,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,5,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,7.5,alive
+2025-01-26,JOC,Edward King SE,ESE01,6,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,13,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,10,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,7,11,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,11,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,8,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,9,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,9,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,9,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,9,9,alive
+2025-01-26,JOC,Edward King SE,ESE01,9,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,10,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,10,11,alive
+2025-01-26,JOC,Edward King SE,ESE01,11,10,alive
+2025-01-26,JOC,Edward King SE,ESE01,11,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,11,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,11,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,11,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,8,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,5,alive
+2025-01-26,JOC,Edward King SE,ESE01,12,4,alive
+2025-01-26,JOC,Edward King SE,ESE01,13,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,14,7,alive
+2025-01-26,JOC,Edward King SE,ESE01,14,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,14,6,alive
+2025-01-26,JOC,Edward King SE,ESE01,15,5,alive
+2025-01-26,JOV,Edward King East,EKE02,1,6,alive
+2025-01-26,JOV,Edward King East,EKE02,2,8,alive
+2025-01-26,JOV,Edward King East,EKE02,2,11,alive
+2025-01-26,JOV,Edward King East,EKE02,2,9,alive
+2025-01-26,JOV,Edward King East,EKE02,3,6,alive
+2025-01-26,JOV,Edward King East,EKE02,3,7,alive
+2025-01-26,JOV,Edward King East,EKE02,3,9,alive
+2025-01-26,JOV,Edward King East,EKE02,4,6,alive
+2025-01-26,JOV,Edward King East,EKE02,4,5,alive
+2025-01-26,JOV,Edward King East,EKE02,4,5,alive
+2025-01-26,JOV,Edward King East,EKE02,5,0,na
+2025-01-26,JOV,Edward King East,EKE02,6,7,alive
+2025-01-26,JOV,Edward King East,EKE02,6,7,alive
+2025-01-26,JOV,Edward King East,EKE02,7,6,alive
+2025-01-26,JOV,Edward King East,EKE02,7,7,alive
+2025-01-26,JOV,Edward King East,EKE02,7,12,alive
+2025-01-26,JOV,Edward King East,EKE02,7,5,alive
+2025-01-26,JOV,Edward King East,EKE02,8,6,alive
+2025-01-26,JOV,Edward King East,EKE02,8,10,alive
+2025-01-26,JOV,Edward King East,EKE02,8,8,alive
+2025-01-26,JOV,Edward King East,EKE02,8,5,alive
+2025-01-26,JOV,Edward King East,EKE02,9,4,alive
+2025-01-26,JOV,Edward King East,EKE02,9,6,alive
+2025-01-26,JOV,Edward King East,EKE02,9,4,alive
+2025-01-26,JOV,Edward King East,EKE02,9,5,alive
+2025-01-26,JOV,Edward King East,EKE02,9,7,alive
+2025-01-26,JOV,Edward King East,EKE02,10,7,alive
+2025-01-26,JOV,Edward King East,EKE02,10,6,alive
+2025-01-26,JOV,Edward King East,EKE02,11,5,alive
+2025-01-26,JOV,Edward King East,EKE02,11,7,alive
+2025-01-26,JOV,Edward King East,EKE02,11,5,alive
+2025-01-26,JOV,Edward King East,EKE02,11,6,alive
+2025-01-26,JOV,Edward King East,EKE02,12,0,na
+2025-01-26,JOV,Edward King East,EKE02,13,6,alive
+2025-01-26,JOV,Edward King East,EKE02,14,7,alive
+2025-01-26,JOV,Edward King East,EKE02,14,6,alive
+2025-01-26,JOV,Edward King East,EKE02,14,5,alive
+2025-01-26,JOV,Edward King East,EKE02,15,6,alive
+2025-01-26,JOV,Edward King East,EKE02,15,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,30,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,30,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,30,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,29,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,29,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,29,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,29,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,29,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,28,9,alive
+2025-01-26,DVM,Edward King SE,ESE01,27,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,27,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,27,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,26,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,26,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,26,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,26,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,26,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,25,6.5,alive
+2025-01-26,DVM,Edward King SE,ESE01,25,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,25,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,25,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,24,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,24,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,24,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,24,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,24,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,23,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,9,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,9,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,22,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,21,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,20,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,20,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,20,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,20,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,20,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,19,2,alive
+2025-01-26,DVM,Edward King SE,ESE01,19,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,18,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,18,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,18,10,alive
+2025-01-26,DVM,Edward King SE,ESE01,17,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,17,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,6,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,5,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,7,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,4,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,8,alive
+2025-01-26,DVM,Edward King SE,ESE01,16,5,alive
+2025-01-26,DVM,Folger Island,FOL01,30,0,na
+2025-01-26,DVM,Folger Island,FOL01,29,0,na
+2025-01-26,DVM,Folger Island,FOL01,28,4,alive
+2025-01-26,DVM,Folger Island,FOL01,27,7,alive
+2025-01-26,DVM,Folger Island,FOL01,26,0,na
+2025-01-26,DVM,Folger Island,FOL01,25,0,na
+2025-01-26,DVM,Folger Island,FOL01,24,5,alive
+2025-01-26,DVM,Folger Island,FOL01,23,7,alive
+2025-01-26,DVM,Folger Island,FOL01,23,6,alive
+2025-01-26,DVM,Folger Island,FOL01,23,5,alive
+2025-01-26,DVM,Folger Island,FOL01,22,5,alive
+2025-01-26,DVM,Folger Island,FOL01,22,6,alive
+2025-01-26,DVM,Folger Island,FOL01,22,6,alive
+2025-01-26,DVM,Folger Island,FOL01,22,6,alive
+2025-01-26,DVM,Folger Island,FOL01,22,8,dead
+2025-01-26,DVM,Folger Island,FOL01,21,0,na
+2025-01-26,DVM,Folger Island,FOL01,20,0,na
+2025-01-26,DVM,Folger Island,FOL01,19,7,alive
+2025-01-26,DVM,Folger Island,FOL01,19,5,alive
+2025-01-26,DVM,Folger Island,FOL01,19,6,alive
+2025-01-26,DVM,Folger Island,FOL01,19,4,alive
+2025-01-26,DVM,Folger Island,FOL01,18,0,na
+2025-01-26,DVM,Folger Island,FOL01,17,0,na
+2025-01-26,DVM,Folger Island,FOL01,16,0,na
+2025-01-26,DVM,Folger Island,FOL01,31,0,na
+2025-01-26,JOC,Blowhole,BHO01,1,0,na
+2025-01-26,JOC,Blowhole,BHO01,2,0,na
+2025-01-26,JOC,Blowhole,BHO01,3,0,na
+2025-01-26,JOC,Blowhole,BHO01,4,0,na
+2025-01-26,JOC,Blowhole,BHO01,5,0,na
+2025-01-26,JOC,Blowhole,BHO01,6,0,na
+2025-01-26,JOC,Blowhole,BHO01,7,9,alive
+2025-01-26,JOC,Blowhole,BHO01,8,0,na
+2025-01-26,JOC,Blowhole,BHO01,9,0,na
+2025-01-26,JOC,Blowhole,BHO01,10,12,alive
+2025-01-26,JOC,Blowhole,BHO01,11,0,na
+2025-01-26,JOC,Blowhole,BHO01,12,9,alive
+2025-01-26,JOC,Blowhole,BHO01,13,0,na
+2025-01-26,JOC,Blowhole,BHO01,14,0,na
+2025-01-26,JOC,Blowhole,BHO01,15,0,na
+2025-01-26,DVM,Bourdelais,BOR01,30,0,na
+2025-01-26,DVM,Bourdelais,BOR01,29,0,na
+2025-01-26,DVM,Bourdelais,BOR01,28,3,dead
+2025-01-26,DVM,Bourdelais,BOR01,27,0,na
+2025-01-26,DVM,Bourdelais,BOR01,26,0,na
+2025-01-26,DVM,Bourdelais,BOR01,25,0,na
+2025-01-26,DVM,Bourdelais,BOR01,24,0,na
+2025-01-26,DVM,Bourdelais,BOR01,23,0,na
+2025-01-26,DVM,Bourdelais,BOR01,22,0,na
+2025-01-26,DVM,Bourdelais,BOR01,21,0,na
+2025-01-26,DVM,Bourdelais,BOR01,20,0,na
+2025-01-26,DVM,Bourdelais,BOR01,19,0,na
+2025-01-26,DVM,Bourdelais,BOR01,18,0,na
+2025-01-26,DVM,Bourdelais,BOR01,17,0,na
+2025-01-26,DVM,Bourdelais,BOR01,16,0,na
+2025-01-26,DVM,Bourdelais,BOR01,31,0,na
+2025-01-26,DVM,Leach,LEA01,30,7,alive
+2025-01-26,DVM,Leach,LEA01,30,6,alive
+2025-01-26,DVM,Leach,LEA01,29,5,alive
+2025-01-26,DVM,Leach,LEA01,29,5,alive
+2025-01-26,DVM,Leach,LEA01,29,6,alive
+2025-01-26,DVM,Leach,LEA01,29,7,alive
+2025-01-26,DVM,Leach,LEA01,29,7,alive
+2025-01-26,DVM,Leach,LEA01,29,6,alive
+2025-01-26,DVM,Leach,LEA01,29,5,alive
+2025-01-26,DVM,Leach,LEA01,29,5,alive
+2025-01-26,DVM,Leach,LEA01,28,5,alive
+2025-01-26,DVM,Leach,LEA01,28,5,alive
+2025-01-26,DVM,Leach,LEA01,28,6,alive
+2025-01-26,DVM,Leach,LEA01,28,7,alive
+2025-01-26,DVM,Leach,LEA01,28,6,alive
+2025-01-26,DVM,Leach,LEA01,28,5,alive
+2025-01-26,DVM,Leach,LEA01,28,6,alive
+2025-01-26,DVM,Leach,LEA01,28,7,alive
+2025-01-26,DVM,Leach,LEA01,28,7,alive
+2025-01-26,DVM,Leach,LEA01,28,7,alive
+2025-01-26,DVM,Leach,LEA01,28,6,alive
+2025-01-26,DVM,Leach,LEA01,28,6,alive
+2025-01-26,DVM,Leach,LEA01,27,5,alive
+2025-01-26,DVM,Leach,LEA01,27,4,alive
+2025-01-26,DVM,Leach,LEA01,27,7,alive
+2025-01-26,DVM,Leach,LEA01,27,7,alive
+2025-01-26,DVM,Leach,LEA01,27,5,alive
+2025-01-26,DVM,Leach,LEA01,27,6,alive
+2025-01-26,DVM,Leach,LEA01,26,5,alive
+2025-01-26,DVM,Leach,LEA01,25,6,alive
+2025-01-26,DVM,Leach,LEA01,25,6.5,alive
+2025-01-26,DVM,Leach,LEA01,25,9,alive
+2025-01-26,DVM,Leach,LEA01,25,2,alive
+2025-01-26,DVM,Leach,LEA01,24,0,na
+2025-01-26,DVM,Leach,LEA01,23,0,na
+2025-01-26,DVM,Leach,LEA01,22,6,alive
+2025-01-26,DVM,Leach,LEA01,21,0,na
+2025-01-26,DVM,Leach,LEA01,20,0,na
+2025-01-26,DVM,Leach,LEA01,19,0,na
+2025-01-26,DVM,Leach,LEA01,18,0,na
+2025-01-26,DVM,Leach,LEA01,17,6,alive
+2025-01-26,DVM,Leach,LEA01,16,6,alive
+2025-01-26,DVM,Leach,LEA01,16,7,alive
+2025-01-27,AJM,Nanat Point,NNT01,30,0,na
+2025-01-27,AJM,Nanat Point,NNT01,29,0,na
+2025-01-27,AJM,Nanat Point,NNT01,28,0,na
+2025-01-27,AJM,Nanat Point,NNT01,27,0,na
+2025-01-27,AJM,Nanat Point,NNT01,26,0,na
+2025-01-27,AJM,Nanat Point,NNT01,25,0,na
+2025-01-27,AJM,Nanat Point,NNT01,24,0,na
+2025-01-27,AJM,Nanat Point,NNT01,23,0,na
+2025-01-27,AJM,Nanat Point,NNT01,22,0,na
+2025-01-27,AJM,Nanat Point,NNT01,21,0,na
+2025-01-27,AJM,Nanat Point,NNT01,20,0,na
+2025-01-27,AJM,Nanat Point,NNT01,19,0,na
+2025-01-27,AJM,Nanat Point,NNT01,18,0,na
+2025-01-27,AJM,Nanat Point,NNT01,17,0,na
+2025-01-27,AJM,Nanat Point,NNT01,16,0,na
+2025-01-27,AJM,Nanat Point,NNT01,15,0,na
+2025-01-27,AJM,Nanat Point,NNT01,14,0,na
+2025-01-27,JOC,Sanford North,SAN01,1,0,na
+2025-01-27,JOC,Sanford North,SAN01,2,0,na
+2025-01-27,JOC,Sanford North,SAN01,3,0,na
+2025-01-27,JOC,Sanford North,SAN01,4,0,na
+2025-01-27,JOC,Sanford North,SAN01,5,0,na
+2025-01-27,JOC,Sanford North,SAN01,6,0,na
+2025-01-27,JOC,Sanford North,SAN01,7,0,na
+2025-01-27,JOC,Sanford North,SAN01,8,0,na
+2025-01-27,JOC,Sanford North,SAN01,9,0,na
+2025-01-27,JOC,Sanford North,SAN01,10,0,na
+2025-01-27,JOC,Sanford North,SAN01,11,0,na
+2025-01-27,JOC,Sanford North,SAN01,12,8,alive
+2025-01-27,JOC,Sanford North,SAN01,13,12,alive
+2025-01-27,JOC,Sanford North,SAN01,13,10,alive
+2025-01-27,JOC,Sanford North,SAN01,13,7,alive
+2025-01-27,JOC,Sanford North,SAN01,14,13,alive
+2025-01-27,JOC,Sanford North,SAN01,15,10,alive
+2025-01-27,JOC,Sanford North,SAN01,15,10,alive
+2025-01-27,JOC,Sanford North,SAN01,15,4,alive
+2025-01-27,JOC,Sanford North,SAN01,16,0,na
+2025-01-27,JOC,Ross NW,RON01,1,0,na
+2025-01-27,JOC,Ross NW,RON01,2,0,na
+2025-01-27,JOC,Ross NW,RON01,3,0,na
+2025-01-27,JOC,Ross NW,RON01,4,0,na
+2025-01-27,JOC,Ross NW,RON01,5,0,na
+2025-01-27,JOC,Ross NW,RON01,6,0,na
+2025-01-27,JOC,Ross NW,RON01,7,0,na
+2025-01-27,JOC,Ross NW,RON01,8,8,alive
+2025-01-27,JOC,Ross NW,RON01,9,0,na
+2025-01-27,JOC,Ross NW,RON01,10,0,na
+2025-01-27,JOC,Ross NW,RON01,11,0,na
+2025-01-27,JOC,Ross NW,RON01,12,0,na
+2025-01-27,JOC,Ross NW,RON01,13,10,alive
+2025-01-27,JOC,Ross NW,RON01,14,9,alive
+2025-01-27,JOC,Ross NW,RON01,14,12,alive
+2025-01-27,AJM,Dixon Inside,DIX02,30,0,
+2025-01-27,AJM,Dixon Inside,DIX02,29,0,
+2025-01-27,AJM,Dixon Inside,DIX02,28,0,
+2025-01-27,AJM,Dixon Inside,DIX02,27,0,
+2025-01-27,AJM,Dixon Inside,DIX02,26,0,
+2025-01-27,AJM,Dixon Inside,DIX02,25,0,
+2025-01-27,AJM,Dixon Inside,DIX02,24,0,
+2025-01-27,AJM,Dixon Inside,DIX02,23,0,
+2025-01-27,AJM,Dixon Inside,DIX02,22,0,
+2025-01-27,AJM,Dixon Inside,DIX02,21,5,
+2025-01-27,AJM,Dixon Inside,DIX02,20,11,
+2025-01-27,AJM,Dixon Inside,DIX02,19,3,
+2025-01-27,AJM,Dixon Inside,DIX02,18,9.5,
+2025-01-27,AJM,Dixon Inside,DIX02,17,4,
+2025-01-27,AJM,Dixon Inside,DIX02,16,0,
+2025-01-27,AJM,Dixon Inside,DIX02,15,6,
+2025-01-27,AJM,Dixon Inside,DIX02,15,4,
+2025-01-27,AJM,Dixon Inside,DIX02,14,4,
+2025-01-27,AJM,Dixon Inside,DIX02,14,2,
+2025-01-27,AJM,Dixon Inside,DIX02,14,10,
+2025-01-27,AJM,Dixon Inside,DIX02,13,7,dead
+2025-01-27,AJM,Dixon Inside,DIX02,13,6,
+2025-01-27,AJM,Dixon Inside,DIX02,13,5,
+2025-01-27,AJM,Dixon Inside,DIX02,13,4,
+2025-01-27,AJM,Dixon Inside,DIX02,13,3,
+2025-01-27,JOC,Sanford South,SAN02,1,0,na
+2025-01-27,JOC,Sanford South,SAN02,2,0,na
+2025-01-27,JOC,Sanford South,SAN02,3,0,na
+2025-01-27,JOC,Sanford South,SAN02,4,0,na
+2025-01-27,JOC,Sanford South,SAN02,5,0,na
+2025-01-27,JOC,Sanford South,SAN02,6,0,na
+2025-01-27,JOC,Sanford South,SAN02,7,0,na
+2025-01-27,JOC,Sanford South,SAN02,8,0,na
+2025-01-27,JOC,Sanford South,SAN02,9,0,na
+2025-01-27,JOC,Sanford South,SAN02,10,0,na
+2025-01-27,JOC,Sanford South,SAN02,11,0,na
+2025-01-27,JOC,Sanford South,SAN02,12,0,na
+2025-01-27,JOC,Sanford South,SAN02,13,0,na
+2025-01-27,JOC,Sanford South,SAN02,14,7,alive
+2025-01-27,JOC,Sanford South,SAN02,15,0,na
+2025-01-27,JOC,Sanford South,SAN02,16,0,na
+2025-01-27,JOC,Sanford South,SAN02,17,0,na
+2025-01-27,JOC,Sanford South,SAN02,18,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,1,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,2,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,3,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,4,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,5,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,6,12,alive
+2025-01-27,JOC,North Helby Rock,NHR01,6,9,alive
+2025-01-27,JOC,North Helby Rock,NHR01,7,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,8,12,alive
+2025-01-27,JOC,North Helby Rock,NHR01,9,9,alive
+2025-01-27,JOC,North Helby Rock,NHR01,9,11,alive
+2025-01-27,JOC,North Helby Rock,NHR01,10,9,alive
+2025-01-27,JOC,North Helby Rock,NHR01,11,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,12,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,13,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,14,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,15,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,16,0,na
+2025-01-27,JOC,North Helby Rock,NHR01,17,0,na
+2025-01-27,AJM,Ross NW,RON01,30,0,na
+2025-01-27,AJM,Ross NW,RON01,29,0,na
+2025-01-27,AJM,Ross NW,RON01,28,0,na
+2025-01-27,AJM,Ross NW,RON01,27,0,na
+2025-01-27,AJM,Ross NW,RON01,26,0,na
+2025-01-27,AJM,Ross NW,RON01,25,0,na
+2025-01-27,AJM,Ross NW,RON01,24,0,na
+2025-01-27,AJM,Ross NW,RON01,23,0,na
+2025-01-27,AJM,Ross NW,RON01,22,0,na
+2025-01-27,AJM,Ross NW,RON01,21,8,alive
+2025-01-27,AJM,Ross NW,RON01,20,0,na
+2025-01-27,AJM,Ross NW,RON01,19,10,alive
+2025-01-27,AJM,Ross NW,RON01,19,9,alive
+2025-01-27,AJM,Ross NW,RON01,18,3,alive
+2025-01-27,AJM,Ross NW,RON01,18,3,alive
+2025-01-27,AJM,Ross NW,RON01,17,7,alive
+2025-01-27,AJM,Ross NW,RON01,16,11,alive
+2025-01-27,AJM,Ross NW,RON01,16,11,alive
+2025-01-27,AJM,Ross NW,RON01,15,11,alive
+2025-01-27,JOC,Dixon Inside,DIX02,1,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,1,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,2,8,alive
+2025-01-27,JOC,Dixon Inside,DIX02,2,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,3,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,3,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,3,10,alive
+2025-01-27,JOC,Dixon Inside,DIX02,3,11,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,9,dead
+2025-01-27,JOC,Dixon Inside,DIX02,4,8,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,4,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,5,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,5,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,5,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,6,2,alive
+2025-01-27,JOC,Dixon Inside,DIX02,6,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,6,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,6,4,alive
+2025-01-27,JOC,Dixon Inside,DIX02,7,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,7,8,alive
+2025-01-27,JOC,Dixon Inside,DIX02,7,2,alive
+2025-01-27,JOC,Dixon Inside,DIX02,7,1.5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,7,9,dead
+2025-01-27,JOC,Dixon Inside,DIX02,8,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,8,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,9,7,alive
+2025-01-27,JOC,Dixon Inside,DIX02,9,8,dead
+2025-01-27,JOC,Dixon Inside,DIX02,9,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,10,9,dead
+2025-01-27,JOC,Dixon Inside,DIX02,10,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,10,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,10,6,alive
+2025-01-27,JOC,Dixon Inside,DIX02,10,5,alive
+2025-01-27,JOC,Dixon Inside,DIX02,11,8,alive
+2025-01-27,JOC,Dixon Inside,DIX02,11,4,alive
+2025-01-27,JOC,Dixon Inside,DIX02,12,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,1,7,alive
+2025-01-27,JOV,Nanat Point,NNT01,1,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,2,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,2,7,alive
+2025-01-27,JOV,Nanat Point,NNT01,2,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,9,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,7,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,3,7,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,7,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,8,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,8,alive
+2025-01-27,JOV,Nanat Point,NNT01,4,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,4,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,4,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,9,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,5,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,6,12,alive
+2025-01-27,JOV,Nanat Point,NNT01,6,10,dead
+2025-01-27,JOV,Nanat Point,NNT01,6,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,7,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,8,9,alive
+2025-01-27,JOV,Nanat Point,NNT01,8,6,alive
+2025-01-27,JOV,Nanat Point,NNT01,8,10,alive
+2025-01-27,JOV,Nanat Point,NNT01,8,8,alive
+2025-01-27,JOV,Nanat Point,NNT01,9,0,na
+2025-01-27,JOV,Nanat Point,NNT01,10,0,na
+2025-01-27,JOV,Nanat Point,NNT01,11,0,na
+2025-01-27,JOV,Nanat Point,NNT01,12,12,dead
+2025-01-27,JOV,Nanat Point,NNT01,12,5,alive
+2025-01-27,JOV,Nanat Point,NNT01,12,9,alive
+2025-01-27,JOV,Nanat Point,NNT01,13,3,alive
+2025-01-27,JOV,Nanat Point,NNT01,13,4,alive
+2025-01-27,JOV,Nanat Point,NNT01,13,4,alive
+2025-01-27,JOV,Nanat Point,NNT01,13,5,alive
+2025-01-27,AJM,Sanford North,SAN01,30,0,na
+2025-01-27,AJM,Sanford North,SAN01,29,6,alive
+2025-01-27,AJM,Sanford North,SAN01,28,5,alive
+2025-01-27,AJM,Sanford North,SAN01,28,5,alive
+2025-01-27,AJM,Sanford North,SAN01,27,0,na
+2025-01-27,AJM,Sanford North,SAN01,26,0,na
+2025-01-27,AJM,Sanford North,SAN01,25,0,na
+2025-01-27,AJM,Sanford North,SAN01,24,0,na
+2025-01-27,AJM,Sanford North,SAN01,23,9,alive
+2025-01-27,AJM,Sanford North,SAN01,23,6,alive
+2025-01-27,AJM,Sanford North,SAN01,22,0,na
+2025-01-27,AJM,Sanford North,SAN01,21,0,na
+2025-01-27,AJM,Sanford North,SAN01,20,0,na
+2025-01-27,AJM,Sanford North,SAN01,19,7,alive
+2025-01-27,AJM,Sanford North,SAN01,18,0,na
+2025-01-27,AJM,Sanford North,SAN01,17,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,30,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,29,6,alive
+2025-01-27,AJM,North Helby Rock,NHR01,29,9,alive
+2025-01-27,AJM,North Helby Rock,NHR01,28,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,27,6,alive
+2025-01-27,AJM,North Helby Rock,NHR01,26,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,25,4,alive
+2025-01-27,AJM,North Helby Rock,NHR01,25,7,alive
+2025-01-27,AJM,North Helby Rock,NHR01,25,8,alive
+2025-01-27,AJM,North Helby Rock,NHR01,25,1,alive
+2025-01-27,AJM,North Helby Rock,NHR01,24,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,23,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,22,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,21,6,alive
+2025-01-27,AJM,North Helby Rock,NHR01,20,9,alive
+2025-01-27,AJM,North Helby Rock,NHR01,19,0,na
+2025-01-27,AJM,North Helby Rock,NHR01,18,0,na
+2025-01-27,AJM,Sanford South,SAN02,30,6,alive
+2025-01-27,AJM,Sanford South,SAN02,29,6,alive
+2025-01-27,AJM,Sanford South,SAN02,28,7,alive
+2025-01-27,AJM,Sanford South,SAN02,28,6,alive
+2025-01-27,AJM,Sanford South,SAN02,28,6,alive
+2025-01-27,AJM,Sanford South,SAN02,28,7,dead
+2025-01-27,AJM,Sanford South,SAN02,27,7,alive
+2025-01-27,AJM,Sanford South,SAN02,27,6,alive
+2025-01-27,AJM,Sanford South,SAN02,27,4,alive
+2025-01-27,AJM,Sanford South,SAN02,27,7,alive
+2025-01-27,AJM,Sanford South,SAN02,26,6,alive
+2025-01-27,AJM,Sanford South,SAN02,26,7,alive
+2025-01-27,AJM,Sanford South,SAN02,25,5,alive
+2025-01-27,AJM,Sanford South,SAN02,25,9,alive
+2025-01-27,AJM,Sanford South,SAN02,25,7,alive
+2025-01-27,AJM,Sanford South,SAN02,25,7,alive
+2025-01-27,AJM,Sanford South,SAN02,24,11,alive
+2025-01-27,AJM,Sanford South,SAN02,24,11,alive
+2025-01-27,AJM,Sanford South,SAN02,24,7,alive
+2025-01-27,AJM,Sanford South,SAN02,24,8,alive
+2025-01-27,AJM,Sanford South,SAN02,23,6,alive
+2025-01-27,AJM,Sanford South,SAN02,23,6,alive
+2025-01-27,AJM,Sanford South,SAN02,23,9,alive
+2025-01-27,AJM,Sanford South,SAN02,23,9,alive
+2025-01-27,AJM,Sanford South,SAN02,22,8,alive
+2025-01-27,AJM,Sanford South,SAN02,22,9,alive
+2025-01-27,AJM,Sanford South,SAN02,21,8,alive
+2025-01-27,AJM,Sanford South,SAN02,21,2,alive
+2025-01-27,AJM,Sanford South,SAN02,21,9,alive
+2025-01-27,AJM,Sanford South,SAN02,21,7,alive
+2025-01-27,AJM,Sanford South,SAN02,20,0,na
+2025-01-27,AJM,Sanford South,SAN02,19,0,na
+2025-01-28,AJM,Keeha,KEE01,30,0,na
+2025-01-28,AJM,Keeha,KEE01,29,0,na
+2025-01-28,AJM,Keeha,KEE01,28,0,na
+2025-01-28,AJM,Keeha,KEE01,27,0,na
+2025-01-28,AJM,Keeha,KEE01,26,0,na
+2025-01-28,AJM,Keeha,KEE01,25,0,na
+2025-01-28,AJM,Keeha,KEE01,24,0,na
+2025-01-28,AJM,Keeha,KEE01,23,0,na
+2025-01-28,AJM,Keeha,KEE01,22,0,na
+2025-01-28,AJM,Keeha,KEE01,21,0,na
+2025-01-28,AJM,Keeha,KEE01,20,0,na
+2025-01-28,AJM,Keeha,KEE01,19,0,na
+2025-01-28,AJM,Keeha,KEE01,18,0,na
+2025-01-28,AJM,Keeha,KEE01,17,6,dead
+2025-01-28,DVM,Seabird Rocks,SBR01,1,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,2,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,3,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,4,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,5,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,6,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,7,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,8,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,9,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,10,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,11,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,12,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,13,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,14,0,na
+2025-01-28,DVM,Seabird Rocks,SBR01,15,0,na
+2025-01-28,DVM,Keeha,KEE01,1,0,na
+2025-01-28,DVM,Keeha,KEE01,2,0,na
+2025-01-28,DVM,Keeha,KEE01,3,0,na
+2025-01-28,DVM,Keeha,KEE01,4,0,na
+2025-01-28,DVM,Keeha,KEE01,5,0,na
+2025-01-28,DVM,Keeha,KEE01,6,0,na
+2025-01-28,DVM,Keeha,KEE01,7,0,na
+2025-01-28,DVM,Keeha,KEE01,8,0,na
+2025-01-28,DVM,Keeha,KEE01,9,0,na
+2025-01-28,DVM,Keeha,KEE01,10,0,na
+2025-01-28,DVM,Keeha,KEE01,11,0,na
+2025-01-28,DVM,Keeha,KEE01,12,0,na
+2025-01-28,DVM,Keeha,KEE01,13,0,na
+2025-01-28,DVM,Keeha,KEE01,14,0,na
+2025-01-28,DVM,Keeha,KEE01,15,0,na
+2025-01-28,DVM,Keeha,KEE01,16,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,30,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,29,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,28,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,27,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,26,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,25,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,24,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,23,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,22,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,21,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,20,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,19,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,18,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,17,0,na
+2025-01-28,AJM,Seabird Rocks,SBR01,16,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,1,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,2,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,3,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,4,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,5,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,6,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,7,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,8,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,9,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,10,0,na
+2025-01-28,DVM,Pachena Bay South,PBS01,11,0,na
+2025-01-28,DVM,Clutus,CLU01,1,0,na
+2025-01-28,DVM,Clutus,CLU01,2,0,na
+2025-01-28,DVM,Clutus,CLU01,3,0,na
+2025-01-28,DVM,Clutus,CLU01,4,0,na
+2025-01-28,DVM,Clutus,CLU01,5,0,na
+2025-01-28,DVM,Clutus,CLU01,6,0,na
+2025-01-28,DVM,Clutus,CLU01,7,0,na
+2025-01-28,DVM,Clutus,CLU01,8,0,na
+2025-01-28,DVM,Clutus,CLU01,9,0,na
+2025-01-28,DVM,Clutus,CLU01,10,0,na
+2025-01-28,DVM,Clutus,CLU01,11,0,na
+2025-01-28,DVM,Clutus,CLU01,12,0,na
+2025-01-28,DVM,Clutus,CLU01,13,0,na
+2025-01-28,DVM,Clutus,CLU01,14,0,na
+2025-01-28,DVM,Clutus,CLU01,15,0,na
+2025-01-28,DVM,Clutus,CLU01,16,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,1,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,2,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,3,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,4,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,5,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,6,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,7,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,8,5,alive
+2025-01-28,DVM,Pachena Bay South 2,PBS02,9,0,na
+2025-01-28,DVM,Pachena Bay South 2,PBS02,10,3,alive
+2025-01-28,DVM,Pachena Bay South 2,PBS02,11,5,alive
+2025-01-28,DVM,Pachena Bay South 2,PBS02,11,5,alive
+2025-01-28,AJM,Clutus,CLU01,30,0,na
+2025-01-28,AJM,Clutus,CLU01,29,0,na
+2025-01-28,AJM,Clutus,CLU01,28,0,na
+2025-01-28,AJM,Clutus,CLU01,27,0,na
+2025-01-28,AJM,Clutus,CLU01,26,0,na
+2025-01-28,AJM,Clutus,CLU01,25,0,na
+2025-01-28,AJM,Clutus,CLU01,24,0,na
+2025-01-28,AJM,Clutus,CLU01,23,0,na
+2025-01-28,AJM,Clutus,CLU01,22,0,na
+2025-01-28,AJM,Clutus,CLU01,21,0,na
+2025-01-28,AJM,Clutus,CLU01,20,0,na
+2025-01-28,AJM,Clutus,CLU01,19,0,na
+2025-01-28,AJM,Clutus,CLU01,18,0,na
+2025-01-28,AJM,Clutus,CLU01,17,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,30,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,29,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,28,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,27,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,26,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,25,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,24,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,23,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,22,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,21,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,20,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,19,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,18,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,17,0,na
+2025-01-28,AJM,Clutus 2 ,CLU02,16,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,1,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,2,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,3,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,4,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,5,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,6,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,7,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,8,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,9,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,10,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,11,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,12,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,13,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,14,0,na
+2025-01-28,DVM,Clutus 2 ,CLU02,15,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,30,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,29,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,28,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,27,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,26,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,25,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,24,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,23,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,22,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,21,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,20,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,19,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,18,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,17,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,16,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,15,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,14,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,13,0,na
+2025-01-28,AJM,Pachena Bay South,PBS01,12,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,30,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,29,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,28,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,27,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,26,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,25,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,24,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,23,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,22,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,21,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,20,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,19,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,18,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,17,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,16,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,15,6,alive
+2025-01-28,AJM,Pachena Bay South 2,PBS02,14,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,13,0,na
+2025-01-28,AJM,Pachena Bay South 2,PBS02,12,3.5,alive
+2025-01-29,JOC,Lawton Point,LAW01,1,6,alive
+2025-01-29,JOC,Lawton Point,LAW01,2,0,na
+2025-01-29,JOC,Lawton Point,LAW01,3,0,na
+2025-01-29,JOC,Lawton Point,LAW01,4,0,na
+2025-01-29,JOC,Lawton Point,LAW01,5,7,alive
+2025-01-29,JOC,Lawton Point,LAW01,6,0,na
+2025-01-29,JOC,Lawton Point,LAW01,7,5,alive
+2025-01-29,JOC,Lawton Point,LAW01,8,5,alive
+2025-01-29,JOC,Lawton Point,LAW01,9,2,alive
+2025-01-29,JOC,Lawton Point,LAW01,10,0,na
+2025-01-29,JOC,Lawton Point,LAW01,11,9,alive
+2025-01-29,JOC,Lawton Point,LAW01,12,6,alive
+2025-01-29,JOC,Lawton Point,LAW01,12,5,alive
+2025-01-29,JOC,Lawton Point,LAW01,13,4,alive
+2025-01-29,JOC,Lawton Point,LAW01,14,4,alive
+2025-01-29,JOC,Lawton Point,LAW01,15,0,na
+2025-01-29,JOC,Lawton Point,LAW01,16,0,na
+2025-01-29,DVM,Flemming 114,FLM05,30,0,na
+2025-01-29,DVM,Flemming 114,FLM05,29,0,na
+2025-01-29,DVM,Flemming 114,FLM05,28,0,na
+2025-01-29,DVM,Flemming 114,FLM05,27,0,na
+2025-01-29,DVM,Flemming 114,FLM05,26,0,na
+2025-01-29,DVM,Flemming 114,FLM05,25,0,na
+2025-01-29,DVM,Flemming 114,FLM05,24,0,na
+2025-01-29,DVM,Flemming 114,FLM05,23,0,na
+2025-01-29,DVM,Flemming 114,FLM05,22,0,na
+2025-01-29,DVM,Flemming 114,FLM05,21,0,na
+2025-01-29,DVM,Flemming 114,FLM05,20,0,na
+2025-01-29,DVM,Flemming 114,FLM05,19,14,alive
+2025-01-29,DVM,Flemming 114,FLM05,18,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,30,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,29,6,alive
+2025-01-29,DVM,Dodger Channel,DOD01,28,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,27,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,26,8,alive
+2025-01-29,DVM,Dodger Channel,DOD01,26,7,alive
+2025-01-29,DVM,Dodger Channel,DOD01,25,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,24,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,23,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,22,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,21,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,20,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,19,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,18,1,dead
+2025-01-29,DVM,Dodger Channel,DOD01,17,0,na
+2025-01-29,DVM,Dodger Channel,DOD01,16,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,1,10,alive
+2025-01-29,JOC,Dodger Channel,DOD01,2,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,3,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,4,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,5,1.5,alive
+2025-01-29,JOC,Dodger Channel,DOD01,6,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,7,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,8,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,9,0,na
+2025-01-29,JOC,Dodger Channel,DOD01,10,5,alive
+2025-01-29,JOC,Dodger Channel,DOD01,11,6,alive
+2025-01-29,JOC,Dodger Channel,DOD01,12,6,alive
+2025-01-29,JOC,Dodger Channel,DOD01,12,5,alive
+2025-01-29,JOC,Dodger Channel,DOD01,13,7,alive
+2025-01-29,JOC,Dodger Channel,DOD01,14,4,alive
+2025-01-29,JOC,Dodger Channel,DOD01,14,5,alive
+2025-01-29,JOC,Dodger Channel,DOD01,15,5,alive
+2025-01-29,DVM,Lawton Point,LAW01,30,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,30,7,alive
+2025-01-29,DVM,Lawton Point,LAW01,30,5.5,alive
+2025-01-29,DVM,Lawton Point,LAW01,30,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,30,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,29,8,alive
+2025-01-29,DVM,Lawton Point,LAW01,29,4,alive
+2025-01-29,DVM,Lawton Point,LAW01,28,7,alive
+2025-01-29,DVM,Lawton Point,LAW01,28,4,alive
+2025-01-29,DVM,Lawton Point,LAW01,28,8,alive
+2025-01-29,DVM,Lawton Point,LAW01,28,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,27,5,alive
+2025-01-29,DVM,Lawton Point,LAW01,27,7,alive
+2025-01-29,DVM,Lawton Point,LAW01,26,9,alive
+2025-01-29,DVM,Lawton Point,LAW01,26,8,alive
+2025-01-29,DVM,Lawton Point,LAW01,25,0,na
+2025-01-29,DVM,Lawton Point,LAW01,24,0,na
+2025-01-29,DVM,Lawton Point,LAW01,23,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,22,8,alive
+2025-01-29,DVM,Lawton Point,LAW01,22,4,alive
+2025-01-29,DVM,Lawton Point,LAW01,22,3,alive
+2025-01-29,DVM,Lawton Point,LAW01,21,4,alive
+2025-01-29,DVM,Lawton Point,LAW01,21,8,alive
+2025-01-29,DVM,Lawton Point,LAW01,20,5,alive
+2025-01-29,DVM,Lawton Point,LAW01,20,6,alive
+2025-01-29,DVM,Lawton Point,LAW01,19,0,na
+2025-01-29,DVM,Lawton Point,LAW01,18,0,na
+2025-01-29,DVM,Lawton Point,LAW01,17,9,alive
+2025-01-29,DVM,Lawton Point,LAW01,17,5,alive
+2025-01-29,DVM,Lawton Point,LAW01,17,4,alive
+2025-01-29,DVM,Lawton Point,LAW01,17,8,alive
+2025-01-29,JOC,Diana SE 2,DSE02,1,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,2,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,3,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,4,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,5,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,6,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,7,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,8,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,9,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,10,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,11,0,na
+2025-01-29,JOC,Diana SE 2,DSE02,12,0,na
+2025-01-29,JOC,Flemming NW 4,FLM04,1,0,na
+2025-01-29,JOC,Flemming NW 4,FLM04,2,0,na
+2025-01-29,JOC,Flemming NW 4,FLM04,3,0,na
+2025-01-29,JOC,Flemming NW 4,FLM04,4,0,na
+2025-01-29,JOC,Flemming NW 4,FLM04,5,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,6,1,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,7,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,8,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,8,9,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,8,10,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,8,5,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,9,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,9,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,10,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,10,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,11,4,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,11,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,11,5,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,11,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,11,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,12,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,12,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,12,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,12,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,13,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,13,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,13,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,14,6,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,14,8,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,14,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,15,9,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,16,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,16,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,17,7,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,17,3,alive
+2025-01-29,JOC,Flemming NW 4,FLM04,17,2,alive
+2025-01-29,DVM,Tzartus 116,TZA01,30,12,dead
+2025-01-29,DVM,Tzartus 116,TZA01,30,14,dead
+2025-01-29,DVM,Tzartus 116,TZA01,30,11,dead
+2025-01-29,DVM,Tzartus 116,TZA01,30,15,alive
+2025-01-29,DVM,Tzartus 116,TZA01,30,14,dead
+2025-01-29,DVM,Tzartus 116,TZA01,30,14,dead
+2025-01-29,DVM,Tzartus 116,TZA01,29,0,na
+2025-01-29,DVM,Tzartus 116,TZA01,28,13,dead
+2025-01-29,DVM,Tzartus 116,TZA01,27,14.5,dead
+2025-01-29,DVM,Tzartus 116,TZA01,26,0,na
+2025-01-29,DVM,Tzartus 116,TZA01,25,13,alive
+2025-01-29,DVM,Tzartus 116,TZA01,25,4,dead
+2025-01-29,DVM,Tzartus 116,TZA01,25,15,dead
+2025-01-29,DVM,Tzartus 116,TZA01,24,14,alive
+2025-01-29,DVM,Tzartus 116,TZA01,23,15,dead
+2025-01-29,DVM,Tzartus 116,TZA01,23,14,dead
+2025-01-29,DVM,Tzartus 116,TZA01,22,12,dead
+2025-01-29,DVM,Tzartus 116,TZA01,22,14,alive
+2025-01-29,DVM,Tzartus 116,TZA01,21,0,na
+2025-01-29,DVM,Tzartus 116,TZA01,20,12,dead
+2025-01-29,DVM,Tzartus 116,TZA01,19,15,dead
+2025-01-29,DVM,Tzartus 116,TZA01,19,11,dead
+2025-01-29,JOC,Flemming 114,FLM05,1,0,na
+2025-01-29,JOC,Flemming 114,FLM05,2,0,na
+2025-01-29,JOC,Flemming 114,FLM05,3,0,na
+2025-01-29,JOC,Flemming 114,FLM05,4,0,na
+2025-01-29,JOC,Flemming 114,FLM05,5,0,na
+2025-01-29,JOC,Flemming 114,FLM05,6,0,na
+2025-01-29,JOC,Flemming 114,FLM05,7,0,na
+2025-01-29,JOC,Flemming 114,FLM05,8,0,na
+2025-01-29,JOC,Flemming 114,FLM05,9,0,na
+2025-01-29,JOC,Flemming 114,FLM05,10,0,na
+2025-01-29,JOC,Flemming 114,FLM05,11,0,na
+2025-01-29,JOC,Flemming 114,FLM05,12,0,na
+2025-01-29,JOC,Flemming 114,FLM05,13,0,na
+2025-01-29,JOC,Flemming 114,FLM05,14,0,na
+2025-01-29,JOC,Flemming 114,FLM05,15,0,na
+2025-01-29,JOC,Flemming 114,FLM05,16,0,na
+2025-01-29,JOC,Flemming 114,FLM05,17,0,na
+2025-01-29,DVM,Flemming 114,FLM04,30,6,
+2025-01-29,DVM,Flemming 114,FLM04,30,5.5,
+2025-01-29,DVM,Flemming 114,FLM04,30,8,
+2025-01-29,DVM,Flemming 114,FLM04,30,7,
+2025-01-29,DVM,Flemming 114,FLM04,29,7,
+2025-01-29,DVM,Flemming 114,FLM04,28,7,
+2025-01-29,DVM,Flemming 114,FLM04,28,7,
+2025-01-29,DVM,Flemming 114,FLM04,28,8,
+2025-01-29,DVM,Flemming 114,FLM04,28,1,
+2025-01-29,DVM,Flemming 114,FLM04,27,7,
+2025-01-29,DVM,Flemming 114,FLM04,26,6,
+2025-01-29,DVM,Flemming 114,FLM04,26,1,
+2025-01-29,DVM,Flemming 114,FLM04,25,0,
+2025-01-29,DVM,Flemming 114,FLM04,24,0,
+2025-01-29,DVM,Flemming 114,FLM04,23,8,
+2025-01-29,DVM,Flemming 114,FLM04,23,7,
+2025-01-29,DVM,Flemming 114,FLM04,22,5,
+2025-01-29,DVM,Flemming 114,FLM04,22,5,
+2025-01-29,DVM,Flemming 114,FLM04,22,8,
+2025-01-29,DVM,Flemming 114,FLM04,21,7,
+2025-01-29,DVM,Flemming 114,FLM04,21,7,
+2025-01-29,DVM,Flemming 114,FLM04,21,5,
+2025-01-29,DVM,Flemming 114,FLM04,21,6,
+2025-01-29,DVM,Flemming 114,FLM04,21,8,
+2025-01-29,DVM,Flemming 114,FLM04,21,6,
+2025-01-29,DVM,Flemming 114,FLM04,21,8,
+2025-01-29,DVM,Flemming 114,FLM04,21,7,
+2025-01-29,DVM,Flemming 114,FLM04,20,5,
+2025-01-29,DVM,Flemming 114,FLM04,20,8,
+2025-01-29,DVM,Flemming 114,FLM04,20,8,
+2025-01-29,DVM,Flemming 114,FLM04,19,7,
+2025-01-29,DVM,Flemming 114,FLM04,18,1,
+2025-01-29,DVM,Flemming 114,FLM04,18,5,
+2025-01-29,JOC,Tzartus 116,TZA01,1,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,2,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,3,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,4,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,5,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,6,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,7,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,8,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,9,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,10,13,alive
+2025-01-29,JOC,Tzartus 116,TZA01,11,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,12,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,13,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,14,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,15,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,16,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,17,0,na
+2025-01-29,JOC,Tzartus 116,TZA01,18,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,30,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,29,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,28,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,27,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,26,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,25,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,24,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,23,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,22,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,21,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,20,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,19,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,18,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,17,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,16,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,15,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,14,0,na
+2025-01-29,DVM,Diana SE 2,DSE02,13,0,na
+2025-01-30,AJM,Hosie South,HOS01,30,0,na
+2025-01-30,AJM,Hosie South,HOS01,29,0,na
+2025-01-30,AJM,Hosie South,HOS01,28,0,na
+2025-01-30,AJM,Hosie South,HOS01,27,0,na
+2025-01-30,AJM,Hosie South,HOS01,26,0,na
+2025-01-30,AJM,Hosie South,HOS01,25,0,na
+2025-01-30,AJM,Hosie South,HOS01,24,0,na
+2025-01-30,AJM,Hosie South,HOS01,23,0,na
+2025-01-30,AJM,Hosie South,HOS01,22,0,na
+2025-01-30,AJM,Hosie South,HOS01,21,15,alive
+2025-01-30,AJM,Hosie South,HOS01,20,0,na
+2025-01-30,AJM,Hosie South,HOS01,19,0,na
+2025-01-30,AJM,Congreve Island,CON01,30,0,na
+2025-01-30,AJM,Congreve Island,CON01,29,0,na
+2025-01-30,AJM,Congreve Island,CON01,28,0,na
+2025-01-30,AJM,Congreve Island,CON01,27,0,na
+2025-01-30,AJM,Congreve Island,CON01,26,0,na
+2025-01-30,AJM,Congreve Island,CON01,25,0,na
+2025-01-30,AJM,Congreve Island,CON01,24,0,na
+2025-01-30,AJM,Congreve Island,CON01,23,0,na
+2025-01-30,AJM,Congreve Island,CON01,22,12,dead
+2025-01-30,AJM,Congreve Island,CON01,21,0,na
+2025-01-30,AJM,Congreve Island,CON01,20,0,na
+2025-01-30,AJM,Congreve Island,CON01,19,0,na
+2025-01-30,AJM,Congreve Island,CON01,18,0,na
+2025-01-30,AJM,Congreve Island,CON01,17,0,na
+2025-01-30,AJM,Congreve Island,CON01,16,0,na
+2025-01-30,AJM,Congreve Island,CON01,15,0,na
+2025-01-30,AJM,Congreve Island,CON01,14,0,na
+2025-01-30,JOC,Clifton Point,CLP01,1,0,na
+2025-01-30,JOC,Clifton Point,CLP01,2,0,na
+2025-01-30,JOC,Clifton Point,CLP01,3,0,na
+2025-01-30,JOC,Clifton Point,CLP01,4,0,na
+2025-01-30,JOC,Clifton Point,CLP01,5,0,na
+2025-01-30,JOC,Clifton Point,CLP01,6,0,na
+2025-01-30,JOC,Clifton Point,CLP01,7,0,na
+2025-01-30,JOC,Clifton Point,CLP01,8,0,na
+2025-01-30,JOC,Clifton Point,CLP01,9,0,na
+2025-01-30,JOC,Clifton Point,CLP01,10,0,na
+2025-01-30,JOC,Clifton Point,CLP01,11,0,na
+2025-01-30,JOC,Clifton Point,CLP01,12,0,na
+2025-01-30,JOC,Clifton Point,CLP01,13,0,na
+2025-01-30,JOC,Clifton Point,CLP01,14,0,na
+2025-01-30,JOC,Clifton Point,CLP01,15,0,na
+2025-01-30,AJM,Clifton Point,CLP01,30,0,na
+2025-01-30,AJM,Clifton Point,CLP01,29,0,na
+2025-01-30,AJM,Clifton Point,CLP01,28,0,na
+2025-01-30,AJM,Clifton Point,CLP01,27,0,na
+2025-01-30,AJM,Clifton Point,CLP01,26,0,na
+2025-01-30,AJM,Clifton Point,CLP01,25,0,na
+2025-01-30,AJM,Clifton Point,CLP01,24,0,na
+2025-01-30,AJM,Clifton Point,CLP01,23,0,na
+2025-01-30,AJM,Clifton Point,CLP01,22,0,na
+2025-01-30,AJM,Clifton Point,CLP01,21,0,na
+2025-01-30,AJM,Clifton Point,CLP01,20,0,na
+2025-01-30,AJM,Clifton Point,CLP01,19,0,na
+2025-01-30,AJM,Clifton Point,CLP01,18,0,na
+2025-01-30,AJM,Clifton Point,CLP01,17,0,na
+2025-01-30,AJM,Clifton Point,CLP01,16,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,1,9,alive
+2025-01-30,JOC,San Jose Islands,SJI01,1,8,alive
+2025-01-30,JOC,San Jose Islands,SJI01,2,7,alive
+2025-01-30,JOC,San Jose Islands,SJI01,3,8,alive
+2025-01-30,JOC,San Jose Islands,SJI01,3,7,alive
+2025-01-30,JOC,San Jose Islands,SJI01,4,7,alive
+2025-01-30,JOC,San Jose Islands,SJI01,4,8,alive
+2025-01-30,JOC,San Jose Islands,SJI01,5,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,6,8,dead
+2025-01-30,JOC,San Jose Islands,SJI01,6,6,alive
+2025-01-30,JOC,San Jose Islands,SJI01,6,7,alive
+2025-01-30,JOC,San Jose Islands,SJI01,6,6,alive
+2025-01-30,JOC,San Jose Islands,SJI01,7,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,8,10,dead
+2025-01-30,JOC,San Jose Islands,SJI01,9,6,alive
+2025-01-30,JOC,San Jose Islands,SJI01,9,2,alive
+2025-01-30,JOC,San Jose Islands,SJI01,10,5,alive
+2025-01-30,JOC,San Jose Islands,SJI01,11,9,dead
+2025-01-30,JOC,San Jose Islands,SJI01,12,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,13,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,14,0,na
+2025-01-30,JOC,San Jose Islands,SJI01,14,0,na
+2025-01-30,AJM,Santa Maria,SAM01,30,0,na
+2025-01-30,AJM,Santa Maria,SAM01,29,0,na
+2025-01-30,AJM,Santa Maria,SAM01,28,0,na
+2025-01-30,AJM,Santa Maria,SAM01,27,0,na
+2025-01-30,AJM,Santa Maria,SAM01,26,0,na
+2025-01-30,AJM,Santa Maria,SAM01,25,0,na
+2025-01-30,AJM,Santa Maria,SAM01,24,0,na
+2025-01-30,AJM,Santa Maria,SAM01,23,0,na
+2025-01-30,AJM,Santa Maria,SAM01,22,0,na
+2025-01-30,AJM,Santa Maria,SAM01,21,0,na
+2025-01-30,AJM,Santa Maria,SAM01,20,0,na
+2025-01-30,AJM,Santa Maria,SAM01,19,0,na
+2025-01-30,AJM,Santa Maria,SAM01,18,0,na
+2025-01-30,AJM,Santa Maria,SAM01,17,0,na
+2025-01-30,AJM,Santa Maria,SAM01,16,0,na
+2025-01-30,AJM,Santa Maria,SAM01,15,0,na
+2025-01-30,AJM,Santa Maria,SAM01,14,0,na
+2025-01-30,JOC,Poets Nook,PON01,1,0,na
+2025-01-30,JOC,Poets Nook,PON01,2,0,na
+2025-01-30,JOC,Poets Nook,PON01,3,0,na
+2025-01-30,JOC,Poets Nook,PON01,4,0,na
+2025-01-30,JOC,Poets Nook,PON01,5,0,na
+2025-01-30,JOC,Poets Nook,PON01,6,0,na
+2025-01-30,JOC,Poets Nook,PON01,7,0,na
+2025-01-30,JOC,Poets Nook,PON01,8,0,na
+2025-01-30,JOC,Poets Nook,PON01,9,0,na
+2025-01-30,JOC,Poets Nook,PON01,10,0,na
+2025-01-30,JOC,Poets Nook,PON01,11,0,na
+2025-01-30,JOC,Poets Nook,PON01,12,0,na
+2025-01-30,JOC,Poets Nook,PON01,13,0,na
+2025-01-30,JOC,Poets Nook,PON01,14,0,na
+2025-01-30,JOC,Poets Nook,PON01,15,0,na
+2025-01-30,JOC,Santa Maria,SAM01,1,0,na
+2025-01-30,JOC,Santa Maria,SAM01,2,0,na
+2025-01-30,JOC,Santa Maria,SAM01,3,0,na
+2025-01-30,JOC,Santa Maria,SAM01,4,0,na
+2025-01-30,JOC,Santa Maria,SAM01,5,0,na
+2025-01-30,JOC,Santa Maria,SAM01,6,0,na
+2025-01-30,JOC,Santa Maria,SAM01,7,0,na
+2025-01-30,JOC,Santa Maria,SAM01,8,0,na
+2025-01-30,JOC,Santa Maria,SAM01,9,0,na
+2025-01-30,JOC,Santa Maria,SAM01,10,0,na
+2025-01-30,JOC,Santa Maria,SAM01,11,0,na
+2025-01-30,JOC,Santa Maria,SAM01,12,0,na
+2025-01-30,JOC,Santa Maria,SAM01,13,0,na
+2025-01-30,AJM,Poets Nook,PON01,30,0,na
+2025-01-30,AJM,Poets Nook,PON01,29,0,na
+2025-01-30,AJM,Poets Nook,PON01,28,0,na
+2025-01-30,AJM,Poets Nook,PON01,27,0,na
+2025-01-30,AJM,Poets Nook,PON01,26,0,na
+2025-01-30,AJM,Poets Nook,PON01,25,0,na
+2025-01-30,AJM,Poets Nook,PON01,24,0,na
+2025-01-30,AJM,Poets Nook,PON01,23,0,na
+2025-01-30,AJM,Poets Nook,PON01,22,0,na
+2025-01-30,AJM,Poets Nook,PON01,21,0,na
+2025-01-30,AJM,Poets Nook,PON01,20,0,na
+2025-01-30,AJM,Poets Nook,PON01,19,0,na
+2025-01-30,AJM,Poets Nook,PON01,18,0,na
+2025-01-30,AJM,Poets Nook,PON01,17,0,na
+2025-01-30,AJM,Poets Nook,PON01,16,0,na
+2025-01-30,JOC,Hosie South,HOS01,1,0,na
+2025-01-30,JOC,Hosie South,HOS01,2,0,na
+2025-01-30,JOC,Hosie South,HOS01,3,0,na
+2025-01-30,JOC,Hosie South,HOS01,4,0,na
+2025-01-30,JOC,Hosie South,HOS01,5,0,na
+2025-01-30,JOC,Hosie South,HOS01,6,0,na
+2025-01-30,JOC,Hosie South,HOS01,7,0,na
+2025-01-30,JOC,Hosie South,HOS01,8,0,na
+2025-01-30,JOC,Hosie South,HOS01,9,0,na
+2025-01-30,JOC,Hosie South,HOS01,10,0,na
+2025-01-30,JOC,Hosie South,HOS01,11,0,na
+2025-01-30,JOC,Hosie South,HOS01,12,0,na
+2025-01-30,JOC,Hosie South,HOS01,13,0,na
+2025-01-30,JOC,Hosie South,HOS01,14,0,na
+2025-01-30,JOC,Hosie South,HOS01,15,0,na
+2025-01-30,JOC,Hosie South,HOS01,16,0,na
+2025-01-30,JOC,Hosie South,HOS01,17,0,na
+2025-01-30,JOC,Hosie South,HOS01,18,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,30,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,29,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,28,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,27,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,26,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,25,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,24,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,23,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,22,15,dead
+2025-01-30,AJM,San Jose Islands,SJI01,21,19,dead
+2025-01-30,AJM,San Jose Islands,SJI01,20,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,19,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,18,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,17,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,16,0,na
+2025-01-30,AJM,San Jose Islands,SJI01,15,1,alive
+2025-01-30,AJM,San Jose Islands,SJI01,15,2,alive
+2025-01-30,AJM,San Jose Islands,SJI01,15,1,alive
+2025-01-30,JOC,Congreve Island,CON01,1,0,na
+2025-01-30,JOC,Congreve Island,CON01,2,0,na
+2025-01-30,JOC,Congreve Island,CON01,3,0,na
+2025-01-30,JOC,Congreve Island,CON01,4,0,na
+2025-01-30,JOC,Congreve Island,CON01,5,0,na
+2025-01-30,JOC,Congreve Island,CON01,6,0,na
+2025-01-30,JOC,Congreve Island,CON01,7,0,na
+2025-01-30,JOC,Congreve Island,CON01,8,0,na
+2025-01-30,JOC,Congreve Island,CON01,9,0,na
+2025-01-30,JOC,Congreve Island,CON01,10,0,na
+2025-01-30,JOC,Congreve Island,CON01,11,0,na
+2025-01-30,JOC,Congreve Island,CON01,12,0,na
+2025-01-30,JOC,Congreve Island,CON01,13,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,1,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,2,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,3,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,4,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,5,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,6,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,7,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,8,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,9,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,10,12,alive
+2025-01-31,AJM,Blue Stone Point,BSP01,11,6,alive
+2025-01-31,AJM,Blue Stone Point,BSP01,12,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,13,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,14,0,na
+2025-01-31,AJM,Blue Stone Point,BSP01,15,9,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,30,7,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,29,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,28,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,27,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,26,10,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,26,9,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,26,9,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,26,8,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,25,7,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,24,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,23,9,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,22,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,21,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,20,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,19,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,18,10,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,17,0,na
+2025-01-31,DVM,Blue Stone Point,BSP01,16,7,alive
+2025-01-31,DVM,Blue Stone Point,BSP01,16,9,alive
+2025-01-31,AJM,The Wall,WAL01,1,6,alive
+2025-01-31,AJM,The Wall,WAL01,1,5,alive
+2025-01-31,AJM,The Wall,WAL01,1,2,alive
+2025-01-31,AJM,The Wall,WAL01,2,5,alive
+2025-01-31,AJM,The Wall,WAL01,2,9,alive
+2025-01-31,AJM,The Wall,WAL01,2,6,alive
+2025-01-31,AJM,The Wall,WAL01,2,6,alive
+2025-01-31,AJM,The Wall,WAL01,2,6,alive
+2025-01-31,AJM,The Wall,WAL01,2,6,alive
+2025-01-31,AJM,The Wall,WAL01,3,7,alive
+2025-01-31,AJM,The Wall,WAL01,3,4,alive
+2025-01-31,AJM,The Wall,WAL01,3,8,alive
+2025-01-31,AJM,The Wall,WAL01,3,6,alive
+2025-01-31,AJM,The Wall,WAL01,4,6,alive
+2025-01-31,AJM,The Wall,WAL01,4,8,alive
+2025-01-31,AJM,The Wall,WAL01,4,7,alive
+2025-01-31,AJM,The Wall,WAL01,4,6,alive
+2025-01-31,AJM,The Wall,WAL01,4,5,alive
+2025-01-31,AJM,The Wall,WAL01,4,6,alive
+2025-01-31,AJM,The Wall,WAL01,5,5,alive
+2025-01-31,AJM,The Wall,WAL01,5,4,alive
+2025-01-31,AJM,The Wall,WAL01,5,6,alive
+2025-01-31,AJM,The Wall,WAL01,5,7,alive
+2025-01-31,AJM,The Wall,WAL01,6,7,alive
+2025-01-31,AJM,The Wall,WAL01,6,7,alive
+2025-01-31,AJM,The Wall,WAL01,6,8,alive
+2025-01-31,AJM,The Wall,WAL01,6,4,alive
+2025-01-31,AJM,The Wall,WAL01,6,4,alive
+2025-01-31,AJM,The Wall,WAL01,7,6,alive
+2025-01-31,AJM,The Wall,WAL01,7,6,alive
+2025-01-31,AJM,The Wall,WAL01,8,6,alive
+2025-01-31,AJM,The Wall,WAL01,8,4,alive
+2025-01-31,AJM,The Wall,WAL01,8,4,alive
+2025-01-31,AJM,The Wall,WAL01,9,7,alive
+2025-01-31,AJM,The Wall,WAL01,9,4,alive
+2025-01-31,AJM,The Wall,WAL01,9,5,alive
+2025-01-31,AJM,The Wall,WAL01,9,4,alive
+2025-01-31,AJM,The Wall,WAL01,9,3,alive
+2025-01-31,AJM,The Wall,WAL01,9,6,dead
+2025-01-31,AJM,The Wall,WAL01,10,7,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,11,5,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,11,4,alive
+2025-01-31,AJM,The Wall,WAL01,12,4,alive
+2025-01-31,AJM,The Wall,WAL01,12,6,alive
+2025-01-31,AJM,The Wall,WAL01,13,3,alive
+2025-01-31,AJM,The Wall,WAL01,13,3,alive
+2025-01-31,DVM,The Wall,WAL01,30,0,na
+2025-01-31,DVM,The Wall,WAL01,29,0,na
+2025-01-31,DVM,The Wall,WAL01,28,0,na
+2025-01-31,DVM,The Wall,WAL01,27,0,na
+2025-01-31,DVM,The Wall,WAL01,26,0,na
+2025-01-31,DVM,The Wall,WAL01,25,0,na
+2025-01-31,DVM,The Wall,WAL01,24,7,na
+2025-01-31,DVM,The Wall,WAL01,23,0,na
+2025-01-31,DVM,The Wall,WAL01,22,2,dead
+2025-01-31,DVM,The Wall,WAL01,21,0,na
+2025-01-31,DVM,The Wall,WAL01,20,0,na
+2025-01-31,DVM,The Wall,WAL01,19,0,na
+2025-01-31,DVM,The Wall,WAL01,18,0,na
+2025-01-31,DVM,The Wall,WAL01,17,0,na
+2025-01-31,DVM,The Wall,WAL01,16,0,na
+2025-01-31,DVM,The Wall,WAL01,15,2,alive
+2025-01-31,DVM,The Wall,WAL01,15,3,alive
+2025-01-31,DVM,The Wall,WAL01,15,4,alive
+2025-01-31,DVM,The Wall,WAL01,15,2,alive
+2025-01-31,DVM,The Wall,WAL01,15,3,alive
+2025-01-31,DVM,The Wall,WAL01,15,4,alive
+2025-01-31,DVM,The Wall,WAL01,15,4,alive
+2025-01-31,DVM,The Wall,WAL01,15,3,alive
+2025-01-31,DVM,The Wall,WAL01,14,2,alive
+2025-01-31,DVM,The Wall,WAL01,14,3,alive
+2025-01-31,DVM,The Wall,WAL01,14,4,alive
+2025-01-31,AJM,Hatchery,HAT01,1,0,na
+2025-01-31,AJM,Hatchery,HAT01,2,0,na
+2025-01-31,AJM,Hatchery,HAT01,3,0,na
+2025-01-31,AJM,Hatchery,HAT01,4,0,na
+2025-01-31,AJM,Hatchery,HAT01,5,0,na
+2025-01-31,AJM,Hatchery,HAT01,6,0,na
+2025-01-31,AJM,Hatchery,HAT01,7,0,na
+2025-01-31,AJM,Hatchery,HAT01,8,0,na
+2025-01-31,AJM,Hatchery,HAT01,9,0,na
+2025-01-31,AJM,Hatchery,HAT01,10,0,na
+2025-01-31,AJM,Hatchery,HAT01,11,0,na
+2025-01-31,AJM,Hatchery,HAT01,12,0,na
+2025-01-31,AJM,Hatchery,HAT01,13,0,na
+2025-01-31,AJM,Hatchery,HAT01,14,0,na
+2025-01-31,AJM,Hatchery,HAT01,15,0,na
+2025-01-31,DVM,Hatchery,HAT01,30,0,na
+2025-01-31,DVM,Hatchery,HAT01,29,0,na
+2025-01-31,DVM,Hatchery,HAT01,28,0,na
+2025-01-31,DVM,Hatchery,HAT01,27,0,na
+2025-01-31,DVM,Hatchery,HAT01,26,0,na
+2025-01-31,DVM,Hatchery,HAT01,25,0,na
+2025-01-31,DVM,Hatchery,HAT01,24,0,na
+2025-01-31,DVM,Hatchery,HAT01,23,0,na
+2025-01-31,DVM,Hatchery,HAT01,22,0,na
+2025-01-31,DVM,Hatchery,HAT01,21,0,na
+2025-01-31,DVM,Hatchery,HAT01,20,0,na
+2025-01-31,DVM,Hatchery,HAT01,19,0,na
+2025-01-31,DVM,Hatchery,HAT01,18,0,na
+2025-01-31,DVM,Hatchery,HAT01,17,0,na
+2025-01-31,DVM,Hatchery,HAT01,16,0,na
+2025-01-25,DVM,Flemming Northwest,FLM03,1,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,1,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,2,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,2,12,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,2,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,3,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,3,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,3,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,3,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,4,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,5,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,6,1,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,6,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,6,2,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,6,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,7,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,7,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,7,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,7,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,8,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,8,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,9,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,9,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,10,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,10,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,10,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,10,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,11,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,11,3,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,11,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,12,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,12,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,12,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,12,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,12,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,13,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,13,10,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,14,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,15,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,15,7,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,16,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,16,8,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,16,9,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,16,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,16,2,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,17,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,17,5,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,17,6,alive
+2025-01-25,DVM,Flemming Northwest,FLM03,17,4,alive
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,

@@ -1,0 +1,11 @@
+filename,variable,group_id,mean,sd,n,r,se,error_type,plot_type
+CH_Fig4_Deep_MetaDigitize.png,mean_density_1m,ellis_deep_i,0.29032258064516125,NA,NA,NA,0.1483870967741936,se,mean_error
+CH_Fig4_Deep_MetaDigitize.png,mean_density_1m,ellis_deep_r,0.09677419354838701,NA,NA,NA,0.07419354838709685,se,mean_error
+CH_Fig4_Deep_MetaDigitize.png,mean_density_1m,helby_deep_i,0.14193548387096766,NA,NA,NA,0.09032258064516119,se,mean_error
+CH_Fig4_Deep_MetaDigitize.png,mean_density_1m,scotts_bay_deep_i,0.05806451612903213,NA,NA,NA,0.02903225806451626,se,mean_error
+CH_Fig4_Deep_MetaDigitize.png,mean_density_1m,scotts_bay_deep_r,0.03225806451612895,NA,NA,NA,0.022580645161290325,se,mean_error
+CH_Fig4_MetaDigitize.png,mean_density_1m,ellis_r,0.3000000000000005,NA,NA,NA,0.2296296296296294,se,mean_error
+CH_Fig4_MetaDigitize.png,mean_density_1m,ellis_i,0.1296296296296302,NA,NA,NA,0.05555555555555558,se,mean_error
+CH_Fig4_MetaDigitize.png,mean_density_1m,helby_i,0.02222222222222303,NA,NA,NA,0.022222222222222143,se,mean_error
+CH_Fig4_MetaDigitize.png,mean_density_1m,scotts_bay_i,0.1407407407407415,NA,NA,NA,0.09629629629629632,se,mean_error
+CH_Fig4_MetaDigitize.png,mean_density_1m,scotts_bay_r,0.34074074074074123,NA,NA,NA,0.1962962962962962,se,mean_error
