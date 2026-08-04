@@ -67,7 +67,7 @@ JW_data_clean <- clean_names(JW_data) %>%
   mutate(site_mean_density = mean/0.49)%>% #okay so quadrats are 0.7m x 0.7m = 0.49m^2, so, to get abalone mean in quadrats across 1m2 we must do mean abalone in 0.49m2 / 0.49m2 = abalone per m2
   mutate(depth_m = depth_ft * 0.3048)%>%
   mutate(date = mdy(date), year = year(date))%>% #changes all the date formats using lubridate so that the second call of "year" can be applied to make a new column with just year
-  mutate(method = "par_quad") %>% #add the method of search used
+  mutate(method = "par_quad") %>% #add the method of search used (in this case it was parallel to shore at a depth between 5-12m with quads a certain number of fin kicks away (Watson & Estes, 2011))
   mutate(search = "non_cryptic") #add the search type
 
   
@@ -111,7 +111,7 @@ CH_data_clean <- CH_data_deep%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "immature", site = "goby_town")%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "goby_town")%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "immature", site = "goby_town")%>% #had to add all the goby town data where they searched for abalone but found none during their surveys. Same is also true from "reproductive" abalone
-  mutate(method = "quad")%>% #method used is similar to breen
+  mutate(method = "par_perp_quad")%>% #method used is similar to breen
   mutate(search = "cryptic") #every fourth quadrat they flipped rocks
 #note that year, and depth are characters... we will probably need them as numeric and dates at some point so lets change that now
 is.character(CH_data_clean$year) #TRUE
@@ -163,7 +163,9 @@ SC_data_quad <- SC_data_clean %>%
   summarise(n_quadrats = n_distinct(quadrat)) #then we get number of quads per site
 
 SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year", "method", "search")) %>%
-  mutate(site_mean_density = total_alive/n_quadrats) #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
+  mutate(site_mean_density = total_alive/n_quadrats) %>% #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
+  rename(site = site_id) #rename to match other data sets
+
 #notice we surveyed 56 sites in this effort but we filtered out dixon inside so 55 observations provides a good moment to CYU
   
 #lets save this (commented out so that when running the code you dont save something accidentally that you may have changed)
@@ -177,9 +179,9 @@ View(RLS_data)
 #lets try to filter for sites over years that dont have abalone 
 RLS_data_year <- RLS_data %>%
   mutate(survey_date = ymd(survey_date)) %>%
-  mutate(year = year(survey_date))
+  mutate(year = year(survey_date)) #first we make a year column
 
-#okay, chatgpt attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
+#attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
 # All unique site-year-depth combinations
 all_combos <- RLS_data_year %>%
   distinct(site_code, year, depth)
@@ -201,23 +203,19 @@ RLS_with_missing_abalone <- bind_rows(RLS_data_year, missing_haliotidae)
 #on reviewing this data I feel like all the missing years with abalone data are either a product of a) surveyors being new in 2021, or b)Kieran and claire having these sand sites
 #As such, lets not go any further and instead we will keep what we previously had and consider the others as filtered for outliers (we will filter 5 of 7 site_codes anyways due to location or study later other two I think are products of failure to detect / novice surveying)
 
-#we just need to lubridate date, and get density
+#Okay, lets come back to year here, and clean the data set. Our goal is to lubridate date, and get density
 RLS_data_clean <- RLS_data_year %>%
   mutate(survey_date = ymd(survey_date),
          date_time_survey = ymd_hms(paste(survey_date, hour)), #lubridate date
          site_code = ifelse(site_name == "Swiss Boy", "BMSC24", site_code),
-         # correct for rectangle area
-         #survey_den = case_when(method == 1 ~ total/500,  #get density for fish
-                            #    method == 2 ~ total/100), #get density for all inverts
          survey_total = total) %>%
-  # just abalone
+  # just abalone sites (even though we know some have zeros)
   filter(species_name == "Haliotis kamtschatkana") %>% #filter for just the abalone data
   group_by(site_code, year, survey_total)%>%
-  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevent variables
-  #mutate(year = year(survey_date)) %>% #add just the year to the df
-  mutate(search = "non_cryptic") #add search column 
+  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevant variables
+  mutate(search = "non_cryptic") #add search column, we will add method later once we dont overright the current method data
   
-# 2026 RLS data from spreadsheet
+# 2026 RLS data from spreadsheet as it is not on the up to date global repository
 RLS_new <- read_csv("data-raw/RLS_2026_only.csv")
 
 #lets check for abalone 0s in the 2026 df
@@ -265,10 +263,10 @@ missing_haliotidae_2026 <- all_combos_2026 %>%
     total = 0
   )
 #I'm more confident in these zeros... curious to compare to other years for Hoise south...
-#instead of trying to add these rows in using some bind function im just going to mutate two zeros in later in the data set for Hosie south at the appropriate depth
+#Again, instead of trying to add these rows in using some bind function im just going to mutate two zeros in later in the data set for Hosie south as we know their density will = 0...
 
 View(RLS_new)
-#we've got a few new issues here a) we got a weird formatting row in row 2 b) we've got M0 data c) the column names are different from the downloaded data... d) the survey blocks aren't added up / together (two surveyers on each side of transect) e) date needs to be lubridated
+#starting from the top: we've got a few new issues here a) we got a weird formatting row in row 2 b) we've got M0 data c) the column names are different from the downloaded data... d) the survey blocks aren't added up / together (two surveyers on each side of transect) e) date needs to be lubridated
 
 #lets try to clean this
 RLS_new_clean <- RLS_new %>%
@@ -294,21 +292,20 @@ RLS_new_clean <- RLS_new %>%
   filter(species_name == "Haliotis kamtschatkana") %>%
   # Pivot longer for biomass
   pivot_longer(cols = `0`:`400`, names_to = "size_class", values_to = "total") %>% # size class 0 = unsized!!!!
-  drop_na(total) %>%
-  #filter(total > 0) %>%
-  select(-Total) %>%
+  drop_na(total) %>% #removing any n/a from the df
+  select(-Total) %>% #dropping previously named "Total"
   # group blocks 1 and 2
   group_by(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, common_name, size_class) %>%
-  summarise(survey_total = sum(total)) %>% # sum blocks 1 and 2
+  summarise(survey_total = sum(total)) %>% # sum blocks 1 and 2 (these are either side of the transect)
   ungroup() %>%
   mutate(size_class = as.numeric(size_class),
          # correct for rectangle area
          survey_den = case_when(method == 1 ~ survey_total/500,
-                                method == 2 ~ survey_total/100)) %>%
+                                method == 2 ~ survey_total/100)) %>% #dont end up using this
   as.data.frame() %>%
   select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>%
   mutate(year = year(survey_date)) %>% #add year column
-  mutate(search = "non_cryptic") #add search column 
+  mutate(search = "non_cryptic") #add search column, again will include method later once no need for pre-exisiting method data referencing fish or invert counts in the df
 
 
 
@@ -320,12 +317,12 @@ View(RLS_full)
 #If we don't care about depth we will then sum those together and divide by the appropriate area
 
 RLS_data_totals <- RLS_full %>%
-  group_by(site_code, year, depth)%>%
-  summarise(total = sum(survey_total)) 
+  group_by(site_name, site_code, year, depth)%>%
+  summarise(total = sum(survey_total)) #lets take just what we want and get a sum total across all size classes of abalone
 
-#now build code that checks if year and site_code occur more than once, if that is the case sum the total and divide by 200, otherwise just divide the total by 100
+#now build code that checks if year and site_code occur more than once, if that is the case sum the total and divide by 200, otherwise just divide the total by 100. Reason for this is some sites are surveyed across two depths at the same time in the same year. Therefore, we need to sum their counts and divide by twice the area surveyed in a single survey to get a site level mean density
 RLS_data_means <- RLS_data_totals %>%
-  group_by(site_code, year) %>%
+  group_by(site_name, site_code, year) %>%
   summarise(
     site_mean_density = if (n() == 2) {
       sum(total, na.rm = TRUE) / 200
@@ -335,14 +332,11 @@ RLS_data_means <- RLS_data_totals %>%
     .groups = "drop"
   )
 
-#check against how many should drop from RLS_data_totals 
+#TO DO check against how many should drop from RLS_data_totals (have an expectation based on knowledge of sites and years for a CYU)
   
-#I dont think this account for sites with zeros... might have to go back to start and filter across site, and year (which removes depth effect) for years that dont have abalone and save them as a df to be bound later with sites with density scores
-#I've done this now and feel confident that I can just add them in later using mutate
-  
-#create rows that adds zero for BMSC26, year = 26, depth = whats in missing haliotid, total =0
-#remove sites that aren't repeated, KC studies, or broken group sites
-unique(RLS_data_means$site_code)
+#Now we create rows that adds zero for BMSC26, year = 26, density =0
+#remove sites that aren't repeated, Kieran cox studies on subtidal kelp beds, or broken group sites
+unique(RLS_data_means$site_code) #see the ones I need to remove
 
 RLS_data_means_filtered <- RLS_data_means %>%
   add_row(
@@ -359,7 +353,7 @@ RLS_data_means_filtered <- RLS_data_means %>%
     "BMSC33",
     "KCCA11",
     "KCCA13",
-    "KCCA19", #all this data is from a separate study in 2023 that didn't study 
+    "KCCA19", #all this data is from a separate study in 2023 that had differing objectives than just rocky reef surveys
     "BMSC13",
     "BMSC14",
     "BMSC15",
@@ -368,7 +362,8 @@ RLS_data_means_filtered <- RLS_data_means %>%
     "BMSC18" #all this data is sites in the broken group 
   ))%>%
   mutate(method = "par_belt")%>%
-  mutate(search = "non_cryptic")
+  mutate(search = "non_cryptic")%>%
+  rename(site = "site_name")
 
 #okay lets check if our removing sites worked
 unique(RLS_data_means_filtered$site_code)
@@ -377,10 +372,18 @@ unique(RLS_data_means_filtered$site_code)
 
 ###Join ------------------------------------------------------------------------------------------
 #okay now I need to join the data into one df. Lets review them all
+#get them all down to 5 variables as listed below
 View(JW_data_clean)
-View(CH_data_mean)
+JW_join <- JW_data_clean%>%
+  select(c("site", "year", "site_mean_density", "method", "search"))
+View(CH_data_mean) #this one is good
 View(SC_data_join)
+SC_join <- SC_data_join%>%
+  select(c("site", "year", "site_mean_density", "method", "search"))
 View(RLS_data_means_filtered)
+RLS_join <- RLS_data_means_filtered%>%
+  select(c("site", "year", "site_mean_density", "method", "search")) #remove site code
 
 #I want the variables site, year, mean_site_density, method, and search across all studies in one df
-#Before combining I first need to make a decision on site overlap (which sites are considered to be the same survey location or not), and read methods on Janes surveys to determine method combo (par vs perp)
+#before combining I first need to make a decision on site overlap (which sites are considered to be the same survey location or not)
+#Struggling on desicion criteria... lets try two versions?

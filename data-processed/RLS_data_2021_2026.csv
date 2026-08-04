@@ -1,111 +1,111 @@
-site_code,year,site_mean_density,method,search
-BMSC1,2021,0.075,par_belt,non_cryptic
-BMSC1,2022,0.08,par_belt,non_cryptic
-BMSC1,2023,0.175,par_belt,non_cryptic
-BMSC1,2024,0.265,par_belt,non_cryptic
-BMSC1,2025,0.625,par_belt,non_cryptic
-BMSC1,2026,0.745,par_belt,non_cryptic
-BMSC10,2021,0.01,par_belt,non_cryptic
-BMSC10,2022,0.35,par_belt,non_cryptic
-BMSC10,2023,0.275,par_belt,non_cryptic
-BMSC10,2024,0.37,par_belt,non_cryptic
-BMSC10,2025,0.37,par_belt,non_cryptic
-BMSC10,2026,0.5,par_belt,non_cryptic
-BMSC11,2021,0.02,par_belt,non_cryptic
-BMSC11,2022,0.03,par_belt,non_cryptic
-BMSC11,2023,0.205,par_belt,non_cryptic
-BMSC11,2024,0.305,par_belt,non_cryptic
-BMSC11,2025,0.31,par_belt,non_cryptic
-BMSC11,2026,0.235,par_belt,non_cryptic
-BMSC12,2021,0.15,par_belt,non_cryptic
-BMSC12,2022,0.085,par_belt,non_cryptic
-BMSC12,2023,0.275,par_belt,non_cryptic
-BMSC12,2024,0.28,par_belt,non_cryptic
-BMSC12,2025,0.385,par_belt,non_cryptic
-BMSC12,2026,0.29,par_belt,non_cryptic
-BMSC19,2021,0.21,par_belt,non_cryptic
-BMSC19,2022,0.15,par_belt,non_cryptic
-BMSC19,2023,0.76,par_belt,non_cryptic
-BMSC19,2024,0.69,par_belt,non_cryptic
-BMSC19,2025,0.37,par_belt,non_cryptic
-BMSC19,2026,0.53,par_belt,non_cryptic
-BMSC2,2021,0.17,par_belt,non_cryptic
-BMSC2,2023,0.36,par_belt,non_cryptic
-BMSC2,2024,0.11,par_belt,non_cryptic
-BMSC2,2025,0.31,par_belt,non_cryptic
-BMSC2,2026,0.08,par_belt,non_cryptic
-BMSC20,2021,0.02,par_belt,non_cryptic
-BMSC20,2022,0.25,par_belt,non_cryptic
-BMSC20,2023,0.04,par_belt,non_cryptic
-BMSC20,2024,0.14,par_belt,non_cryptic
-BMSC20,2025,0.24,par_belt,non_cryptic
-BMSC20,2026,0.04,par_belt,non_cryptic
-BMSC21,2021,0.34,par_belt,non_cryptic
-BMSC21,2022,0.64,par_belt,non_cryptic
-BMSC21,2023,1.41,par_belt,non_cryptic
-BMSC21,2024,0.56,par_belt,non_cryptic
-BMSC21,2025,2.6,par_belt,non_cryptic
-BMSC21,2026,1.99,par_belt,non_cryptic
-BMSC22,2022,0.02,par_belt,non_cryptic
-BMSC22,2023,0.08,par_belt,non_cryptic
-BMSC22,2024,0.08,par_belt,non_cryptic
-BMSC22,2025,0.4,par_belt,non_cryptic
-BMSC22,2026,0.35,par_belt,non_cryptic
-BMSC23,2022,0.21,par_belt,non_cryptic
-BMSC23,2023,0.46,par_belt,non_cryptic
-BMSC23,2024,0.38,par_belt,non_cryptic
-BMSC23,2025,1.08,par_belt,non_cryptic
-BMSC23,2026,0.64,par_belt,non_cryptic
-BMSC24,2023,0.975,par_belt,non_cryptic
-BMSC24,2024,1.28,par_belt,non_cryptic
-BMSC24,2025,1.83,par_belt,non_cryptic
-BMSC24,2026,0.71,par_belt,non_cryptic
-BMSC25,2023,0.45,par_belt,non_cryptic
-BMSC25,2024,0.33,par_belt,non_cryptic
-BMSC25,2025,0.875,par_belt,non_cryptic
-BMSC25,2026,0.17,par_belt,non_cryptic
-BMSC26,2023,0.01,par_belt,non_cryptic
-BMSC26,2024,0.05,par_belt,non_cryptic
-BMSC26,2025,0.045,par_belt,non_cryptic
-BMSC27,2023,0.055,par_belt,non_cryptic
-BMSC27,2024,0.03,par_belt,non_cryptic
-BMSC27,2025,0.185,par_belt,non_cryptic
-BMSC27,2026,0.295,par_belt,non_cryptic
-BMSC3,2021,0.64,par_belt,non_cryptic
-BMSC3,2022,0.4,par_belt,non_cryptic
-BMSC3,2023,0.71,par_belt,non_cryptic
-BMSC3,2024,0.48,par_belt,non_cryptic
-BMSC3,2025,0.47,par_belt,non_cryptic
-BMSC3,2026,0.52,par_belt,non_cryptic
-BMSC4,2021,0.02,par_belt,non_cryptic
-BMSC4,2023,0.16,par_belt,non_cryptic
-BMSC4,2024,0.15,par_belt,non_cryptic
-BMSC4,2025,0.24,par_belt,non_cryptic
-BMSC4,2026,0.5,par_belt,non_cryptic
-BMSC5,2021,0.17,par_belt,non_cryptic
-BMSC5,2022,0.085,par_belt,non_cryptic
-BMSC5,2023,0.305,par_belt,non_cryptic
-BMSC5,2024,0.32,par_belt,non_cryptic
-BMSC5,2025,0.665,par_belt,non_cryptic
-BMSC5,2026,0.31,par_belt,non_cryptic
-BMSC6,2021,0.2,par_belt,non_cryptic
-BMSC6,2022,0.27,par_belt,non_cryptic
-BMSC6,2023,0.15,par_belt,non_cryptic
-BMSC6,2024,0.21,par_belt,non_cryptic
-BMSC6,2025,0.265,par_belt,non_cryptic
-BMSC6,2026,0.475,par_belt,non_cryptic
-BMSC7,2021,1.41,par_belt,non_cryptic
-BMSC8,2021,0.48,par_belt,non_cryptic
-BMSC8,2022,0.24,par_belt,non_cryptic
-BMSC8,2023,0.18,par_belt,non_cryptic
-BMSC8,2024,0.305,par_belt,non_cryptic
-BMSC8,2025,0.135,par_belt,non_cryptic
-BMSC8,2026,0.185,par_belt,non_cryptic
-BMSC9,2021,0.18,par_belt,non_cryptic
-BMSC9,2022,0.37,par_belt,non_cryptic
-BMSC9,2023,0.67,par_belt,non_cryptic
-BMSC9,2024,0.82,par_belt,non_cryptic
-BMSC9,2025,2.39,par_belt,non_cryptic
-BMSC9,2026,1.02,par_belt,non_cryptic
-BMSC26,2026,0,par_belt,non_cryptic
-BMSC26,2026,0,par_belt,non_cryptic
+site_name,site_code,year,site_mean_density,method,search
+Aguilar Point,BMSC23,2022,0.21,par_belt,non_cryptic
+Aguilar Point,BMSC23,2023,0.46,par_belt,non_cryptic
+Aguilar Point,BMSC23,2024,0.38,par_belt,non_cryptic
+Aguilar Point,BMSC23,2025,1.08,par_belt,non_cryptic
+Aguilar Point,BMSC23,2026,0.64,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2021,0.48,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2022,0.24,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2023,0.18,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2024,0.305,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2025,0.135,par_belt,non_cryptic
+Baeria Rocks North Island Northside,BMSC8,2026,0.185,par_belt,non_cryptic
+Baeria Rocks North Island Southside,BMSC7,2021,1.41,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2021,0.2,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2022,0.27,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2023,0.15,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2024,0.21,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2025,0.265,par_belt,non_cryptic
+Baeria Rocks South Island,BMSC6,2026,0.475,par_belt,non_cryptic
+Dixon Inside,BMSC22,2022,0.02,par_belt,non_cryptic
+Dixon Inside,BMSC22,2023,0.08,par_belt,non_cryptic
+Dixon Inside,BMSC22,2024,0.08,par_belt,non_cryptic
+Dixon Inside,BMSC22,2025,0.4,par_belt,non_cryptic
+Dixon Inside,BMSC22,2026,0.35,par_belt,non_cryptic
+Dixon SW,BMSC21,2021,0.34,par_belt,non_cryptic
+Dixon SW,BMSC21,2022,0.64,par_belt,non_cryptic
+Dixon SW,BMSC21,2023,1.41,par_belt,non_cryptic
+Dixon SW,BMSC21,2024,0.56,par_belt,non_cryptic
+Dixon SW,BMSC21,2025,2.6,par_belt,non_cryptic
+Dixon SW,BMSC21,2026,1.99,par_belt,non_cryptic
+Dodger Channel,BMSC1,2021,0.075,par_belt,non_cryptic
+Dodger Channel,BMSC1,2022,0.08,par_belt,non_cryptic
+Dodger Channel,BMSC1,2023,0.175,par_belt,non_cryptic
+Dodger Channel,BMSC1,2024,0.265,par_belt,non_cryptic
+Dodger Channel,BMSC1,2025,0.625,par_belt,non_cryptic
+Dodger Channel,BMSC1,2026,0.745,par_belt,non_cryptic
+Eagle Bay,BMSC9,2021,0.18,par_belt,non_cryptic
+Eagle Bay,BMSC9,2022,0.37,par_belt,non_cryptic
+Eagle Bay,BMSC9,2023,0.67,par_belt,non_cryptic
+Eagle Bay,BMSC9,2024,0.82,par_belt,non_cryptic
+Eagle Bay,BMSC9,2025,2.39,par_belt,non_cryptic
+Eagle Bay,BMSC9,2026,1.02,par_belt,non_cryptic
+Ed King East,BMSC20,2021,0.02,par_belt,non_cryptic
+Ed King East,BMSC20,2022,0.25,par_belt,non_cryptic
+Ed King East,BMSC20,2023,0.04,par_belt,non_cryptic
+Ed King East,BMSC20,2024,0.14,par_belt,non_cryptic
+Ed King East,BMSC20,2025,0.24,par_belt,non_cryptic
+Ed King East,BMSC20,2026,0.04,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2021,0.21,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2022,0.15,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2023,0.76,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2024,0.69,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2025,0.37,par_belt,non_cryptic
+Ed King SW Pyramid,BMSC19,2026,0.53,par_belt,non_cryptic
+Goby Town,BMSC25,2023,0.45,par_belt,non_cryptic
+Goby Town,BMSC25,2024,0.33,par_belt,non_cryptic
+Goby Town,BMSC25,2025,0.875,par_belt,non_cryptic
+Goby Town,BMSC25,2026,0.17,par_belt,non_cryptic
+Hosie South,BMSC26,2023,0.01,par_belt,non_cryptic
+Hosie South,BMSC26,2024,0.05,par_belt,non_cryptic
+Hosie South,BMSC26,2025,0.045,par_belt,non_cryptic
+Kii xin,BMSC4,2021,0.02,par_belt,non_cryptic
+Kii xin,BMSC4,2023,0.16,par_belt,non_cryptic
+Kii xin,BMSC4,2024,0.15,par_belt,non_cryptic
+Kii xin,BMSC4,2025,0.24,par_belt,non_cryptic
+Kii xin,BMSC4,2026,0.5,par_belt,non_cryptic
+Kirby,BMSC2,2021,0.17,par_belt,non_cryptic
+Kirby,BMSC2,2023,0.36,par_belt,non_cryptic
+Kirby,BMSC2,2024,0.11,par_belt,non_cryptic
+Kirby,BMSC2,2025,0.31,par_belt,non_cryptic
+Kirby,BMSC2,2026,0.08,par_belt,non_cryptic
+Ohiat,BMSC3,2021,0.64,par_belt,non_cryptic
+Ohiat,BMSC3,2022,0.4,par_belt,non_cryptic
+Ohiat,BMSC3,2023,0.71,par_belt,non_cryptic
+Ohiat,BMSC3,2024,0.48,par_belt,non_cryptic
+Ohiat,BMSC3,2025,0.47,par_belt,non_cryptic
+Ohiat,BMSC3,2026,0.52,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2021,0.01,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2022,0.35,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2023,0.275,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2024,0.37,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2025,0.37,par_belt,non_cryptic
+Ross Islets Slug Island,BMSC10,2026,0.5,par_belt,non_cryptic
+San Jose North Island,BMSC27,2023,0.055,par_belt,non_cryptic
+San Jose North Island,BMSC27,2024,0.03,par_belt,non_cryptic
+San Jose North Island,BMSC27,2025,0.185,par_belt,non_cryptic
+San Jose North Island,BMSC27,2026,0.295,par_belt,non_cryptic
+Swiss Boy,BMSC24,2023,0.975,par_belt,non_cryptic
+Swiss Boy,BMSC24,2024,1.28,par_belt,non_cryptic
+Swiss Boy,BMSC24,2025,1.83,par_belt,non_cryptic
+Swiss Boy,BMSC24,2026,0.71,par_belt,non_cryptic
+Taylor Rock,BMSC5,2021,0.17,par_belt,non_cryptic
+Taylor Rock,BMSC5,2022,0.085,par_belt,non_cryptic
+Taylor Rock,BMSC5,2023,0.305,par_belt,non_cryptic
+Taylor Rock,BMSC5,2024,0.32,par_belt,non_cryptic
+Taylor Rock,BMSC5,2025,0.665,par_belt,non_cryptic
+Taylor Rock,BMSC5,2026,0.31,par_belt,non_cryptic
+Wizard Island North,BMSC12,2021,0.15,par_belt,non_cryptic
+Wizard Island North,BMSC12,2022,0.085,par_belt,non_cryptic
+Wizard Island North,BMSC12,2023,0.275,par_belt,non_cryptic
+Wizard Island North,BMSC12,2024,0.28,par_belt,non_cryptic
+Wizard Island North,BMSC12,2025,0.385,par_belt,non_cryptic
+Wizard Island North,BMSC12,2026,0.29,par_belt,non_cryptic
+Wizard Island South,BMSC11,2021,0.02,par_belt,non_cryptic
+Wizard Island South,BMSC11,2022,0.03,par_belt,non_cryptic
+Wizard Island South,BMSC11,2023,0.205,par_belt,non_cryptic
+Wizard Island South,BMSC11,2024,0.305,par_belt,non_cryptic
+Wizard Island South,BMSC11,2025,0.31,par_belt,non_cryptic
+Wizard Island South,BMSC11,2026,0.235,par_belt,non_cryptic
+NA,BMSC26,2026,0,par_belt,non_cryptic
+NA,BMSC26,2026,0,par_belt,non_cryptic
