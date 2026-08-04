@@ -39,26 +39,26 @@ JW_data_clean <- clean_names(JW_data) %>%
     code = as.integer(str_extract(site, "^\\d+")),
     site = case_when(
       code == 1 ~ "ship_islands",
-      code == 2 ~ "ed_king",
-      code == 3 ~ "w_ed_king",
+      code == 2 ~ "ed_king_sw", #call relevant to outplant location
+      code == 3 ~ "ed_king_nw", #call relevant to outplant location
       code == 4 ~ "seppings",
       code == 5 ~ "cape_beale",
       code == 6 ~ "lawton_point",
       code == 7 ~ "whittlestone",
       code == 8 ~ "execution_rock",
-      code == 9 ~ "self_point",
-      code == 10 ~ "helby_island",
+      code == 9 ~ "self_point", #this sites gps location is near effingham inlet?
+      code == 10 ~ "helby_ne",  #call relevant to outplant location
       code == 11 ~ "scotts_bay",
       code == 12 ~ "aguilar_point",
       code == 13 ~ "cia_rock",
-      code == 14 ~ "taylor_rock",
+      code == 14 ~ "ed_king_se", #for the purposes of this project I am renaming this site to align with the outplant location name (it is the closest site in this study)
       code == 15 ~ "kirby_point",
       code == 16 ~ "village_bay",
       code == 17 ~ "blowhole",
       code == 18 ~ "prasiola",
       code == 19 ~ "wizard",
       code == 20 ~ "grappler",
-      code == 21 ~ "ed_king_?",
+      code == 21 ~ "ed_king_?", #seems like the same place as ed_king_nw
       TRUE ~ site
     )
   ) %>%
@@ -104,14 +104,14 @@ CH_data_clean <- CH_data_deep%>%
   #revist this decision for more complicated analyses 
   mutate(reproductive_status = case_when(str_detect(group_id, "_i") ~ "immature", TRUE ~ "reproductive")) %>%
   mutate(site = case_when(str_detect(group_id, "ellis") ~ "ellis",
-                          str_detect(group_id, "helby") ~ "helby",
+                          str_detect(group_id, "helby") ~ "helby_sw",
                           TRUE ~ "scotts_bay")) %>% #give them independent site names outside of depth and reproductive status
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "reproductive", site = "helby")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "helby")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "reproductive", site = "goby_town")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "immature", site = "goby_town")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "goby_town")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "immature", site = "goby_town")%>% #had to add all the goby town data where they searched for abalone but found none during their surveys. Same is also true from "reproductive" abalone
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "reproductive", site = "helby_sw")%>%
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "helby_sw")%>%
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "reproductive", site = "grappler")%>%
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "immature", site = "grappler")%>%
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "grappler")%>%
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "immature", site = "grappler")%>% #had to add all the goby town data where they searched for abalone but found none during their surveys. Same is also true from "reproductive" abalone
   mutate(method = "par_perp_quad")%>% #method used is similar to breen
   mutate(search = "cryptic") #every fourth quadrat they flipped rocks
 #note that year, and depth are characters... we will probably need them as numeric and dates at some point so lets change that now
@@ -146,10 +146,18 @@ SC_data <- SC_data %>%
   clean_names() #make column names easier to work with
 SC_data_clean <- SC_data%>%
   filter(quadrat != "NA") %>% #remove a bunch of blank data, now this matches our raw df...
-  filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts
+  filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
   mutate(date = ymd(date), year = year(date)) %>% #change date to a date using lubridate and add a year column
   mutate(method = "perp_quad") %>% #method used 
-  mutate(search = "non_cryptic") #did not flip over rocks in search
+  mutate(search = "non_cryptic") %>% #did not flip over rocks in search
+  mutate(site_id = case_when(str_detect(transect_id, "EKE02") ~ "ed_king_se", #changing names relevant to outplanting information.
+                          str_detect(transect_id, "EGB01") ~ "scotts_bay",
+                          str_detect(transect_id, "ELI01") ~ "ellis",
+                          str_detect(transect_id, "GOT01") ~ "grappler",
+                          str_detect(transect_id, "HSW01") ~ "helby_sw",
+                          str_detect(transect_id, "SAN02") ~ "sandford_sw", #this site might be less accurate -> to review in CH thesis
+                          TRUE ~ site_id)) 
+  
  
 
 unique(SC_data_clean$alive_or_dead) #make sure next alive filter will correctly get all data
@@ -371,7 +379,7 @@ unique(RLS_data_means_filtered$site_code)
 #Okay yay! We got there, lets save that as processed data
 #readr::write_csv(RLS_data_means_filtered, file = "data-processed/RLS_data_2021_2026.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
 
-###Join ------------------------------------------------------------------------------------------
+#Join abalone density-----------------------------------------------------------------------------
 #okay now I need to join the data into one df. Lets review them all
 #get them all down to 5 variables as listed below
 View(JW_data_clean)
@@ -396,8 +404,27 @@ abalone_density <- rbind(JW_join, CH_data_mean, SC_join, RLS_join)
 
 View(abalone_density) #I need to add outplant details to this df 
 
-##Outplant information -----------------------------------------------------------------------------
-outplant <- read.csv("data-raw/Outplant_information.csv")
+#Outplant information -----------------------------------------------------------------------------
+outplant <- read.csv("data-raw/outplant_read_raw.csv")
+
+View(outplant)
+#wow this is ugly. For the purposes of this project I'm just going to take the outplant information, not experimentation that resulted in outplants as verifying location of effective outplant during these was not the primary goal 
+
+clean_outplant <- clean_names(outplant) %>% #lets clean this up, start with column names
+  filter(str_starts(objective, "BHCAP")) %>% #just take the outplants through BHCAP
+  mutate(year = as.integer(str_extract(date, "\\d{4}"))) %>% #lets get the year out of this unorganized weird date column
+  mutate(number_outplanted = as.numeric(str_remove_all(amount, ","))) %>% # lets get rid of the commas in our numeric data for number of outplants
+  #last thing to do here is to change the outplant names to the specific location of outplant that can correspond to our joined df about abalone density
+  mutate(outplant_site = case_when(str_detect(outplant_site, "Scotts Bay") ~ "scotts_bay", 
+                          str_detect(outplant_site, "Helby Island") ~ "helby_sw",
+                          str_detect(outplant_site, "Grappler Inlet") ~ "grappler",
+                          str_detect(outplant_site, "Edward King Island") ~ "ed_king_se",
+                          str_detect(outplant_site, "Aguilar Point") ~ "aguilar_point",
+                          str_detect(outplant_site, "Sandford Island") ~ "sandford_sw")) 
+  
+
+#Join all data -------------------------------------------------------------------------------------
+  
 
 
 #brief visualization
