@@ -1,0 +1,255 @@
+site,year,site_mean_density,method,search
+ship_islands,1988,0.30612244897959184,par_quad,non_cryptic
+ed_king_sw,1988,0.7142857142857143,par_quad,non_cryptic
+ed_king_nw,1988,0.10204081632653061,par_quad,non_cryptic
+seppings,1988,0.20408163265306123,par_quad,non_cryptic
+cape_beale,1988,0.20408163265306123,par_quad,non_cryptic
+lawton_point,1988,0.30612244897959184,par_quad,non_cryptic
+whittlestone,1988,0.10204081632653061,par_quad,non_cryptic
+execution_rock,1988,0,par_quad,non_cryptic
+self_point,1988,0,par_quad,non_cryptic
+helby_ne,1988,0.20408163265306123,par_quad,non_cryptic
+scotts_bay,1988,0.5102040816326531,par_quad,non_cryptic
+aguilar_point,1988,0.5102040816326531,par_quad,non_cryptic
+cia_rock,1988,0.5102040816326531,par_quad,non_cryptic
+ed_king_se,1988,1.1224489795918369,par_quad,non_cryptic
+kirby_point,1988,0.7142857142857143,par_quad,non_cryptic
+village_bay,1988,1.0204081632653061,par_quad,non_cryptic
+blowhole,1988,0.8163265306122449,par_quad,non_cryptic
+prasiola,1988,0.10204081632653061,par_quad,non_cryptic
+wizard,1988,0.10204081632653061,par_quad,non_cryptic
+grappler,1988,0.40816326530612246,par_quad,non_cryptic
+ed_king_?,1994,NA,par_quad,non_cryptic
+ship_islands,1994,0.5102040816326531,par_quad,non_cryptic
+ed_king_sw,1994,0.9183673469387755,par_quad,non_cryptic
+ed_king_nw,1994,0.20408163265306123,par_quad,non_cryptic
+seppings,1994,0.30612244897959184,par_quad,non_cryptic
+cape_beale,1994,0,par_quad,non_cryptic
+lawton_point,1994,0.20408163265306123,par_quad,non_cryptic
+whittlestone,1994,0.10204081632653061,par_quad,non_cryptic
+execution_rock,1994,0,par_quad,non_cryptic
+self_point,1994,0.6122448979591837,par_quad,non_cryptic
+helby_ne,1994,0,par_quad,non_cryptic
+scotts_bay,1994,0,par_quad,non_cryptic
+aguilar_point,1994,0.10204081632653061,par_quad,non_cryptic
+cia_rock,1994,0,par_quad,non_cryptic
+ed_king_se,1994,0,par_quad,non_cryptic
+kirby_point,1994,0.5102040816326531,par_quad,non_cryptic
+village_bay,1994,0.7142857142857143,par_quad,non_cryptic
+blowhole,1994,0.30612244897959184,par_quad,non_cryptic
+prasiola,1994,0.10204081632653061,par_quad,non_cryptic
+wizard,1994,0.10204081632653061,par_quad,non_cryptic
+grappler,1994,0.10204081632653061,par_quad,non_cryptic
+ed_king_?,1994,NA,par_quad,non_cryptic
+ship_islands,2007,0.14285714285714288,par_quad,non_cryptic
+ed_king_sw,2007,0,par_quad,non_cryptic
+ed_king_nw,2007,0.14285714285714288,par_quad,non_cryptic
+seppings,2007,0.5306122448979592,par_quad,non_cryptic
+cape_beale,2007,0,par_quad,non_cryptic
+lawton_point,2007,0.14285714285714288,par_quad,non_cryptic
+whittlestone,2007,0,par_quad,non_cryptic
+execution_rock,2007,0,par_quad,non_cryptic
+self_point,2007,0.24489795918367346,par_quad,non_cryptic
+helby_ne,2007,0.14285714285714288,par_quad,non_cryptic
+scotts_bay,2007,0.24489795918367346,par_quad,non_cryptic
+aguilar_point,2007,0.9591836734693877,par_quad,non_cryptic
+cia_rock,2007,0,par_quad,non_cryptic
+ed_king_se,2007,0.14285714285714288,par_quad,non_cryptic
+kirby_point,2007,0.14285714285714288,par_quad,non_cryptic
+village_bay,2007,0.8163265306122449,par_quad,non_cryptic
+blowhole,2007,0,par_quad,non_cryptic
+prasiola,2007,0,par_quad,non_cryptic
+wizard,2007,0.40816326530612246,par_quad,non_cryptic
+grappler,2007,0.12244897959183673,par_quad,non_cryptic
+ed_king_?,2007,0,par_quad,non_cryptic
+ship_islands,2022,0.2721088428571429,par_quad,non_cryptic
+ed_king_sw,2022,0.06802721020408163,par_quad,non_cryptic
+ed_king_nw,2022,0,par_quad,non_cryptic
+seppings,2022,0,par_quad,non_cryptic
+cape_beale,2022,0.4761904755102041,par_quad,non_cryptic
+lawton_point,2022,0,par_quad,non_cryptic
+whittlestone,2022,0.4761904755102041,par_quad,non_cryptic
+execution_rock,2022,0.6802721081632653,par_quad,non_cryptic
+self_point,2022,0.6122448979591837,par_quad,non_cryptic
+helby_ne,2022,0.6802721081632653,par_quad,non_cryptic
+scotts_bay,2022,2.312925169387755,par_quad,non_cryptic
+aguilar_point,2022,0.9523809530612245,par_quad,non_cryptic
+cia_rock,2022,0,par_quad,non_cryptic
+ed_king_se,2022,0,par_quad,non_cryptic
+kirby_point,2022,0.20408163265306123,par_quad,non_cryptic
+village_bay,2022,0.3401360551020408,par_quad,non_cryptic
+blowhole,2022,0.06802721020408163,par_quad,non_cryptic
+prasiola,2022,0.4761904755102041,par_quad,non_cryptic
+wizard,2022,0.6122448979591837,par_quad,non_cryptic
+grappler,2022,1.6326530612244898,par_quad,non_cryptic
+ed_king_?,2022,0.3401360551020408,par_quad,non_cryptic
+ellis,2008,0.816726403823179,par_perp_quad,cryptic
+grappler,2008,0,par_perp_quad,cryptic
+helby_sw,2008,0.1641577060931907,par_perp_quad,cryptic
+scotts_bay,2008,0.5718040621266438,par_perp_quad,cryptic
+Blowhole,2025,0.26666666666666666,perp_quad,non_cryptic
+Blue Stone Point,2025,0.43333333333333335,perp_quad,non_cryptic
+Bourdelais,2025,0.06451612903225806,perp_quad,non_cryptic
+Clifton Point,2025,0,perp_quad,non_cryptic
+Clutus,2025,0,perp_quad,non_cryptic
+Clutus 2 ,2025,0,perp_quad,non_cryptic
+Congreve Island,2025,0,perp_quad,non_cryptic
+Danger Rock,2025,0.06666666666666667,perp_quad,non_cryptic
+Diana SE,2025,1.4333333333333333,perp_quad,non_cryptic
+Diana SE 2,2025,0,perp_quad,non_cryptic
+Diplock Island,2025,1.4333333333333333,perp_quad,non_cryptic
+Dixon Southwest,2025,2.533333333333333,perp_quad,non_cryptic
+Dodger Channel,2025,0.43333333333333335,perp_quad,non_cryptic
+Edward King East,2025,1.2666666666666666,perp_quad,non_cryptic
+Edward King SE,2025,4.9,perp_quad,non_cryptic
+Edward King SW Pyramid,2025,2.3333333333333335,perp_quad,non_cryptic
+Flemming 112,2025,1.1935483870967742,perp_quad,non_cryptic
+Flemming 114,2025,0.03333333333333333,perp_quad,non_cryptic
+Flemming NW 4,2025,2.1176470588235294,perp_quad,non_cryptic
+Flemming Northeast,2025,0.7,perp_quad,non_cryptic
+Flemming Northwest,2025,3.7333333333333334,perp_quad,non_cryptic
+Folger Island,2025,0.6129032258064516,perp_quad,non_cryptic
+Fry Island,2025,1.4333333333333333,perp_quad,non_cryptic
+Hatchery,2025,0,perp_quad,non_cryptic
+Hosie South,2025,0.03333333333333333,perp_quad,non_cryptic
+Keeha,2025,0,perp_quad,non_cryptic
+Kirby,2025,0.4,perp_quad,non_cryptic
+Lawton Point,2025,1.2333333333333334,perp_quad,non_cryptic
+Leach,2025,1.9,perp_quad,non_cryptic
+Nanat Point,2025,1.2666666666666666,perp_quad,non_cryptic
+North Helby Rock,2025,0.5,perp_quad,non_cryptic
+Ohiat Islet,2025,1.4,perp_quad,non_cryptic
+Pachena Bay South,2025,0,perp_quad,non_cryptic
+Pachena Bay South 2,2025,0.2,perp_quad,non_cryptic
+Poets Nook,2025,0,perp_quad,non_cryptic
+Ross NW,2025,0.43333333333333335,perp_quad,non_cryptic
+San Jose Islands,2025,0.5333333333333333,perp_quad,non_cryptic
+Sanford North,2025,0.4666666666666667,perp_quad,non_cryptic
+Santa Maria,2025,0,perp_quad,non_cryptic
+Seabird Rocks,2025,0,perp_quad,non_cryptic
+Second Beach,2025,0.27586206896551724,perp_quad,non_cryptic
+Slug Island,2025,0.7666666666666667,perp_quad,non_cryptic
+Swiss Boy Island,2025,3.966666666666667,perp_quad,non_cryptic
+Taylor Rock,2025,1.4666666666666666,perp_quad,non_cryptic
+The Wall,2025,2.033333333333333,perp_quad,non_cryptic
+Turf Island,2025,1.1333333333333333,perp_quad,non_cryptic
+Tzartus 116,2025,0.16666666666666666,perp_quad,non_cryptic
+Wizard North,2025,1.1333333333333333,perp_quad,non_cryptic
+Wizard South,2025,1.1935483870967742,perp_quad,non_cryptic
+aguilar_point,2025,1.5333333333333334,perp_quad,non_cryptic
+ed_king_se,2025,2.066666666666667,perp_quad,non_cryptic
+ellis,2025,4.866666666666666,perp_quad,non_cryptic
+grappler,2025,2.3666666666666667,perp_quad,non_cryptic
+helby_sw,2025,2.870967741935484,perp_quad,non_cryptic
+sandford_sw,2025,1,perp_quad,non_cryptic
+scotts_bay,2025,8.066666666666666,perp_quad,non_cryptic
+aguilar_point,2022,0.21,par_belt,non_cryptic
+aguilar_point,2023,0.46,par_belt,non_cryptic
+aguilar_point,2024,0.38,par_belt,non_cryptic
+aguilar_point,2025,1.08,par_belt,non_cryptic
+aguilar_point,2026,0.64,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2021,0.48,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2022,0.24,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2023,0.18,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2024,0.305,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2025,0.135,par_belt,non_cryptic
+Baeria Rocks North Island Northside,2026,0.185,par_belt,non_cryptic
+Baeria Rocks North Island Southside,2021,1.41,par_belt,non_cryptic
+Baeria Rocks South Island,2021,0.2,par_belt,non_cryptic
+Baeria Rocks South Island,2022,0.27,par_belt,non_cryptic
+Baeria Rocks South Island,2023,0.15,par_belt,non_cryptic
+Baeria Rocks South Island,2024,0.21,par_belt,non_cryptic
+Baeria Rocks South Island,2025,0.265,par_belt,non_cryptic
+Baeria Rocks South Island,2026,0.475,par_belt,non_cryptic
+Dixon Inside,2022,0.02,par_belt,non_cryptic
+Dixon Inside,2023,0.08,par_belt,non_cryptic
+Dixon Inside,2024,0.08,par_belt,non_cryptic
+Dixon Inside,2025,0.4,par_belt,non_cryptic
+Dixon Inside,2026,0.35,par_belt,non_cryptic
+Dixon SW,2021,0.34,par_belt,non_cryptic
+Dixon SW,2022,0.64,par_belt,non_cryptic
+Dixon SW,2023,1.41,par_belt,non_cryptic
+Dixon SW,2024,0.56,par_belt,non_cryptic
+Dixon SW,2025,2.6,par_belt,non_cryptic
+Dixon SW,2026,1.99,par_belt,non_cryptic
+Dodger Channel,2021,0.075,par_belt,non_cryptic
+Dodger Channel,2022,0.08,par_belt,non_cryptic
+Dodger Channel,2023,0.175,par_belt,non_cryptic
+Dodger Channel,2024,0.265,par_belt,non_cryptic
+Dodger Channel,2025,0.625,par_belt,non_cryptic
+Dodger Channel,2026,0.745,par_belt,non_cryptic
+scotts_bay,2021,0.18,par_belt,non_cryptic
+scotts_bay,2022,0.37,par_belt,non_cryptic
+scotts_bay,2023,0.67,par_belt,non_cryptic
+scotts_bay,2024,0.82,par_belt,non_cryptic
+scotts_bay,2025,2.39,par_belt,non_cryptic
+scotts_bay,2026,1.02,par_belt,non_cryptic
+Ed King East,2021,0.02,par_belt,non_cryptic
+Ed King East,2022,0.25,par_belt,non_cryptic
+Ed King East,2023,0.04,par_belt,non_cryptic
+Ed King East,2024,0.14,par_belt,non_cryptic
+Ed King East,2025,0.24,par_belt,non_cryptic
+Ed King East,2026,0.04,par_belt,non_cryptic
+Ed King SW Pyramid,2021,0.21,par_belt,non_cryptic
+Ed King SW Pyramid,2022,0.15,par_belt,non_cryptic
+Ed King SW Pyramid,2023,0.76,par_belt,non_cryptic
+Ed King SW Pyramid,2024,0.69,par_belt,non_cryptic
+Ed King SW Pyramid,2025,0.37,par_belt,non_cryptic
+Ed King SW Pyramid,2026,0.53,par_belt,non_cryptic
+grappler,2023,0.45,par_belt,non_cryptic
+grappler,2024,0.33,par_belt,non_cryptic
+grappler,2025,0.875,par_belt,non_cryptic
+grappler,2026,0.17,par_belt,non_cryptic
+Hosie South,2023,0.01,par_belt,non_cryptic
+Hosie South,2024,0.05,par_belt,non_cryptic
+Hosie South,2025,0.045,par_belt,non_cryptic
+Kii xin,2021,0.02,par_belt,non_cryptic
+Kii xin,2023,0.16,par_belt,non_cryptic
+Kii xin,2024,0.15,par_belt,non_cryptic
+Kii xin,2025,0.24,par_belt,non_cryptic
+Kii xin,2026,0.5,par_belt,non_cryptic
+Kirby,2021,0.17,par_belt,non_cryptic
+Kirby,2023,0.36,par_belt,non_cryptic
+Kirby,2024,0.11,par_belt,non_cryptic
+Kirby,2025,0.31,par_belt,non_cryptic
+Kirby,2026,0.08,par_belt,non_cryptic
+Ohiat,2021,0.64,par_belt,non_cryptic
+Ohiat,2022,0.4,par_belt,non_cryptic
+Ohiat,2023,0.71,par_belt,non_cryptic
+Ohiat,2024,0.48,par_belt,non_cryptic
+Ohiat,2025,0.47,par_belt,non_cryptic
+Ohiat,2026,0.52,par_belt,non_cryptic
+Ross Islets Slug Island,2021,0.01,par_belt,non_cryptic
+Ross Islets Slug Island,2022,0.35,par_belt,non_cryptic
+Ross Islets Slug Island,2023,0.275,par_belt,non_cryptic
+Ross Islets Slug Island,2024,0.37,par_belt,non_cryptic
+Ross Islets Slug Island,2025,0.37,par_belt,non_cryptic
+Ross Islets Slug Island,2026,0.5,par_belt,non_cryptic
+San Jose North Island,2023,0.055,par_belt,non_cryptic
+San Jose North Island,2024,0.03,par_belt,non_cryptic
+San Jose North Island,2025,0.185,par_belt,non_cryptic
+San Jose North Island,2026,0.295,par_belt,non_cryptic
+Swiss Boy,2023,0.975,par_belt,non_cryptic
+Swiss Boy,2024,1.28,par_belt,non_cryptic
+Swiss Boy,2025,1.83,par_belt,non_cryptic
+Swiss Boy,2026,0.71,par_belt,non_cryptic
+Taylor Rock,2021,0.17,par_belt,non_cryptic
+Taylor Rock,2022,0.085,par_belt,non_cryptic
+Taylor Rock,2023,0.305,par_belt,non_cryptic
+Taylor Rock,2024,0.32,par_belt,non_cryptic
+Taylor Rock,2025,0.665,par_belt,non_cryptic
+Taylor Rock,2026,0.31,par_belt,non_cryptic
+Wizard Island North,2021,0.15,par_belt,non_cryptic
+Wizard Island North,2022,0.085,par_belt,non_cryptic
+Wizard Island North,2023,0.275,par_belt,non_cryptic
+Wizard Island North,2024,0.28,par_belt,non_cryptic
+Wizard Island North,2025,0.385,par_belt,non_cryptic
+Wizard Island North,2026,0.29,par_belt,non_cryptic
+Wizard Island South,2021,0.02,par_belt,non_cryptic
+Wizard Island South,2022,0.03,par_belt,non_cryptic
+Wizard Island South,2023,0.205,par_belt,non_cryptic
+Wizard Island South,2024,0.305,par_belt,non_cryptic
+Wizard Island South,2025,0.31,par_belt,non_cryptic
+Wizard Island South,2026,0.235,par_belt,non_cryptic
+Hosie South,2026,0,par_belt,non_cryptic
+Hosie South,2026,0,par_belt,non_cryptic
