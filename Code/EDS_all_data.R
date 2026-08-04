@@ -414,6 +414,8 @@ abalone_density <- rbind(JW_join, CH_data_mean, SC_join, RLS_join)
 
 View(abalone_density) #I need to add outplant details to this df 
 
+#readr::write_csv(abalone_density, file = "data-processed/abalone_density_joined.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
+
 #Outplant information -----------------------------------------------------------------------------
 outplant <- read.csv("data-raw/outplant_read_raw.csv")
 
