@@ -64,9 +64,11 @@ JW_data_clean <- clean_names(JW_data) %>%
   ) %>%
   select(-code)%>%
   mutate(density_sample_size = str_remove(density_sample_size, "^n="))%>% #remove n= from rows in density sample size
-  mutate(mean_density_1m = mean/0.49)%>% #okay so quadrats are 0.7m x 0.7m = 0.49m^2, so, to get abalone mean in quadrats across 1m2 we must do mean abalone in 0.49m2 / 0.49m2 = abalone per m2
+  mutate(site_mean_density = mean/0.49)%>% #okay so quadrats are 0.7m x 0.7m = 0.49m^2, so, to get abalone mean in quadrats across 1m2 we must do mean abalone in 0.49m2 / 0.49m2 = abalone per m2
   mutate(depth_m = depth_ft * 0.3048)%>%
-  mutate(date = mdy(date), year = year(date)) #changes all the date formats using lubridate so that the second call of "year" can be applied to make a new column with just year
+  mutate(date = mdy(date), year = year(date))%>% #changes all the date formats using lubridate so that the second call of "year" can be applied to make a new column with just year
+  mutate(method = "par_quad") %>% #add the method of search used
+  mutate(search = "non_cryptic") #add the search type
 
   
 #we are going to leave the size information for JW right now as really dont have much of that...
@@ -74,7 +76,9 @@ JW_data_clean <- clean_names(JW_data) %>%
 #also note depth makes major chage throughout program
 
 View(JW_data_clean)
-#readr::write_csv(JW_data_clean, file = "data-processed/JW_data_1988_2022.csv") #to save the clean data
+#readr::write_csv(JW_data_clean, file = "data-processed/JW_data_1988_2022.csv") #to save the clean data (commented out so that when running the code you dont save something accidentally that you may have changed)
+
+#TO DO CONFIRM METHODS
 
 #Christine Hansen data -------------------------------------------------------------------
 #in the future I hope to have this raw data...
@@ -87,6 +91,7 @@ View(JW_data_clean)
 
 #readr::write_csv(CH_data_deep, file = "data-raw/CH_data_2008.csv") #to save the raw data
 
+CH_data_deep <- read.csv("data-raw/CH_data_2008.csv")
 #TO DO: rename columns to match JW dataset then save as data
 #need site, date, depth, add zero counts, mean_density_1m
 
@@ -105,19 +110,277 @@ CH_data_clean <- CH_data_deep%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "reproductive", site = "goby_town")%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "7.5", reproductive_status = "immature", site = "goby_town")%>%
   add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "reproductive", site = "goby_town")%>%
-  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "immature", site = "goby_town") #had to add all the goby town data where they searched for abalone but found none during their surveys. Same is also true from "reproductive" abalone
+  add_row(study = "ChristineHansen", mean = 0, se = 0, year = "2008", depth_m = "2.5", reproductive_status = "immature", site = "goby_town")%>% #had to add all the goby town data where they searched for abalone but found none during their surveys. Same is also true from "reproductive" abalone
+  mutate(method = "quad")%>% #method used is similar to breen
+  mutate(search = "cryptic") #every fourth quadrat they flipped rocks
 #note that year, and depth are characters... we will probably need them as numeric and dates at some point so lets change that now
 is.character(CH_data_clean$year) #TRUE
 is.character(CH_data_clean$depth_m) #TRUE
 
 
 CH_data_mean <- CH_data_clean%>%
-  group_by(site, year)%>%
-  summarise(site_mean = sum(mean, na.rm = TRUE))
+  group_by(site, year, method, search)%>%
+  summarise(site_mean_density = sum(mean, na.rm = TRUE))
 #add the means across the whole site regardless of depth or size class / reproductive status 
 #this is processed data and should be saved as such
 
-#readr::write_csv(CH_data_mean, file = "data-processed/CH_data_2008.csv") #to save the processed data
+#readr::write_csv(CH_data_mean, file = "data-processed/CH_data_2008.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
 
+###FUTURE: NEED TO GET DEPTH DATA IN THIS DF
 #DFO kelp data ------------------------------------------------------------------------
 DFO_kelp_data <- read.csv("data-raw/2021-2025_DFO_Kelp_Abalone.csv")
+
+#hmm this data set looks different... I need to get year and site into this data frame...
+#From the methods I know the area covered on each survey, note that some comments or notes might describe missing transect lines or quadrats
+#for the purposes of this project I'm going to leave this data set out
+
+#Storm Coast data --------------------------------------------------------------------------------
+SC_data <- read.csv("data-raw/StormCoast_Abalone_2025.csv")
+
+View(SC_data)
+is.character(SC_data$date)
+###review dixon inside on datasheets -> for now filter the site out
+#TO DO: fix column names, get dates to year, go from sizes to density per site
+SC_data <- SC_data %>%
+  clean_names() #make column names easier to work with
+SC_data_clean <- SC_data%>%
+  filter(quadrat != "NA") %>% #remove a bunch of blank data, now this matches our raw df...
+  filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts
+  mutate(date = ymd(date), year = year(date)) %>% #change date to a date using lubridate and add a year column
+  mutate(method = "perp_quad") %>% #method used 
+  mutate(search = "non_cryptic") #did not flip over rocks in search
+ 
+
+unique(SC_data_clean$alive_or_dead) #make sure next alive filter will correctly get all data
+#Nevermind, this wont work as it will impact our number of quadrat count...
+#instead lets find a total alive value per site and total quadrat per site and join them
+SC_data_alive <- SC_data_clean %>%
+  group_by(site_id, year, method, search)%>%
+  summarise(total_alive = sum(alive_or_dead == "alive")) #first we get number of alive per site
+
+SC_data_quad <- SC_data_clean %>%
+  group_by(site_id, year, method, search)%>%
+  summarise(n_quadrats = n_distinct(quadrat)) #then we get number of quads per site
+
+SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year", "method", "search")) %>%
+  mutate(site_mean_density = total_alive/n_quadrats) #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
+#notice we surveyed 56 sites in this effort but we filtered out dixon inside so 55 observations provides a good moment to CYU
+  
+#lets save this (commented out so that when running the code you dont save something accidentally that you may have changed)
+#readr::write_csv(SC_data_join, file = "data-processed/SC_data_2025.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
+#RLS data ----------------------------------------------------------------------------------------
+RLS_data <- read.csv("data-raw/RLS_2025.csv") 
+
+#lets review the data
+View(RLS_data)
+
+#lets try to filter for sites over years that dont have abalone 
+RLS_data_year <- RLS_data %>%
+  mutate(survey_date = ymd(survey_date)) %>%
+  mutate(year = year(survey_date))
+
+#okay, chatgpt attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
+# All unique site-year-depth combinations
+all_combos <- RLS_data_year %>%
+  distinct(site_code, year, depth)
+
+# Existing Haliotidae records
+haliotidae <- RLS_data_year %>%
+  filter(family == "Haliotidae") %>%
+  distinct(site_code, year, depth)
+
+# Find combinations missing Haliotidae
+missing_haliotidae <- all_combos %>%
+  anti_join(haliotidae, by = c("site_code", "year", "depth")) %>%
+  mutate(
+    family = "Haliotidae",
+    total = 0
+  )
+# Add the missing rows
+RLS_with_missing_abalone <- bind_rows(RLS_data_year, missing_haliotidae)
+#on reviewing this data I feel like all the missing years with abalone data are either a product of a) surveyors being new in 2021, or b)Kieran and claire having these sand sites
+#As such, lets not go any further and instead we will keep what we previously had and consider the others as filtered for outliers (we will filter 5 of 7 site_codes anyways due to location or study later other two I think are products of failure to detect / novice surveying)
+
+#we just need to lubridate date, and get density
+RLS_data_clean <- RLS_data_year %>%
+  mutate(survey_date = ymd(survey_date),
+         date_time_survey = ymd_hms(paste(survey_date, hour)), #lubridate date
+         site_code = ifelse(site_name == "Swiss Boy", "BMSC24", site_code),
+         # correct for rectangle area
+         #survey_den = case_when(method == 1 ~ total/500,  #get density for fish
+                            #    method == 2 ~ total/100), #get density for all inverts
+         survey_total = total) %>%
+  # just abalone
+  filter(species_name == "Haliotis kamtschatkana") %>% #filter for just the abalone data
+  group_by(site_code, year, survey_total)%>%
+  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevent variables
+  #mutate(year = year(survey_date)) %>% #add just the year to the df
+  mutate(search = "non_cryptic") #add search column 
+  
+# 2026 RLS data from spreadsheet
+RLS_new <- read_csv("data-raw/RLS_2026_only.csv")
+
+#lets check for abalone 0s in the 2026 df
+RLS_new_0ab <- RLS_new %>%
+  # processing required to get this df into the RLS data format
+  filter(Method != 0) %>% # get rid of all method 0's
+  slice(2:n()) %>% # cuts the first blank row
+  # rename columns
+  rename(
+    site_code = `Site No.`,
+    site_name = `Site Name`, 
+    common_name = `Common name`,
+    `0` = Inverts,
+    species_name = Species,
+    method = Method,
+    depth = Depth
+  )  %>% 
+  # Rename columns with spaces
+  mutate(species_name = str_to_sentence(species_name),
+         common_name = str_to_sentence(common_name),
+         survey_date = dmy(Date),
+         date_time_survey = ymd_hms(paste(survey_date, Time))) %>%
+  # just abalone
+  #filter(species_name == "Haliotis kamtschatkana") %>%
+  # Pivot longer for biomass
+  pivot_longer(cols = `0`:`400`, names_to = "size_class", values_to = "total") %>% # size class 0 = unsized!!!!
+  drop_na(total) %>%
+  #filter(total > 0) %>%
+  select(-Total)
+
+# All unique site-year-depth combinations
+all_combos_2026 <- RLS_new_0ab %>%
+  distinct(site_code, depth)
+
+# Existing Haliotidae records
+haliotidae_2026 <- RLS_new_0ab %>%
+  filter(species_name == "Haliotis kamtschatkana") %>%
+  distinct(site_code, depth)
+
+# Find combinations missing Haliotidae
+missing_haliotidae_2026 <- all_combos_2026 %>%
+  anti_join(haliotidae_2026, by = c("site_code", "depth")) %>%
+  mutate(
+    species_name = "Haliotis kamtschatkana",
+    total = 0
+  )
+#I'm more confident in these zeros... curious to compare to other years for Hoise south...
+#instead of trying to add these rows in using some bind function im just going to mutate two zeros in later in the data set for Hosie south at the appropriate depth
+
+View(RLS_new)
+#we've got a few new issues here a) we got a weird formatting row in row 2 b) we've got M0 data c) the column names are different from the downloaded data... d) the survey blocks aren't added up / together (two surveyers on each side of transect) e) date needs to be lubridated
+
+#lets try to clean this
+RLS_new_clean <- RLS_new %>%
+  # processing required to get this df into the RLS data format
+  filter(Method != 0) %>% # get rid of all method 0's
+  slice(2:n()) %>% # cuts the first blank row
+  # rename columns
+  rename(
+    site_code = `Site No.`,
+    site_name = `Site Name`, 
+    common_name = `Common name`,
+    `0` = Inverts,
+    species_name = Species,
+    method = Method,
+    depth = Depth
+  )  %>% 
+  # Rename columns with spaces
+  mutate(species_name = str_to_sentence(species_name),
+         common_name = str_to_sentence(common_name),
+         survey_date = dmy(Date),
+         date_time_survey = ymd_hms(paste(survey_date, Time))) %>%
+  # just abalone
+  filter(species_name == "Haliotis kamtschatkana") %>%
+  # Pivot longer for biomass
+  pivot_longer(cols = `0`:`400`, names_to = "size_class", values_to = "total") %>% # size class 0 = unsized!!!!
+  drop_na(total) %>%
+  #filter(total > 0) %>%
+  select(-Total) %>%
+  # group blocks 1 and 2
+  group_by(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, common_name, size_class) %>%
+  summarise(survey_total = sum(total)) %>% # sum blocks 1 and 2
+  ungroup() %>%
+  mutate(size_class = as.numeric(size_class),
+         # correct for rectangle area
+         survey_den = case_when(method == 1 ~ survey_total/500,
+                                method == 2 ~ survey_total/100)) %>%
+  as.data.frame() %>%
+  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>%
+  mutate(year = year(survey_date)) %>% #add year column
+  mutate(search = "non_cryptic") #add search column 
+
+
+
+#lets merge the data sets using rbind
+RLS_full <- rbind(RLS_new_clean, RLS_data_clean)
+
+View(RLS_full)
+#notice survey density isn't on the data frame, the manipulation above only worked per size class. Need to think of a way to capture for all size classes across a survey site and depth.
+#If we don't care about depth we will then sum those together and divide by the appropriate area
+
+RLS_data_totals <- RLS_full %>%
+  group_by(site_code, year, depth)%>%
+  summarise(total = sum(survey_total)) 
+
+#now build code that checks if year and site_code occur more than once, if that is the case sum the total and divide by 200, otherwise just divide the total by 100
+RLS_data_means <- RLS_data_totals %>%
+  group_by(site_code, year) %>%
+  summarise(
+    site_mean_density = if (n() == 2) {
+      sum(total, na.rm = TRUE) / 200
+    } else {
+      first(total) / 100
+    },
+    .groups = "drop"
+  )
+
+#check against how many should drop from RLS_data_totals 
+  
+#I dont think this account for sites with zeros... might have to go back to start and filter across site, and year (which removes depth effect) for years that dont have abalone and save them as a df to be bound later with sites with density scores
+#I've done this now and feel confident that I can just add them in later using mutate
+  
+#create rows that adds zero for BMSC26, year = 26, depth = whats in missing haliotid, total =0
+#remove sites that aren't repeated, KC studies, or broken group sites
+unique(RLS_data_means$site_code)
+
+RLS_data_means_filtered <- RLS_data_means %>%
+  add_row(
+    site_code = "BMSC26",
+    year = 2026,
+    site_mean_density = 0)%>%
+  add_row(site_code = "BMSC26",
+          year = 2026,
+          site_mean_density = 0)%>% #we just added the relevant 0s found in missing_haliotidae_2026
+  filter(!site_code %in% c(
+    "BMKC2",
+    "BMSC31",
+    "BMSC32",
+    "BMSC33",
+    "KCCA11",
+    "KCCA13",
+    "KCCA19", #all this data is from a separate study in 2023 that didn't study 
+    "BMSC13",
+    "BMSC14",
+    "BMSC15",
+    "BMSC16",
+    "BMSC17",
+    "BMSC18" #all this data is sites in the broken group 
+  ))%>%
+  mutate(method = "par_belt")%>%
+  mutate(search = "non_cryptic")
+
+#okay lets check if our removing sites worked
+unique(RLS_data_means_filtered$site_code)
+#Okay yay! We got there, lets save that as processed data
+#readr::write_csv(RLS_data_means_filtered, file = "data-processed/RLS_data_2021_2026.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
+
+###Join ------------------------------------------------------------------------------------------
+#okay now I need to join the data into one df. Lets review them all
+View(JW_data_clean)
+View(CH_data_mean)
+View(SC_data_join)
+View(RLS_data_means_filtered)
+
+#I want the variables site, year, mean_site_density, method, and search across all studies in one df
+#Before combining I first need to make a decision on site overlap (which sites are considered to be the same survey location or not), and read methods on Janes surveys to determine method combo (par vs perp)

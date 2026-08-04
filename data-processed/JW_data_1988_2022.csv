@@ -1,85 +1,85 @@
-site,location,x,x_1,mean,sd,var,se,depth_ft,date,abalone_sizes_sample_independently_of_density_data,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11,x_12,x_13,x_14,density_sample_size,study,quad_size_m2,comments,mean_density_1m,depth_m,year
-ship_islands,48 49.06,125 13.83,NA,0.15,0.366347549,0.134210526,0.081917802,20,1988-07-18,,,,,,,,,,,,,,,20,JaneWatson,0.7,Density estimates based on 20 quadrats (0.7 by 0.7m) placed haphazardly on the sea bed in ~8-10m below MLW,0.30612244897959184,6.096,1988
-ed_king,48 49.31,125 12.97,NA,0.35,0.74515982,0.555263158,0.166622801,20,1988-07-18,Abalone,34mm,90mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.7142857142857143,6.096,1988
-w_ed_king,48 49.79,125 13.12,NA,0.05,0.223606798,0.05,0.05,20,1988-07-18,Abalone,60mm,68mm,74mm,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,6.096,1988
-seppings,48 47.81,125 12.37,NA,0.1,0.307793506,0.094736842,0.06882472,20,1988-07-18,Abalone,23mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988
-cape_beale,48 47.81,125 12.60,NA,0.1,0.307793506,0.094736842,0.06882472,20,1988-07-19,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988
-lawton_point,48 48.02,125 11.40,NA,0.15,0.489360485,0.239473684,0.109424331,20,1988-07-19,Abalone,103mm,48mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,6.096,1988
-whittlestone,48 48.43,125 11.08,NA,0.05,0.223606798,0.05,0.05,20,1988-07-19,Abalone,62mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,6.096,1988
-execution_rock,48 48.86,125 10.71,NA,0,0,0,0,20,1988-07-19,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,6.096,1988
-self_point,48 59.90,125 09.75,NA,0,0,0,0,25,1988-07-20,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,7.62,1988
-helby_island,48 51.35,125 10.23,NA,0.1,0.447213595,0.2,0.1,20,1988-07-20,Abalone,34mm,62mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988
-scotts_bay,48 50.06,125 08.83,NA,0.25,0.444261658,0.197368421,0.099339927,20,1988-07-20,Abalone,59mm,91mm,53mm,55mm,30mm,102mm,80mm,110mm,97mm,68mm,75mm,70mm,80mm,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988
-aguilar_point,48 50.34,125 08.52,NA,0.25,0.550119604,0.302631579,0.123010483,20,1988-07-20,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988
-cia_rock,48 50.26,125 10.95,NA,0.25,0.550119604,0.302631579,0.123010483,20,1988-07-21,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988
-taylor_rock,48 49.66,125 12.25,NA,0.55,0.998683344,0.997368421,0.223312384,20,1988-07-21,Abalone,15mm,71mm,97mm,101mm,58mm,65mm,92mm,85mm,92mm,,,,,20,JaneWatson,0.7,,1.1224489795918369,6.096,1988
-kirby_point,48 50.70,125 12.52,NA,0.35,0.74515982,0.555263158,0.166622801,30,1988-06-11,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 89 ,0.7142857142857143,9.144,1988
-village_bay,48 51.00,125 12.04,NA,0.5,0.827170192,0.684210526,0.184960878,25,1988-06-11,Abalone,62mm,85mm,84mm,86mm,77mm,74mm,82mm,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 90,1.0204081632653061,7.62,1988
-blowhole,48 49.47,125 09.70,NA,0.4,0.680557047,0.463157895,0.152177182,20,1988-06-12,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 91,0.8163265306122449,6.096,1988
-prasiola,48 48.90,125 10.49,NA,0.05,0.223606798,0.05,0.05,30,1988-06-12,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 92,0.10204081632653061,9.144,1988
-wizard,48 51.48,125 09.65,NA,0.05,0.223606798,0.05,0.05,25,1988-06-11,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 93,0.10204081632653061,7.62,1988
-grappler,48 50.34,125 08.01,NA,0.2,0.523148364,0.273684211,0.11697953,NA,1988-11-18,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 94,0.40816326530612246,NA,1988
-ed_king_?,48 49.8,125 13.16,NA,NA,NA,NA,NA,NA,NA,,,,,,,,,,,,,,,,JaneWatson,0.7,,NA,NA,NA
-ship_islands,48 49.06,125 13.83,NA,0.25,0.550119604,NA,NA,NA,1994-09-27,Abalone,80mm,68mm,71mm,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,NA,1994
-ed_king,48 49.31,125 12.97,NA,0.45,0.604805319,NA,NA,NA,1994-09-27,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.9183673469387755,NA,1994
-w_ed_king,48 49.79,125 13.12,NA,0.1,0.307793506,NA,NA,NA,NA,Abalone,80mm,68mm,71mm,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,NA,NA
-seppings,48 47.81,125 12.37,NA,0.15,0.489360485,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,NA,NA
-cape_beale,48 47.81,125 12.60,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-lawton_point,48 48.02,125 11.40,NA,0.1,0.307793506,NA,NA,NA,NA,Abalone,15mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,NA,NA
-whittlestone,48 48.43,125 11.08,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,82mm,93mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA
-execution_rock,48 48.86,125 10.71,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-self_point,48 59.90,125 09.75,NA,0.3,0.656946685,NA,NA,NA,NA,Abalone,100mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.6122448979591837,NA,NA
-helby_island,48 51.35,125 10.23,NA,0,0,NA,NA,NA,NA,Abalone,82mm,99mm,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-scotts_bay,48 50.06,125 08.83,NA,0,0,NA,NA,NA,NA,Abalone,93mm,92mm,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-aguilar_point,48 50.34,125 08.52,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,92mm,53mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA
-cia_rock,48 50.26,125 10.95,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-taylor_rock,48 49.66,125 12.25,NA,0,0,NA,NA,NA,NA,Abalone,36mm,30mm,77mm,90mm,80mm,85mm,35mm,,,,,,,20,JaneWatson,0.7,,0,NA,NA
-kirby_point,48 50.70,125 12.52,NA,0.25,0.638666374,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,NA,NA
-village_bay,48 51.00,125 12.04,NA,0.35,0.670820393,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.7142857142857143,NA,NA
-blowhole,48 49.47,125 09.70,NA,0.15,0.670820393,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,NA,NA
-prasiola,48 48.90,125 10.49,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,72mm,88mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA
-wizard,48 51.48,125 09.65,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,95mm,60mm,79mm,85mm,73mm,62mm,80mm,105mm,100mm,105mm,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA
-grappler,48 50.34,125 08.01,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,101mm,55mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA
-ed_king_?,48 49.8,125 13.16,NA,NA,NA,NA,NA,NA,NA,,,,,,,,,,,,,,,,JaneWatson,0.7,,NA,NA,NA
-ship_islands,48 49.06,125 13.83,NA,0.07,NA,NA,NA,35,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,"Density estimates based on 30, 0.7 by 0.7m quadrats placed haphazardly on the sea floor.",0.14285714285714288,10.668000000000001,2007
-ed_king,48 49.31,125 12.97,NA,0,NA,NA,NA,29,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.8392,2007
-w_ed_king,48 49.79,125 13.12,NA,0.07,NA,NA,NA,30,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,9.144,2007
-seppings,48 47.81,125 12.37,NA,0.26,NA,NA,NA,42,2007-07-15,,60mm,60mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.5306122448979592,12.8016,2007
-cape_beale,48 47.81,125 12.60,NA,0,NA,NA,NA,40,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.192,2007
-lawton_point,48 48.02,125 11.40,NA,0.07,NA,NA,NA,42,2007-07-16,,83mm,83mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,12.8016,2007
-whittlestone,48 48.43,125 11.08,NA,0,NA,NA,NA,42,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.8016,2007
-execution_rock,48 48.86,125 10.71,NA,0,NA,NA,NA,40,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.192,2007
-self_point,48 59.90,125 09.75,NA,0.12,NA,NA,NA,30,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.24489795918367346,9.144,2007
-helby_island,48 51.35,125 10.23,NA,0.07,NA,NA,NA,30,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,9.144,2007
-scotts_bay,48 50.06,125 08.83,NA,0.12,NA,NA,NA,22,2007-07-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.24489795918367346,6.7056000000000004,2007
-aguilar_point,48 50.34,125 08.52,NA,0.47,NA,NA,NA,25,2007-07-18,,90mm,87mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.9591836734693877,7.62,2007
-cia_rock,48 50.26,125 10.95,NA,0,NA,NA,NA,35,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.668000000000001,2007
-taylor_rock,48 49.66,125 12.25,NA,0.07,NA,NA,NA,28,2007-07-14,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,8.5344,2007
-kirby_point,48 50.70,125 12.52,NA,0.07,NA,NA,NA,42,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,12.8016,2007
-village_bay,48 51.00,125 12.04,NA,0.4,NA,NA,NA,40,2007-07-15,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.8163265306122449,12.192,2007
-blowhole,48 49.47,125 09.70,NA,0,NA,NA,NA,20,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,6.096,2007
-prasiola,48 48.90,125 10.49,NA,0,NA,NA,NA,35,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.668000000000001,2007
-wizard,48 51.48,125 09.65,NA,0.2,NA,NA,NA,30,2007-07-14,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.40816326530612246,9.144,2007
-grappler,48 50.34,125 08.01,NA,0.06,NA,NA,NA,25,2007-07-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.12244897959183673,7.62,2007
-ed_king_?,48 49.8,125 13.16,NA,0,NA,NA,NA,33,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.0584,2007
-ship_islands,,,NA,0.133333333,0.345745904,0.11954023,0.063124277,30,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.2721088428571429,9.144,2022
-ed_king,,,NA,0.033333333,0.182574186,0.033333333,0.033333333,30,2022-09-16,,48,,,,,,,,,,,,,30,JaneWatson,0.7,,0.06802721020408163,9.144,2022
-w_ed_king,,,NA,0,0,0,0,31,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,9.4488,2022
-seppings,,,NA,0,0,0,0,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.5344,2022
-cape_beale,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,30,2022-09-18,,67,78,75,79,75,72,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,9.144,2022
-lawton_point,,,NA,0,0,0,0,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.5344,2022
-whittlestone,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,32,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,9.7536,2022
-execution_rock,,,NA,0.333333333,0.606478435,0.367816092,0.110727306,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6802721081632653,8.5344,2022
-self_point,,,NA,0.3,0.534983081,0.286206897,0.0976741,30,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6122448979591837,9.144,2022
-helby_island,,,NA,0.333333333,0.606478435,0.367816092,0.110727306,30,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6802721081632653,9.144,2022
-scotts_bay,,,NA,1.133333333,1.332183412,1.774712644,0.243222302,24,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,2.312925169387755,7.315200000000001,2022
-aguilar_point,,,NA,0.466666667,0.681445387,0.464367816,0.124414337,18,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.9523809530612245,5.486400000000001,2022
-cia_rock,,,NA,0,0,0,0,20,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,6.096,2022
-taylor_rock,,,NA,0,0,0,0,26,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,7.9248,2022
-kirby_point,,,NA,0.1,0.305128577,0.093103448,0.055708601,31,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.20408163265306123,9.4488,2022
-village_bay,,,NA,0.166666667,0.379049022,0.143678161,0.069204567,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.3401360551020408,8.5344,2022
-blowhole,,,NA,0.033333333,0.182574186,0.033333333,0.033333333,24,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.06802721020408163,7.315200000000001,2022
-prasiola,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,8.5344,2022
-wizard,,,NA,0.3,0.651258728,0.424137931,0.118903032,30,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6122448979591837,9.144,2022
-grappler,,,NA,0.8,1.37464729,1.889655172,0.25097511,23,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,1.6326530612244898,7.010400000000001,2022
-ed_king_?,,,NA,0.166666667,0.461133037,0.212643678,0.084190989,26,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.3401360551020408,7.9248,2022
+site,location,x,x_1,mean,sd,var,se,depth_ft,date,abalone_sizes_sample_independently_of_density_data,x_2,x_3,x_4,x_5,x_6,x_7,x_8,x_9,x_10,x_11,x_12,x_13,x_14,density_sample_size,study,quad_size_m2,comments,site_mean_density,depth_m,year,method,search
+ship_islands,48 49.06,125 13.83,NA,0.15,0.366347549,0.134210526,0.081917802,20,1988-07-18,,,,,,,,,,,,,,,20,JaneWatson,0.7,Density estimates based on 20 quadrats (0.7 by 0.7m) placed haphazardly on the sea bed in ~8-10m below MLW,0.30612244897959184,6.096,1988,par_quad,non_cryptic
+ed_king,48 49.31,125 12.97,NA,0.35,0.74515982,0.555263158,0.166622801,20,1988-07-18,Abalone,34mm,90mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.7142857142857143,6.096,1988,par_quad,non_cryptic
+w_ed_king,48 49.79,125 13.12,NA,0.05,0.223606798,0.05,0.05,20,1988-07-18,Abalone,60mm,68mm,74mm,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,6.096,1988,par_quad,non_cryptic
+seppings,48 47.81,125 12.37,NA,0.1,0.307793506,0.094736842,0.06882472,20,1988-07-18,Abalone,23mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988,par_quad,non_cryptic
+cape_beale,48 47.81,125 12.60,NA,0.1,0.307793506,0.094736842,0.06882472,20,1988-07-19,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988,par_quad,non_cryptic
+lawton_point,48 48.02,125 11.40,NA,0.15,0.489360485,0.239473684,0.109424331,20,1988-07-19,Abalone,103mm,48mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,6.096,1988,par_quad,non_cryptic
+whittlestone,48 48.43,125 11.08,NA,0.05,0.223606798,0.05,0.05,20,1988-07-19,Abalone,62mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,6.096,1988,par_quad,non_cryptic
+execution_rock,48 48.86,125 10.71,NA,0,0,0,0,20,1988-07-19,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,6.096,1988,par_quad,non_cryptic
+self_point,48 59.90,125 09.75,NA,0,0,0,0,25,1988-07-20,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,7.62,1988,par_quad,non_cryptic
+helby_island,48 51.35,125 10.23,NA,0.1,0.447213595,0.2,0.1,20,1988-07-20,Abalone,34mm,62mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,6.096,1988,par_quad,non_cryptic
+scotts_bay,48 50.06,125 08.83,NA,0.25,0.444261658,0.197368421,0.099339927,20,1988-07-20,Abalone,59mm,91mm,53mm,55mm,30mm,102mm,80mm,110mm,97mm,68mm,75mm,70mm,80mm,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988,par_quad,non_cryptic
+aguilar_point,48 50.34,125 08.52,NA,0.25,0.550119604,0.302631579,0.123010483,20,1988-07-20,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988,par_quad,non_cryptic
+cia_rock,48 50.26,125 10.95,NA,0.25,0.550119604,0.302631579,0.123010483,20,1988-07-21,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,6.096,1988,par_quad,non_cryptic
+taylor_rock,48 49.66,125 12.25,NA,0.55,0.998683344,0.997368421,0.223312384,20,1988-07-21,Abalone,15mm,71mm,97mm,101mm,58mm,65mm,92mm,85mm,92mm,,,,,20,JaneWatson,0.7,,1.1224489795918369,6.096,1988,par_quad,non_cryptic
+kirby_point,48 50.70,125 12.52,NA,0.35,0.74515982,0.555263158,0.166622801,30,1988-06-11,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 89 ,0.7142857142857143,9.144,1988,par_quad,non_cryptic
+village_bay,48 51.00,125 12.04,NA,0.5,0.827170192,0.684210526,0.184960878,25,1988-06-11,Abalone,62mm,85mm,84mm,86mm,77mm,74mm,82mm,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 90,1.0204081632653061,7.62,1988,par_quad,non_cryptic
+blowhole,48 49.47,125 09.70,NA,0.4,0.680557047,0.463157895,0.152177182,20,1988-06-12,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 91,0.8163265306122449,6.096,1988,par_quad,non_cryptic
+prasiola,48 48.90,125 10.49,NA,0.05,0.223606798,0.05,0.05,30,1988-06-12,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 92,0.10204081632653061,9.144,1988,par_quad,non_cryptic
+wizard,48 51.48,125 09.65,NA,0.05,0.223606798,0.05,0.05,25,1988-06-11,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 93,0.10204081632653061,7.62,1988,par_quad,non_cryptic
+grappler,48 50.34,125 08.01,NA,0.2,0.523148364,0.273684211,0.11697953,NA,1988-11-18,,,,,,,,,,,,,,,20,JaneWatson,0.7,some descrepency in the data around whether this was 88 or 94,0.40816326530612246,NA,1988,par_quad,non_cryptic
+ed_king_?,48 49.8,125 13.16,NA,NA,NA,NA,NA,NA,NA,,,,,,,,,,,,,,,,JaneWatson,0.7,,NA,NA,NA,par_quad,non_cryptic
+ship_islands,48 49.06,125 13.83,NA,0.25,0.550119604,NA,NA,NA,1994-09-27,Abalone,80mm,68mm,71mm,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,NA,1994,par_quad,non_cryptic
+ed_king,48 49.31,125 12.97,NA,0.45,0.604805319,NA,NA,NA,1994-09-27,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.9183673469387755,NA,1994,par_quad,non_cryptic
+w_ed_king,48 49.79,125 13.12,NA,0.1,0.307793506,NA,NA,NA,NA,Abalone,80mm,68mm,71mm,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,NA,NA,par_quad,non_cryptic
+seppings,48 47.81,125 12.37,NA,0.15,0.489360485,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,NA,NA,par_quad,non_cryptic
+cape_beale,48 47.81,125 12.60,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+lawton_point,48 48.02,125 11.40,NA,0.1,0.307793506,NA,NA,NA,NA,Abalone,15mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.20408163265306123,NA,NA,par_quad,non_cryptic
+whittlestone,48 48.43,125 11.08,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,82mm,93mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA,par_quad,non_cryptic
+execution_rock,48 48.86,125 10.71,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+self_point,48 59.90,125 09.75,NA,0.3,0.656946685,NA,NA,NA,NA,Abalone,100mm,,,,,,,,,,,,,20,JaneWatson,0.7,,0.6122448979591837,NA,NA,par_quad,non_cryptic
+helby_island,48 51.35,125 10.23,NA,0,0,NA,NA,NA,NA,Abalone,82mm,99mm,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+scotts_bay,48 50.06,125 08.83,NA,0,0,NA,NA,NA,NA,Abalone,93mm,92mm,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+aguilar_point,48 50.34,125 08.52,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,92mm,53mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA,par_quad,non_cryptic
+cia_rock,48 50.26,125 10.95,NA,0,0,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+taylor_rock,48 49.66,125 12.25,NA,0,0,NA,NA,NA,NA,Abalone,36mm,30mm,77mm,90mm,80mm,85mm,35mm,,,,,,,20,JaneWatson,0.7,,0,NA,NA,par_quad,non_cryptic
+kirby_point,48 50.70,125 12.52,NA,0.25,0.638666374,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.5102040816326531,NA,NA,par_quad,non_cryptic
+village_bay,48 51.00,125 12.04,NA,0.35,0.670820393,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.7142857142857143,NA,NA,par_quad,non_cryptic
+blowhole,48 49.47,125 09.70,NA,0.15,0.670820393,NA,NA,NA,NA,,,,,,,,,,,,,,,20,JaneWatson,0.7,,0.30612244897959184,NA,NA,par_quad,non_cryptic
+prasiola,48 48.90,125 10.49,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,72mm,88mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA,par_quad,non_cryptic
+wizard,48 51.48,125 09.65,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,95mm,60mm,79mm,85mm,73mm,62mm,80mm,105mm,100mm,105mm,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA,par_quad,non_cryptic
+grappler,48 50.34,125 08.01,NA,0.05,0.223606798,NA,NA,NA,NA,Abalone,101mm,55mm,,,,,,,,,,,,20,JaneWatson,0.7,,0.10204081632653061,NA,NA,par_quad,non_cryptic
+ed_king_?,48 49.8,125 13.16,NA,NA,NA,NA,NA,NA,NA,,,,,,,,,,,,,,,,JaneWatson,0.7,,NA,NA,NA,par_quad,non_cryptic
+ship_islands,48 49.06,125 13.83,NA,0.07,NA,NA,NA,35,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,"Density estimates based on 30, 0.7 by 0.7m quadrats placed haphazardly on the sea floor.",0.14285714285714288,10.668000000000001,2007,par_quad,non_cryptic
+ed_king,48 49.31,125 12.97,NA,0,NA,NA,NA,29,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.8392,2007,par_quad,non_cryptic
+w_ed_king,48 49.79,125 13.12,NA,0.07,NA,NA,NA,30,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,9.144,2007,par_quad,non_cryptic
+seppings,48 47.81,125 12.37,NA,0.26,NA,NA,NA,42,2007-07-15,,60mm,60mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.5306122448979592,12.8016,2007,par_quad,non_cryptic
+cape_beale,48 47.81,125 12.60,NA,0,NA,NA,NA,40,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.192,2007,par_quad,non_cryptic
+lawton_point,48 48.02,125 11.40,NA,0.07,NA,NA,NA,42,2007-07-16,,83mm,83mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,12.8016,2007,par_quad,non_cryptic
+whittlestone,48 48.43,125 11.08,NA,0,NA,NA,NA,42,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.8016,2007,par_quad,non_cryptic
+execution_rock,48 48.86,125 10.71,NA,0,NA,NA,NA,40,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,12.192,2007,par_quad,non_cryptic
+self_point,48 59.90,125 09.75,NA,0.12,NA,NA,NA,30,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.24489795918367346,9.144,2007,par_quad,non_cryptic
+helby_island,48 51.35,125 10.23,NA,0.07,NA,NA,NA,30,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,9.144,2007,par_quad,non_cryptic
+scotts_bay,48 50.06,125 08.83,NA,0.12,NA,NA,NA,22,2007-07-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.24489795918367346,6.7056000000000004,2007,par_quad,non_cryptic
+aguilar_point,48 50.34,125 08.52,NA,0.47,NA,NA,NA,25,2007-07-18,,90mm,87mm,,,,,,,,,,,,30,JaneWatson,0.7,,0.9591836734693877,7.62,2007,par_quad,non_cryptic
+cia_rock,48 50.26,125 10.95,NA,0,NA,NA,NA,35,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.668000000000001,2007,par_quad,non_cryptic
+taylor_rock,48 49.66,125 12.25,NA,0.07,NA,NA,NA,28,2007-07-14,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,8.5344,2007,par_quad,non_cryptic
+kirby_point,48 50.70,125 12.52,NA,0.07,NA,NA,NA,42,2007-07-17,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.14285714285714288,12.8016,2007,par_quad,non_cryptic
+village_bay,48 51.00,125 12.04,NA,0.4,NA,NA,NA,40,2007-07-15,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.8163265306122449,12.192,2007,par_quad,non_cryptic
+blowhole,48 49.47,125 09.70,NA,0,NA,NA,NA,20,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,6.096,2007,par_quad,non_cryptic
+prasiola,48 48.90,125 10.49,NA,0,NA,NA,NA,35,2007-07-13,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.668000000000001,2007,par_quad,non_cryptic
+wizard,48 51.48,125 09.65,NA,0.2,NA,NA,NA,30,2007-07-14,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.40816326530612246,9.144,2007,par_quad,non_cryptic
+grappler,48 50.34,125 08.01,NA,0.06,NA,NA,NA,25,2007-07-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.12244897959183673,7.62,2007,par_quad,non_cryptic
+ed_king_?,48 49.8,125 13.16,NA,0,NA,NA,NA,33,2007-07-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,10.0584,2007,par_quad,non_cryptic
+ship_islands,,,NA,0.133333333,0.345745904,0.11954023,0.063124277,30,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.2721088428571429,9.144,2022,par_quad,non_cryptic
+ed_king,,,NA,0.033333333,0.182574186,0.033333333,0.033333333,30,2022-09-16,,48,,,,,,,,,,,,,30,JaneWatson,0.7,,0.06802721020408163,9.144,2022,par_quad,non_cryptic
+w_ed_king,,,NA,0,0,0,0,31,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,9.4488,2022,par_quad,non_cryptic
+seppings,,,NA,0,0,0,0,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.5344,2022,par_quad,non_cryptic
+cape_beale,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,30,2022-09-18,,67,78,75,79,75,72,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,9.144,2022,par_quad,non_cryptic
+lawton_point,,,NA,0,0,0,0,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,8.5344,2022,par_quad,non_cryptic
+whittlestone,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,32,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,9.7536,2022,par_quad,non_cryptic
+execution_rock,,,NA,0.333333333,0.606478435,0.367816092,0.110727306,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6802721081632653,8.5344,2022,par_quad,non_cryptic
+self_point,,,NA,0.3,0.534983081,0.286206897,0.0976741,30,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6122448979591837,9.144,2022,par_quad,non_cryptic
+helby_island,,,NA,0.333333333,0.606478435,0.367816092,0.110727306,30,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6802721081632653,9.144,2022,par_quad,non_cryptic
+scotts_bay,,,NA,1.133333333,1.332183412,1.774712644,0.243222302,24,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,2.312925169387755,7.315200000000001,2022,par_quad,non_cryptic
+aguilar_point,,,NA,0.466666667,0.681445387,0.464367816,0.124414337,18,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.9523809530612245,5.486400000000001,2022,par_quad,non_cryptic
+cia_rock,,,NA,0,0,0,0,20,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,6.096,2022,par_quad,non_cryptic
+taylor_rock,,,NA,0,0,0,0,26,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0,7.9248,2022,par_quad,non_cryptic
+kirby_point,,,NA,0.1,0.305128577,0.093103448,0.055708601,31,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.20408163265306123,9.4488,2022,par_quad,non_cryptic
+village_bay,,,NA,0.166666667,0.379049022,0.143678161,0.069204567,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.3401360551020408,8.5344,2022,par_quad,non_cryptic
+blowhole,,,NA,0.033333333,0.182574186,0.033333333,0.033333333,24,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.06802721020408163,7.315200000000001,2022,par_quad,non_cryptic
+prasiola,,,NA,0.233333333,0.504006933,0.254022989,0.092018655,28,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.4761904755102041,8.5344,2022,par_quad,non_cryptic
+wizard,,,NA,0.3,0.651258728,0.424137931,0.118903032,30,2022-09-18,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.6122448979591837,9.144,2022,par_quad,non_cryptic
+grappler,,,NA,0.8,1.37464729,1.889655172,0.25097511,23,2022-09-19,,,,,,,,,,,,,,,30,JaneWatson,0.7,,1.6326530612244898,7.010400000000001,2022,par_quad,non_cryptic
+ed_king_?,,,NA,0.166666667,0.461133037,0.212643678,0.084190989,26,2022-09-16,,,,,,,,,,,,,,,30,JaneWatson,0.7,,0.3401360551020408,7.9248,2022,par_quad,non_cryptic

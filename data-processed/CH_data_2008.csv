@@ -1,5 +1,5 @@
-site,year,site_mean
-ellis,2008,0.816726403823179
-goby_town,2008,0
-helby,2008,0.1641577060931907
-scotts_bay,2008,0.5718040621266438
+site,year,method,search,site_mean_density
+ellis,2008,quad,cryptic,0.816726403823179
+goby_town,2008,quad,cryptic,0
+helby,2008,quad,cryptic,0.1641577060931907
+scotts_bay,2008,quad,cryptic,0.5718040621266438
