@@ -156,6 +156,7 @@ SC_data_clean <- SC_data%>%
                           str_detect(transect_id, "GOT01") ~ "grappler",
                           str_detect(transect_id, "HSW01") ~ "helby_sw",
                           str_detect(transect_id, "SAN02") ~ "sandford_sw", #this site might be less accurate -> to review in CH thesis
+                          str_detect(transect_id, "AGU01") ~ "aguilar_point",
                           TRUE ~ site_id)) 
   
  
@@ -348,11 +349,14 @@ RLS_data_means <- RLS_data_totals %>%
 unique(RLS_data_means$site_code) #see the ones I need to remove
 
 RLS_data_means_filtered <- RLS_data_means %>%
+  rename(site = "site_name") %>%
   add_row(
+    site = "Hosie South",
     site_code = "BMSC26",
     year = 2026,
     site_mean_density = 0)%>%
-  add_row(site_code = "BMSC26",
+  add_row(site = "Hosie South",
+          site_code = "BMSC26",
           year = 2026,
           site_mean_density = 0)%>% #we just added the relevant 0s found in missing_haliotidae_2026
   filter(!site_code %in% c(
@@ -372,7 +376,11 @@ RLS_data_means_filtered <- RLS_data_means %>%
   ))%>%
   mutate(method = "par_belt")%>%
   mutate(search = "non_cryptic")%>%
-  rename(site = "site_name")
+  mutate(site = case_when(str_detect(site, "Aguilar Point") ~ "aguilar_point", #changing names relevant to outplanting information.
+                             str_detect(site, "Eagle Bay") ~ "scotts_bay",
+                             str_detect(site, "Goby Town") ~ "grappler",
+                             TRUE ~ site)) 
+#taylor or dodgers could be included as the ed_king_se most adjacent site here but it doesn't quite feel correct
 
 #okay lets check if our removing sites worked
 unique(RLS_data_means_filtered$site_code)
