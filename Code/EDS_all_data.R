@@ -68,7 +68,8 @@ JW_data_clean <- clean_names(JW_data) %>%
   mutate(depth_m = depth_ft * 0.3048)%>%
   mutate(date = mdy(date), year = year(date))%>% #changes all the date formats using lubridate so that the second call of "year" can be applied to make a new column with just year
   mutate(method = "par_quad") %>% #add the method of search used (in this case it was parallel to shore at a depth between 5-12m with quads a certain number of fin kicks away (Watson & Estes, 2011))
-  mutate(search = "non_cryptic") #add the search type
+  mutate(search = "non_cryptic") %>% #add the search type
+  mutate(year = if_else(is.na(year), 1994, year)) #add year in places when they weren't directly pasted into the raw file but they were in the document titled 1994
 
   
 #we are going to leave the size information for JW right now as really dont have much of that...
@@ -386,4 +387,15 @@ RLS_join <- RLS_data_means_filtered%>%
 
 #I want the variables site, year, mean_site_density, method, and search across all studies in one df
 #before combining I first need to make a decision on site overlap (which sites are considered to be the same survey location or not)
-#Struggling on desicion criteria... lets try two versions?
+#Struggling on decision criteria... lets try two versions?
+
+#lets just bind them with all these different site names and figure out that detail later
+abalone_density <- rbind(JW_join, CH_data_mean, SC_join, RLS_join)
+#CYU: previously had 84+4+110+55 observations 
+84+4+110+55 #matches observations of bound df at 253
+
+View(abalone_density) #I need to add outplant details to this df 
+
+#brief visualization
+ggplot(data = JW_join, aes(x = year, y = site_mean_density, colour = site)) +
+  geom_point()
