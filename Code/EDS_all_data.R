@@ -144,6 +144,7 @@ is.character(SC_data$date)
 #TO DO: fix column names, get dates to year, go from sizes to density per site
 SC_data <- SC_data %>%
   clean_names() #make column names easier to work with
+
 SC_data_clean <- SC_data%>%
   filter(quadrat != "NA") %>% #remove a bunch of blank data, now this matches our raw df...
   filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
@@ -176,7 +177,8 @@ SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year",
   mutate(site_mean_density = total_alive/n_quadrats) %>% #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
   rename(site = site_id) #rename to match other data sets
 
-#notice we surveyed 56 sites in this effort but we filtered out dixon inside so 55 observations provides a good moment to CYU
+unique((SC_data_join$site))
+#notice we surveyed 57 sites in this effort but we filtered out dixon inside so 56 observations provides a good moment to CYU
   
 #lets save this (commented out so that when running the code you dont save something accidentally that you may have changed)
 #readr::write_csv(SC_data_join, file = "data-processed/SC_data_2025.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
@@ -434,7 +436,7 @@ clean_outplant <- clean_names(outplant) %>% #lets clean this up, start with colu
 #Join all data -------------------------------------------------------------------------------------
   
 
-
 #brief visualization
-ggplot(data = JW_join, aes(x = year, y = site_mean_density, colour = site)) +
-  geom_point()
+ggplot(data = abalone_density, aes(x = as.numeric(year), y = site_mean_density, colour = method)) +
+  geom_point()+
+  facet_wrap(~site)
