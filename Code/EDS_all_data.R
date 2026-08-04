@@ -396,6 +396,10 @@ abalone_density <- rbind(JW_join, CH_data_mean, SC_join, RLS_join)
 
 View(abalone_density) #I need to add outplant details to this df 
 
+##Outplant information -----------------------------------------------------------------------------
+outplant <- read.csv("data-raw/Outplant_information.csv")
+
+
 #brief visualization
 ggplot(data = JW_join, aes(x = year, y = site_mean_density, colour = site)) +
   geom_point()
