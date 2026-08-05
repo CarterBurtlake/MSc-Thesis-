@@ -139,7 +139,7 @@ ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colo
   facet_wrap(~site) #show by site
 
 #Lets get the slopes of the lines again
-slopes_Fig1_JW_RLS <- Fig1_JW_RLS %>%
+slopes_Fig1_JW_RLS_df <- Fig1_JW_RLS %>%
   nest_by(site)%>% #like group by but gives it a key
   mutate(fit = list(lm(site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
   reframe(tidy(fit)) %>%
@@ -153,7 +153,7 @@ slopes_Fig1_JW_RLS <- Fig1_JW_RLS %>%
                               TRUE ~ "no"))
 
 
-slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS %>%
+slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS_df %>%
   mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
   ggplot(aes(x = estimate, y = site, colour = outplant)) +
   geom_point()+
@@ -181,7 +181,7 @@ slopes_Fig1_JW / slopes_Fig1_JW_RLS +
 #or maybe more explicitly?
 slopes_Fig1_JW / slopes_Fig1_JW_RLS +
   plot_annotation(tag_levels = list(c('(conservative)', '(combined)')))
-#figure 2 -----------------------------------------------------------------------------
+#Fig 2a) -----------------------------------------------------------------------------
 
 #here I want to plot all the relevant sites distance from one of 6 potential outplant sites
 
@@ -247,23 +247,81 @@ non_outplant_sites <- non_outplant_sites %>% #lets change this to km so its easi
 
 #now I need to add nearest distance in km to the slope estimate data frame 
 min_distance_join <- left_join(slopes_Fig1_JW_df, non_outplant_sites, by = c("site", "outplant"))%>%
-  filter(outplant != "yes") %>% #remove all sites that are outplants as we dont have a distance from relationship here
-  filter(site != "self_point") #have to remove again because joined
+  #filter(outplant != "yes") %>% #remove all sites that are outplants as we dont have a distance from relationship here
+  filter(site != "self_point") %>% #have to remove again because joined
 #Review self_point when have more time
+  mutate(nearest_distance_km = case_when(is.na(nearest_distance_km) ~ 0, #add outplant sites
+                                        TRUE ~ nearest_distance_km)) %>%
+  mutate(nearest_outplant = case_when(str_detect(site, "scotts_bay") ~"scotts_bay", #include outplant locations as nearest outplants instead of NA's
+                                      str_detect(site, "aguilar_point") ~"aguilar_point",
+                                      str_detect(site, "grappler") ~"grappler",
+                                      str_detect(site, "helby_sw") ~"helby_sw", #not in data set
+                                      str_detect(site, "ed_king_se") ~"ed_king_se",
+                                      TRUE ~ nearest_outplant))%>%
+  filter(site != "aguilar_point")%>% #only one point and thats aguilar so no trend to detect
+  filter(site != "grappler") #only one point and thats grappler so no trend to detect
 
 #lets try to plot this now!
 distance_from_outplant_Fig2_JW <- min_distance_join %>%
   ggplot(aes(x = nearest_distance_km, y = estimate, colour = nearest_outplant)) +
   geom_point() +
+  #geom_smooth(aes(fill = nearest_outplant), method = "lm") +
+  geom_smooth(method = "lm")+
   geom_errorbar(
     aes(
       ymin = estimate - std.error,
       ymax = estimate + std.error,
       x = nearest_distance_km),width = 0.2)+
   theme_classic()+
-  geom_hline(yintercept = 0, linetype = "dotted")  #insert 0 line to show direction of slopes
-  #guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
-  #geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+  labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
+  geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
+  coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
+#why cant I get scotts error to display?
+  
 
 distance_from_outplant_Fig2_JW
+#perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
 #Hmm, could we instead do this with mean site abalone density using data sets post outplanting (2021-2026)
+
+#Fig 2b) -------------------------------------------------------------------------------------------
+
+#Repeat for the combined RLS dataset
+#now I need to add nearest distance in km to the slope estimate data frame 
+RLS_min_distance_join <- left_join(slopes_Fig1_JW_RLS_df, non_outplant_sites, by = c("site", "outplant"))%>%
+  #filter(outplant != "yes") %>% #remove all sites that are outplants as we dont have a distance from relationship here
+  #filter(site != "self_point") %>% #have to remove again because joined
+  #Review self_point when have more time
+  mutate(nearest_distance_km = case_when(is.na(nearest_distance_km) ~ 0, #add outplant sites
+                                         TRUE ~ nearest_distance_km)) %>%
+  mutate(nearest_outplant = case_when(str_detect(site, "scotts_bay") ~"scotts_bay", #include outplant locations as nearest outplants instead of NA's
+                                      str_detect(site, "aguilar_point") ~"aguilar_point",
+                                      str_detect(site, "grappler") ~"grappler",
+                                      str_detect(site, "helby_sw") ~"helby_sw", #not in data set
+                                      str_detect(site, "ed_king_se") ~"ed_king_se",
+                                      TRUE ~ nearest_outplant))%>%
+  filter(site != "aguilar_point")%>% #only one point and thats aguilar so no trend to detect
+  filter(site != "grappler") #only one point and thats grappler so no trend to detect
+
+#lets try to plot this now!
+distance_from_outplant_Fig2_JW_RLS <- RLS_min_distance_join %>%
+  ggplot(aes(x = nearest_distance_km, y = estimate, colour = nearest_outplant)) +
+  geom_point() +
+  #geom_smooth(aes(fill = nearest_outplant), method = "lm") +
+  geom_smooth(method = "lm")+
+  geom_errorbar(
+    aes(
+      ymin = estimate - std.error,
+      ymax = estimate + std.error,
+      x = nearest_distance_km),width = 0.2)+
+  theme_classic()+
+  labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
+  geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
+  coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
+#why cant I get scotts error to display?
+
+
+distance_from_outplant_Fig2_JW_RLS
+#perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
+#Hmm, could we instead do this with mean site abalone density using data sets post outplanting (2021-2026)
+#TOO FEW SITES TO REPORT
+#other figure is more conservative anyways
