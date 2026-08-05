@@ -1,9 +1,31 @@
 #Figures for EDS report
-library(rphylopic) #to put nice images on our plots
-#install.packages("broom")
+# Load packages-----------------------------------------------------------------
+
+library(readr)
+library(tidyr)
+library(dplyr) # for general data wrangling
+library(lubridate) # for looking at dates
+library(janitor) #to clean data frames
+library(stringr) #to clean data frames
+library(forcats) #to order factors
+
+library(glmmTMB) # The swiss army knife of modeling packages
+library(DHARMa) # inspect model residuals/check assumptions
+library(ggeffects) # for extracting predictions and running post hoc tests
 library(broom) # to run nested linear models
+library(performance) #to check assumptions of my regressions on normal data
+library(insight) #to "fix" performance package
+
+library(ggplot2) # Plotting data
+library(patchwork) # Arrange multiple plots together
+library(visreg) # plot model predictions
+library(viridisLite) # colour palettes
+library(metaDigitise) #to pull data from figures without raw values
+library(rphylopic) #to put nice images on our plots
 library(patchwork) #to stitch plots together
-#install.packages("geosphere") 
+
+library(ggspatial)
+library(sf) #geospatial package for points, lines, and polygons: to map the min distance from an outplant site
 library(geosphere) #to map the min distance from an outplant site
 
 #Figure fluff ---------------------------------------------------------------------------------------
@@ -29,7 +51,7 @@ silhouette_df_abalone_2 <- data.frame(
   img_x = 0.06, 
   img_y = "execution_rock", 
   uuid = abalone_uuid_2)
-#
+
 #Fig 1a) --------------------------------------------------------------------------------------------
 
 #the first figure is going to be plotting the change in density by status of site (outplant or not)
@@ -360,6 +382,7 @@ b_distance_from_outplant_Fig2_JW
 ###model 2b)----------------------------------------------------------------------------------------
 #lets try this again 
 b_Fig2_model <- lm(estimate ~ nearest_distance_km + nearest_outplant, data= b_min_distance_join)
+check_model(b_Fig2_model)
 summary(b_Fig2_model)
 #for every 1 km from the outplant site the rate of change decreases by -0.005 ab per year.
 #there is moderate evidence to suggest that for every 1 km from the outplant site, scotts bay has a more positve rate of change.
