@@ -2,18 +2,34 @@
 library(rphylopic) #to put nice images on our plots
 #install.packages("broom")
 library(broom) # to run nested linear models
+library(patchwork) #to stitch plots together
+#install.packages("geosphere") 
+library(geosphere) #to map the min distance from an outplant site
 
 #Figure fluff ---------------------------------------------------------------------------------------
 
+#Fig 1a)
 #using the rphylopic database we will pull an ID for a stock image of a chiton to graph
 abalone_uuid <- get_uuid(name = "abalones")
 abalone_uuid
 
 #then we will make a small data frame to house the image containing x and y values relevant to our graph of interest so we can add it to our plot
 silhouette_df_abalone <- data.frame(
-  img_x = 2030, 
-  img_y = 20, 
+  img_x = 0.07, 
+  img_y = "helby_ne", 
   uuid = abalone_uuid)
+
+#Fig 1b)
+#using the rphylopic database we will pull an ID for a stock image of a chiton to graph
+abalone_uuid_2 <- get_uuid(name = "abalones")
+abalone_uuid_2
+
+#then we will make a small data frame to house the image containing x and y values relevant to our graph of interest so we can add it to our plot
+silhouette_df_abalone_2 <- data.frame(
+  img_x = 0.06, 
+  img_y = "execution_rock", 
+  uuid = abalone_uuid_2)
+#
 #Fig 1a) --------------------------------------------------------------------------------------------
 
 #the first figure is going to be plotting the change in density by status of site (outplant or not)
@@ -44,15 +60,14 @@ ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour =
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site) + #show by site
-  #geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 20, inherit.aes = FALSE) +#use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
-  coord_cartesian(ylim = c(0, 3))
+  coord_cartesian(ylim = c(0, 3)) #use this to show relevant CI range
 
 #now we need to pull the slope value to get an average change in abalone density group
 
 #okay, lets now get the slope of each line in this plot to then plot change in desnity through time
-slopes_Fig1_JW <- Fig1_JW %>%
+slopes_Fig1_JW_df <- Fig1_JW %>%
   nest_by(site)%>% #like group by but gives it a key
-  mutate(fit = list(glm(family = quasipoisson, site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
+  mutate(fit = list(lm(site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
   reframe(tidy(fit)) %>%
   filter(term == "year")%>%
   mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
@@ -64,7 +79,7 @@ slopes_Fig1_JW <- Fig1_JW %>%
                               TRUE ~ "no"))
   
 
-slopes_Fig1_JW %>%
+slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
   mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
   ggplot(aes(x = estimate, y = site, colour = outplant)) +
   geom_point()+
@@ -74,7 +89,15 @@ slopes_Fig1_JW %>%
       xmax = estimate + std.error,
       y = site),width = 0.2)+
   theme_classic()+
-  guides(color = guide_legend(reverse = TRUE)) #put yes status on the top of the legend
+  labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
+  geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+
+#plot
+slopes_Fig1_JW
+
+#okay when brain dead clean these names and axis titles
 
 
 #Fig 1b) --------------------------------------------------------------------------------------------
@@ -101,7 +124,9 @@ Fig1_JW_RLS <- density_outplant_v_non %>%
                               TRUE ~ site))%>%
   group_by(site)%>%
   filter(all(c(1988, 2023, 2024) %in% year)) %>% #filter out non JW and RLS sites based on year covered
-  ungroup()
+  ungroup()%>%
+  mutate(outplant = case_when(str_detect(site, "ed_king_se") ~"yes",
+         TRUE ~ outplant)) #since we lumped the previous RLS site to this site we must now say that it is an outplant site by proxy of how close it is 
 
 #Now lets plot density through time per site for the combined data set
 ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
@@ -112,3 +137,133 @@ ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colo
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(limits = c(-1, 3), breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site) #show by site
+
+#Lets get the slopes of the lines again
+slopes_Fig1_JW_RLS <- Fig1_JW_RLS %>%
+  nest_by(site)%>% #like group by but gives it a key
+  mutate(fit = list(lm(site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
+  reframe(tidy(fit)) %>%
+  filter(term == "year")%>%
+  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "aguilar_point") ~"yes",
+                              str_detect(site, "grappler") ~"yes",
+                              str_detect(site, "ed_king_se") ~"yes",
+                              str_detect(site, "sandford_sw") ~"yes",
+                              str_detect(site, "helby_sw") ~"yes",
+                              TRUE ~ "no"))
+
+
+slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS %>%
+  mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
+  ggplot(aes(x = estimate, y = site, colour = outplant)) +
+  geom_point()+
+  geom_errorbar(
+    aes(
+      xmin = estimate - std.error,
+      xmax = estimate + std.error,
+      y = site),width = 0.2)+
+  theme_classic()+
+  labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
+  geom_phylopic(data= silhouette_df_abalone_2, aes(x=img_x, y = img_y, uuid = abalone_uuid_2), height = 1.5, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+
+#plot
+slopes_Fig1_JW_RLS
+
+#fix names and axis titles
+#use patchwork to stitch
+#okay, here is where we use patchwork to combine plots
+slopes_Fig1_JW / slopes_Fig1_JW_RLS +
+  plot_annotation(tag_levels = list(c('(a)', '(b)')))
+#maybe in the future I can make 1 legend and picture that captures this whole plot 
+
+#or maybe more explicitly?
+slopes_Fig1_JW / slopes_Fig1_JW_RLS +
+  plot_annotation(tag_levels = list(c('(conservative)', '(combined)')))
+#figure 2 -----------------------------------------------------------------------------
+
+#here I want to plot all the relevant sites distance from one of 6 potential outplant sites
+
+#read in relevant coordinate data
+Fig2_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv")%>%
+  clean_names()%>%
+  mutate( #tidy site names
+    site = case_when(
+      row_number() == 1 ~ "ship_islands",
+      row_number() == 2 ~ "ed_king_sw", #call relevant to outplant location
+      row_number() == 3 ~ "ed_king_nw", #call relevant to outplant location
+      row_number() == 4 ~ "seppings",
+      row_number() == 5 ~ "cape_beale",
+      row_number() == 6 ~ "lawton_point",
+      row_number() == 7 ~ "whittlestone",
+      row_number() == 8 ~ "execution_rock",
+      row_number() == 9 ~ "self_point", #this sites gps location is near effingham inlet?
+      row_number() == 10 ~ "helby_ne",  #call relevant to outplant location
+      row_number() == 11 ~ "scotts_bay",
+      row_number() == 12 ~ "aguilar_point",
+      row_number() == 13 ~ "cia_rock",
+      row_number() == 14 ~ "ed_king_se", #for the purposes of this project I am renaming this site to align with the outplant location name (it is the closest site in this study)
+      row_number() == 15 ~ "kirby_point",
+      row_number() == 16 ~ "village_bay",
+      row_number() == 17 ~ "blowhole",
+      row_number() == 18 ~ "prasiola",
+      row_number() == 19 ~ "wizard",
+      row_number() == 20 ~ "grappler",
+      row_number() == 21 ~ "ed_king_?", #seems like the same place as ed_king_nw
+      TRUE ~ site
+    )) %>%
+  filter(site != "ed_king_?") %>% #remove random site
+  filter(site != "self_point") #remove self point as coord is incorrect and too late to contact Jane 
+#NOTE I cannot locate a specific sanford island outplant location so for the purpose of this report I am going to neglect that data. Im not sure it will actually matter as all sites might be closer to another outplant location and
+
+
+# Use package sf to find distance to closest outplant site - Convert to an sf object
+sites_sf <- st_as_sf(
+  Fig2_coords,
+  coords = c("longitude_decimal_degrees", "latitude_decimal_degrees"),
+  crs = 4326
+)
+
+# Split into outplant and non-outplant sites
+outplant_sites <- sites_sf %>%
+  filter(outplant == "yes")
+
+non_outplant_sites <- sites_sf %>%
+  filter(outplant == "no")
+
+dist_mat <- st_distance(non_outplant_sites, outplant_sites) #make a distance matrix
+
+non_outplant_sites$nearest_distance_m <-
+  apply(dist_mat, 1, min) #find minimum distance from outplant
+
+non_outplant_sites$nearest_outplant <-
+  outplant_sites$site[apply(dist_mat, 1, which.min)]  #add which specific site it is
+
+non_outplant_sites <- non_outplant_sites %>% #lets change this to km so its easier to graph and interpret
+  mutate(
+    nearest_distance_km = as.numeric(nearest_distance_m) / 1000
+  )
+
+#now I need to add nearest distance in km to the slope estimate data frame 
+min_distance_join <- left_join(slopes_Fig1_JW_df, non_outplant_sites, by = c("site", "outplant"))%>%
+  filter(outplant != "yes") %>% #remove all sites that are outplants as we dont have a distance from relationship here
+  filter(site != "self_point") #have to remove again because joined
+#Review self_point when have more time
+
+#lets try to plot this now!
+distance_from_outplant_Fig2_JW <- min_distance_join %>%
+  ggplot(aes(x = nearest_distance_km, y = estimate, colour = nearest_outplant)) +
+  geom_point() +
+  geom_errorbar(
+    aes(
+      ymin = estimate - std.error,
+      ymax = estimate + std.error,
+      x = nearest_distance_km),width = 0.2)+
+  theme_classic()+
+  geom_hline(yintercept = 0, linetype = "dotted")  #insert 0 line to show direction of slopes
+  #guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
+  #geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+
+distance_from_outplant_Fig2_JW
+#Hmm, could we instead do this with mean site abalone density using data sets post outplanting (2021-2026)
