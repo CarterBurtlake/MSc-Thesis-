@@ -435,8 +435,6 @@ clean_outplant <- clean_names(outplant) %>% #lets clean this up, start with colu
                           str_detect(outplant_site, "Sandford Island") ~ "sandford_sw")) 
   
 
-#Join all data -------------------------------------------------------------------------------------
-  
 
 #brief visualization
 ggplot(data = abalone_density, aes(x = as.numeric(year), y = site_mean_density, colour = method)) +

@@ -275,21 +275,55 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
   theme_classic()+
   labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
-  coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
-#why cant I get scotts error to display?
+  coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant error between points
+#no scotts bay error becuase there are just two points
   
 
 distance_from_outplant_Fig2_JW
 #perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
-#Hmm, could we instead do this with mean site abalone density using data sets post outplanting (2021-2026)
 
-#Fig 2b) -------------------------------------------------------------------------------------------
+###model 2a)----------------------------------------------------------------------------------------
+Fig2_model <- lm(estimate ~ nearest_distance_km + nearest_outplant, data= min_distance_join)
+summary(Fig2_model)
+#hmm this is predicting our slopes to all be positive which isn't the reality of this data set
+#it probably does this because the weight of the data towards a site that was "outplanted" at a very different level is seen as an equal factor in the model to scotts and helby
 
-#Repeat for the combined RLS dataset
+#Fig 2b)--------------------------------------------------------------------------------------------
+#HERE WE REMOVE THE ED KING OUTPLANT BECAUSE IT OUTPLANTED ADULTS ON THE MAGNITUDE OF 10,000 WHERE AS ITS OTHER TWO COMPARISONS OUTPLANTED MAINLY LARVAE AND JUVENILES ON THE SCALES OF MILLIONS. THEY ARE NOT THE SAME
+b_Fig2_coords <- Fig2_coords%>%
+  filter(site != "ed_king_se")
+
+# Use package sf to find distance to closest outplant site - Convert to an sf object
+b_sites_sf <- st_as_sf(
+  b_Fig2_coords,
+  coords = c("longitude_decimal_degrees", "latitude_decimal_degrees"),
+  crs = 4326
+)
+
+# Split into outplant and non-outplant sites
+b_outplant_sites <- b_sites_sf %>%
+  filter(outplant == "yes")
+
+b_non_outplant_sites <- b_sites_sf %>%
+  filter(outplant == "no")
+
+b_dist_mat <- st_distance(b_non_outplant_sites, b_outplant_sites) #make a distance matrix
+
+b_non_outplant_sites$nearest_distance_m <-
+  apply(b_dist_mat, 1, min) #find minimum distance from outplant
+
+b_non_outplant_sites$nearest_outplant <-
+  b_outplant_sites$site[apply(b_dist_mat, 1, which.min)]  #add which specific site it is
+
+b_non_outplant_sites <- b_non_outplant_sites %>% #lets change this to km so its easier to graph and interpret
+  mutate(
+    nearest_distance_km = as.numeric(nearest_distance_m) / 1000
+  )
+
 #now I need to add nearest distance in km to the slope estimate data frame 
-RLS_min_distance_join <- left_join(slopes_Fig1_JW_RLS_df, non_outplant_sites, by = c("site", "outplant"))%>%
+b_min_distance_join <- left_join(slopes_Fig1_JW_df, b_non_outplant_sites, by = c("site", "outplant"))%>%
   #filter(outplant != "yes") %>% #remove all sites that are outplants as we dont have a distance from relationship here
-  #filter(site != "self_point") %>% #have to remove again because joined
+  filter(site != "self_point") %>% #have to remove again because joined
   #Review self_point when have more time
   mutate(nearest_distance_km = case_when(is.na(nearest_distance_km) ~ 0, #add outplant sites
                                          TRUE ~ nearest_distance_km)) %>%
@@ -300,10 +334,11 @@ RLS_min_distance_join <- left_join(slopes_Fig1_JW_RLS_df, non_outplant_sites, by
                                       str_detect(site, "ed_king_se") ~"ed_king_se",
                                       TRUE ~ nearest_outplant))%>%
   filter(site != "aguilar_point")%>% #only one point and thats aguilar so no trend to detect
-  filter(site != "grappler") #only one point and thats grappler so no trend to detect
+  filter(site != "grappler") %>% #only one point and thats grappler so no trend to detect
+  filter(site != "ed_king_se")
 
 #lets try to plot this now!
-distance_from_outplant_Fig2_JW_RLS <- RLS_min_distance_join %>%
+b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
   ggplot(aes(x = nearest_distance_km, y = estimate, colour = nearest_outplant)) +
   geom_point() +
   #geom_smooth(aes(fill = nearest_outplant), method = "lm") +
@@ -314,14 +349,22 @@ distance_from_outplant_Fig2_JW_RLS <- RLS_min_distance_join %>%
       ymax = estimate + std.error,
       x = nearest_distance_km),width = 0.2)+
   theme_classic()+
+  guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
 #why cant I get scotts error to display?
 
+b_distance_from_outplant_Fig2_JW
 
-distance_from_outplant_Fig2_JW_RLS
-#perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
+###model 2b)----------------------------------------------------------------------------------------
+#lets try this again 
+b_Fig2_model <- lm(estimate ~ nearest_distance_km + nearest_outplant, data= b_min_distance_join)
+summary(b_Fig2_model)
+#for every 1 km from the outplant site the rate of change decreases by -0.005 ab per year.
+#there is moderate evidence to suggest that for every 1 km from the outplant site, scotts bay has a more positve rate of change.
+#Based off this evidence, particularly the scotts bay site, say unit at witch crosses -ve slope. 
+#explain this in discussion based off ecological relevance 
+
+#In the future--------------------------------------------------------------------------------------
 #Hmm, could we instead do this with mean site abalone density using data sets post outplanting (2021-2026)
-#TOO FEW SITES TO REPORT
-#other figure is more conservative anyways
