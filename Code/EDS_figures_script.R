@@ -1,5 +1,19 @@
 #Figures for EDS report
+library(rphylopic) #to put nice images on our plots
+#install.packages("broom")
+library(broom) # to run nested linear models
 
+#Figure fluff ---------------------------------------------------------------------------------------
+
+#using the rphylopic database we will pull an ID for a stock image of a chiton to graph
+abalone_uuid <- get_uuid(name = "abalones")
+abalone_uuid
+
+#then we will make a small data frame to house the image containing x and y values relevant to our graph of interest so we can add it to our plot
+silhouette_df_abalone <- data.frame(
+  img_x = 2030, 
+  img_y = 20, 
+  uuid = abalone_uuid)
 #Fig 1a) --------------------------------------------------------------------------------------------
 
 #the first figure is going to be plotting the change in density by status of site (outplant or not)
@@ -28,10 +42,40 @@ ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour =
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
-  scale_y_continuous(limits = c(-1, 3), breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
-  facet_wrap(~site) #show by site
+  scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
+  facet_wrap(~site) + #show by site
+  #geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 20, inherit.aes = FALSE) +#use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+  coord_cartesian(ylim = c(0, 3))
 
 #now we need to pull the slope value to get an average change in abalone density group
+
+#okay, lets now get the slope of each line in this plot to then plot change in desnity through time
+slopes_Fig1_JW <- Fig1_JW %>%
+  nest_by(site)%>% #like group by but gives it a key
+  mutate(fit = list(glm(family = quasipoisson, site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
+  reframe(tidy(fit)) %>%
+  filter(term == "year")%>%
+  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "aguilar_point") ~"yes",
+                              str_detect(site, "grappler") ~"yes",
+                              str_detect(site, "ed_king_se") ~"yes",
+                              str_detect(site, "sandford_sw") ~"yes",
+                              str_detect(site, "helby_sw") ~"yes",
+                              TRUE ~ "no"))
+  
+
+slopes_Fig1_JW %>%
+  mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
+  ggplot(aes(x = estimate, y = site, colour = outplant)) +
+  geom_point()+
+  geom_errorbar(
+    aes(
+      xmin = estimate - std.error,
+      xmax = estimate + std.error,
+      y = site),width = 0.2)+
+  theme_classic()+
+  guides(color = guide_legend(reverse = TRUE)) #put yes status on the top of the legend
+
 
 #Fig 1b) --------------------------------------------------------------------------------------------
 
