@@ -15,6 +15,7 @@ library(ggeffects) # for extracting predictions and running post hoc tests
 library(broom) # to run nested linear models
 library(performance) #to check assumptions of my regressions on normal data
 library(insight) #to "fix" performance package
+library(lme4)
 
 library(ggplot2) # Plotting data
 library(patchwork) # Arrange multiple plots together
@@ -23,6 +24,7 @@ library(viridisLite) # colour palettes
 library(metaDigitise) #to pull data from figures without raw values
 library(rphylopic) #to put nice images on our plots
 library(patchwork) #to stitch plots together
+library(paletteer) #colour palette 
 
 library(ggspatial)
 library(sf) #geospatial package for points, lines, and polygons: to map the min distance from an outplant site
@@ -121,8 +123,33 @@ slopes_Fig1_JW
 
 #okay when brain dead clean these names and axis titles
 
+###model--------------------------------------------------------------------------------------------
 
-#Fig 1b) --------------------------------------------------------------------------------------------
+#compare the two outplant groups mean density (not accounting for years?) -> this doesn't really explain a nice story... I think we need something that accounts for years
+t.test(site_mean_density ~ outplant,
+       data = Fig1_JW,
+       alternative = "two.sided")
+#p = 0.1041 no evidence of 
+
+#I think I need to be doing lms 
+Fig1_model <- lm(estimate ~ outplant, data= slopes_Fig1_JW_df)
+#before we had site and year in here but year is inherently in the estimate value so I dont think that should be included
+check_model(Fig1_model) #non normal 
+summary(Fig1_model)
+
+#or maybe 
+Fig1_model <-lm(site_mean_density ~ outplant * year, data= Fig1_JW)
+#interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
+check_model(Fig1_model)
+summary(Fig1_model)
+#why significantly -ve relationship? is it because its intercept its predicting is so high based on the heavily weighted zero data???
+
+Fig1_model <-glmmTMB(site_mean_density ~ outplant * year + (0 + year | site), data= slopes_Fig1_JW)
+#this is the model we think
+#interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
+check_model(Fig1_model)
+summary(Fig1_model)
+#Fig 1b) -------------------------------------------------------------------------------------------
 
 #Okay lets try this with the addition of RLS (Not sure how i feel about combining methods)
 #first we need to find = sites and drop sites that cannot be considered close enough to be =
@@ -295,7 +322,7 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
       ymax = estimate + std.error,
       x = nearest_distance_km),width = 0.2)+
   theme_classic()+
-  labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
+  labs(x = "Distance from closest large outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant error between points
 #no scotts bay error becuase there are just two points
@@ -375,7 +402,7 @@ b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
   labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
-#why cant I get scotts error to display?
+
 
 b_distance_from_outplant_Fig2_JW
 
