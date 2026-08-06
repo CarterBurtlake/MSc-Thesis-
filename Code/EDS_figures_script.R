@@ -106,14 +106,16 @@ slopes_Fig1_JW_df <- Fig1_JW %>%
 slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
   mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
   ggplot(aes(x = estimate, y = site, colour = outplant)) +
-  geom_point()+
+  geom_point(size = 2)+
   geom_errorbar(
     aes(
       xmin = estimate - std.error,
       xmax = estimate + std.error,
-      y = site),width = 0.2)+
+      y = site), size = 1.2, width = 0.2)+
   theme_classic()+
+  scale_color_manual(values = c("#140E3AFF", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
   guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
   geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
@@ -146,7 +148,7 @@ summary(Fig1_model)
 
 
 #figure out how to visualize the check_model. Since the correlation is -1 the random effect structure is too complex for data
-Fig1_model <-lmer(site_mean_density ~ outplant * year + ( year | site), data= Fig1_JW)
+Fig1_model <-lmer(site_mean_density ~ outplant + year + ( year | site), data= Fig1_JW)
 #this is the model we think
 #interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
 check_model(Fig1_model, show_dots = FALSE) # will not let me check for normalicy 
@@ -207,14 +209,17 @@ slopes_Fig1_JW_RLS_df <- Fig1_JW_RLS %>%
 slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS_df %>%
   mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
   ggplot(aes(x = estimate, y = site, colour = outplant)) +
-  geom_point()+
+  geom_point(size = 2.5)+
   geom_errorbar(
     aes(
       xmin = estimate - std.error,
       xmax = estimate + std.error,
-      y = site),width = 0.2)+
+      y = site), size = 1.2, width = 0.2)+
   theme_classic()+
+  scale_color_manual(values = c("#140E3AFF", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  theme(axis.title = element_text(size = 18))+
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
   guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
   geom_phylopic(data= silhouette_df_abalone_2, aes(x=img_x, y = img_y, uuid = abalone_uuid_2), height = 1.5, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
@@ -237,7 +242,7 @@ slopes_Fig1_JW / slopes_Fig1_JW_RLS +
 #here I want to plot all the relevant sites distance from one of 6 potential outplant sites
 
 #read in relevant coordinate data
-Fig2_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv")%>%
+Fig2_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv") %>%
   clean_names()%>%
   mutate( #tidy site names
     site = case_when(
