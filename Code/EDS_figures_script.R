@@ -81,6 +81,7 @@ ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour =
   geom_smooth(method = "lm") +
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site) + #show by site
@@ -113,10 +114,11 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
       xmax = estimate + std.error,
       y = site), size = 1.2, width = 0.2)+
   theme_classic()+
-  scale_color_manual(values = c("#140E3AFF", "#CD64B5FF"))+
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
   guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
   geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
 
@@ -216,7 +218,7 @@ slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS_df %>%
       xmax = estimate + std.error,
       y = site), size = 1.2, width = 0.2)+
   theme_classic()+
-  scale_color_manual(values = c("#140E3AFF", "#CD64B5FF"))+
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
   theme(axis.title = element_text(size = 18))+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
@@ -243,7 +245,7 @@ slopes_Fig1_JW / slopes_Fig1_JW_RLS +
 
 #read in relevant coordinate data
 Fig2_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv") %>%
-  clean_names()%>%
+  janitor::clean_names()%>%
   mutate( #tidy site names
     site = case_when(
       row_number() == 1 ~ "ship_islands",
@@ -330,6 +332,11 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
       x = nearest_distance_km),width = 0.2)+
   theme_classic()+
   labs(x = "Distance from closest large outplant (km)", y = "Rate of density change", colour = "Outplant location")+
+  scale_color_manual(
+    name = "Closest outplant site",
+    values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF", "ed_king_se" = "grey65"),
+    labels = c("helby_sw" = "Helby Sw","scotts_bay" = "Scotts Bay"))+
+  scale_fill_manual(values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF", "ed_king_se" = "grey65"))+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant error between points
 #no scotts bay error becuase there are just two points
@@ -396,22 +403,30 @@ b_min_distance_join <- left_join(slopes_Fig1_JW_df, b_non_outplant_sites, by = c
 #lets try to plot this now!
 b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
   ggplot(aes(x = nearest_distance_km, y = estimate, colour = nearest_outplant)) +
-  geom_point() +
-  #geom_smooth(aes(fill = nearest_outplant), method = "lm") +
-  geom_smooth(method = "lm")+
+  geom_point(size = 2.5) +
+  geom_smooth(aes(fill = nearest_outplant), #make line correct colour
+              method = "lm", 
+              show.legend = FALSE)+ # get rid of legend addition
   geom_errorbar(
     aes(
       ymin = estimate - std.error,
       ymax = estimate + std.error,
-      x = nearest_distance_km),width = 0.2)+
+      x = nearest_distance_km), size = 1.2, width = 0.2)+
   theme_classic()+
+  theme(axis.title = element_text(size = 14))+ #increase axis text size
+  #scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
+  scale_color_manual(
+    name = "Closest outplant site",
+    values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF"),
+    labels = c("helby_sw" = "Helby Sw","scotts_bay" = "Scotts Bay"))+
+  scale_fill_manual(values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
 
-
-b_distance_from_outplant_Fig2_JW
+#plot
+b_distance_from_outplant_Fig2_JW 
 
 ###model 2b)----------------------------------------------------------------------------------------
 #lets try this again 
