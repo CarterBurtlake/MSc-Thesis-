@@ -54,6 +54,17 @@ silhouette_df_abalone_2 <- data.frame(
   img_y = "execution_rock", 
   uuid = abalone_uuid_2)
 
+#Fig 2
+#using the rphylopic database we will pull an ID for a stock image of a chiton to graph
+abalone_uuid_3 <- get_uuid(name = "abalones")
+abalone_uuid_3
+
+#then we will make a small data frame to house the image containing x and y values relevant to our graph of interest so we can add it to our plot
+silhouette_df_abalone_3 <- data.frame(
+  img_x = 6, 
+  img_y = 0.06, 
+  uuid = abalone_uuid_3)
+
 #Fig 1a) --------------------------------------------------------------------------------------------
 
 #the first figure is going to be plotting the change in density by status of site (outplant or not)
@@ -86,6 +97,9 @@ ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour =
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site) + #show by site
   coord_cartesian(ylim = c(0, 3)) #use this to show relevant CI range
+
+#ggsave("figures/Fig1a)Supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 #now we need to pull the slope value to get an average change in abalone density group
 
@@ -125,7 +139,8 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
 #plot
 slopes_Fig1_JW
 
-#okay when brain dead clean these names and axis titles
+#ggsave("figures/Fig1a).png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model--------------------------------------------------------------------------------------------
 
@@ -189,9 +204,13 @@ ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colo
   geom_smooth(method = "lm") +
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(limits = c(-1, 3), breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site) #show by site
+
+#ggsave("figures/Fig1b)supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 #Lets get the slopes of the lines again
 slopes_Fig1_JW_RLS_df <- Fig1_JW_RLS %>%
@@ -228,6 +247,9 @@ slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS_df %>%
 
 #plot
 slopes_Fig1_JW_RLS
+
+#ggsave("figures/Fig1Supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 #fix names and axis titles
 #use patchwork to stitch
@@ -335,7 +357,7 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
   scale_color_manual(
     name = "Closest outplant site",
     values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF", "ed_king_se" = "grey65"),
-    labels = c("helby_sw" = "Helby Sw","scotts_bay" = "Scotts Bay"))+
+    labels = c("helby_sw" = "Helby Sw","scotts_bay" = "Scotts Bay", "ed_king_se" = "Edward King Southeast"))+
   scale_fill_manual(values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF", "ed_king_se" = "grey65"))+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant error between points
@@ -344,6 +366,9 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
 
 distance_from_outplant_Fig2_JW
 #perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
+
+#ggsave("figures/Fig2Supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 2a)----------------------------------------------------------------------------------------
 Fig2_model <- lm(estimate ~ nearest_distance_km + nearest_outplant, data= min_distance_join)
@@ -423,10 +448,13 @@ b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted") +  #insert 0 line to show direction of slopes
+  geom_phylopic(data= silhouette_df_abalone_3, aes(x=img_x, y = img_y, uuid = abalone_uuid_3), height = 0.03, inherit.aes = FALSE)+ #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
 
 #plot
-b_distance_from_outplant_Fig2_JW 
+b_distance_from_outplant_Fig2_JW
+#ggsave("figures/Fig2.png", device = "png", height = 9, width = 12, dpi = 400)
+#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 2b)----------------------------------------------------------------------------------------
 #lets try this again 
