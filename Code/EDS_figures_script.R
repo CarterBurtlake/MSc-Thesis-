@@ -144,10 +144,12 @@ check_model(Fig1_model)
 summary(Fig1_model)
 #why significantly -ve relationship? is it because its intercept its predicting is so high based on the heavily weighted zero data???
 
-Fig1_model <-glmmTMB(site_mean_density ~ outplant * year + (0 + year | site), data= slopes_Fig1_JW)
+
+#figure out how to visualize the check_model. Since the correlation is -1 the random effect structure is too complex for data
+Fig1_model <-lmer(site_mean_density ~ outplant * year + ( year | site), data= Fig1_JW)
 #this is the model we think
 #interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
-check_model(Fig1_model)
+check_model(Fig1_model, show_dots = FALSE) # will not let me check for normalicy 
 summary(Fig1_model)
 #Fig 1b) -------------------------------------------------------------------------------------------
 
