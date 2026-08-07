@@ -30,7 +30,7 @@ library(sf)
 JW_data <- read.csv("data-raw/AbaloneJaneWatsonCombined89_22.csv")
 
 #lets review it
-View(JW_data)
+#View(JW_data) #commented out to run all code easily
 #all sites accounted for (84)
 #TO DO: 1. column titles 2.site names (remove numbers) 3. sizes 4. sample size (remove n=)
 # 5. update density relative to 1m^2 
@@ -76,7 +76,7 @@ JW_data_clean <- clean_names(JW_data) %>%
 #no depth for 1994 - perhaps it was assumed to be the same as previous survey?
 #also note depth makes major chage throughout program
 
-View(JW_data_clean)
+#View(JW_data_clean) #commented out to run all code easily
 #readr::write_csv(JW_data_clean, file = "data-processed/JW_data_1988_2022.csv") #to save the clean data (commented out so that when running the code you dont save something accidentally that you may have changed)
 
 #TO DO CONFIRM METHODS
@@ -138,7 +138,7 @@ DFO_kelp_data <- read.csv("data-raw/2021-2025_DFO_Kelp_Abalone.csv")
 #Storm Coast data --------------------------------------------------------------------------------
 SC_data <- read.csv("data-raw/StormCoast_Abalone_2025.csv")
 
-View(SC_data)
+#View(SC_data)#commented out to run all code easily
 is.character(SC_data$date)
 ###review dixon inside on datasheets -> for now filter the site out
 #TO DO: fix column names, get dates to year, go from sizes to density per site
@@ -186,7 +186,7 @@ unique((SC_data_join$site))
 RLS_data <- read.csv("data-raw/RLS_2025.csv") 
 
 #lets review the data
-View(RLS_data)
+#View(RLS_data)#commented out to run all code easily
 
 #lets try to filter for sites over years that dont have abalone 
 RLS_data_year <- RLS_data %>%
@@ -277,7 +277,7 @@ missing_haliotidae_2026 <- all_combos_2026 %>%
 #I'm more confident in these zeros... curious to compare to other years for Hoise south...
 #Again, instead of trying to add these rows in using some bind function im just going to mutate two zeros in later in the data set for Hosie south as we know their density will = 0...
 
-View(RLS_new)
+#View(RLS_new) #commented out to run all code easily
 #starting from the top: we've got a few new issues here a) we got a weird formatting row in row 2 b) we've got M0 data c) the column names are different from the downloaded data... d) the survey blocks aren't added up / together (two surveyers on each side of transect) e) date needs to be lubridated
 
 #lets try to clean this
@@ -324,7 +324,7 @@ RLS_new_clean <- RLS_new %>%
 #lets merge the data sets using rbind
 RLS_full <- rbind(RLS_new_clean, RLS_data_clean)
 
-View(RLS_full)
+#View(RLS_full) #commented out to run all code easily
 #notice survey density isn't on the data frame, the manipulation above only worked per size class. Need to think of a way to capture for all size classes across a survey site and depth.
 #If we don't care about depth we will then sum those together and divide by the appropriate area
 
@@ -392,14 +392,14 @@ unique(RLS_data_means_filtered$site_code)
 #Join abalone density-----------------------------------------------------------------------------
 #okay now I need to join the data into one df. Lets review them all
 #get them all down to 5 variables as listed below
-View(JW_data_clean)
+#View(JW_data_clean)#commented out to run all code easily
 JW_join <- JW_data_clean%>%
   select(c("site", "year", "site_mean_density", "method", "search"))
-View(CH_data_mean) #this one is good
-View(SC_data_join)
+#View(CH_data_mean) #this one is good #commented out to run all code easily
+#View(SC_data_join) #commented out to run all code easily
 SC_join <- SC_data_join%>%
   select(c("site", "year", "site_mean_density", "method", "search"))
-View(RLS_data_means_filtered)
+#View(RLS_data_means_filtered) #commented out to run all code easily
 RLS_join <- RLS_data_means_filtered%>%
   select(c("site", "year", "site_mean_density", "method", "search")) #remove site code
 
@@ -412,14 +412,14 @@ abalone_density <- rbind(JW_join, CH_data_mean, SC_join, RLS_join)
 #CYU: previously had 84+4+110+55 observations 
 84+4+110+55 #matches observations of bound df at 253
 
-View(abalone_density) #I need to add outplant details to this df 
+#View(abalone_density) #I need to add outplant details to this df #commented out to run all code easily
 
 #readr::write_csv(abalone_density, file = "data-processed/abalone_density_joined.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
 
 #Outplant information -----------------------------------------------------------------------------
 outplant <- read.csv("data-raw/outplant_read_raw.csv")
 
-View(outplant)
+#View(outplant) #commented out to run all code easily
 #wow this is ugly. For the purposes of this project I'm just going to take the outplant information, not experimentation that resulted in outplants as verifying location of effective outplant during these was not the primary goal 
 
 clean_outplant <- clean_names(outplant) %>% #lets clean this up, start with column names
@@ -434,9 +434,3 @@ clean_outplant <- clean_names(outplant) %>% #lets clean this up, start with colu
                           str_detect(outplant_site, "Aguilar Point") ~ "aguilar_point",
                           str_detect(outplant_site, "Sandford Island") ~ "sandford_sw")) 
   
-
-
-#brief visualization
-ggplot(data = abalone_density, aes(x = as.numeric(year), y = site_mean_density, colour = method)) +
-  geom_point()+
-  facet_wrap(~site)
