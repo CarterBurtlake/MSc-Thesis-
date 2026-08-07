@@ -303,16 +303,6 @@ FigS2 / slopes_Fig1_JW_RLS +
 #ggsave("figures/a+b_Fig1Supps.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
-
-#use patchwork to stitch
-#okay, here is where we use patchwork to combine plots
-slopes_Fig1_JW / slopes_Fig1_JW_RLS +
-  plot_annotation(tag_levels = list(c('(a)', '(b)')))
-#maybe in the future I can make 1 legend and picture that captures this whole plot 
-
-#or maybe more explicitly?
-slopes_Fig1_JW / slopes_Fig1_JW_RLS +
-  plot_annotation(tag_levels = list(c('(conservative)', '(combined)')))
 #Fig 2a) -----------------------------------------------------------------------------
 
 #here I want to plot all the relevant sites distance from one of 6 potential outplant sites
