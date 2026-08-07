@@ -84,7 +84,29 @@ density_outplant_v_non <- read.csv("data-processed/abalone_density_joined.csv") 
 #next, filter for just Jane data
 Fig1_JW <- density_outplant_v_non%>%
   filter(method == "par_quad") %>% #clean this up later, but for now we know each study has a unique method so we can just filter for that 
-  filter(site != "ed_king_?") #remove sites that dont record density in certain time periods
+  filter(site != "ed_king_?") %>% #remove sites that dont record density in certain time periods
+  mutate(site = factor(site,           #manually (ew) change names to read largest positive slope to largest negative slopes 
+                       levels = c(
+                         "scotts_bay",
+                         "grappler",
+                         "aguilar_point",
+                         "wizard",
+                         "helby_ne",
+                         "execution_rock",
+                         "self_point",
+                         "prasiola",
+                         "cape_beale",
+                         "whittlestone",
+                         "seppings",
+                         "ship_islands",
+                         "ed_king_nw",
+                         "cia_rock",
+                         "lawton_point",
+                         "kirby_point",
+                         "blowhole",
+                         "village_bay",
+                         "ed_king_sw",
+                         "ed_king_se")))
 
 #lets plot density through time per site, we will get a linear relationship from this and extract the slope to get a change in density through time across a site
 ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
@@ -95,7 +117,8 @@ ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour =
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
-  facet_wrap(~site) + #show by site
+  facet_wrap(~site, #show by site
+             labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) + # edit names) 
   coord_cartesian(ylim = c(0, 3)) #use this to show relevant CI range
 
 #ggsave("figures/Fig1a)Supps.png", device = "png", height = 9, width = 12, dpi = 400)
@@ -115,7 +138,8 @@ slopes_Fig1_JW_df <- Fig1_JW %>%
                               str_detect(site, "ed_king_se") ~"yes",
                               str_detect(site, "sandford_sw") ~"yes",
                               str_detect(site, "helby_sw") ~"yes",
-                              TRUE ~ "no"))
+                              TRUE ~ "no")) 
+  
   
 
 slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
@@ -142,38 +166,36 @@ slopes_Fig1_JW
 #ggsave("figures/Fig1a).png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
-###model--------------------------------------------------------------------------------------------
-
-#compare the two outplant groups mean density (not accounting for years?) -> this doesn't really explain a nice story... I think we need something that accounts for years
-t.test(site_mean_density ~ outplant,
-       data = Fig1_JW,
-       alternative = "two.sided")
-#p = 0.1041 no evidence of 
-
-#I think I need to be doing lms 
-Fig1_model <- lm(estimate ~ outplant, data= slopes_Fig1_JW_df)
-#before we had site and year in here but year is inherently in the estimate value so I dont think that should be included
-check_model(Fig1_model) #non normal 
-summary(Fig1_model)
-
-#or maybe 
-Fig1_model <-lm(site_mean_density ~ outplant * year, data= Fig1_JW)
-#interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
-check_model(Fig1_model)
-summary(Fig1_model)
-#why significantly -ve relationship? is it because its intercept its predicting is so high based on the heavily weighted zero data???
-
+###model 1a)----------------------------------------------------------------------------------------
 
 #figure out how to visualize the check_model. Since the correlation is -1 the random effect structure is too complex for data
-Fig1_model <-lmer(site_mean_density ~ outplant + year + ( year | site), data= Fig1_JW)
+Fig1_model_test <-lmer(site_mean_density ~ outplant + factor(year) + ( 1| site), data= Fig1_JW)
 #this is the model we think
 #interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
-check_model(Fig1_model, show_dots = FALSE) # will not let me check for normalicy 
+check_model(Fig1_model_test, show_dots = FALSE) # will not let me check for normalicy 
+summary(Fig1_model_test)
+
+#the boundary (singular) fit: see help('isSingular') code is telling me that my random effect is estimated 0 varience in my data. This likely isnt because the parameters explain it all, instead its likely a result of having and inadequate amount of data at a site (one mean) in a given year
+
+#test for singularity
+isSingular(Fig1_model_test)
+
+#because of the above I'm going to run a simple linear model without mixed effects 
+Fig1_model <-lm(site_mean_density ~ outplant * factor(year), data= Fig1_JW) #year as a factor to account for a non-continuous distribution. Although I expect abalone density to increase through time (continuous) I dont have enough data through time to meet assumptions of linearity 
+
+check_model(Fig1_model, show_dots = FALSE) #figure out how to run
+
 summary(Fig1_model)
+#Here I find that outplant sites in 1988 showed no evidence of being different than non outplant sites p =0.12 (great)
+#No effect of year (all p > 0.16)
+#but weak evidence for significantly fewer abalone at outplant sites from 1988 -> 1994 (p = 0.05)
+#and moderate evidence of signifigance that 0.6 more abalone per m2 were detected at outplant sites in 2022 than in 1988 (p = 0.3). Interestingly this was not this case in recently after outplanting 2007 (p=0.7). This might be more evidence to suggest that outplant effect took time!
+
+
 #Fig 1b) -------------------------------------------------------------------------------------------
 
-#Okay lets try this with the addition of RLS (Not sure how i feel about combining methods)
-#first we need to find = sites and drop sites that cannot be considered close enough to be =
+#Okay lets try this with the addition of RLS 
+#first we need to find = sites and drop sites that cannot be considered close enough to have "similar" expectations of habitat
 unique(Fig1_JW$site)
 #list of sites that we have similar RLS sites to = ed_king_nw, execution_rock, helby_ne (questionable with Wizard N), scotts_bay, aguilar_point, ed_king_se, village_bay, wizard, grappler
 #so we need to make these names the same, easiest way to do that is change the JW names because I already have code for changing those names in the EDS_all_data script
@@ -196,18 +218,33 @@ Fig1_JW_RLS <- density_outplant_v_non %>%
   filter(all(c(1988, 2023, 2024) %in% year)) %>% #filter out non JW and RLS sites based on year covered
   ungroup()%>%
   mutate(outplant = case_when(str_detect(site, "ed_king_se") ~"yes",
-         TRUE ~ outplant)) #since we lumped the previous RLS site to this site we must now say that it is an outplant site by proxy of how close it is 
+         TRUE ~ outplant)) %>% #since we lumped the previous RLS site to this site we must now say that it is an outplant site by proxy of how close it is 
+  mutate(site = factor(site, #manually (ew) change names to read largest positive slope to largest negative slopes 
+                       levels = c(
+                         "scotts_bay",
+                         "grappler",
+                         "aguilar_point",
+                         "ed_king_nw",
+                         "execution_rock",
+                         "wizard",
+                         "helby_ne",
+                         "ed_king_se",
+                         "village_bay")))
 
 #Now lets plot density through time per site for the combined data set
-ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
+FigS2 <- ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
   geom_point()+
   geom_smooth(method = "lm") +
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
+  theme(axis.title = element_text(size = 16))+
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(limits = c(-1, 3), breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
-  facet_wrap(~site) #show by site
+  facet_wrap(~site, #show by site
+             labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) # edit names
+
+FigS2
 
 #ggsave("figures/Fig1b)supps.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
@@ -248,10 +285,13 @@ slopes_Fig1_JW_RLS <- slopes_Fig1_JW_RLS_df %>%
 #plot
 slopes_Fig1_JW_RLS
 
-#ggsave("figures/Fig1Supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#patch together with patchwork for supps
+FigS2 / slopes_Fig1_JW_RLS +
+  plot_annotation(tag_levels = list(c('(a)', '(b)')))
+#ggsave("figures/a+b_Fig1Supps.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
-#fix names and axis titles
+
 #use patchwork to stitch
 #okay, here is where we use patchwork to combine plots
 slopes_Fig1_JW / slopes_Fig1_JW_RLS +
