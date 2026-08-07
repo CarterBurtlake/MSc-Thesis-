@@ -152,6 +152,9 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
       xmax = estimate + std.error,
       y = site), size = 1.2, width = 0.2)+
   theme_classic()+
+  theme(axis.title = element_text(size = 18), #increase axis text size
+        legend.title = element_text(size = 16), #increase legend text size
+        legend.text = element_text(size = 14))+ 
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
@@ -163,7 +166,7 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
 #plot
 slopes_Fig1_JW
 
-#ggsave("figures/Fig1a).png", device = "png", height = 9, width = 12, dpi = 400)
+#ggsave("figures/Fig1).png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 1a)----------------------------------------------------------------------------------------
@@ -244,10 +247,8 @@ FigS2 <- ggplot(data = Fig1_JW_RLS, aes(x = as.numeric(year), y = site_mean_dens
   facet_wrap(~site, #show by site
              labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) # edit names
 
+#plot
 FigS2
-
-#ggsave("figures/Fig1b)supps.png", device = "png", height = 9, width = 12, dpi = 400)
-#commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 #Lets get the slopes of the lines again
 slopes_Fig1_JW_RLS_df <- Fig1_JW_RLS %>%
@@ -393,6 +394,7 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
       ymax = estimate + std.error,
       x = nearest_distance_km),width = 0.2)+
   theme_classic()+
+  theme(axis.title = element_text(size = 18))+ #increase axis text size
   labs(x = "Distance from closest large outplant (km)", y = "Rate of density change", colour = "Outplant location")+
   scale_color_manual(
     name = "Closest outplant site",
@@ -407,7 +409,7 @@ distance_from_outplant_Fig2_JW <- min_distance_join %>%
 distance_from_outplant_Fig2_JW
 #perhaps there are more applicable further away outplant sites for the sites labelled by ed_king_se. Important to remember that only around 10,000 abs outplanted here compared to the millions at scotts_bay, helby, and grappler
 
-#ggsave("figures/Fig2Supps.png", device = "png", height = 9, width = 12, dpi = 400)
+#ggsave("figures/Fig3Supps.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 2a)----------------------------------------------------------------------------------------
@@ -478,7 +480,9 @@ b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
       ymax = estimate + std.error,
       x = nearest_distance_km), size = 1.2, width = 0.2)+
   theme_classic()+
-  theme(axis.title = element_text(size = 14))+ #increase axis text size
+  theme(axis.title = element_text(size = 18), #increase axis text size
+        legend.title = element_text(size = 16), #increase legend text size
+        legend.text = element_text(size = 14))+ 
   #scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   scale_color_manual(
     name = "Closest outplant site",
