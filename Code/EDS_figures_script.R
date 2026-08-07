@@ -109,17 +109,23 @@ Fig1_JW <- density_outplant_v_non%>%
                          "ed_king_se")))
 
 #lets plot density through time per site, we will get a linear relationship from this and extract the slope to get a change in density through time across a site
-ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
+FigS1 <- ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
   geom_point()+
   geom_smooth(method = "lm") +
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
+  theme(axis.title = element_text(size = 19), #increase axis text size
+        legend.title = element_text(size = 17), #increase legend text size
+        legend.text = element_text(size = 15))+
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
   facet_wrap(~site, #show by site
              labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) + # edit names) 
   coord_cartesian(ylim = c(0, 3)) #use this to show relevant CI range
+
+#plot 
+FigS1
 
 #ggsave("figures/Fig1a)Supps.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
@@ -152,20 +158,23 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
       xmax = estimate + std.error,
       y = site), size = 1.2, width = 0.2)+
   theme_classic()+
-  theme(axis.title = element_text(size = 18), #increase axis text size
-        legend.title = element_text(size = 16), #increase legend text size
-        legend.text = element_text(size = 14))+ 
+  theme(axis.title = element_text(size = 19), #increase axis text size
+        legend.title = element_text(size = 17), #increase legend text size
+        legend.text = element_text(size = 15))+ 
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
   #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
   guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
-  geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 3, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+  geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 4, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
 
 #plot
 slopes_Fig1_JW
 
+#patchwork together
+FigS1 / slopes_Fig1_JW +
+  plot_annotation(tag_levels = list(c('(a)', '(b)')))
 #ggsave("figures/Fig1).png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
