@@ -90,23 +90,23 @@ Fig1_JW <- density_outplant_v_non%>%
                          "scotts_bay",
                          "grappler",
                          "aguilar_point",
+                         "execution_rock",
                          "wizard",
                          "helby_ne",
-                         "execution_rock",
                          "self_point",
+                         "whittlestone",
                          "prasiola",
                          "cape_beale",
-                         "whittlestone",
-                         "seppings",
-                         "ship_islands",
                          "ed_king_nw",
-                         "cia_rock",
+                         "ship_islands",
+                         "seppings",
                          "lawton_point",
+                         "cia_rock",
                          "kirby_point",
-                         "blowhole",
                          "village_bay",
-                         "ed_king_sw",
-                         "ed_king_se")))
+                         "blowhole",
+                         "ed_king_se",
+                         "ed_king_sw")))
 
 #lets plot density through time per site, we will get a linear relationship from this and extract the slope to get a change in density through time across a site
 FigS1 <- ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density, colour = outplant)) +
@@ -114,9 +114,9 @@ FigS1 <- ggplot(data = Fig1_JW, aes(x = as.numeric(year), y = site_mean_density,
   geom_smooth(method = "lm") +
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Recieved outplants?") + #add titles
   theme_classic()+ #white background
-  theme(axis.title = element_text(size = 19), #increase axis text size
-        legend.title = element_text(size = 17), #increase legend text size
-        legend.text = element_text(size = 15))+
+  theme(axis.title = element_text(size = 20), #increase axis text size
+        legend.title = element_text(size = 18), #increase legend text size
+        legend.text = element_text(size = 16))+
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)
@@ -160,22 +160,24 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
   theme_classic()+
   theme(axis.title = element_text(size = 19), #increase axis text size
         legend.title = element_text(size = 17), #increase legend text size
-        legend.text = element_text(size = 15))+ 
+        legend.text = element_text(size = 15),
+        legend.position = "none") + #remove legend up so can have one legend in patched figure 1
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
   #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
-  guides(color = guide_legend(reverse = TRUE)) +#put yes status on the top of the legend
-  geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 4, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
+  guides(color = guide_legend(reverse = TRUE)) #put yes status on the top of the legend
+  #geom_phylopic(data= silhouette_df_abalone, aes(x=img_x, y = img_y, uuid = abalone_uuid), height = 4, inherit.aes = FALSE) #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
 
 #plot
 slopes_Fig1_JW
 
 #patchwork together
 FigS1 / slopes_Fig1_JW +
+  plot_layout(guides = "collect")+ #bring legend to middle of the patchwork grid
   plot_annotation(tag_levels = list(c('(a)', '(b)')))
-#ggsave("figures/Fig1).png", device = "png", height = 9, width = 12, dpi = 400)
+#ggsave("figures/Fig1.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 1a)----------------------------------------------------------------------------------------
