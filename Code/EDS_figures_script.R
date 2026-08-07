@@ -163,7 +163,7 @@ slopes_Fig1_JW <- slopes_Fig1_JW_df %>%
         legend.text = element_text(size = 15),
         legend.position = "none") + #remove legend up so can have one legend in patched figure 1
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
-  labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  labs(x = "Rate of abalone density change through time", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
   #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
@@ -501,14 +501,14 @@ b_distance_from_outplant_Fig2_JW <- b_min_distance_join %>%
     labels = c("helby_sw" = "Helby Sw","scotts_bay" = "Scotts Bay"))+
   scale_fill_manual(values = c("helby_sw" = "#41045AFF","scotts_bay" = "#CD64B5FF"))+
   guides(color = guide_legend(reverse = TRUE))+ #put yes status on the top of the legend
-  labs(x = "Distance from closest outplant (km)", y = "Rate of density change", colour = "Outplant location")+
+  labs(x = "Distance from closest outplant (km)", y = "Rate of abalone density change through time", colour = "Outplant location")+
   geom_hline(yintercept = 0, linetype = "dotted",linewidth = 2) +  #insert 0 line to show direction of slopes
   geom_phylopic(data= silhouette_df_abalone_3, aes(x=img_x, y = img_y, uuid = abalone_uuid_3), height = 0.03, inherit.aes = FALSE)+ #use the rphylopic package alongside the data frame we created to place the image in space (altering image size with the height function)
   coord_cartesian(ylim = c(-0.07, 0.09)) #use this to show relevant CI range
 
 #plot
 b_distance_from_outplant_Fig2_JW
-ggsave("figures/Fig2.png", device = "png", height = 9, width = 12, dpi = 400)
+#ggsave("figures/Fig2.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
 
 ###model 2b)----------------------------------------------------------------------------------------
