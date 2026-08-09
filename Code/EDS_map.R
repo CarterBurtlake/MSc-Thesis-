@@ -2,7 +2,7 @@
 #August 2026
 #Carter Burtlake
 
-# Load packages --------------------------------------------------------------------------------------
+# Load packages ----------------------------------------------------------------
 library(readr)
 library(tidyr)
 library(dplyr) # for general data wrangling
@@ -21,7 +21,7 @@ library(paletteer) #colour palette
 library(ggspatial)
 library(sf)
 
-# Load data ------------------------------------------------------------------------------------------
+# Load data --------------------------------------------------------------------
 
 JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv") %>%
   janitor::clean_names()%>%
@@ -55,10 +55,10 @@ JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.cs
 #NOTE I cannot locate a specific sanford island outplant location so for the purpose of this report I am going to neglect that data. Im not sure it will actually matter as all sites might be closer to another outplant location and
 
 # transform coords into actually mappable coords
-coords <- map_coords %>%
+coords <- JW_coords %>%
   st_as_sf(coords = c("longitude_decimal_degrees", "latitude_decimal_degrees")) %>%
   st_set_crs(4326) %>%
-  left_join((map_coords %>% select(site, latitude_decimal_degrees, longitude_decimal_degrees)), by = "site")%>%
+  left_join((JW_coords %>% select(site, latitude_decimal_degrees, longitude_decimal_degrees)), by = "site")%>%
   rename(latitude = "latitude_decimal_degrees") %>%
   rename(longitude = "longitude_decimal_degrees") %>%
   mutate(
