@@ -110,6 +110,7 @@ map <- function(lat_min, lat_max, long_min, long_max,
     geom_sf(data = coord_data,
             alpha = 0.9,
             size = point_size,
+            stroke = 2,
             aes(
               fill = {{nh4_var}}, #use this fill later for desnity scores. Also nice to not have big dots over the map as we want to obscure exact site location
               shape = {{kelp_var}},
