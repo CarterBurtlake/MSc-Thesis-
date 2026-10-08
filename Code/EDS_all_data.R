@@ -74,7 +74,7 @@ JW_data_clean <- clean_names(JW_data) %>%
   
 #we are going to leave the size information for JW right now as really dont have much of that...
 #no depth for 1994 - perhaps it was assumed to be the same as previous survey?
-#also note depth makes major chage throughout program
+#also note depth makes major change throughout program
 
 #View(JW_data_clean) #commented out to run all code easily
 #readr::write_csv(JW_data_clean, file = "data-processed/JW_data_1988_2022.csv") #to save the clean data (commented out so that when running the code you dont save something accidentally that you may have changed)

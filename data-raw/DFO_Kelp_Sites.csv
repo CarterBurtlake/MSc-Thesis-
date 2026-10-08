@@ -1,0 +1,575 @@
+﻿HKey,Survey,SurveyDesign,Year,Month,Day,TideStation,SiteName,Transect,LonMinQuadrat,Diver1,Diver2,TimeIn1,TimeOut1,TimeComment,CommentsAlgae,CommentsInverts,CommentFish,CommentsKeypuncher,Vessel
+32,PAC2021-M09,4,2021,9,14,Bamfield,Scott's Bay,2,8.802,359,126,12:47,13:21,,,,,Not sure about lat/long. Different listed at bottom of page?,Palmira
+33,PAC2021-M09,4,2021,9,14,Bamfield,Scott's Bay,4,8.76,359,126,12:10,12:32,,,,,,Palmira
+36,PAC2021-M09,4,2021,9,15,Bamfield,Flemming 114,2,6.902,138,357,12:55,13:31,,,,,,
+37,PAC2021-M09,4,2021,9,15,Bamfield,Flemming 114,4,6.894,138,357,11:40,12:35,,,,,,
+39,PAC2021-M09,4,2021,9,16,Bamfield,Breakers,2,9.664,138,126,10:07,11:00,,Lots of debris in turf Q1 and Q3,,,,
+40,PAC2021-M09,4,2021,9,16,Bamfield,Breakers,4,9.52,359,384,09:57,11:00,,,,,,
+41,PAC2021-M09,4,2021,9,16,Bamfield,Tzartus 116,2,4.852,359,384,14:22,15:06,,,,,,
+42,PAC2021-M09,4,2021,9,16,Bamfield,Tzartus 116,4,9.672,138,357,13:43,14:24,,,,,No deep lat/long recorded. Used marker coordinates,
+43,PAC2021-M09,4,2021,9,17,Bamfield,Dixon,2,7.402,138,384,09:50,10:34,,,,,,
+44,PAC2021-M09,4,2021,9,17,Bamfield,Dixon,4,7.413,359,357,09:32,10:10,,,,,,
+45,PAC2021-M09,4,2021,9,17,Bamfield,Grappler Mouth,2,8.095,359,357,13:59,14:40,,,,,,
+46,PAC2021-M09,4,2021,9,17,Bamfield,Grappler Mouth,4,8.133,138,384,13:27,14:17,,,,,,
+47,PAC2021-M09,4,2021,9,18,Bamfield,Flemming 112 2021,2,8.629,359,357,14:40,15:24,,,,,Quad 3 for this site has no substrate information recorded,
+48,PAC2021-M09,4,2021,9,18,Bamfield,Flemming 112 2021,4,8.626,359,357,09:42,10:32,,,,,,
+49,PAC2021-M09,4,2021,9,16,Bamfield,Flemming Turf Island,2,8.818,359,357,12:13,12:45,,,,,,
+50,PAC2021-M09,4,2021,9,16,Bamfield,Flemming Turf Island,4,8.861,138,384,11:38,12:23,,,,,,
+51,PAC2021-M09,4,2021,9,20,Bamfield,Taylor Island 2021,2,11.868,359,357,09:21,09:57,,,,,,
+52,PAC2021-M09,4,2021,9,20,Bamfield,Taylor Island 2021,4,11.865,138,384,09:02,09:46,,,,,,
+53,PAC2021-M09,4,2021,9,20,Bamfield,Ohiat,2,10.983,138,384,11:43,12:24,,,,,,
+54,PAC2021-M09,4,2021,9,20,Bamfield,Ohiat,4,11.042,359,357,11:53,12:34,,,,,,
+55,PAC2021-M09,4,2021,9,21,Bamfield,Edward King 142,2,12.797,138,357,11:08,11:47,,,,,the shallow quadrats were redone,
+56,PAC2021-M09,4,2021,9,21,Bamfield,Edward King 142,4,12.749,359,126,10:53,11:27,,,,,,
+57,PAC2021-M09,4,2021,9,21,Bamfield,Sanford Seagull,2,10.269,138,357,14:01,14:56,,,,,,
+58,PAC2021-M09,4,2021,9,21,Bamfield,Sanford Seagull,4,10.258,359,384,14:16,14:48,,,,,,
+59,PAC2021-M09,4,2021,9,22,Bamfield,Swiss Boy,2,7.894,359,357,15:30,16:13,,,,,,
+60,PAC2021-M09,4,2021,9,22,Bamfield,Swiss Boy,4,7.868,138,357,11:13,12:03,,,,,,
+61,PAC2021-M09,4,2021,9,22,Bamfield,Three Tree Island,2,9.856,138,357,14:08,14:58,,,,,,
+62,PAC2021-M09,4,2021,9,22,Bamfield,Three Tree Island,4,9.867,359,384,14:19,14:58,,,,,,
+63,PAC2021-M09,4,2021,9,23,Bamfield,Second Beach,2,10.269,359,357,10:11,10:46,,,,,,
+64,PAC2021-M09,4,2021,9,23,Bamfield,Second Beach,4,10.261,138,384,09:57,10:38,,,,,,
+65,PAC2021-M09,4,2021,9,23,Bamfield,Edward King 142,2,,359,384,11:50,12:49,,,,,"No lat/long provided,  returned to redo this shallow transect?",
+66,PAC2022-M08,3,2022,8,25,Bamfield,New Taylor Island 2022,2,,126,138,09:40,10:16,,,,,,Palmira used for this survey
+67,PAC2022-M08,3,2022,8,25,Bamfield,New Taylor Island 2022,4,,126,138,09:40,10:16,,,,,,
+68,PAC2022-M08,3,2022,8,25,Bamfield,New Taylor Island 2022,6,,126,138,09:40,10:16,,,,,,
+69,PAC2022-M08,3,2022,8,25,Bamfield,Edward King 142,2,,126,138,10:50,11:34,,,,,,
+70,PAC2022-M08,3,2022,8,25,Bamfield,Edward King 142,4,,126,138,10:50,11:34,,,,,,
+71,PAC2022-M08,3,2022,8,25,Bamfield,Edward King 142,6,,126,138,10:50,11:34,,,,,,
+72,PAC2022-M08,3,2022,8,25,Bamfield,Sanford Seagull,2,,138,384,13:22,14:08,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+73,PAC2022-M08,3,2022,8,25,Bamfield,Sanford Seagull,4,,138,384,13:22,14:08,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+74,PAC2022-M08,3,2022,8,25,Bamfield,Sanford Seagull,6,,138,384,13:22,14:08,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+75,PAC2022-M08,3,2022,8,25,Bamfield,Ohiat,2,,384,138,12:19,12:59,,,,,,
+76,PAC2022-M08,3,2022,8,25,Bamfield,Ohiat,4,,384,138,12:19,12:59,,,,,,
+77,PAC2022-M08,3,2022,8,25,Bamfield,Ohiat,6,,384,138,12:19,12:59,,,,,,
+78,PAC2022-M08,3,2022,8,25,Bamfield,Three Tree Island,2,,126,384,14:41,15:20,,,,,,
+79,PAC2022-M08,3,2022,8,25,Bamfield,Three Tree Island,4,,126,384,14:41,15:20,,,,,,
+80,PAC2022-M08,3,2022,8,25,Bamfield,Three Tree Island,6,,126,384,14:41,15:20,,,,,,
+81,PAC2022-M08,3,2022,8,26,Bamfield,Breakers,2,,126,384,09:09,09:29,,,,,,
+82,PAC2022-M08,3,2022,8,26,Bamfield,Breakers,4,,138,357,08:51,09:21,,,,,,
+83,PAC2022-M08,3,2022,8,26,Bamfield,Breakers,6,,138,357,08:51,09:21,,,,,,
+84,PAC2022-M08,3,2022,8,26,Bamfield,Second Beach,2,,138,357,09:52,10:18,,,,,,
+85,PAC2022-M08,3,2022,8,26,Bamfield,Second Beach,4,,126,384,09:47,10:14,,,,,,
+86,PAC2022-M08,3,2022,8,26,Bamfield,Second Beach,6,,126,384,09:47,10:14,,,,,,
+87,PAC2022-M08,3,2022,8,26,Bamfield,Flemming Turf Island,2,,138,357,10:53,11:10,,,,,,
+88,PAC2022-M08,3,2022,8,26,Bamfield,Flemming Turf Island,4,,126,384,10:43,11:16,,,,,,
+89,PAC2022-M08,3,2022,8,26,Bamfield,Flemming Turf Island,6,,126,384,10:43,11:16,,,,,,
+90,PAC2022-M08,3,2022,8,26,Bamfield,Swiss Boy,2,,126,384,11:36,11:58,,,,,,
+91,PAC2022-M08,3,2022,8,26,Bamfield,Swiss Boy,4,,138,357,11:44,12:14,,,,,,
+92,PAC2022-M08,3,2022,8,26,Bamfield,Swiss Boy,6,,138,357,11:44,12:14,,,,,,
+93,PAC2022-M08,3,2022,8,26,Bamfield,Tzartus 116,2,,384,138,13:21,14:06,,,,,,
+94,PAC2022-M08,3,2022,8,26,Bamfield,Tzartus 116,4,,385,357,13:08,13:38,,,,,,
+95,PAC2022-M08,3,2022,8,26,Bamfield,Tzartus 116,6,,385,357,13:08,13:38,,,,,,
+96,PAC2022-M08,3,2022,8,26,Bamfield,New Tzartus 2022,2,,385,357,14:30,15:10,,,,,,
+97,PAC2022-M08,3,2022,8,26,Bamfield,New Tzartus 2022,4,,385,357,14:30,15:10,,,,,,
+98,PAC2022-M08,3,2022,8,26,Bamfield,New Tzartus 2022,6,,385,357,14:30,15:10,,,,,,
+99,PAC2022-M08,3,2022,8,27,Bamfield,New Flemming 112 2022,2,,385,384,09:04,09:20,,,,,,
+100,PAC2022-M08,3,2022,8,27,Bamfield,New Flemming 112 2022,4,,138,357,08:51,09:23,,,,,,
+101,PAC2022-M08,3,2022,8,27,Bamfield,New Flemming 112 2022,6,,138,357,08:51,09:23,,,,,,
+102,PAC2022-M08,3,2022,8,27,Bamfield,Dixon,2,,138,357,09:43,09:56,,,,,,
+103,PAC2022-M08,3,2022,8,27,Bamfield,Dixon,4,,385,384,09:48,10:15,,,,,,
+104,PAC2022-M08,3,2022,8,27,Bamfield,Dixon,6,,385,384,09:48,10:15,,,,,,
+105,PAC2022-M08,3,2022,8,27,Bamfield,Scott's Bay,2,,385,384,10:38,10:56,,,,,,
+106,PAC2022-M08,3,2022,8,27,Bamfield,Scott's Bay,4,,138,357,10:44,11:15,,,,,,
+107,PAC2022-M08,3,2022,8,27,Bamfield,Scott's Bay,6,,138,357,10:44,11:15,,,,,,
+108,PAC2022-M08,3,2022,8,27,Bamfield,Grappler Mouth,2,,385,357,11:38,11:56,,,,,,
+109,PAC2022-M08,3,2022,8,27,Bamfield,Grappler Mouth,4,,384,138,11:31,12:00,,,,,,
+110,PAC2022-M08,3,2022,8,27,Bamfield,Grappler Mouth,6,,384,138,11:31,12:00,,,,,,
+111,PAC2022-M08,5,2022,8,17,Bamfield,New Taylor Island 2022,2,,386,126,09:36,10:02,"For fish survey design, dive time can also include some quadrat surveys performed in the same dive",,,,,
+112,PAC2022-M08,5,2022,8,17,Bamfield,New Taylor Island 2022,4,,386,126,09:36,10:02,,,,,,
+113,PAC2022-M08,5,2022,8,17,Bamfield,New Taylor Island 2022,6,,386,126,09:36,10:02,,,,,,
+114,PAC2022-M08,5,2022,8,18,Bamfield,Edward King 142,2,,385,126,09:12,10:26,,,,,,
+115,PAC2022-M08,5,2022,8,18,Bamfield,Edward King 142,4,,385,126,09:12,10:26,,,,,,
+116,PAC2022-M08,5,2022,8,18,Bamfield,Edward King 142,6,,385,126,09:12,10:26,,,,,,
+117,PAC2022-M08,5,2022,8,18,Bamfield,Second Beach,2,,385,357,12:00,13:00,,,,,,
+118,PAC2022-M08,5,2022,8,18,Bamfield,Second Beach,4,,385,357,12:00,13:00,,,,,,
+119,PAC2022-M08,5,2022,8,18,Bamfield,Second Beach,6,,385,357,12:00,13:00,,,,,,
+120,PAC2022-M08,5,2022,8,19,Bamfield,Ohiat,2,,385,357,09:01,10:12,,,,,,
+121,PAC2022-M08,5,2022,8,19,Bamfield,Ohiat,4,,385,357,09:01,10:12,,,,,,
+122,PAC2022-M08,5,2022,8,19,Bamfield,Ohiat,6,,385,357,09:01,10:12,,,,,,
+123,PAC2022-M08,5,2022,8,19,Bamfield,Breakers,2,,385,357,14:36,14:59,,,,,,
+124,PAC2022-M08,5,2022,8,19,Bamfield,Breakers,4,,385,357,14:36,14:59,,,,,,
+125,PAC2022-M08,5,2022,8,19,Bamfield,Breakers,6,,385,357,14:36,14:59,,,,,,
+126,PAC2022-M08,5,2022,8,19,Bamfield,Dixon,2,,385,357,15:21,16:17,,,,,,
+127,PAC2022-M08,5,2022,8,19,Bamfield,Dixon,4,,385,357,15:21,16:17,,,,,,
+128,PAC2022-M08,5,2022,8,19,Bamfield,Dixon,6,,385,357,15:21,16:17,,,,,,
+129,PAC2022-M08,5,2022,8,20,Bamfield,Sanford Seagull,2,,385,357,08:55,09:41,,,,,,
+130,PAC2022-M08,5,2022,8,20,Bamfield,Sanford Seagull,4,,385,357,08:55,09:41,,,,,,
+131,PAC2022-M08,5,2022,8,20,Bamfield,Sanford Seagull,6,,385,357,08:55,09:41,,,,,,
+132,PAC2022-M08,5,2022,8,20,Bamfield,Three Tree Island,2,,384,138,10:46,11:08,,,,,,
+133,PAC2022-M08,5,2022,8,20,Bamfield,Three Tree Island,4,,384,138,10:46,11:08,,,,,,
+134,PAC2022-M08,5,2022,8,20,Bamfield,Three Tree Island,6,,384,138,10:46,11:08,,,,,,
+135,PAC2022-M08,5,2022,8,21,Bamfield,New Tzartus 2022,2,,385,138,14:17,15:32,,,,,,
+136,PAC2022-M08,5,2022,8,21,Bamfield,New Tzartus 2022,4,,385,138,14:17,15:32,,,,,,
+137,PAC2022-M08,5,2022,8,21,Bamfield,New Tzartus 2022,6,,385,138,14:17,15:32,,,,,,
+138,PAC2022-M08,5,2022,8,22,Bamfield,New Flemming 112 2022,2,,385,126,08:52,10:10,,,,,,
+139,PAC2022-M08,5,2022,8,22,Bamfield,New Flemming 112 2022,4,,385,126,08:52,10:10,,,,,,
+140,PAC2022-M08,5,2022,8,22,Bamfield,New Flemming 112 2022,6,,385,126,08:52,10:10,,,,,,
+141,PAC2022-M08,5,2022,8,22,Bamfield,Swiss Boy,2,,138,126,11:33,12:42,,,,,,
+142,PAC2022-M08,5,2022,8,22,Bamfield,Swiss Boy,4,,138,126,11:33,12:42,,,,,,
+143,PAC2022-M08,5,2022,8,22,Bamfield,Swiss Boy,6,,138,126,11:33,12:42,,,,,,
+144,PAC2022-M08,5,2022,8,23,Bamfield,Grappler Mouth,2,,138,384,14:48,16:24,,,,,,
+145,PAC2022-M08,5,2022,8,23,Bamfield,Grappler Mouth,4,,138,384,14:48,16:24,,,,,,
+146,PAC2022-M08,5,2022,8,23,Bamfield,Grappler Mouth,6,,138,384,14:48,16:24,,,,,,
+147,PAC2022-M08,5,2022,8,24,Bamfield,Scott's Bay,2,,385,357,09:07,10:10,,,,,,
+148,PAC2022-M08,5,2022,8,24,Bamfield,Scott's Bay,4,,385,357,09:07,10:10,,,,,,
+149,PAC2022-M08,5,2022,8,24,Bamfield,Scott's Bay,6,,385,357,09:07,10:10,,,,,,
+150,PAC2022-M08,5,2022,8,24,Bamfield,Tzartus 116,2,,385,357,11:33,12:48,,,,,,
+151,PAC2022-M08,5,2022,8,24,Bamfield,Tzartus 116,4,,385,357,11:33,12:48,,,,,,
+152,PAC2022-M08,5,2022,8,24,Bamfield,Tzartus 116,6,,385,357,11:33,12:48,,,,,,
+153,PAC2022-M08,5,2022,8,22,Bamfield,Flemming Turf Island,2,,385,357,14:49,15:46,,,,,,
+154,PAC2022-M08,5,2022,8,22,Bamfield,Flemming Turf Island,4,,385,357,14:49,15:46,,,,,,
+155,PAC2022-M08,5,2022,8,22,Bamfield,Flemming Turf Island,6,,385,357,14:49,15:46,,,,,,
+156,PAC2022-M08,4,2022,8,17,Bamfield,New Taylor Island 2022,2,,385,138,09:49,11:03,,,,,,
+157,PAC2022-M08,4,2022,8,17,Bamfield,New Taylor Island 2022,4,,385,138,11:17,11:41,,,,,,
+158,PAC2022-M08,4,2022,8,17,Bamfield,New Taylor Island 2022,6,,126,384,10:57,11:38,,,,,,
+159,PAC2022-M08,4,2022,8,18,Bamfield,Edward King 142,2,,138,384,09:36,11:14,,,,,,
+160,PAC2022-M08,4,2022,8,18,Bamfield,Edward King 142,4,,138,384,09:36,11:14,,,,,,
+161,PAC2022-M08,4,2022,8,18,Bamfield,Edward King 142,6,,126,385,09:12,10:26,,,,,,
+162,PAC2022-M08,4,2022,8,18,Bamfield,Second Beach,2,,385,357,14:12,15:16,,,,,,
+163,PAC2022-M08,4,2022,8,18,Bamfield,Second Beach,4,,384,138,14:27,15:52,,,,,,
+164,PAC2022-M08,4,2022,8,18,Bamfield,Second Beach,6,,384,138,14:27,15:52,,,,,,
+165,PAC2022-M08,4,2022,8,19,Bamfield,Ohiat,2,,357,385,09:01,10:12,,,,,,
+166,PAC2022-M08,4,2022,8,19,Bamfield,Ohiat,4,,384,138,09:20,10:55,,,,,,
+167,PAC2022-M08,4,2022,8,19,Bamfield,Ohiat,6,,384,138,09:20,10:55,,,,,,
+168,PAC2022-M08,4,2022,8,19,Bamfield,Dixon,2,,385,357,15:21,16:17,,,,,,
+169,PAC2022-M08,4,2022,8,19,Bamfield,Dixon,4,,138,126,15:35,16:43,,,,,,
+170,PAC2022-M08,4,2022,8,19,Bamfield,Dixon,6,,138,126,15:35,16:43,,,,,,
+171,PAC2022-M08,4,2022,8,20,Bamfield,Sanford Seagull,2,,385,357,08:55,09:41,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+172,PAC2022-M08,4,2022,8,20,Bamfield,Sanford Seagull,4,,384,138,09:12,10:26,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+173,PAC2022-M08,4,2022,8,20,Bamfield,Sanford Seagull,6,,384,138,09:12,10:26,,,,,"""Sanford""  and ""Sandford Seagull"" used variably on datasheets.  I think it's the same site",
+174,PAC2022-M08,4,2022,8,20,Bamfield,Three Tree Island,2,,138,384,10:46,12:05,2 divers finished at different times,,,,,
+175,PAC2022-M08,4,2022,8,20,Bamfield,Three Tree Island,4,,357,385,11:00,12:10,,,,,,
+176,PAC2022-M08,4,2022,8,20,Bamfield,Three Tree Island,6,,357,385,11:00,12:10,,,,,,
+177,PAC2022-M08,4,2022,8,21,Bamfield,Breakers,2,,126,384,09:35,10:23,,,,,,
+178,PAC2022-M08,4,2022,8,21,Bamfield,Breakers,4,,385,138,09:25,10:30,,,,,,
+179,PAC2022-M08,4,2022,8,21,Bamfield,Breakers,6,,385,138,09:25,10:30,,,,,,
+180,PAC2022-M08,4,2022,8,21,Bamfield,New Tzartus 2022,2,,138,385,14:17,15:32,,,,,,
+181,PAC2022-M08,4,2022,8,21,Bamfield,New Tzartus 2022,4,,357,384,14:30,15:34,,,,,,
+182,PAC2022-M08,4,2022,8,21,Bamfield,New Tzartus 2022,6,,357,384,14:30,15:34,,,,,,
+183,PAC2022-M08,4,2022,8,22,Bamfield,New Flemming 112 2022,2,,385,126,08:52,10:10,,,"Dire whelk: 7 in Q1, 8 in Q2, 3 in Q3",,,
+184,PAC2022-M08,4,2022,8,22,Bamfield,New Flemming 112 2022,4,,384,357,09:11,10:18,,,,,,
+185,PAC2022-M08,4,2022,8,22,Bamfield,New Flemming 112 2022,6,,384,357,09:11,10:18,,,,,,
+186,PAC2022-M08,4,2022,8,22,Bamfield,Swiss Boy,2,,126,138,11:33,12:42,,,,,,
+187,PAC2022-M08,4,2022,8,22,Bamfield,Swiss Boy,4,,357,384,11:53,12:59,,,,,,
+188,PAC2022-M08,4,2022,8,22,Bamfield,Swiss Boy,6,,357,384,11:53,12:59,,,,,,
+189,PAC2022-M08,4,2022,8,22,Bamfield,Flemming Turf Island,2,,357,385,14:49,15:46,,,,,,
+190,PAC2022-M08,4,2022,8,22,Bamfield,Flemming Turf Island,4,,384,138,15:03,16:12,,,,,,
+191,PAC2022-M08,4,2022,8,22,Bamfield,Flemming Turf Island,6,,384,138,15:03,16:12,,,,,,
+192,PAC2022-M08,4,2022,8,23,Bamfield,Grappler Mouth,2,,138,384,14:48,16:24,,,,,,
+193,PAC2022-M08,4,2022,8,23,Bamfield,Grappler Mouth,4,,138,384,14:48,16:24,,,,,,
+194,PAC2022-M08,4,2022,8,24,Bamfield,Grappler Mouth,6,,357,384,15:57,16:30,,,,,,
+195,PAC2022-M08,4,2022,8,24,Bamfield,Scott's Bay,2,,385,357,09:07,10:10,,,,,,
+196,PAC2022-M08,4,2022,8,24,Bamfield,Scott's Bay,4,,126,138,09:35,10:51,,,,,,
+197,PAC2022-M08,4,2022,8,24,Bamfield,Scott's Bay,6,,126,138,09:35,10:51,,,,,,
+198,PAC2022-M08,4,2022,8,24,Bamfield,Tzartus 116,2,,357,385,11:33,12:48,,,,,"On dive log and datasheets, says ""Tzartus"" but fish sheet says Tzartus 116, so using that site name",
+199,PAC2022-M08,4,2022,8,24,Bamfield,Tzartus 116,4,,138,384,11:50,13:12,2 divers finished at different times,,worm Salmacina: 1 in Q1,,"On dive log and datasheets, says ""Tzartus"" but fish sheet says Tzartus 116, so using that site name",
+200,PAC2022-M08,4,2022,8,24,Bamfield,Tzartus 116,6,,138,384,11:50,13:12,2 divers finished at different times,,,,"On dive log and datasheets, says ""Tzartus"" but fish sheet says Tzartus 116, so using that site name",
+230,PAC2023-M14,5,2023,8,9,Bamfield,Dixon,2,,138,384,10:01,11:20,Dive time includes all 3 fish transects and 6 m quadrat,,,Change in how fish are measured this year from bin sizes of 10 cm to nearest 5 cm,,Palmira
+231,PAC2023-M14,5,2023,8,9,Bamfield,Dixon,4,,138,384,10:01,11:20,,,,"""Artedius"" on datasheet entered as ""Sculpin""",,Palmira
+232,PAC2023-M14,5,2023,8,9,Bamfield,Dixon,6,,138,384,10:01,11:20,,,,,,Palmira
+233,PAC2023-M14,5,2023,8,9,Bamfield,Tzartus 116,2,,138,338,12:29,13:35,Only fish in this dive,,,,,Palmira
+234,PAC2023-M14,5,2023,8,9,Bamfield,Tzartus 116,4,,138,338,12:29,13:35,,,,,,Palmira
+235,PAC2023-M14,5,2023,8,9,Bamfield,Tzartus 116,6,,138,338,12:29,13:35,,,,,,Palmira
+236,PAC2023-M14,5,2023,8,10,Bamfield,Edward King 142,2,,138,123,12:27,13:45,,,,,,Palmira
+237,PAC2023-M14,5,2023,8,10,Bamfield,Edward King 142,4,,138,123,12:27,13:45,,,,Perpendicular line worn - new in 2024,,Palmira
+238,PAC2023-M14,5,2023,8,10,Bamfield,Edward King 142,6,,138,123,12:27,13:45,,,,,,Palmira
+239,PAC2023-M14,5,2023,8,10,Bamfield,New Taylor Island 2022,2,,138,387,09:13,11:05,Same dive as 6 m quadrat at this site,,,Bad visibility 1 - 2 m,,Palmira
+240,PAC2023-M14,5,2023,8,10,Bamfield,New Taylor Island 2022,4,,138,387,09:13,11:05,,,,,,Palmira
+241,PAC2023-M14,5,2023,8,10,Bamfield,New Taylor Island 2022,6,,138,387,09:13,11:05,,,,,,Palmira
+242,PAC2023-M14,5,2023,8,10,Bamfield,Breakers,2,,126,138,15:24,16:45,Same dive as 6 m,,,,,Palmira
+243,PAC2023-M14,5,2023,8,10,Bamfield,Breakers,4,,126,138,15:24,16:45,,,,,,Palmira
+244,PAC2023-M14,5,2023,8,10,Bamfield,Breakers,6,,126,138,15:24,16:45,,,,,,Palmira
+245,PAC2023-M14,5,2023,8,11,Bamfield,Swiss Boy,2,,138,126,09:35,10:47,Same dive as 6 m quadrat at this site,,,,,Palmira
+246,PAC2023-M14,5,2023,8,11,Bamfield,Swiss Boy,4,,138,126,09:35,10:47,,,,,,Palmira
+247,PAC2023-M14,5,2023,8,11,Bamfield,Swiss Boy,6,,138,126,09:35,10:47,,,,,,Palmira
+248,PAC2023-M14,5,2023,8,11,Bamfield,Sanford Seagull,6,,138,338,12:38,13:49,Same dive as 2 m quadrat,,,,,Palmira
+249,PAC2023-M14,5,2023,8,11,Bamfield,Sanford Seagull,4,,138,338,12:38,13:49,,,,,,Palmira
+250,PAC2023-M14,5,2023,8,11,Bamfield,Sanford Seagull,2,,138,338,12:38,13:49,,,,,,Palmira
+251,PAC2023-M14,5,2023,8,12,Bamfield,Three Tree Island,2,,138,338,09:14,10:20,Same dive as 6 m quadrat,,,Visibility 1-2 m; 2 videos,,Palmira
+252,PAC2023-M14,5,2023,8,12,Bamfield,Three Tree Island,4,,138,338,09:14,10:20,,,,,,Palmira
+253,PAC2023-M14,5,2023,8,12,Bamfield,Three Tree Island,6,,138,338,09:14,10:20,,,,2 videos - sandlance video,,Palmira
+254,PAC2023-M14,5,2023,8,12,Bamfield,Flemming Turf Island,2,,138,123,12:20,13:48,Fish and 6 m quadrat on same dive,,,,,Palmira
+255,PAC2023-M14,5,2023,8,12,Bamfield,Flemming Turf Island,4,,138,123,12:20,13:48,,,,,,Palmira
+256,PAC2023-M14,5,2023,8,12,Bamfield,Flemming Turf Island,6,,138,123,12:20,13:48,,,,,,Palmira
+257,PAC2023-M14,5,2023,8,13,Bamfield,Second Beach,2,,123,138,09:00,10:46,,,,,Double check this series of measurements. Are they binned on datasheet?,Palmira
+258,PAC2023-M14,5,2023,8,13,Bamfield,Second Beach,4,,123,138,09:00,10:46,,,,,"Double check all the species and measurement data on this transect, specifically the rockfish listed first",Palmira
+259,PAC2023-M14,5,2023,8,13,Bamfield,Second Beach,6,,123,138,09:00,10:46,,,,lead line is buried in sand,Check all sand dab measurements,Palmira
+260,PAC2023-M14,5,2023,8,13,Bamfield,New Flemming 112 2022,2,,126,138,12:15,13:28,Also one of the quadrats at same time as this dive,,,,,Palmira
+261,PAC2023-M14,5,2023,8,13,Bamfield,New Flemming 112 2022,4,,126,138,12:15,13:28,,,,,,Palmira
+262,PAC2023-M14,5,2023,8,13,Bamfield,New Flemming 112 2022,6,,126,138,12:15,13:28,,,,,,Palmira
+263,PAC2023-M14,5,2023,8,14,Bamfield,New Tzartus 2022,2,,138,387,10:02,11:20,Same dive as 6 m quadrat,,,,,Palmira
+264,PAC2023-M14,5,2023,8,14,Bamfield,New Tzartus 2022,4,,138,387,10:02,11:20,,,,,,Palmira
+265,PAC2023-M14,5,2023,8,14,Bamfield,New Tzartus 2022,6,,138,387,10:02,11:20,,,,,,Palmira
+266,PAC2023-M14,5,2023,8,14,Bamfield,Grappler Mouth,2,,123,138,13:07,14:33,Same dive as 6 m quadrat,,,,,Palmira
+267,PAC2023-M14,5,2023,8,14,Bamfield,Grappler Mouth,4,,123,138,13:07,14:33,,,,,,Palmira
+268,PAC2023-M14,5,2023,8,14,Bamfield,Grappler Mouth,6,,123,138,13:07,14:33,,,,,,Palmira
+269,PAC2023-M14,5,2023,8,14,Bamfield,Scott's Bay,2,,123,138,15:14,15:58,Fish transects only on this dive,,,Large school of black rockfish at start and end of 6 m transect,,Palmira
+270,PAC2023-M14,5,2023,8,14,Bamfield,Scott's Bay,4,,123,138,15:14,15:58,,,,,,Palmira
+271,PAC2023-M14,5,2023,8,14,Bamfield,Scott's Bay,6,,123,138,15:14,15:58,,,,,,Palmira
+272,PAC2023-M14,5,2023,8,15,Bamfield,Ohiat,2,,386,126,13:38,14:32,Same dive as the 2 m quadrat this site,,,,,Palmira
+273,PAC2023-M14,5,2023,8,15,Bamfield,Ohiat,4,,386,126,13:38,14:42,,,,,,Palmira
+274,PAC2023-M14,5,2023,8,15,Bamfield,Ohiat,6,,386,126,13:38,14:32,,,,,,Palmira
+275,PAC2023-M14,3,2023,8,15,Bamfield,Dixon,6,,358,138,09:19,10:31,,,,,,Palmira
+276,PAC2023-M14,3,2023,8,15,Bamfield,Dixon,4,,138,387,09:19,10:31,,,,,,Palmira
+277,PAC2023-M14,3,2023,8,15,Bamfield,Dixon,2,,138,387,09:19,10:31,,,,,,Palmira
+278,PAC2023-M14,3,2023,8,16,Bamfield,Sanford Seagull,6,,387,123,11:40,13:00,,No algae,,,,Palmira
+279,PAC2023-M14,3,2023,8,16,Bamfield,Sanford Seagull,4,,387,123,11:40,13:00,,No Algae,,,,Palmira
+280,PAC2023-M14,3,2023,8,16,Bamfield,Sanford Seagull,2,,387,123,11:40,13:00,,no data on sheet for last quadrat,Gooseneck barnacles on shell in 10 m quadrat section,,,Palmira
+281,PAC2023-M14,3,2023,8,16,Bamfield,Edward King 142,6,,387,123,09:21,10:31,,,,,,Palmira
+282,PAC2023-M14,3,2023,8,16,Bamfield,Edward King 142,4,,387,123,09:21,10:31,,,,,,Palmira
+283,PAC2023-M14,3,2023,8,16,Bamfield,Edward King 142,2,,387,123,09:21,10:31,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated,,,,Palmira
+284,PAC2023-M14,3,2023,8,16,Bamfield,New Flemming 112 2022,6,,387,123,13:34,15:01,,,"Filming on go pro for photomosaic.  Everything is spawning - cukes, urchins, tubeworms",,,Palmira
+285,PAC2023-M14,3,2023,8,16,Bamfield,New Flemming 112 2022,4,,387,123,13:34,15:01,,,,,,Palmira
+286,PAC2023-M14,3,2023,8,16,Bamfield,New Flemming 112 2022,2,,387,123,13:34,15:01,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+287,PAC2023-M14,3,2023,8,17,Bamfield,Breakers,6,,126,387,11:05,12:18,,,,,,Palmira
+288,PAC2023-M14,3,2023,8,17,Bamfield,Breakers,4,,126,387,11:05,12:18,,,,,,Palmira
+289,PAC2023-M14,3,2023,8,17,Bamfield,Breakers,2,,126,387,11:05,12:18,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+290,PAC2023-M14,3,2023,8,17,Bamfield,Second Beach,6,,387,123,09:10,10:28,,,,,,Palmira
+291,PAC2023-M14,3,2023,8,17,Bamfield,Second Beach,4,,387,123,09:10,10:28,,,,,,Palmira
+292,PAC2023-M14,3,2023,8,17,Bamfield,Second Beach,2,,387,123,09:10,10:28,,,,,,Palmira
+293,PAC2023-M14,3,2023,8,17,Bamfield,New Taylor Island 2022,6,,387,123,14:17,15:34,,,,,,Palmira
+294,PAC2023-M14,3,2023,8,17,Bamfield,New Taylor Island 2022,4,,387,123,14:17,15:34,,,,,,Palmira
+295,PAC2023-M14,3,2023,8,17,Bamfield,New Taylor Island 2022,2,,387,123,14:17,15:34,,,,,,Palmira
+296,PAC2023-M14,3,2023,8,18,Bamfield,New Tzartus 2022,6,,387,123,14:48,15:56,,,"Only 2 of 3 Quadrats filled in with comment: ""missed the 10m mark""",,Invertebrate data entered in the 10 m quadrat includes the 5 m quadrat as well. No invertebrate data entered in the 5 m quadrat.,Palmira
+297,PAC2023-M14,3,2023,8,18,Bamfield,New Tzartus 2022,4,,387,123,14:48,15:56,,,"Only 2 of 3 Quadrats filled in with comment: ""missed the 10m mark""",,Invertebrate data entered in the 10 m quadrat includes the 5 m quadrat as well. No invertebrate data entered in the 5 m quadrat.,Palmira
+298,PAC2023-M14,3,2023,8,18,Bamfield,New Tzartus 2022,2,,387,123,14:48,15:56,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+299,PAC2023-M14,3,2023,8,18,Bamfield,Tzartus 116,4,,123,387,09:15,11:03,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+300,PAC2023-M14,3,2023,8,18,Bamfield,Tzartus 116,6,,123,387,09:15,11:03,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+301,PAC2023-M14,3,2023,8,18,Bamfield,Tzartus 116,2,,123,387,09:15,11:03,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+302,PAC2023-M14,3,2023,8,19,Bamfield,Flemming Turf Island,2,,123,387,11:07,11:48,,,,,,Palmira
+303,PAC2023-M14,3,2023,8,19,Bamfield,Flemming Turf Island,6,,126,386,10:57,11:48,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+304,PAC2023-M14,3,2023,8,19,Bamfield,Flemming Turf Island,4,,126,386,10:57,11:48,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+305,PAC2023-M14,3,2023,8,19,Bamfield,Three Tree Island,2,,126,386,12:26,13:00,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+306,PAC2023-M14,3,2023,8,19,Bamfield,Three Tree Island,6,,387,382,12:18,13:04,,,,,,Palmira
+307,PAC2023-M14,3,2023,8,19,Bamfield,Three Tree Island,4,,387,123,12:18,13:04,,,,,,Palmira
+308,PAC2023-M14,3,2023,8,19,Bamfield,Ohiat,2,,387,123,15:11,15:43,,,,,,Palmira
+309,PAC2023-M14,3,2023,8,19,Bamfield,Ohiat,6,,138,386,15:02,15:50,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+310,PAC2023-M14,3,2023,8,19,Bamfield,Ohiat,4,,138,386,15:02,15:50,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+311,PAC2023-M14,3,2023,8,19,Bamfield,Swiss Boy,2,,138,386,09:22,10:14,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+312,PAC2023-M14,3,2023,8,19,Bamfield,Swiss Boy,6,,123,387,09:11,10:01,,,,,,Palmira
+313,PAC2023-M14,3,2023,8,19,Bamfield,Swiss Boy,4,,123,387,09:11,10:01,,,"Only 2 of 3 Quadrats filled in with comment: ""missed the 10m mark""",,Invertebrate data entered in the 10 m quadrat includes the 5 m quadrat as well. No invertebrate data entered in the 5 m quadrat.,Palmira
+314,PAC2023-M14,3,2023,8,20,Bamfield,Grappler Mouth,2,,123,387,08:59,10:02,,,,,,Palmira
+315,PAC2023-M14,3,2023,8,20,Bamfield,Grappler Mouth,4,,123,387,08:59,10:02,,,,,,Palmira
+316,PAC2023-M14,3,2023,8,20,Bamfield,Grappler Mouth,6,,123,387,08:59,10:02,,,,,,Palmira
+317,PAC2023-M14,3,2023,8,20,Bamfield,Scott's Bay,4,,123,386,10:47,12:06,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+318,PAC2023-M14,3,2023,8,20,Bamfield,Scott's Bay,6,,123,386,10:47,12:06,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+319,PAC2023-M14,3,2023,8,20,Bamfield,Scott's Bay,2,,123,386,10:47,12:06,,"%En, Inverts & Bare much greater than 100%. %En values extremely high",,,,Palmira
+320,PAC2023-M14,4,2023,8,9,Bamfield,Dixon,2,,126,387,10:18,11:20,,,,,,Palmira
+321,PAC2023-M14,4,2023,8,9,Bamfield,Dixon,4,,126,387,10:18,11:20,,,,,,Palmira
+322,PAC2023-M14,4,2023,8,9,Bamfield,Dixon,6,,138,384,10:01,11:20,Same dive as fish for this site,,,,,Palmira
+323,PAC2023-M14,4,2023,8,9,Bamfield,Tzartus 116,2,,138,338,13:43,14:45,,,,,,Palmira
+324,PAC2023-M14,4,2023,8,9,Bamfield,Tzartus 116,4,,384,123,14:25,15:22,,,,,,Palmira
+325,PAC2023-M14,4,2023,8,9,Bamfield,Tzartus 116,6,,123,126,14:25,15:22,Dive log information confusing for this dive,,,,,Palmira
+326,PAC2023-M14,4,2023,8,10,Bamfield,Breakers,2,,384,338,15:45,16:43,Time doesn't match the time on Algae quadrat sheet.  I think the Algae quadrat times are off by an hour and I have adjusted them accordingly,,,,,Palmira
+327,PAC2023-M14,4,2023,8,10,Bamfield,Breakers,4,,384,338,15:45,17:02,Divers came up to switch tanks. This quadrat spanned 2 dives. Note that time on Algae sheet appears to be off by an hour and I have adjusted them,,,,,Palmira
+328,PAC2023-M14,4,2023,8,10,Bamfield,Breakers,6,,138,126,15:24,16:45,,,,,,Palmira
+329,PAC2023-M14,4,2023,8,10,Bamfield,Edward King 142,2,,384,387,12:52,14:15,,,,,,Palmira
+330,PAC2023-M14,4,2023,8,10,Bamfield,Edward King 142,4,,384,387,12:52,14:15,Same dive as Transect 2 Quadrats,,,,,Palmira
+331,PAC2023-M14,4,2023,8,10,Bamfield,Edward King 142,6,,138,123,12:27,13:45,Same dive as fish transect,,,,,Palmira
+332,PAC2023-M14,4,2023,8,10,Bamfield,New Taylor Island 2022,2,,338,126,09:52,10:55,,,,,,Palmira
+333,PAC2023-M14,4,2023,8,10,Bamfield,New Taylor Island 2022,4,,338,126,09:52,11:42,Two dives for this Transect with a tank switch from 10:55 to 11:18,,,,,Palmira
+334,PAC2023-M14,4,2023,8,10,Bamfield,New Taylor Island 2022,6,,138,387,09:13,11:05,Same dive as fish,,,,,Palmira
+335,PAC2023-M14,4,2023,8,11,Bamfield,Swiss Boy,2,,387,384,09:57,10:42,,,,,,Palmira
+336,PAC2023-M14,4,2023,8,11,Bamfield,Swiss Boy,4,,384,387,10:51,11:53,,,,,,Palmira
+337,PAC2023-M14,4,2023,8,11,Bamfield,Swiss Boy,6,,126,384,09:35,10:47,,,,,,Palmira
+338,PAC2023-M14,4,2023,8,11,Bamfield,Sanford Seagull,2,,338,138,12:38,13:49,Same dive as fish,,,,,Palmira
+339,PAC2023-M14,4,2023,8,11,Bamfield,Sanford Seagull,4,,126,123,13:07,14:30,,Transect 6 appears first on datasheets followed by Transect 4,,,,Palmira
+340,PAC2023-M14,4,2023,8,11,Bamfield,Sanford Seagull,6,,126,123,13:07,14:30,,,,,,Palmira
+341,PAC2023-M14,4,2023,8,12,Bamfield,Three Tree Island,2,,123,126,09:30,10:39,2 dives with tank switch. First dive finished at 10:39,,,,,Palmira
+342,PAC2023-M14,4,2023,8,12,Bamfield,Three Tree Island,4,,123,126,10:39,11:31,Dive logs and data sheets don't match. Transects 2 and 4 both done by Sandie and Joanne. Tank switch at 10:39,,,,,Palmira
+343,PAC2023-M14,4,2023,8,12,Bamfield,Three Tree Island,6,,358,338,09:14,11:19,Dive logs and data sheets don't match. This Transect likely done over 2 dives with a break at 10:20 to switch tanks. Same dive as fish at this site,,,,,Palmira
+344,PAC2023-M14,4,2023,8,12,Bamfield,Flemming Turf Island,2,,387,384,12:42,14:06,"on datasheet: ""Realized after that 2m line had washed about 3-4' shallower in depth""",,,,,Palmira
+345,PAC2023-M14,4,2023,8,12,Bamfield,Flemming Turf Island,4,,387,384,12:42,14:06,Same dive as Transect 2 Quadrats,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+346,PAC2023-M14,4,2023,8,12,Bamfield,Flemming Turf Island,6,,138,123,12:20,13:48,Same dive as fish,,,,,Palmira
+347,PAC2023-M14,4,2023,8,13,Bamfield,Second Beach,2,,384,338,10:07,11:27,,,,,,Palmira
+348,PAC2023-M14,4,2023,8,13,Bamfield,Second Beach,4,,384,338,10:07,11:27,same dive as Transect 2 Quadrats,,,,,Palmira
+349,PAC2023-M14,4,2023,8,13,Bamfield,Second Beach,6,,138,123,09:00,10:46,same dive as fish,,,,,Palmira
+350,PAC2023-M14,4,2023,8,13,Bamfield,New Flemming 112 2022,2,,384,387,12:38,14:00,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+351,PAC2023-M14,4,2023,8,13,Bamfield,New Flemming 112 2022,4,,384,387,12:38,14:00,Same dive as Transect 2 quadrats,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+352,PAC2023-M14,4,2023,8,13,Bamfield,New Flemming 112 2022,6,,126,138,12:15,13:28,,,,,,Palmira
+353,PAC2023-M14,4,2023,8,14,Bamfield,New Tzartus 2022,2,,338,384,10:31,11:55,,,,,,Palmira
+354,PAC2023-M14,4,2023,8,14,Bamfield,New Tzartus 2022,4,,338,384,10:31,11:55,Same dive as Transect 2 quadrats,,,,,Palmira
+355,PAC2023-M14,4,2023,8,14,Bamfield,New Tzartus 2022,6,,138,387,10:02,11:20,,,,,,Palmira
+356,PAC2023-M14,4,2023,8,14,Bamfield,Grappler Mouth,2,,384,338,13:24,14:26,,,,,,Palmira
+357,PAC2023-M14,4,2023,8,14,Bamfield,Grappler Mouth,4,,384,338,13:24,14:26,Same dive as Transect 2 quadrats,,,,,Palmira
+358,PAC2023-M14,4,2023,8,14,Bamfield,Grappler Mouth,6,,138,123,13:07,14:33,Same dive as fish transects,,,,,Palmira
+359,PAC2023-M14,4,2023,8,14,Bamfield,Scott's Bay,2,,384,387,15:31,16:19,,all fields on right of  Algae sheet add up to 100% - values in these quadrats may be underestimated.,,,,Palmira
+360,PAC2023-M14,4,2023,8,16,Bamfield,Scott's Bay,4,,386,123,16:01,17:22,,,,,,Palmira
+361,PAC2023-M14,4,2023,8,16,Bamfield,Scott's Bay,6,,138,123,16:01,17:22,Fiona also on part of this dive. Appears to be same dive as Transect 4 quadrats with 3 divers on the dive,,,,,Palmira
+362,PAC2023-M14,4,2023,8,15,Bamfield,Ohiat,2,,126,386,13:38,14:32,Same dive as fish transects,,,,,Palmira
+363,PAC2023-M14,4,2023,8,15,Bamfield,Ohiat,4,,123,126,14:14,15:56,Diving at the same time as Joanne and Fiona but Sandie did all datasheets for this transect's quadrats,,,,,Palmira
+364,PAC2023-M14,4,2023,8,15,Bamfield,Ohiat,6,,386,126,14:44,15:56,,,,,,Palmira
+365,PAC2024-M09,5,2024,8,7,Bamfield,Three Tree Island,2,,386,123,12:03,12:12,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+366,PAC2024-M09,5,2024,8,7,Bamfield,Three Tree Island,4,,386,123,11:36,12:03,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+367,PAC2024-M09,5,2024,8,7,Bamfield,Three Tree Island,6,,386,123,11:14,11:36,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+368,PAC2024-M09,5,2024,8,7,Bamfield,Ohiat,2,,126,138,12:55,13:34,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+369,PAC2024-M09,5,2024,8,7,Bamfield,Ohiat,4,,126,138,12:55,13:34,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+370,PAC2024-M09,5,2024,8,7,Bamfield,Ohiat,6,,126,138,12:55,13:34,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+371,PAC2024-M09,5,2024,8,7,Bamfield,Breakers,2,,138,126,14:47,15:41,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+372,PAC2024-M09,5,2024,8,7,Bamfield,Breakers,4,,138,126,14:47,15:41,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+373,PAC2024-M09,5,2024,8,7,Bamfield,Breakers,6,,138,126,14:47,15:41,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+374,PAC2024-M09,5,2024,8,8,Bamfield,Flemming Turf Island,2,,138,123,10:15,10:35,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+375,PAC2024-M09,5,2024,8,8,Bamfield,Flemming Turf Island,4,,138,123,10:35,10:45,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+376,PAC2024-M09,5,2024,8,8,Bamfield,Flemming Turf Island,6,,138,123,10:45,11:14,Dive time out is the end of the dive - time in is start of the transect,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+377,PAC2024-M09,5,2024,8,8,Bamfield,Swiss Boy,2,,386,126,12:19,12:28,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+378,PAC2024-M09,5,2024,8,8,Bamfield,Swiss Boy,4,,386,126,12:12,12:19,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+379,PAC2024-M09,5,2024,8,8,Bamfield,Swiss Boy,6,,386,126,12:28,12:52,Dive time out is the end of the dive - time in is start of the transect,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+380,PAC2024-M09,5,2024,8,8,Bamfield,Sanford Seagull,2,,386,126,14:49,14:55,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+381,PAC2024-M09,5,2024,8,8,Bamfield,Sanford Seagull,4,,386,126,14:43,14:49,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+382,PAC2024-M09,5,2024,8,8,Bamfield,Sanford Seagull,6,,386,126,14:55,15:14,Dive time out is the end of the dive - time in is start of the transect,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+383,PAC2024-M09,5,2024,8,9,Bamfield,Second Beach,2,,123,138,09:14,10:52,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+384,PAC2024-M09,5,2024,8,9,Bamfield,Second Beach,4,,123,138,09:14,10:52,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+385,PAC2024-M09,5,2024,8,9,Bamfield,Second Beach,6,,123,138,09:14,10:52,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+386,PAC2024-M09,5,2024,8,9,Bamfield,New Taylor Island 2022,2,,123,138,11:38,12:30,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+387,PAC2024-M09,5,2024,8,9,Bamfield,New Taylor Island 2022,4,,123,138,11:38,12:30,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+388,PAC2024-M09,5,2024,8,9,Bamfield,New Taylor Island 2022,6,,123,138,11:38,12:30,No individual times for fish transects. Time is for the whole dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+389,PAC2024-M09,5,2024,8,9,Bamfield,Scott's Bay,2,,386,126,13:37,13:46,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+390,PAC2024-M09,5,2024,8,9,Bamfield,Scott's Bay,4,,386,126,13:46,13:55,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+391,PAC2024-M09,5,2024,8,9,Bamfield,Scott's Bay,6,,386,126,13:55,14:20,Beginning time is arrival at transect. End time is end of the dive,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+392,PAC2024-M09,5,2024,8,9,Bamfield,Grappler Mouth,2,,386,126,14:55,15:02,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+393,PAC2024-M09,5,2024,8,9,Bamfield,Grappler Mouth,4,,386,126,15:02,15:10,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+394,PAC2024-M09,5,2024,8,9,Bamfield,Grappler Mouth,6,,386,126,15:10,15:21,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+395,PAC2024-M09,5,2024,8,10,Bamfield,Dixon,2,,386,126,10:02,10:10,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+396,PAC2024-M09,5,2024,8,10,Bamfield,Dixon,4,,386,126,09:53,10:02,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+397,PAC2024-M09,5,2024,8,10,Bamfield,Dixon,6,,386,126,10:10,10:32,"""Time Out"" based end of dive in dive log.",,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+398,PAC2024-M09,5,2024,8,10,Bamfield,New Tzartus 2022,2,,123,138,11:24,11:37,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+399,PAC2024-M09,5,2024,8,10,Bamfield,New Tzartus 2022,4,,123,138,11:37,11:53,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+400,PAC2024-M09,5,2024,8,10,Bamfield,New Tzartus 2022,6,,123,138,11:53,12:18,"""Time Out"" is end of dive from dive log",,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+401,PAC2024-M09,5,2024,8,10,Bamfield,Tzartus 116,2,,138,123,12:45,13:15,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+402,PAC2024-M09,5,2024,8,10,Bamfield,Tzartus 116,4,,138,123,13:15,13:30,,,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+403,PAC2024-M09,5,2024,8,10,Bamfield,Tzartus 116,6,,138,123,13:30,14:00,"""Time Out"" is end of dive from dive log",,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+404,PAC2024-M09,5,2024,8,11,Bamfield,Edward King 142,2,,123,138,09:59,10:44,Start time is for beginning of first fish transect (4m). No time for start of 2m transect (2nd transect),,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+405,PAC2024-M09,5,2024,8,11,Bamfield,Edward King 142,4,,123,138,09:59,10:44,"This was the first transect of the dive. ""Time Out"" is the start of the 3rd transect (6m). No time for the start of the second transect (2m)",,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+406,PAC2024-M09,5,2024,8,11,Bamfield,Edward King 142,6,,123,138,10:44,11:09,"""Time Out"" is the end of the dive from the dive log",,,Fish size written as a range. Used upper value for measurement table.,,Palmira
+407,PAC2024-M09,5,2024,8,11,Bamfield,New Flemming 112 2022,2,,386,126,11:57,12:06,,,,,,Palmira
+408,PAC2024-M09,5,2024,8,11,Bamfield,New Flemming 112 2022,4,,386,126,12:06,12:15,,,,,,Palmira
+409,PAC2024-M09,5,2024,8,11,Bamfield,New Flemming 112 2022,6,,386,126,12:15,12:36,"""Time Out"" end of dive from dive log",,,,,Palmira
+410,PAC2024-M09,4,2024,8,12,Bamfield,Second Beach,2,,126,338,09:28,10:16,Transects 2 and 4 within this dive.Times from dive log.,,,,,Palmira
+411,PAC2024-M09,4,2024,8,12,Bamfield,Second Beach,4,,138,384,09:25,09:52,Transects 2 and 4 within this dive. Times from dive log.,,,,,Palmira
+412,PAC2024-M09,4,2024,8,12,Bamfield,Second Beach,6,,138,384,09:08,09:25,"""Time Out"" end of dive from dive log",,,,,Palmira
+413,PAC2024-M09,4,2024,8,12,Bamfield,Breakers,2,,126,338,11:06,11:45,,,,,,Palmira
+414,PAC2024-M09,4,2024,8,12,Bamfield,Breakers,4,,138,384,10:46,11:14,,,,,,Palmira
+415,PAC2024-M09,4,2024,8,12,Bamfield,Breakers,6,,138,384,11:14,11:53,,,1 unknown orange sponge in Q2,,,Palmira
+416,PAC2024-M09,4,2024,8,11,Bamfield,Three Tree Island,2,,126,123,14:41,16:06,"""Time Out"" is end of dive, not when the Quadrat transect was finished",,,,,Palmira
+417,PAC2024-M09,4,2024,8,11,Bamfield,Three Tree Island,4,,384,386,14:47,15:17,,,,,,Palmira
+418,PAC2024-M09,4,2024,8,11,Bamfield,Three Tree Island,6,,384,386,14:19,14:47,,,,,,Palmira
+419,PAC2024-M09,4,2024,8,12,Bamfield,New Flemming 112 2022,2,,138,384,15:16,15:45,,,,,,Palmira
+420,PAC2024-M09,4,2024,8,12,Bamfield,New Flemming 112 2022,4,,123,386,14:52,15:25,,,,,,Palmira
+421,PAC2024-M09,4,2024,8,12,Bamfield,New Flemming 112 2022,6,,123,386,14:23,14:52,,,,,,Palmira
+422,PAC2024-M09,4,2024,8,13,Bamfield,Dixon,2,,389,123,10:48,12:02,"""Time Out"" is end of the dive from dive log.",,,,,Palmira
+423,PAC2024-M09,4,2024,8,13,Bamfield,Dixon,4,,388,138,11:14,11:59,,,,,,Palmira
+424,PAC2024-M09,4,2024,8,13,Bamfield,Dixon,6,,388,138,10:27,11:14,,,,,,Palmira
+425,PAC2024-M09,4,2024,8,13,Bamfield,Edward King 142,2,,388,386,13:19,14:23,,,,,,Palmira
+427,PAC2024-M09,4,2024,8,13,Bamfield,Edward King 142,4,,389,123,13:44,14:45,,,,,,Palmira
+428,PAC2024-M09,4,2024,8,13,Bamfield,Edward King 142,6,,389,123,12:55,13:44,,,,,,Palmira
+429,PAC2024-M09,4,2024,8,14,Bamfield,Swiss Boy,2,,388,138,10:00,11:16,,,,,,Palmira
+430,PAC2024-M09,4,2024,8,14,Bamfield,Swiss Boy,4,,126,386,10:02,10:31,,,,,,Palmira
+431,PAC2024-M09,4,2024,8,14,Bamfield,Swiss Boy,6,,126,386,09:27,10:02,,,,,,Palmira
+432,PAC2024-M09,4,2024,8,14,Bamfield,New Tzartus 2022,2,,126,386,12:32,13:08,,,,,,Palmira
+433,PAC2024-M09,4,2024,8,14,Bamfield,New Tzartus 2022,4,,389,123,13:04,13:57,,,,,,Palmira
+434,PAC2024-M09,4,2024,8,14,Bamfield,New Tzartus 2022,6,,389,123,12:18,13:04,,,,,,Palmira
+435,PAC2024-M09,4,2024,8,14,Bamfield,New Flemming 112 2022,2,,389,123,14:26,15:34,,,,,,Palmira
+436,PAC2024-M09,4,2024,8,14,Bamfield,New Flemming 112 2022,4,,388,138,15:00,15:34,,,,,,Palmira
+437,PAC2024-M09,4,2024,8,14,Bamfield,Grappler Mouth,6,,388,138,14:32,15:00,,,,,,Palmira
+438,PAC2024-M09,4,2024,8,15,Bamfield,Ohiat,2,,389,123,09:59,11:28,,,,,,Palmira
+439,PAC2024-M09,4,2024,8,15,Bamfield,Ohiat,4,,358,388,11:28,12:13,,,,,,Palmira
+440,PAC2024-M09,4,2024,8,15,Bamfield,Ohiat,6,,388,138,09:44,11:09,,,,,,Palmira
+441,PAC2024-M09,4,2024,8,15,Bamfield,Sanford Seagull,2,,126,386,14:11,14:38,,,,,,Palmira
+442,PAC2024-M09,4,2024,8,15,Bamfield,Sanford Seagull,4,,126,386,13:41,14:11,,,,,,Palmira
+443,PAC2024-M09,4,2024,8,15,Bamfield,Sanford Seagull,6,,389,123,13:45,15:16,Time Out is end of dive from dive log. Dive includes perpendicular transect,,,,,Palmira
+444,PAC2024-M09,4,2024,8,16,Bamfield,Grappler Mouth,2,,389,138,09:48,10:15,,,,,,Palmira
+445,PAC2024-M09,4,2024,8,16,Bamfield,Grappler Mouth,4,,389,138,10:15,10:44,,,,,,Palmira
+446,PAC2024-M09,4,2024,8,16,Bamfield,Grappler Mouth,6,,388,126,09:24,10:38,Time Out is end of dive from dive log. Also perpendicular transect on this dive,,,,,Palmira
+447,PAC2024-M09,4,2024,8,16,Bamfield,Tzartus 116,2,,123,386,14:34,15:28,Dive sheets say Tzartus 116 but dive log says New Tzartus. Used Tszartus 116 since New Tzartus done on Aug. 14th,,,,,Palmira
+448,PAC2024-M09,4,2024,8,16,Bamfield,Tzartus 116,4,,123,386,15:28,16:23,Dive sheets say Tzartus 116 but dive log says New Tzartus. Used Tszartus 116 since New Tzartus done on Aug. 14th. End time from dive log,,,,,Palmira
+449,PAC2024-M09,4,2024,8,16,Bamfield,Tzartus 116,6,,389,138,14:41,16:57,Dive sheets say Tzartus 116 but dive log says New Tzartus. Used Tszartus 116 since New Tzartus done on Aug. 14th. End time is end of dive from dive log. Also did perpendicular transect on this dive.,,1 unknown flat orange sponge,,,Palmira
+450,PAC2024-M09,4,2024,8,16,Bamfield,Scott's Bay,2,,123,386,11:44,12:13,,,,,,Palmira
+451,PAC2024-M09,4,2024,8,16,Bamfield,Scott's Bay,4,,123,386,12:13,13:00,,,,,,Palmira
+452,PAC2024-M09,4,2024,8,16,Bamfield,Scott's Bay,6,,388,126,11:24,13:00,Time out is the end of the dive. Dive includes perpendicular transect,,,,,Palmira
+453,PAC2024-M09,4,2024,8,17,Bamfield,New Taylor Island 2022,2,,123,386,09:41,11:08,Time out is end of dive from dive log. Also perpendicular transect on this dive,,,,,Palmira
+454,PAC2024-M09,4,2024,8,17,Bamfield,New Taylor Island 2022,4,,388,126,09:51,10:50,,,,,,Palmira
+455,PAC2024-M09,4,2024,8,17,Bamfield,New Taylor Island 2022,6,,388,126,09:20,09:51,,,,,,Palmira
+456,PAC2024-M09,4,2024,8,17,Bamfield,Flemming Turf Island,2,,389,138,12:07,14:04,Time Out is end of dive from dive logs. Perpendicular transect also on this dive.,,1 octocoral recorded in Q2,,,Palmira
+457,PAC2024-M09,4,2024,8,17,Bamfield,Flemming Turf Island,4,,388,126,12:54,13:32,,,Painted star noted on Invertebrate Quadrat sheet. Entered into appropriate tables,,,Palmira
+458,PAC2024-M09,4,2024,8,17,Bamfield,Flemming Turf Island,6,,388,126,12:23,12:54,,,,,,Palmira
+459,PAC2024-M09,3,2024,8,7,Bamfield,Three Tree Island,2,,126,138,10:30,11:55,Time for both 2 and 4 m Transects,,,,,Palmira
+460,PAC2024-M09,3,2024,8,7,Bamfield,Three Tree Island,4,,126,138,10:30,11:55,Time for both 2 and 4 m Transects,,,,,Palmira
+461,PAC2024-M09,3,2024,8,7,Bamfield,Three Tree Island,6,,386,123,10:01,12:12,same dive as fish,,,,,Palmira
+462,PAC2024-M09,3,2024,8,7,Bamfield,Ohiat,2,,338,384,13:35,14:13,Time for both 2 and 4 m Transects,,,,,Palmira
+463,PAC2024-M09,3,2024,8,7,Bamfield,Ohiat,4,,338,384,13:35,14:13,Time for both 2 and 4 m Transects,,,,,Palmira
+464,PAC2024-M09,3,2024,8,7,Bamfield,Ohiat,6,,126,138,12:55,13:34,same dive as fish,,,,,Palmira
+465,PAC2024-M09,3,2024,8,7,Bamfield,Breakers,2,,338,384,15:23,15:57,Time for both 2 and 4 m Transects,,,,,Palmira
+466,PAC2024-M09,3,2024,8,7,Bamfield,Breakers,4,,338,384,15:23,15:57,Time for both 2 and 4 m Transects,"#3 quadrat of this transect missing on data sheet. ""only 2 swaths done on 4; 5 m zap straps missing""",,,,Palmira
+467,PAC2024-M09,3,2024,8,7,Bamfield,Breakers,6,,126,138,14:47,15:41,same dive as fish,,,,,Palmira
+468,PAC2024-M09,3,2024,8,8,Bamfield,Flemming Turf Island,2,,384,338,10:37,11:11,transects 2 and 4 same dive,,,,,Palmira
+469,PAC2024-M09,3,2024,8,8,Bamfield,Flemming Turf Island,4,,384,338,10:37,11:11,transects 2 and 4 same dive,,,,,Palmira
+470,PAC2024-M09,3,2024,8,8,Bamfield,Flemming Turf Island,6,,138,123,10:00,11:14,same dive as fish,,,,,Palmira
+471,PAC2024-M09,3,2024,8,8,Bamfield,Swiss Boy,2,,384,338,12:31,13:13,transects 2 and 4 same dive,,,,,Palmira
+472,PAC2024-M09,3,2024,8,8,Bamfield,Swiss Boy,4,,384,338,12:31,13:13,transects 2 and 4 same dive,,,,,Palmira
+473,PAC2024-M09,3,2024,8,8,Bamfield,Swiss Boy,6,,126,386,11:57,12:52,same dive as fish,,,,,Palmira
+474,PAC2024-M09,3,2024,8,8,Bamfield,Sanford Seagull,2,,123,138,14:55,15:44,2m and 4 m same dive,,,,,Palmira
+475,PAC2024-M09,3,2024,8,8,Bamfield,Sanford Seagull,4,,123,138,14:55,15:44,2 and 4 m same dive,,,,,Palmira
+476,PAC2024-M09,3,2024,8,8,Bamfield,Sanford Seagull,6,,126,386,14:10,15:14,same dive as fish,,,,,Palmira
+477,PAC2024-M09,3,2024,8,9,Bamfield,Second Beach,2,,384,338,10:12,10:52,2m and 4 m same dive,,,,,Palmira
+478,PAC2024-M09,3,2024,8,9,Bamfield,Second Beach,4,,384,338,10:12,10:52,2m and 4 m same dive,,,,,Palmira
+479,PAC2024-M09,3,2024,8,9,Bamfield,Second Beach,6,,138,123,09:14,10:52,same dive as fish,,,,,Palmira
+480,PAC2024-M09,3,2024,8,9,Bamfield,New Taylor Island 2022,2,,126,386,11:54,12:27,2m and 4m same dive,,,,,Palmira
+481,PAC2024-M09,3,2024,8,9,Bamfield,New Taylor Island 2022,4,,126,386,11:54,12:27,2m and 4m same dive,,,,,Palmira
+482,PAC2024-M09,3,2024,8,9,Bamfield,New Taylor Island 2022,6,,123,138,11:30,12:30,same dive as fish,,,,,Palmira
+483,PAC2024-M09,3,2024,8,9,Bamfield,Scott's Bay,2,,338,384,13:46,14:14,2m and 4m same dive,,,,,Palmira
+484,PAC2024-M09,3,2024,8,9,Bamfield,Scott's Bay,4,,338,384,13:46,14:14,2m and 4 m same dive,,Octocoral present on 4 m transect,,,Palmira
+485,PAC2024-M09,3,2024,8,9,Bamfield,Scott's Bay,6,,126,386,13:21,14:20,same dive as fish,,,,,Palmira
+486,PAC2024-M09,3,2024,8,9,Bamfield,Grappler Mouth,2,,338,384,15:05,15:31,all 3 transects on this dive,,,,,Palmira
+487,PAC2024-M09,3,2024,8,9,Bamfield,Grappler Mouth,4,,384,338,15:05,15:31,all 3 transects on this dive,,,,,Palmira
+488,PAC2024-M09,3,2024,8,9,Bamfield,Grappler Mouth,6,,384,338,15:05,15:31,all 3 transects on this dive,,,,,Palmira
+489,PAC2024-M09,3,2024,8,10,Bamfield,Dixon,2,,384,338,09:23,10:32,all 3 transects on this dive,,,,,Palmira
+490,PAC2024-M09,3,2024,8,10,Bamfield,Dixon,4,,384,338,09:23,10:32,all 3 transects on this dive,,,,,Palmira
+491,PAC2024-M09,3,2024,8,10,Bamfield,Dixon,6,,384,338,09:23,10:32,all 3 transects on this dive,,,,,Palmira
+492,PAC2024-M09,3,2024,8,10,Bamfield,New Tzartus 2022,2,,338,384,11:50,12:13,2m and 4m on same dive,,,,,Palmira
+493,PAC2024-M09,3,2024,8,10,Bamfield,New Tzartus 2022,4,,338,384,11:50,12:13,2m and 4m on same dive,,,,,Palmira
+494,PAC2024-M09,3,2024,9,10,Bamfield,New Tzartus 2022,6,,138,123,11:14,12:18,same dive as fish,,,,,Palmira
+495,PAC2024-M09,3,2024,8,10,Bamfield,Tzartus 116,2,,126,386,13:18,14:12,2m and 4m on same dive,,,,,Palmira
+496,PAC2024-M09,3,2024,8,10,Bamfield,Tzartus 116,4,,126,386,13:18,14:12,2m and 4m on same dive,,,,,Palmira
+497,PAC2024-M09,3,2024,8,10,Bamfield,Tzartus 116,6,,123,138,12:41,14:00,same dive as fish,,,,,Palmira
+498,PAC2024-M09,3,2024,8,11,Bamfield,Edward King 142,2,,384,338,10:15,11:16,2 and 4 m on  same dive,,,,,Palmira
+499,PAC2024-M09,3,2024,8,11,Bamfield,Edward King 142,4,,384,338,10:15,11:16,2 and 4 m on same dive,,,,,Palmira
+500,PAC2024-M09,3,2024,8,11,Bamfield,Edward King 142,6,,123,138,09:38,11:09,same dive as fish,,,,,Palmira
+501,PAC2024-M09,3,2024,8,11,Bamfield,New Flemming 112 2022,2,,338,384,12:16,12:40,2 and 4 m on  same dive,Dense Macrocystis shallower than 2 m lead line,Urchin front on 2 m lead line below Macrocystis,,,Palmira
+502,PAC2024-M09,3,2024,8,11,Bamfield,New Flemming 112 2022,4,,338,384,12:16,12:40,2 and 4 m on  same dive,,,,,Palmira
+503,PAC2024-M09,3,2024,8,11,Bamfield,New Flemming 112 2022,6,,126,386,11:54,12:36,same dive as fish,,,,,Palmira
+506,PAC2025-M07,5,2025,8,6,Bamfield,Dixon,2,,386,138,11:07,11:12,,,,,,Palmira
+507,PAC2025-M07,5,2025,8,6,Bamfield,Dixon,4,,386,138,10:40,,start time a guess based on other 2 transects,,,,,Palmira
+508,PAC2025-M07,5,2025,8,6,Bamfield,Dixon,6,,386,138,10:27,,"No end time. This was the first transect surveyed, followed by 4m, then 2m",,,,,Palmira
+509,PAC2025-M07,5,2025,8,10,Bamfield,Second Beach,2,,138,389,09:35,,No time on data sheet - this is start time of dive,,,Done a few days later than Transects 4 and 6,,Palmira
+510,PAC2025-M07,5,2025,8,6,Bamfield,Second Beach,4,,386,138,13:10,13:24,,,,,,Palmira
+511,PAC2025-M07KMS2025,5,2025,8,6,Bamfield,Second Beach,6,,386,138,13:24,13:39,,,,,,Palmira
+512,PAC2027-M07,5,2025,8,6,Bamfield,Edward King 142,2,,386,138,14:52,,No end time available - part of other dive,,,,,Palmira
+513,PAC2025-M07,5,2025,8,6,Bamfield,Edward King 142,4,,386,138,14:42,14:52,,,,,,Palmira
+514,PAC2025-M07,5,2025,8,6,Bamfield,Edward King 142,6,,386,138,14:35,14:42,,,,,,Palmira
+515,PAC2025-M07,5,2025,8,7,Bamfield,Breakers,2,,386,138,10:21,10:50,,,,,,Palmira
+516,PAC2025-M07,5,2025,8,7,Bamfield,Breakers,4,,386,138,10:08,10:21,,,,"""Sculpin"" is rosylip sculpin",,Palmira
+517,PAC2025-M07,5,2025,8,7,Bamfield,Breakers,6,,386,138,09:59,10:08,,,,,,Palmira
+518,PAC2025-M07,5,2025,8,11,Bamfield,Flemming Turf Island,2,,138,389,14:45,,,,,,,Palmira
+519,PAC2025-M07,5,2025,8,8,Bamfield,Flemming Turf Island,4,,138,382,11:42,,Start time uncertain (guess based on dive log) end time not available. Part of another dive,,,Not clear on if there were 10 blackeyed gobies 10 cm each or 2 x 10cm blackeyed gobies. I entered 2,,Palmira
+520,PAC2025-M07,5,2025,8,8,Bamfield,Flemming Turf Island,6,,138,382,11:52,,Start time just a guess based on start of dive from logbook. No end time,,,,,Palmira
+521,PAC2025-M07,5,2025,8,8,Bamfield,Scott's Bay,2,,386,123,15:46,,Time in is a guess - no end time,,,size intervals very small - may need to be re-evaluated,,Palmira
+522,PAC2025-M07,5,2025,8,8,Bamfield,Scott's Bay,4,,386,123,15:36,,Time in is a guess - no end time,,,"size intervals very small - may need to be re-evaluated; ""Rockfish sp"" is a deacon rockfish and ""Sculpin"" is rosylip sculpin",,Palmira
+523,PAC2025-M07,5,2025,8,8,Bamfield,Scott's Bay,6,,386,123,15:26,,,,,size intervals very small - may need to be re-evaluated,,Palmira
+524,PAC2025-M07,5,2025,8,11,Bamfield,New Taylor Island 2022,2,,138,389,10:16,,Start time is a guess based on dive logs,,,,,Palmira
+525,PAC2025-M07,5,2025,8,9,Bamfield,New Taylor Island 2022,4,,138,382,09:20,,Start time is a guess based on dive logs,,,,,Palmira
+526,PAC2025-M07,5,2025,8,9,Bamfield,New Taylor Island 2022,6,,138,382,09:10,,Start time is a guess based on dive logs,,,,,Palmira
+527,PAC2025-M07,5,2025,8,9,Bamfield,New Tzartus 2022,2,,386,123,11:42,,,,,,,Palmira
+528,PAC2025=M07,5,2025,8,9,Bamfield,New Tzartus 2022,4,,386,123,11:32,,start time guess based on time for 2m,,,,,Palmira
+529,PAC2025-M07,5,2025,8,9,Bamfield,New Tzartus 2022,6,,386,123,11:22,,start  time guess based on time for 2m,,,,,Palmira
+530,PAC2025-M07,5,2025,8,9,Bamfield,Tzartus 116,2,,386,123,13:11,,start time guess based on previous transect,,,,,Palmira
+531,PAC2025-M07,5,2025,8,9,Bamfield,Tzartus 116,4,,386,123,13:01,,,,,,,Palmira
+532,PAC2025-M07,5,2025,8,9,Bamfield,Tzartus 116,6,,386,123,12:50,13:01,,,,,,Palmira
+533,PAC2025-M07,5,2025,8,9,Bamfield,Grappler Mouth,2,,386,123,15:42,,,,,also a cockscomb detected 150 mm,,Palmira
+534,PAC2025-M07,5,2025,8,9,Bamfield,Grappler Mouth,4,,386,123,15:33,15:42,start time guess based on other 2 transect times,,,,,Palmira
+535,PAC2025-M07,5,2025,8,9,Bamfield,Grappler Mouth,6,,386,123,15:23,,,,,,,Palmira
+536,PAC2025-M07,5,2025,8,10,Bamfield,New Flemming 112 2022,2,,386,123,14:28,,Time in is a guess based on 1st transect,,,,,Palmira
+537,PAC2025-M07,5,2025,8,10,Bamfield,New Flemming 112 2022,4,,386,123,14:18,,Time in is a guess based on first transect,,,,,Palmira
+538,PAC2025-M07,5,2025,8,10,Bamfield,New Flemming 112 2022,6,,386,123,14:08,,,,,,,Palmira
+539,PAC2025-M07,5,2025,8,14,Bamfield,Ohiat,2,,138,389,09:21,,Start time guess based on dive log,,,,,Palmira
+540,PAC2025-M07,5,2025,8,14,Bamfield,Ohiat,4,,138,389,09:11,,start time guess based on dive logs,,,,,Palmira
+541,PAC2025-M07,5,2025,8,14,Bamfield,Ohiat,6,,138,389,09:01,,start time based on dive log,,,,,Palmira
+542,PAC2025-M07,5,2025,8,14,Bamfield,Swiss Boy,2,,138,123,14:50,,Start time a guess based on dive logs,,,,,Palmira
+543,PAC2025-M07,5,2025,8,14,Bamfield,Swiss Boy,4,,138,123,14:40,,Start time guessed based on dive logs,,,"""Rockfish species"" is deacon rockfish",,Palmira
+544,PAC2025-M07,5,2025,8,14,Bamfield,Swiss Boy,6,,138,123,14:30,,start time based on dive log,,,,,Palmira
+545,PAC2025-M07,5,2025,8,15,Bamfield,Three Tree Island,2,,138,389,09:45,,start time guess based on dive log,,,,,Palmira
+546,PAC2025-M07,5,2025,8,15,Bamfield,Three Tree Island,4,,138,389,09:35,,start time guess based on dive log,,,,,Palmira
+547,PAC2025-M07,5,2025,8,15,Bamfield,Three Tree Island,6,,138,389,09:25,,start time based on dive log,,,,,Palmira
+548,PAC2025-M07,5,2025,8,16,Bamfield,Sanford Seagull,2,,123,126,09:45,,start time a guess based on dive logs,,,,,Palmira
+549,PAC2025-M07,5,2025,8,16,Bamfield,Sanford Seagull,4,,123,126,09:35,,start time a guess based on dive logs,,,,,Palmira
+550,PAC2025-M07,5,2025,8,16,Bamfield,Sanford Seagull,6,,123,126,09:25,,start time based on dive logs,,,,,Palmira
+551,PAC2025-M07,3,2025,8,7,Bamfield,Breakers,2,,138,386,10:00,,start time a guess based on dive logs,,,,,Palmira
+552,PAC2025-M07,3,2025,8,7,Bamfield,Breakers,4,,123,389,10:27,,,,,,,Palmira
+553,PAC2025-M07,3,2025,8,7,Bamfield,Breakers,6,,123,389,10:11,,,,,,,Palmira
+554,PAC2025-M07,3,2025,8,7,Bamfield,Ohiat,2,,138,389,11:48,,,,,,,Palmira
+555,PAC2025-M07,3,2025,8,7,Bamfield,Ohiat,4,,123,389,11:59,,,,,,,Palmira
+556,PAC2025-M07,3,2025,8,7,Bamfield,Ohiat,6,,123,389,11:47,,,,,,,Palmira
+557,PAC2025-M07,3,2025,8,6,Bamfield,Edward King 142,2,,138,386,15:04,,,,,,,Palmira
+558,PAC2025-M07,3,2025,8,6,Bamfield,Edward King 142,4,,382,126,15:22,,start time guess based on dive log,,,,,Palmira
+559,PAC2025-M07,3,2025,8,6,Bamfield,Edward King 142,6,,382,126,14:52,,start time based on dive log,,,,,Palmira
+560,PAC2025-M07,3,2025,8,6,Bamfield,Second Beach,2,,138,386,12:59,,,,,,,Palmira
+561,PAC2025-M07,3,2025,8,6,Bamfield,Second Beach,4,,123,389,13:00,,start time guess based on dive log,,,,,Palmira
+562,PAC2025-M07,3,2025,8,6,Bamfield,Second Beach,6,,123,389,13:34,,,,,,,Palmira
+563,PAC2025-M07,3,2025,8,6,Bamfield,Dixon,2,,138,386,10:35,,,,,,,Palmira
+564,PAC2025-M07,3,2025,8,6,Bamfield,Dixon,4,,123,389,10:41,,,,,,,Palmira
+565,PAC2025-M07,3,2025,8,6,Bamfield,Dixon,6,,123,389,10:28,,,,,,,Palmira
+566,PAC2025-M07,3,2025,8,7,Bamfield,Sanford Seagull,2,,382,126,13:45,,start time guess based on dive log,,,,,Palmira
+567,PAC2025-M07,3,2025,8,7,Bamfield,Sanford Seagull,4,,123,389,14:01,,,,,,,Palmira
+568,PAC2025-M07,3,2025,8,7,Bamfield,Sanford Seagull,6,,123,389,13:46,,,,,,,Palmira
+569,PAC2025-M07,3,2025,8,8,Bamfield,Swiss Boy,2,,382,138,09:50,,start time guess based on dive logs,,,,,Palmira
+570,PAC2025-M07,3,2025,8,8,Bamfield,Swiss Boy,4,,123,386,10:05,,,,,,,Palmira
+571,PAC2025-M07,3,2025,8,8,Bamfield,Swiss Boy,6,,123,386,09:49,,,,,,,Palmira
+572,PAC2025-M07,3,2025,8,8,Bamfield,Flemming Turf Island,2,,382,138,12:00,,start time guess based on dive logs,,,,Asterina sea star indicated for Q2 on data sheet. Not one of the listed species in the database,Palmira
+573,PAC2025-M07,3,2025,8,8,Bamfield,Flemming Turf Island,4,,123,386,11:54,,,,,,,Palmira
+574,PAC2025-M07,3,2025,8,8,Bamfield,Flemming Turf Island,6,,123,386,11:43,,,,,,,Palmira
+575,PAC2025-M07,3,2025,8,8,Bamfield,Three Tree Island,2,,126,389,14:19,,,,,,,Palmira
+576,PAC2025-M07,3,2025,8,8,Bamfield,Three Tree Island,4,,123,386,14:00,,start time guess based on dive logs,,,,,Palmira
+577,PAC2025-M07,3,2025,8,8,Bamfield,Three Tree Island,6,,123,386,13:29,,,,,,,Palmira
+578,PAC2025-M07,3,2025,8,8,Bamfield,Scott's Bay,2,,123,386,16:00,,start time guess based on dive logs,,,,,Palmira
+579,PAC2025-M07,3,2025,8,8,Bamfield,Scott's Bay,4,,126,389,16:00,,start time guess based on dive logs,,,,,Palmira
+580,PAC2025-M07,3,2025,8,8,Bamfield,Scott's Bay,6,,126,389,15:46,,,,Diaulula lentiginosa recorded in addition to other nudibranchs,,,Palmira
+581,PAC2025-M07,3,2025,8,9,Bamfield,New Taylor Island 2022,2,,382,138,09:30,,Start time guess based on dive logs,,,,,Palmira
+582,PAC2025-M07,3,2025,8,9,Bamfield,New Taylor Island 2022,4,,389,126,09:50,,Start time guess based on dive logs,,,,,Palmira
+583,PAC2025-M07,3,2025,8,9,Bamfield,New Taylor Island 2022,6,,389,126,09:30,,,,"""other crab"" is black-clawed crab (Lophopanopeus bellus)",,,Palmira
+584,PAC2025-M07,3,2025,8,9,Bamfield,New Tzartus 2022,2,,123,386,11:51,,,,,,,Palmira
+585,PAC2025-M07,3,2025,8,9,Bamfield,New Tzartus 2022,4,,389,126,11:55,,start time guess based on first transect,,Pugettia sp. -> not kelp crab,,,Palmira
+586,PAC2025-M07,3,2025,8,9,Bamfield,New Tzartus 2022,6,,389,126,11:37,,,,Pugettia not kelp,,,Palmira
+587,PAC2025-M07,3,2025,8,9,Bamfield,Tzartus 116,2,,123,386,13:30,,,,,,,Palmira
+588,PAC2025-M07,3,2025,8,9,Bamfield,Tzartus 116,4,,382,138,13:35,,start time guess based on dive logs,,,,,Palmira
+589,PAC2025-M07,3,2025,8,9,Bamfield,Tzartus 116,6,,382,138,13:15,,start time guess based on dive logs,,,,,Palmira
+590,PAC2025-M07,3,2025,8,9,Bamfield,Grappler Mouth,2,,123,386,15:52,,,,,,,Palmira
+591,PAC2025-M07,3,2025,8,9,Bamfield,Grappler Mouth,4,,382,138,15:50,,start time guess based on dive logs,,,,,Palmira
+592,PAC2025-M07,3,2025,8,9,Bamfield,Grappler Mouth,6,,382,138,15:32,,,,,,,Palmira
+593,PAC2025-M07,3,2025,8,10,Bamfield,New Flemming 112 2022,2,,123,386,14:35,,,,Tube dwelling anemones indicated in Q1 and 2 but then crossed out,,,Palmira
+594,PAC2025-M07,3,2025,8,10,Bamfield,New Flemming 112 2022,4,,382,126,14:50,,start time guess based on dive logs,,,,,Palmira
+595,PAC2025-M07,3,2025,8,10,Bamfield,New Flemming 112 2022,6,,382,126,14:20,,,,,,,Palmira
+597,PAC2025-M07,4,2025,8,10,Bamfield,Second Beach,2,,389,138,09:51,,,,,,,Palmira
+598,PAC2025-M07,4,2025,8,10,Bamfield,Second Beach,4,,123,386,09:55,,,,,,,Palmira
+599,PAC2025-M07,4,2025,8,10,Bamfield,Second Beach,6,,123,386,09:31,,,,,,,Palmira
+600,PAC2025-M07,4,2025,8,10,Bamfield,Scott's Bay,2,,382,357,12:03,,,UV and FU drift in Q14 (the 3rd Quadrat surveyed),,,,Palmira
+601,PAC2025-M07,4,2025,8,10,Bamfield,Scott's Bay,4,,389,138,12:18,,,,,,,Palmira
+602,PAC2025-M07,4,2025,8,10,Bamfield,Scott's Bay,6,,389,138,11:40,,,,1 octocoral noted in both Q1 and Q3,,,Palmira
+603,PAC2025-M07,4,2025,8,10,Bamfield,New Flemming 112 2022,2,,123,386,14:47,,,,,,,Palmira
+604,PAC2025-M07,4,2025,8,10,Bamfield,New Flemming 112 2022,4,,382,126,15:44,,,,,,3 animals measured but not identified - confirmed with Michelle - they were PY - added to database,Palmira
+605,PAC2025-M07,4,2025,8,10,Bamfield,New Flemming 112 2022,6,,382,126,14:41,,,,,,,Palmira
+606,PAC2025-M07,4,2025,8,11,Bamfield,Flemming Turf Island,2,,389,138,14:51,,,,,,,Palmira
+607,PAC2025-M07,4,2025,8,11,Bamfield,Flemming Turf Island,4,,389,138,15:35,,,,,,,Palmira
+608,PAC2025-M07,4,2025,8,11,Bamfield,Flemming Turf Island,6,,390,123,15:35,,,,small metridium (no species?) in Q3 - not measured. Coonstripe shrimp: 18 in Q1; 15 in Q2; 5 in Q3,,other crab in Q1 is pubescent crab,Palmira
+609,PAC2025-M07,4,2025,8,11,Bamfield,New Taylor Island 2022,2,,389,138,10:32,,,,,,,Palmira
+610,PAC2025-M07,4,2025,8,11,Bamfield,New Taylor Island 2022,4,,390,123,11:30,,,,1 octocoral in Q1,,,Palmira
+611,PAC2025-M07,4,2025,8,11,Bamfield,New Taylor Island 2022,6,,390,123,10:18,,,,,,,Palmira
+612,PAC2025-M07,4,2025,8,12,Bamfield,Dixon,2,,390,123,12:46,,,,,,,Dixon
+613,PAC2025-M07,4,2025,8,12,Bamfield,Dixon,4,,391,138,12:06,,,,,,,Palmira
+614,PAC2025-M07,4,2025,8,12,Bamfield,Dixon,6,,390,123,11:52,,,,"constripe shrimp: 2 in Q1, 1 in Q2, 2 in Q3",,,Palmira
+615,PAC2025-M07,4,2025,8,13,Bamfield,Grappler Mouth,2,,392,123,10:12,,,,,,,Palmira
+616,PAC2025-M07,4,2025,8,13,Bamfield,Grappler Mouth,4,,391,138,09:48,,,,1 octocoral noted in Q1,,,Palmira
+617,PAC2025-M07,4,2025,8,13,Bamfield,Grappler Mouth,6,,392,123,09:22,,,,,,,Palmira
+618,PAC2025-M07,4,2025,8,13,Bamfield,Edward King 142,2,,389,126,13:21,,,,,,other crab in Q2 is black clawed crab,Palmira
+619,PAC2025-M07,4,2025,8,13,Bamfield,Edward King 142,4,,391,138,13:16,,,,,,,Palmira
+620,PAC2025-M07,4,2025,8,13,Bamfield,Edward King 142,6,,389,126,12:44,,,,1 slipper snail noted in Q1,,,Palmira
+621,PAC2025-M07,4,2025,8,13,Bamfield,New Tzartus 2022,2,,392,123,15:14,,,,,,fish eating and M. senile recorded in Q1 but not measured,Palmira
+622,PAC2025-M07,4,2025,8,13,Bamfield,New Tzartus 2022,4,,389,126,15:14,,,,1 Lampshell noted in Q1,Q5 juvenile wolf eel,,Palmira
+623,PAC2025-M07,4,2025,8,13,Bamfield,New Tzartus 2022,6,,389,126,14:55,,,,,,,Palmira
+624,PAC2025-M07,4,2025,8,14,Bamfield,Ohiat,2,,389,138,09:37,,,,,,,Palmira
+625,PAC2025-M07,4,2025,8,14,Bamfield,Ohiat,4,,389,138,10:14,,,,,,,Palmira
+626,PAC2025-M07,4,2025,8,14,Bamfield,Ohiat,6,,391,123,09:31,,,,,,,Palmira
+627,PAC2025-M07,4,2025,8,14,Bamfield,Breakers,2,,392,126,12:57,,,,other crab in Q1 is black clawed,,This transect was done twice. Entered the 2nd one as per instructions on data sheet,Palmira
+628,PAC2025-M07,4,2025,8,14,Bamfield,Breakers,4,,389,138,12:32,,,,,,,Palmira
+629,PAC2025-M07,4,2025,8,14,Bamfield,Breakers,6,,389,138,12:01,,,,,,,Palmira
+630,PAC2025-M07,4,2025,8,14,Bamfield,Swiss Boy,2,,391,123,15:13,,,,,,,Palmira
+631,PAC2025-M07,4,2025,8,14,Bamfield,Swiss Boy,4,,392,126,15:33,,,,Hydrocoral : 1 in Q1 and 1 in Q3;,,,Palmira
+632,PAC2025-M07,4,2025,8,14,Bamfield,Swiss Boy,6,,392,126,14:54,,,,,,,Palmira
+633,PAC2025-M07,4,2025,8,15,Bamfield,Three Tree Island,2,,389,138,10:01,,,,,,no algae species noted,Palmira
+634,PAC2025-M07,4,2025,8,15,Bamfield,Three Tree Island,4,,392,123,10:35,,,,Dead abalone being eaten by an urchin in Q2 in quadrat measurements form (length of A is 82 mm),,,Palmira
+635,PAC2025-M07,4,2025,8,15,Bamfield,Three Tree Island,6,,392,123,09:54,,,,,,no algae species listed,Palmira
+636,PAC2025-M07,4,2025,8,15,Bamfield,Tzartus 116,2,,389,138,13:45,,,,,,,Palmira
+637,PAC2025-M07,4,2025,8,15,Bamfield,Tzartus 116,4,,392,123,13:10,,,,,,"Last species measurement in Q3 was ""PG"" - no such code - used ""AG"" red turban snail - double check",Palmira
+638,PAC2025-M07,4,2025,8,15,Bamfield,Tzartus 116,6,,392,123,12:20,,,,,,,Palmira
+639,PAC2025-M07,4,2025,8,16,Bamfield,Sanford Seagull,2,,123,126,09:57,,,,Wasting disease on leather start in Q1 invert measurement form,,,Palmira
+640,PAC2025-M07,4,2025,8,16,Bamfield,Sanford Seagull,4,,389,392,10:12,,,,on quadrat 1&2 (the wall) quadrat would scrape off inverts in the big swell - lower #,,This invert comment probably applies to next transect,Palmira
+641,PAC2025-M07,4,2025,8,16,Bamfield,Sanford Seagull,6,,389,392,09:40,,,,on quadrat 1&2 (the wall) quadrat would scrape off inverts in the big swell - lower #,,This invert comment probably applies to this transect,Palmira
