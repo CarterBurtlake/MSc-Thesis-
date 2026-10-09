@@ -301,4 +301,6 @@ RLS_average_density <- RLS_data_means_filtered %>%
   summarise(overall_mean_density = mean(site_mean_density), #calculate density average across all years of study
             number_years = n_distinct(year), #tell us how many years go into the average calculation
             .groups = "drop")
-#hmm for some reason many sites have less years sampled than expected. Look into this tomorrow
+#Reviewed all sites and all have the correct number of years of data contributing to their average
+# CHECK: worth investigating density by depth 
+# CHECK: see if its worth adding KCCA data...

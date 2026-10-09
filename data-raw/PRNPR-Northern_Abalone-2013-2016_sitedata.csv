@@ -1,0 +1,117 @@
+﻿Site,Day,Month,Year,Latitude,Longitude,Transect #,Bearing,Ave depth (ft),Comment
+Dodd,23,8,2013,48 55.528,125 19.666,1,90,24,
+Dodd,23,8,2013,48 55.528,125 19.666,2,250,26,
+Dodd,9,9,2013,48 55.537,125 19.639,3,270,28,"average depth recorded from start and end depths of transect, depth not recorded during habitat survey"
+Dodd,9,9,2013,48 55.537,125 19.639,4,90,24,
+Dodd,11,9,2013,48 55.537,125 19.639,5,270,26,
+Dodd,11,9,2013,48 55.537,125 19.639,6,90,28,
+Effingham Bay,14,8,2013,48 52.730,125 19.190,1,120,34,Bearing shifted from 120 to 60 at end of transect
+Effingham Bay,14,8,2013,48 52.730,125 19.190,2,10,30,
+Effingham Bay,14,8,2013,48 52.752,125 19.204,3,150,30,
+Effingham Bay,14,8,2013,48 52.752,125 19.204,4,330,30,
+Hand Island,22,8,2013,48 57.215,125 18.560,1,220,26,
+Hand Island,22,8,2013,48 57.215,125 18.560,2,40,29,
+Hand Island,22,8,2013,48 57.226,125 18.506,3,220,28,
+Hand Island,22,8,2013,48 57.226,125 18.506,4,40,32,Bearing shifted from 40 to 100 24m along transect
+Island Harbour,15,8,2013,48 54.562,125 16.983,1,300,14,Bearing shifted from 300 to 20 at end of transect
+Island Harbour,15,8,2013,48 54.562,125 16.983,2,100,17,Bearing shifted from 100 to 50 at end of transect
+Island Harbour,15,8,2013,48 54.626,125 16.924,3,180,24,
+Island Harbour,15,8,2013,48 54.626,125 16.924,4,250,28,Bearing shifted from 250 to 270 at end of transect
+Nettle,13,8,2013,48 56.229,125 15.017,1,100,24,
+Nettle,13,8,2013,48 56.229,125 15.017,2,280,22,
+Nettle,13,8,2013,48 56.251,125 15.073,3,100,17,
+Nettle,23,8,2013,48 56.231,125 14.992,4,100,28,
+Nettle,23,8,2013,48 56.231,125 14.992,5,220,28,
+Turret,21,8,2013,48 53.851,125 20.650,1,300,18,
+Turret,21,8,2013,48 53.851,125 20.650,2,120,20,"Bearing shifted from 120 to 180, 10 metres along transect bearing shifted"
+Turret,21,8,2013,48 53.855,125 20.606,3,100,22,
+Turret,21,8,2013,48 53.855,125 20.606,4,300,21,Bearing shifted from 300 to 0 at 6m along transect and 0 to 90 at 24m along transect
+Dodd,12,8,2014,48 55.540,125 19.646,1,70,21,
+Dodd,12,8,2014,48 55.540,125 19.646,2,270,28,
+Dodd,12,8,2014,48 55.535,125 19.612,3,90,23,
+Dodd,17,8,2014,48 55.514,125 19.545,4,270,17,Bearing shifted from 270 to 10 at 20m along transect
+Effingham Bay,10,9,2014,48 52.738,125 19.174,1,160,25,
+Effingham Bay,10,9,2014,48 52.738,125 19.174,2,340,28,
+Effingham Bay,10,9,2014,48 52.841,125 19.165,3,160,25,
+Effingham Bay,10,9,2014,48 52.841,125 19.165,4,340,29,
+Hand Island,17,8,2014,48 57.222,125 18.494,1,220,21,
+Hand Island,17,8,2014,48 57.222,125 18.494,2,40,27,
+Hand Island,19,8,2014,48 57.198,125 18.587,3,210,25,
+Hand Island,19,8,2014,48 57.198,125 18.587,4,30,30,
+Island Harbour,10,8,2014,48 54.568,125 16.982,1,290,16,
+Island Harbour,11,8,2014,48 54.561,125 16.983,2,80,18,
+Island Harbour,11,8,2014,48 54.630,125 16.959,3,180,17,
+Island Harbour,11,8,2014,48 54.630,125 16.959,4,0,33,Bearing shifted from 0 to 120 at 20.5m along transect
+Nettle,19,8,2014,48 56.277,125 15.123,1,240,22,
+Nettle,19,8,2014,48 56.277,125 15.123,2,110,22,
+Nettle,9,9,2014,48 56.244,125 15.122,3,90,22,
+Nettle,9,9,2014,48 56.244,125 15.122,4,290,27,
+Turret,18,8,2014,48 53.855,125 20.650,1,270,18,Bearing shifted to 300 at 20m along transect
+Turret,18,8,2014,48 53.855,125 20.650,2,170,23,Bearing shifted to 100 at 9m along transect
+Turret,18,8,2014,48 53.863,125 20.604,3,90,13,"Bearing shifted to 180 at 15m along transect, transect not used for EI data"
+Turret,18,8,2014,48 53.863,125 20.604,4,30,11,Transect not used for EI data
+Turret,12,9,2014,48 53.884,125 20.646,5,120,17,Bearing shifted to 40 at 18.5m along transect
+Turret,12,9,2014,48 53.884,125 20.646,6,300,18,
+Hand Island,13,8,2015,48 56.219,125 18.528,1,240,30,
+Hand Island,13,8,2015,48 57.214,125 18.519,2,240,27,
+Hand Island,13,8,2015,48 56.219,125 18.528,3,60,24,
+Hand Island,14,8,2015,48 57.199,125 18.598,4,240,28,
+Hand Island,14,8,2015,48 57.208,125 18.560,5,240,31,
+Nettle,24,8,2015,48 56.268,125 15.106,1,90,29,
+Nettle,24,8,2015,48 56.268,125 15.106,2,270,28,
+Nettle,24,8,2015,48 56.258,125 15.106,3,90,24,
+Turret,25,8,2015,48 53.866,125 20.674,1,220,21,Bearing shifted to 150 at 6m along transect and 90 at 15m along transect
+Turret,25,8,2015,48 53.866,125 20.674,2,110,23,
+Turret,25,8,2015,48 53.857,125 20.647,3,100,25,Bearing shifted to 80 at 8m along transect
+Turret,2,9,2015,48 53.881,125 20.669,4,140,23,Bearing shifted to 60 at 15m along transect 
+Turret,2,9,2015,48 53.881,125 20.669,5,320,17,Bearing shifted to 290 at 23m along transect
+Turret,2,9,2015,48 53.865,125 20.669,6,290,32,
+Island Harbour,31,8,2015,48 54.561,125 16.976,1,80,27,
+Island Harbour,31,8,2015,48 54.561,125 16.976,2,270,26,
+Island Harbour,3,9,2015,48 54.615,125 16.942,3,300,20,
+Island Harbour,3,9,2015,48 54.603,125 16.986,4,300,16,
+Nettle,14,9,2015,48 56.137,125 14.825,4,90,23,
+Nettle,14,9,2015,48 56.137,125 14.825,5,270,24,
+Effingham Bay,15,9,2015,48 52.827,125 19.086,1,250,22,Bearing shifted from 250 to 330 at 8m along transect and at 20m along transect to 240
+Effingham Bay,15,9,2015,48 52.883,125 19.177,2,30,18,
+Effingham Bay,15,9,2015,48 52.818,125 19.157,3,90,23,
+Effingham Bay,17,9,2015,48 52.819,125 19.045,4,150,24,Bearing shifted to 90 at 14m along transect
+Dodd,16,9,2015,48 55.528,125 19.687,1,30,22,
+Dodd,16,9,2015,48 55.528,125 19.687,2,270,28,
+Dodd,16,9,2015,48 55.522,125 19.641,3,90,19,
+Dodd,17,9,2015,48 55.518,125 19.638,4,70,18,
+Nettle,8,8,2016,48 56.277,125 15.114,1,110,33,
+Nettle,8,8,2016,48 56.277,125 15.114,2,300,43,
+Nettle,8,8,2016,48 56.277,125 15.114,3,270,28,
+Nettle,9,8,2016,48 56.255,125 15.110,4,110,22,Bearing shifted to 90 at 15m along transect
+Nettle,9,8,2016,48 56.255,125 15.110,5,280,18,"Bearing shifted to 330 at 14m, then back to 280 at 24m"
+Nettle,9,8,2016,48 56.255,125 15.110,6,270,20,bearing shifted to 230 at 18m then to 300 at 25 m
+Island Harbour,10,8,2016,48 54.565,125 16.994,1,90,22,
+Island Harbour,10,8,2016,48 54.565,125 16.994,2,300,17,Bearing shifted to 15 at 17m along transect
+Island Harbour,10,8,2016,48 54.526,125 17.054,3,290,24,Bearing shifted to 30 at 12m along transect
+Turret,11,8,2016,48 53.860,125 20.650,1,270,20,
+Turret,11,8,2016,48 53.860,125 20.650,2,180,20,
+Island Harbour,22,8,2016,48 54.642,125 16.973,4,140,17,"Bearing shifted to 180 at 11m, then to 120"
+Island Harbour,22,8,2016,48 54.645,125 16.985,5,300,25,Bearing shifted to 240 at 10m along transect
+Island Harbour,22,8,2016,48 54.566,125 17.009,6,10,18,Bearing shifted to 40 at 15m along transect
+Turret,23,8,2016,48 53.883,125 20.653,3,300,17,
+Turret,23,8,2016,48 53.883,125 20.653,4,180,20,Bearing shifted to 90 at 13m along transect
+Turret,23,8,2016,48 53.851,125 20.601,5,330,21,"Bearing shifted to 270 at 10m, then to 15 at 20m"
+Turret,26,8,2016,48 53.860,125 20.650,6,180,21,
+Turret,26,8,2016,48 53.860,125 20.650,7,360,28,Bearing shifted to 300 at 10m along transect
+Effingham Bay,8,9,2016,48 52.751,125 19.178,1,140,22,Bearing shifted to 180 at 20m along transect
+Effingham Bay,8,9,2016,48 52.822,125 19.105,2,20,20,Bearing shifted to 240 at 14m along transect
+Effingham Bay,8,9,2016,48 52.838,125 19.090,3,90,14,
+Effingham Bay,9,9,2016,48 52.863,125 19.170,4,10,18,Bearing shifted to 30 at some point along transect
+Effingham Bay,9,9,2016,48 52.863,125 19.170,5,140,18,Bearing shifted to 70 at 20m along transect
+Dodd,24,8,2016,48 55.533,125 19.590,1,90,20,
+Dodd,24,8,2016,48 55.533,125 19.590,2,240,17,Bearing shifted to 280 at 11m along transect
+Dodd ,24,8,2016,48 55.572,125 19.838,3,240,23,
+Dodd,7,9,2016,48 55.536,125 19.635,4,270,28,
+Dodd,7,9,2016,48 55.536,125 19.635,5,70,25,"2 Octopus seen, 1 at 9m on transect, 1 between 2-0m"
+Dodd,7,9,2016,48 55.538,125 19.581,6,75,28,
+Hand Island,13,9,2016,48 57.202,125 18.569,1,260,32,
+Hand Island,13,9,2016,48 57.202,125 18.569,2,70,29,
+Hand Island,13,9,2016,48 57.200,125 18.600,3,240,33,
+Hand Island,14,9,2016,48 57.223,125 18.491,4,50,37,Bearing shifted to 80 at 14m along transect
+Hand Island,14,9,2016,48 57.217,125 18.515,5,270,30,
