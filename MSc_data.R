@@ -229,8 +229,26 @@ RLS_data_totals <- RLS_full %>%
   group_by(site_name, site_code, year, depth)%>%
   summarise(total = sum(survey_total)) #lets take just what we want and get a sum total across all size classes of abalone
 
+RLS_data_totals_missing <- RLS_data_totals %>%
+  ungroup()%>%
+  add_row(site_name = "Dixon Inside", #add survey data that says none were found here in 2021 (removed when filtered for abalone)
+          site_code = "BMSC22",
+          year = 2021,
+          total = 0) %>%
+  add_row(site_name = "Raymond Kelp Rock", #add survey data that says none were found here in 2021 (removed when filtered for abalone)
+          site_code = "BMSC15",
+          year = 2021,
+          total = 0) %>%
+  add_row(site_name = "Hosie South", #add survey data that says none were found here in 2026 (removed when filtered for abalone)
+          site_code = "BMSC26",
+          year = 2026,
+          total = 0) %>%
+  add_row(site_name = "Wizard Island South", #add survey data that says none were found at this depth in 2022 (removed when filtered for abalone, not in 2022 one survey found abalone but there are two surveys so if I want the calculation to appropriately score density below I need to add another row that has a 0 total)
+          site_code = "BMSC11",
+          year = 2022,
+          total = 0)
 #now build code that checks if year and site_code occur more than once, if that is the case sum the total and divide by 200, otherwise just divide the total by 100. Reason for this is some sites are surveyed across two depths at the same time in the same year. Therefore, we need to sum their counts and divide by twice the area surveyed in a single survey to get a site level mean density
-RLS_data_means <- RLS_data_totals %>%
+RLS_data_means <- RLS_data_totals_missing %>%
   group_by(site_name, site_code, year) %>%
   summarise(
     site_mean_density = if (n() == 2) {
@@ -249,15 +267,6 @@ unique(RLS_data_means$site_code) #see the ones I need to remove
 
 RLS_data_means_filtered <- RLS_data_means %>%
   rename(site = "site_name") %>%
-  add_row(
-    site = "Hosie South",
-    site_code = "BMSC26",
-    year = 2026,
-    site_mean_density = 0)%>%
-  add_row(site = "Hosie South",
-          site_code = "BMSC26",
-          year = 2026,
-          site_mean_density = 0)%>% #we just added the relevant 0s found in missing_haliotidae_2026
   filter(!site_code %in% c(
     "BMKC2",
     "BMSC31",
