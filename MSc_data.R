@@ -386,3 +386,21 @@ average_Parks_abalone <- Parks_full_abalone %>%
             .groups = "drop")
 #KRI data ----
 #load data
+KRI_data<- read.csv("data-raw/BaumLab_BGI_abalonedata_2021-2025.csv") 
+
+#clean data set
+KRI_data_clean <- clean_names(KRI_data) 
+
+#clean dates
+KRI_data_clean <- KRI_data_clean %>%
+  mutate(date = as.Date(date, format = "%d.%m.%Y"))%>%
+  mutate(year = year(date)) %>% #get year column
+  mutate(site = case_when(str_detect(site, "Turret") ~ "Turret Island", #rename to ensure all names in df match
+                          str_detect(site, "Effingham") ~ "Effingham Bay", #rename to match Parks data
+                          str_detect(site, "Hand") ~ "Hand Island", #rename to match Parks data
+                          str_detect(site, "Nettle") ~ "Nettle", #rename to match Parks data
+                          str_detect(site, "Harb") ~ "Island Harbour", #rename to match Parks data
+                          TRUE ~ site)) 
+
+#get density 
+      
