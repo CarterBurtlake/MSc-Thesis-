@@ -304,3 +304,85 @@ RLS_average_density <- RLS_data_means_filtered %>%
 #Reviewed all sites and all have the correct number of years of data contributing to their average
 # CHECK: worth investigating density by depth 
 # CHECK: see if its worth adding KCCA data...
+
+# Parks data ----
+#load 2007-2012 data
+Parks_data_2007 <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012.csv") %>% #size data
+  rename(site = `Location`)
+Parks_data_2007_sites <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012_sitedata.csv") #site data
+  
+
+#clean size dataset and obtain total_abalone per site
+Parks_clean_data_2007 <- clean_names(Parks_data_2007) %>%
+  filter(!comment == "dead") %>%
+  group_by(site, year) %>%
+  summarise(total_abalone = n()) #add up the number of measured abalone for a year and site
+
+#clean site dataset and obtain site level survey_area
+Parks_clean_sites_2007 <- clean_names(Parks_data_2007_sites) %>%
+  group_by(site, year)%>%
+  summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
+            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+
+#join datasets together and get density
+Parks_abalone_2007 <- Parks_clean_sites_2007 %>%
+  left_join(Parks_clean_data_2007 %>%
+              select(site, year, total_abalone), #add the total ab data to the site data
+            by = c("site", "year")) %>% #combining the dataset by year and site
+  mutate(total_abalone = replace_na(total_abalone, 0)) %>% #N/A -> 0s for years when abalone wasnt seen at a site
+  mutate(density = total_abalone / survey_area) #calc density
+
+#average density
+average_Parks_abalone_2007 <- Parks_abalone_2007 %>%
+  group_by(site) %>%
+  summarise(mean_density = mean(density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+
+#need to join with the 2013-2016 data and KRI data to get the complete average density across these sites
+
+#load 2013-2016 data
+Parks_data_2013 <- read.csv("data-raw/PRNPR-Northern_Abalone-2013-2016.csv") #size data
+Parks_data_2013_sites <- read.csv("data-raw/PRNPR-Northern_Abalone-2013-2016_sitedata.csv") #site data
+
+#clean size dataset and obtain total_abalone per site
+Parks_clean_data_2013 <- clean_names(Parks_data_2013) %>%
+  group_by(site, year) %>%
+  summarise(total_abalone = n()) #add up the number of distinct measured abalone for a year and site
+
+#clean site dataset and obtain site level survey_area
+Parks_clean_sites_2013 <- clean_names(Parks_data_2013_sites) %>%
+  mutate(site = trimws(site)) %>% #one of the 2016 transects had a space after the name "Dodd " so use trimws to fix
+  group_by(site, year)%>%
+  summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
+            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+
+#join datasets together and get density
+Parks_abalone_2013 <- Parks_clean_sites_2013 %>%
+  left_join(Parks_clean_data_2013 %>%
+              select(site, year, total_abalone), #add the total ab data to the site data
+            by = c("site", "year")) %>% #combining the dataset by year and site
+  mutate(density = total_abalone / survey_area) #calc density
+
+#average density
+average_Parks_abalone_2013 <- Parks_abalone_2013 %>%
+  group_by(site) %>%
+  summarise(mean_density = mean(density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+
+#now we need to merge all parks density data to calc a total parks average density data (but we dont really need this for thesis)
+#lets merge the data sets using rbind
+Parks_full_abalone <- rbind(Parks_abalone_2013, Parks_abalone_2007)
+
+#average density
+average_Parks_abalone <- Parks_full_abalone %>%
+  mutate(site = trimws(site)) %>% #effingham name has white space, remove so that they are seen as same site
+  mutate(site = case_when(str_detect(site, "Turret") ~ "Turret Island", #rename turret to match 2007-2012 data
+                          TRUE ~ site))%>%
+  group_by(site) %>%
+  summarise(mean_density = mean(density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+#KRI data ----
+#load data
