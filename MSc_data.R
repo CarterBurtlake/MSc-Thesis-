@@ -373,13 +373,13 @@ average_Parks_abalone_2013 <- Parks_abalone_2013 %>%
 
 #now we need to merge all parks density data to calc a total parks average density data (but we dont really need this for thesis)
 #lets merge the data sets using rbind
-Parks_full_abalone <- rbind(Parks_abalone_2013, Parks_abalone_2007)
+Parks_full_abalone <- rbind(Parks_abalone_2013, Parks_abalone_2007) %>%
+  mutate(site = trimws(site)) %>% #effingham name has white space, remove so that they are seen as same site
+  mutate(site = case_when(str_detect(site, "Turret") ~ "Turret Island", #rename turret to match 2007-2012 data
+                          TRUE ~ site))
 
 #average density
 average_Parks_abalone <- Parks_full_abalone %>%
-  mutate(site = trimws(site)) %>% #effingham name has white space, remove so that they are seen as same site
-  mutate(site = case_when(str_detect(site, "Turret") ~ "Turret Island", #rename turret to match 2007-2012 data
-                          TRUE ~ site))%>%
   group_by(site) %>%
   summarise(mean_density = mean(density), #calculate density average across all years of study
             number_years = n_distinct(year), #tell us how many years go into the average calculation
@@ -402,5 +402,65 @@ KRI_data_clean <- KRI_data_clean %>%
                           str_detect(site, "Harb") ~ "Island Harbour", #rename to match Parks data
                           TRUE ~ site)) 
 
-#get density 
-      
+#get survey area 
+KRI_data_survey_area <- KRI_data_clean %>%
+  group_by(site, year)%>%
+  summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
+            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+
+KRI_abalone_total <- KRI_data_clean %>%
+  filter(size_cm > 0)%>% #remove rows where size = 0 as there were no abalone
+  group_by(site, year) %>%
+  summarise(total_abalone = n()) #total the number of abalone by totaling the number of rows that contain both year and site info CYU if just look at the df from the filter we see there are 68 observations, then the total abalone count across all sites and years add up to that so we know each row that = 68 so each size is tallied is accounted for -> total abs
+  
+KRI_abalone_totals_with_0s <- KRI_abalone_total%>%  #add 0s for sites that found no abalone
+  ungroup() %>%  # Remove grouping before adding rows
+  add_row(site = "Effingham Bay", 
+          year = 2021,
+          total_abalone = 0) %>%
+  add_row(site = "Dodd", 
+          year = 2021,
+          total_abalone = 0) %>%
+  add_row(site = "Hand Island", 
+          year = 2025,
+          total_abalone = 0) %>%
+  add_row(site = "Island Harbour", 
+          year = 2021,
+          total_abalone = 0) %>%
+  add_row(site = "Island Harbour", 
+          year = 2025,
+          total_abalone = 0)
+  
+KRI_density <- KRI_data_survey_area %>%
+  left_join(KRI_abalone_totals_with_0s %>%
+              select(site, year, total_abalone), #add the total ab data to the site data
+            by = c("site", "year")) %>% #combining the dataset by year and site
+  mutate(density = total_abalone / survey_area) #calc density
+
+#average density
+average_KRI_abalone <- KRI_density %>%
+  group_by(site) %>%
+  summarise(mean_density = mean(density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+
+# Parks + KRI data set ----
+#lets merge all the density data for the Parks sites
+BrokenGroupSites_full_abalone_data <- rbind(Parks_full_abalone, KRI_density)
+
+#average density across all the years (just for fun)
+average_BrokenGroup_data <- BrokenGroupSites_full_abalone_data %>%
+  group_by(site) %>%
+  summarise(mean_density = mean(density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+
+#plots sites through the years 
+test <- ggplot(data = BrokenGroupSites_full_abalone_data, aes(x = as.numeric(year), y = density, colour = site)) +
+  geom_point()+
+  geom_line()+
+  labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Site") + #add titles
+  theme_classic()
+
+test
+#notice that the 2013-2016 surveys had the largest search effort and seem to have the most variability in the data. 
