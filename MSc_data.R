@@ -322,7 +322,7 @@ Parks_clean_data_2007 <- clean_names(Parks_data_2007) %>%
 Parks_clean_sites_2007 <- clean_names(Parks_data_2007_sites) %>%
   group_by(site, year)%>%
   summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
-            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+            survey_area = survey_total_transect * 3.75) #number of transects * area surveyed in a single transect
 
 #join datasets together and get density
 Parks_abalone_2007 <- Parks_clean_sites_2007 %>%
