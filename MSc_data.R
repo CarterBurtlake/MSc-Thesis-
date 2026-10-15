@@ -54,8 +54,11 @@ DFO_abalone_density <- DFO_abalone %>%
          source = "DFO",
          search = "non_cryptic")
 
+#cant run this twice, must clean the environment if so to make changes
 DFO_abalone_density <- clean_names(DFO_abalone_density) %>% #tidy the column names
   rename(site = site_name) %>% #rename site to match all dfs
+  rename(site_mean_density = density) %>% #rename to match all dfs
+  select(site,year,site_mean_density,source,search,method) %>% #remove columns to match all dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", "")) 
 
@@ -64,7 +67,7 @@ DFO_average_density <- DFO_abalone_density %>%
   filter(!site %in% c("taylor_island_2021", "flemming_112_2021", "flemming_114")) %>% #remove sites that were only done in 2021
   # CHECK: Confirm we should remove or keep these? I think we should remove in this specific case as the sites were seen as unsuitable
   group_by(site) %>%
-  summarise(mean_density = mean(density), #calculate density average across all years of study
+  summarise(average_density = mean(site_mean_density), #calculate density average across all years of study
             number_years = n_distinct(year), #tell us how many years go into the average calculation
             .groups = "drop")
 
@@ -298,6 +301,13 @@ RLS_data_means_filtered <- RLS_data_means %>%
                           TRUE ~ site)) 
 #taylor or dodgers could be included as the ed_king_se most adjacent site here but it doesn't quite feel correct
 
+#tidy names to match combined df of all average abalone density
+RLS_abalone_density <- clean_names(RLS_data_means_filtered) %>% #tidy the column names
+  select(site, year, site_mean_density, method, search) %>% #remove site code to match other dfs
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""),
+         source = "RLS") 
+
 #okay lets check if our removing sites worked
 unique(RLS_data_means_filtered$site_code)
 #Okay yay! We got there, lets save that as processed data
@@ -306,7 +316,7 @@ unique(RLS_data_means_filtered$site_code)
 ##lets get an average for each site across all years 2021-2026
 RLS_average_density <- RLS_data_means_filtered %>%
   group_by(site_code) %>%
-  summarise(overall_mean_density = mean(site_mean_density), #calculate density average across all years of study
+  summarise(average_density = mean(site_mean_density), #calculate density average across all years of study
             number_years = n_distinct(year), #tell us how many years go into the average calculation
             .groups = "drop")
 #Reviewed all sites and all have the correct number of years of data contributing to their average
