@@ -396,6 +396,16 @@ Parks_full_abalone <- rbind(Parks_abalone_2013, Parks_abalone_2007) %>%
   mutate(site = case_when(str_detect(site, "Turret") ~ "Turret Island", #rename turret to match 2007-2012 data
                           TRUE ~ site))
 
+#tidy names to match combined df of all average abalone density
+Parks_abalone_density <- clean_names(Parks_full_abalone) %>% #tidy the column names
+  rename(site_mean_density = density) %>% #rename to match other dfs naming convention
+  select(site, year, site_mean_density) %>% #remove site code to match other dfs
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""),
+         source = "Parks",
+         method = "par_belt",
+         search = "non_cryptic") 
+
 #average density
 average_Parks_abalone <- Parks_full_abalone %>%
   group_by(site) %>%
@@ -455,6 +465,16 @@ KRI_density <- KRI_data_survey_area %>%
             by = c("site", "year")) %>% #combining the dataset by year and site
   mutate(density = total_abalone / survey_area) #calc density
 
+#tidy names to match combined df of all average abalone density
+KRI_abalone_density <- clean_names(KRI_density) %>% #tidy the column names
+  rename(site_mean_density = density) %>% #rename to match other dfs naming convention
+  select(site, year, site_mean_density) %>% #remove site code to match other dfs
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""),
+         source = "KRI",
+         method = "par_belt",
+         search = "non_cryptic") 
+
 #average density
 average_KRI_abalone <- KRI_density %>%
   group_by(site) %>%
@@ -464,17 +484,17 @@ average_KRI_abalone <- KRI_density %>%
 
 # Parks + KRI data set ----
 #lets merge all the density data for the Parks sites
-BrokenGroupSites_full_abalone_data <- rbind(Parks_full_abalone, KRI_density)
+BGI_abalone_density <- rbind(Parks_abalone_density, KRI_abalone_density)
 
 #average density across all the years (just for fun)
-average_BrokenGroup_data <- BrokenGroupSites_full_abalone_data %>%
+average_BrokenGroup_data <- BGI_abalone_density %>%
   group_by(site) %>%
-  summarise(mean_density = mean(density), #calculate density average across all years of study
+  summarise(average_density = mean(site_mean_density), #calculate density average across all years of study
             number_years = n_distinct(year), #tell us how many years go into the average calculation
             .groups = "drop")
 
 #plots sites through the years 
-test <- ggplot(data = BrokenGroupSites_full_abalone_data, aes(x = as.numeric(year), y = density, colour = site)) +
+test <- ggplot(data = BGI_abalone_density, aes(x = as.numeric(year), y = site_mean_density, colour = site)) +
   geom_point()+
   geom_line()+
   labs(x = "Year", y = "Abalone density (" ~m^-2*")", colour = "Site") + #add titles
