@@ -482,7 +482,7 @@ average_KRI_abalone <- KRI_density %>%
             number_years = n_distinct(year), #tell us how many years go into the average calculation
             .groups = "drop")
 
-# Parks + KRI data set ----
+# Parks + KRI data ----
 #lets merge all the density data for the Parks sites
 BGI_abalone_density <- rbind(Parks_abalone_density, KRI_abalone_density)
 
@@ -503,3 +503,118 @@ test <- ggplot(data = BGI_abalone_density, aes(x = as.numeric(year), y = site_me
 test
 #notice that the 2013-2016 surveys had the largest search effort and seem to have the most variability in the data. 
 
+
+# Jane Watson data ----
+#load data  
+JW_data <- read.csv("data-raw/AbaloneJaneWatsonCombined89_22.csv")
+#all sites accounted for (84)
+
+#clean data set
+JW_data_clean <- clean_names(JW_data) %>%
+  mutate( #tidy site names
+    code = as.integer(str_extract(site, "^\\d+")),
+    site = case_when(
+      code == 1 ~ "ship_islands",
+      code == 2 ~ "ed_king_sw", #call relevant to outplant location
+      code == 3 ~ "ed_king_nw", #call relevant to outplant location
+      code == 4 ~ "seppings",
+      code == 5 ~ "cape_beale",
+      code == 6 ~ "lawton_point",
+      code == 7 ~ "whittlestone",
+      code == 8 ~ "execution_rock",
+      code == 9 ~ "self_point", #this sites gps location is near effingham inlet?
+      code == 10 ~ "helby_ne",  #call relevant to outplant location
+      code == 11 ~ "scotts_bay",
+      code == 12 ~ "aguilar_point",
+      code == 13 ~ "cia_rock",
+      code == 14 ~ "ed_king_se", #for the purposes of this project I am renaming this site to align with the outplant location name (it is the closest site in this study)
+      code == 15 ~ "kirby_point",
+      code == 16 ~ "village_bay",
+      code == 17 ~ "blowhole",
+      code == 18 ~ "prasiola",
+      code == 19 ~ "wizard",
+      code == 20 ~ "grappler",
+      code == 21 ~ "ed_king_?", #seems like the same place as ed_king_nw
+      TRUE ~ site
+    )
+  ) %>%
+  select(-code)%>%
+  mutate(density_sample_size = str_remove(density_sample_size, "^n="))%>% #remove n= from rows in density sample size
+  mutate(site_mean_density = mean/0.49)%>% #okay so quadrats are 0.7m x 0.7m = 0.49m^2, so, to get abalone mean in quadrats across 1m2 we must do mean abalone in 0.49m2 / 0.49m2 = abalone per m2
+  mutate(depth_m = depth_ft * 0.3048)%>%
+  mutate(date = mdy(date), year = year(date))%>% #changes all the date formats using lubridate so that the second call of "year" can be applied to make a new column with just year
+  mutate(method = "par_quad") %>% #add the method of search used (in this case it was parallel to shore at a depth between 5-12m with quads a certain number of fin kicks away (Watson & Estes, 2011))
+  mutate(search = "non_cryptic") %>% #add the search type
+  mutate(source = "Jane_Watson") %>% #add the source 
+  mutate(year = if_else(is.na(year), 1994, year)) #add year in places when they weren't directly pasted into the raw file but they were in the document titled 1994
+
+# CHECK: confirm with Jane that the methods used for these surveys different than the wizard and taylor dataset?
+# CHECK: important to stress that I am just taking Janes mean data and we could recalculate these data
+# CHECK: there might be additional abalone in this dataset that I haven't accessed wherein they used independent quadrats to sample abalone and urchin sizes
+#we are going to leave the size information for JW right now as really dont have much of that...
+#no depth for 1994 - perhaps it was assumed to be the same as previous survey?
+#also note depth makes major change throughout program
+
+#tidy names to match combined df of all average abalone density
+JW_abalone_density_7year <- clean_names(JW_data_clean) %>% #tidy the column names
+  select(site, year, site_mean_density,method,source,search) %>% #remove other variables to match dfs 
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""))
+
+#View(JW_data_clean) #commented out to run all code easily
+#readr::write_csv(JW_data_clean, file = "data-processed/JW_data_1988_2022.csv") #to save the clean data (commented out so that when running the code you dont save something accidentally that you may have changed)
+
+#lets get an average for each site across all years 1989-2022
+JW_average_density <- JW_abalone_density_7year %>%
+  filter(!site == "ed_king_?") %>% #remove site with no data?
+  # CHECK: what is this data???
+  group_by(site) %>%
+  summarise(average_density = mean(site_mean_density), #calculate density average across all years of study
+            number_years = n_distinct(year), #tell us how many years go into the average calculation
+            .groups = "drop")
+
+#load annual data set
+JW_taylor_data <- read.csv("data-raw/JW_Taylor_Annual.csv")
+JW_wizard_data <- read.csv("data-raw/JW_Wizard_Annual.csv")
+
+#clean taylor
+JW_taylor_data_clean <- clean_names(JW_taylor_data)%>%
+  select(year,abalone) %>% #take column that totals abalone and the year it happened
+  filter(str_detect(year, regex("MEAN", ignore_case = TRUE))) %>% #could do this for variance and SD
+  mutate(year = as.numeric(str_extract(year, "\\d{2}$")), #extract number at end of name, then add appropriate year
+         year = if_else(year <= 26, year + 2000, year + 1900))%>%
+  rename(mean_abalone = abalone) %>% #rename to be clear
+  mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by indivudal transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
+         site = "taylor") 
+
+#density taylor
+JW_taylor_density <- JW_taylor_data_clean%>%
+  filter(!year == "1991")%>% #remove year that has no data
+  mutate(mean_abalone = as.numeric(mean_abalone))%>% #make these mean values numeric so can calculate density
+  mutate(site_mean_density = mean_abalone/survey_area) #calc density per year 
+  
+#do the same with Wizard
+JW_wizard_data_clean <- clean_names(JW_wizard_data)%>%
+  select(year,abalone) %>% #take column that totals abalone and the year it happened
+  filter(str_detect(year, regex("MEAN", ignore_case = TRUE))) %>% #could do this for variance and SD
+  mutate(year = as.numeric(str_extract(year, "\\d{2}$")), #extract number at end of name, then add appropriate year
+         year = if_else(year <= 26, year + 2000, year + 1900))%>%
+  rename(mean_abalone = abalone) %>% #rename to be clear
+  mutate(survey_area = 20,
+         site = "wizard") 
+
+#density wizard
+JW_wizard_density <- JW_wizard_data_clean%>%
+  mutate(site_mean_density = mean_abalone/survey_area) #calc density per year 
+
+#annual surveys combined and get in same format as other dfs
+JW_annual_density <- rbind(JW_wizard_density, JW_taylor_density) %>%
+  select(site,year,site_mean_density) %>% #remove columns to keep dfs consistent
+  mutate(search = "non_cryptic",
+         source = "Jane_Watson",
+         method = "perp_belt")
+
+#combine all Jane Watson data
+JW_abalone_density <- rbind(JW_abalone_density_7year, JW_annual_density)
+
+#could do all this with pychno data across all data sets except subsci 2024
