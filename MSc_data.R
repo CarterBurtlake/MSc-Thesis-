@@ -504,6 +504,64 @@ test
 #notice that the 2013-2016 surveys had the largest search effort and seem to have the most variability in the data. 
 
 
+# Storm Coast data ----
+#load data
+SC_data <- read.csv("data-raw/StormCoast_Abalone_2025.csv")
+
+View(SC_data)#commented out to run all code easily
+is.character(SC_data$date)
+# CHECK: review dixon inside on datasheets -> for now filter the site out
+
+#clean data
+SC_data <- SC_data %>%
+  clean_names() #make column names easier to work with
+
+SC_data_clean <- SC_data%>%
+  filter(quadrat != "NA") %>% #remove a bunch of blank data, now this matches our raw df... doesnt remove na's in rows without abalone though which is perfect
+  filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
+  filter(site_id != "Flemming 114") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
+  mutate(date = ymd(date), year = year(date)) %>% #change date to a date using lubridate and add a year column
+  mutate(method = "perp_quad") %>% #method used 
+  mutate(search = "non_cryptic") %>% #did not flip over rocks in search
+  mutate(source = "Storm_Coast") %>% #add to match df convention
+  mutate(site_id = case_when(str_detect(transect_id, "EKE02") ~ "ed_king_se", #changing names relevant to outplanting information.
+                             str_detect(transect_id, "EGB01") ~ "scotts_bay",
+                             str_detect(transect_id, "ELI01") ~ "ellis",
+                             str_detect(transect_id, "GOT01") ~ "grappler",
+                             str_detect(transect_id, "HSW01") ~ "helby_sw",
+                             str_detect(transect_id, "SAN02") ~ "sandford_sw", #this site might be less accurate -> to review in CH thesis
+                             str_detect(transect_id, "AGU01") ~ "aguilar_point",
+                             TRUE ~ site_id)) 
+
+
+
+
+#find a total alive value per site and total quadrat per site and join them
+SC_data_alive <- SC_data_clean %>%
+  group_by(site_id, year, method, search,source)%>%
+  summarise(total_alive = sum(alive_or_dead == "alive")) #first we get number of alive per site
+
+SC_data_quad <- SC_data_clean %>%
+  group_by(site_id, year, method, search, source)%>%
+  summarise(n_quadrats = n_distinct(quadrat)) #then we get number of quads per site
+
+SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year", "method", "search", "source")) %>%
+  mutate(site_mean_density = total_alive/n_quadrats) %>% #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
+  rename(site = site_id) #rename to match other data sets
+
+unique((SC_data_join$site))
+#notice we surveyed 57 sites in this effort but we filtered out dixon inside and flemming 114 so 55 observations provides a good moment to CYU
+#CHECK : get paper data and validate
+
+#tidy names to match combined df of all average abalone density
+SC_abalone_density <- clean_names(SC_data_join) %>% #tidy the column names
+  select(site, year, site_mean_density,method,source,search) %>% #remove other variables to match dfs 
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""))
+
+#lets save this (commented out so that when running the code you dont save something accidentally that you may have changed)
+#readr::write_csv(SC_data_join, file = "data-processed/SC_data_2025.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
+
 # Jane Watson data ----
 #load data  
 JW_data <- read.csv("data-raw/AbaloneJaneWatsonCombined89_22.csv")
@@ -616,5 +674,13 @@ JW_annual_density <- rbind(JW_wizard_density, JW_taylor_density) %>%
 
 #combine all Jane Watson data
 JW_abalone_density <- rbind(JW_abalone_density_7year, JW_annual_density)
+
+# Combined sources ----
+abalone_density <- rbind(JW_abalone_density, DFO_abalone_density, RLS_abalone_density, KRI_abalone_density, SC_abalone_density)
+
+#check site alignment
+unique(abalone_density$site)
+#figure out 1 year DFO sites (ask sandie if decided to be unsuitable habitat)
+#figure out naming convention in map for 100m proximity expcept if aspect changes (have to maybe filter wizard, clutus, folger, flemming, taylor/dodger/edking se complex, Sanford, ed_king all)
 
 #could do all this with pychno data across all data sets except subsci 2024
