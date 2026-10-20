@@ -720,11 +720,13 @@ JW_annual_density <- rbind(JW_wizard_density, JW_taylor_density) %>%
 
 #combine all Jane Watson data
 JW_abalone_density <- rbind(JW_abalone_density_7year, JW_annual_density)
+readr::write_csv(JW_abalone_density, file = "data-processed/JW_abalone_density.csv") #to save the processed data 
 
 # SubSci data ----
 
 # Combined sources ----
 abalone_density <- rbind(JW_abalone_density, DFO_abalone_density, RLS_abalone_density, KRI_abalone_density, SC_abalone_density)
+readr::write_csv(abalone_density, file = "data-processed/all_abalone_density.csv") #to save the processed data 
 
 #check site alignment
 unique(abalone_density$site)
