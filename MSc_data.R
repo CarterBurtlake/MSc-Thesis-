@@ -227,9 +227,53 @@ RLS_new_clean <- RLS_new %>%
   mutate(year = year(survey_date)) %>% #add year column
   mutate(search = "non_cryptic") #add search column, again will include method later once no need for pre-exisiting method data referencing fish or invert counts in the df
 
+#lets add the KCCA data from 2022 that didnt make it into this data set
+RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
+
+#clean names
+RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
+
+#filter for sites over years that don't have abalone 
+KCCA_data_year <- RLS_KCCA2022_data %>%
+  mutate(survey_date = dmy(date)) %>%
+  mutate(year = year(survey_date)) %>% #first we make a year column
+  filter(method != 0) %>% # get rid of all method 0's
+  slice(2:n()) # cuts the first blank row
+
+#attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
+# All unique site-year-depth combinations
+KCCA_all_combos <- KCCA_data_year %>%
+  distinct(site_no, year, depth)
+
+# Existing Haliotidae records
+KCCA_haliotidae <- KCCA_data_year %>%
+  filter(species == "Haliotis kamtschatkana") %>%
+  distinct(site_no, year, depth)
+
+# Find combinations missing Haliotidae
+KCCA_missing_haliotidae <- KCCA_all_combos %>%
+  anti_join(KCCA_haliotidae, by = c("site_no", "year", "depth")) %>%
+  mutate(
+    species = "Haliotis kamtschatkana",
+    total = 0
+  )
+# Add the missing rows
+KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
+         filter(species == "Haliotis kamtschatkana") 
+  
+
+#Okay, lets come back to year here, and clean the data set. Our goal is to lubridate date, and get density
+KCCA_data_clean <- KCCA_data_year %>%
+  mutate(survey_total = total) %>%
+  # just abalone sites (even though we know some have zeros)
+  filter(species == "Haliotis kamtschatkana") %>% #filter for just the abalone data
+  group_by(site_no, year, survey_total)%>%
+  select(site_no, site_name, survey_date, year, depth, method, species, size_class, survey_total) %>% #take relevant variables
+  mutate(search = "non_cryptic") #add search column, we will add method later once we dont overright the current method data
 
 
-#lets merge the data sets using rbind
+
+#lets merge the data sets u#lets merge the data sets u#lets merge the data sets using rbind
 RLS_full <- rbind(RLS_new_clean, RLS_data_clean)
 
 #View(RLS_full) #commented out to run all code easily
@@ -323,6 +367,8 @@ RLS_average_density <- RLS_data_means_filtered %>%
 # CHECK: worth investigating density by depth 
 # CHECK: see if its worth adding KCCA data...
 
+# RLS KCCA data----
+#load data
 # Parks data ----
 #load 2007-2012 data
 Parks_data_2007 <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012.csv") %>% #size data
