@@ -555,6 +555,8 @@ test
 SC_data <- read.csv("data-raw/StormCoast_Abalone_2025.csv")
 
 View(SC_data)#commented out to run all code easily
+#Flemming NW4 is actually the site we have to edit! Here all the abalone measured are alive so as long as size >0 then it can = alive
+#Dixon inside has some counted as dead vs alive and others not... for this we must have a condition wherein if size >0 and alive vs dead is blank then make it = alive
 is.character(SC_data$date)
 # CHECK: review dixon inside on datasheets -> for now filter the site out
 
@@ -564,8 +566,8 @@ SC_data <- SC_data %>%
 
 SC_data_clean <- SC_data%>%
   filter(quadrat != "NA") %>% #remove a bunch of blank data, now this matches our raw df... doesnt remove na's in rows without abalone though which is perfect
-  filter(site_id != "Dixon Inside") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
-  filter(site_id != "Flemming 114") %>% #remove site where we are uncertain of dead or alive counts - REVIEW PAPER DATA TO VALIDATE THIS 
+  mutate(alive_or_dead = case_when(abalone_shell_length_cm > 0 & alive_or_dead == "" ~ "alive",
+         TRUE ~ alive_or_dead)) %>% 
   mutate(date = ymd(date), year = year(date)) %>% #change date to a date using lubridate and add a year column
   mutate(method = "perp_quad") %>% #method used 
   mutate(search = "non_cryptic") %>% #did not flip over rocks in search
@@ -577,6 +579,7 @@ SC_data_clean <- SC_data%>%
                              str_detect(transect_id, "HSW01") ~ "helby_sw",
                              str_detect(transect_id, "SAN02") ~ "sandford_sw", #this site might be less accurate -> to review in CH thesis
                              str_detect(transect_id, "AGU01") ~ "aguilar_point",
+                             str_detect(transect_id, "ESE01") ~ "ed_king_s",
                              TRUE ~ site_id)) 
 
 
@@ -596,8 +599,7 @@ SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year",
   rename(site = site_id) #rename to match other data sets
 
 unique((SC_data_join$site))
-#notice we surveyed 57 sites in this effort but we filtered out dixon inside and flemming 114 so 55 observations provides a good moment to CYU
-#CHECK : get paper data and validate
+#notice we surveyed 57 sites in this effort and 57 observations (checked)
 
 #tidy names to match combined df of all average abalone density
 SC_abalone_density <- clean_names(SC_data_join) %>% #tidy the column names
@@ -605,6 +607,7 @@ SC_abalone_density <- clean_names(SC_data_join) %>% #tidy the column names
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))
 
+unique((SC_abalone_density$site))
 #lets save this (commented out so that when running the code you dont save something accidentally that you may have changed)
 #readr::write_csv(SC_data_join, file = "data-processed/SC_data_2025.csv") #to save the processed data (commented out so that when running the code you dont save something accidentally that you may have changed)
 
