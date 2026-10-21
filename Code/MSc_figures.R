@@ -20,6 +20,7 @@ library(lme4)
 library(TMB)
 library(visreg)
 library(fitdistrplus)
+library(emmeans)
 
 library(ggplot2) # Plotting data
 library(patchwork) # Arrange multiple plots together
@@ -177,7 +178,7 @@ slopes_Fig3 <- Fig3_rate %>%
   mutate(site = case_when(site == "wizard" & method == "perp_belt" ~ "wizard_north",
     TRUE ~ site)) %>%
   nest_by(site)%>% #like group by but gives it a key
-  mutate(fit = list(lm(site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the seperate sites so we get a slope per site
+  mutate(fit = list(lm(site_mean_density ~ year, data = data)))%>% #this should run multiple linear models on the separate sites so we get a slope per site
   reframe(tidy(fit)) %>%
   filter(term == "year")%>%
   mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
@@ -242,11 +243,33 @@ simulate_residuals(Fig3_model)
 descdist(Fig3_glm$site_mean_density) #looks like gamma but has 0s so try tweedie
 Fig3_glm <- Fig3_rate %>%
   #filter(method != "perp_belt") %>% #remove annual data for modelling 
+  #notice that if you add the filter above you take a lot of the weight out of the non_outplant data that is rich in the annual surveys and this drives a non-significant pattern with the interaction but generates one with year
   mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) #attempt to make year continuous and see "change per decade"
 Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
 #tweedie handles the 0s in the dataset, and can handle the random factor and the unbalanced survey design
 plot(simulateResiduals(Fig3_model_GLM))
 summary(Fig3_model_GLM) #have to exp to interpret 
-exp(0.66322)
-exp(0.25386)
-#use emmtrends to detedct differences between the year groupings? If split into just random sites could use emmeans and year as a factor? 
+exp(0.66322) #back transform the estimate for outplant_yes = 1.941032 1.94x higher density at outplant sites
+exp(0.25386) #back transform the estimate for decade = 1.288991 abs per m2 per decade growth at non-outplant sites
+
+# Biggest question is don't I then want to calculate the slopes using this distribution not lm as done for the Fig 3C, so how do I do this?
+#test
+test <- Fig3_rate %>%
+  mutate(site = case_when(site == "wizard" & method == "perp_belt" ~ "wizard_north",
+                          TRUE ~ site)) %>%
+  nest_by(site)%>% #like group by but gives it a key
+  mutate(fit = list(glmmTMB(site_mean_density ~ year, family = tweedie(link = "log"), data = data)))%>% #this should run multiple generalized mixed linear models with a log on the separate sites so we get a slope per site
+  reframe(tidy(fit)) %>%
+  filter(term == "year")%>%
+  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "aguilar_point") ~"yes",
+                              str_detect(site, "grappler") ~"yes",
+                              str_detect(site, "ed_king_se") ~"yes",
+                              str_detect(site, "sandford_sw") ~"yes",
+                              str_detect(site, "helby_sw") ~"yes",
+                              TRUE ~ "no")) %>%
+  mutate(method = case_when(str_detect(site, "wizard_north") ~"perp_belt", #add a column for method level
+                            str_detect(site, "taylor") ~"perp_belt",
+                            TRUE ~ "par_quad"))
+
+#note cannot do this as basically not enough information at each site to appropriately assign glmmTMB information to it 
