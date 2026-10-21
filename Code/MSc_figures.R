@@ -246,5 +246,7 @@ Fig3_glm <- Fig3_rate %>%
 Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
 #tweedie handles the 0s in the dataset, and can handle the random factor and the unbalanced survey design
 plot(simulateResiduals(Fig3_model_GLM))
-summary(Fig3_model_GLM)
+summary(Fig3_model_GLM) #have to exp to interpret 
+exp(0.66322)
+exp(0.25386)
 #use emmtrends to detedct differences between the year groupings? If split into just random sites could use emmeans and year as a factor? 
