@@ -227,52 +227,6 @@ RLS_new_clean <- RLS_new %>%
   mutate(year = year(survey_date)) %>% #add year column
   mutate(search = "non_cryptic") #add search column, again will include method later once no need for pre-exisiting method data referencing fish or invert counts in the df
 
-#lets add the KCCA data from 2022 that didnt make it into this data set
-RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
-
-#clean names
-RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
-
-#filter for sites over years that don't have abalone 
-KCCA_data_year <- RLS_KCCA2022_data %>%
-  mutate(survey_date = dmy(date)) %>%
-  mutate(year = year(survey_date)) %>% #first we make a year column
-  filter(method != 0) %>% # get rid of all method 0's
-  slice(2:n()) # cuts the first blank row
-
-#attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
-# All unique site-year-depth combinations
-KCCA_all_combos <- KCCA_data_year %>%
-  distinct(site_no, year, depth)
-
-# Existing Haliotidae records
-KCCA_haliotidae <- KCCA_data_year %>%
-  filter(species == "Haliotis kamtschatkana") %>%
-  distinct(site_no, year, depth)
-
-# Find combinations missing Haliotidae
-KCCA_missing_haliotidae <- KCCA_all_combos %>%
-  anti_join(KCCA_haliotidae, by = c("site_no", "year", "depth")) %>%
-  mutate(
-    species = "Haliotis kamtschatkana",
-    total = 0
-  )
-# Add the missing rows
-KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
-         filter(species == "Haliotis kamtschatkana") 
-  
-
-#Okay, lets come back to year here, and clean the data set. Our goal is to lubridate date, and get density
-KCCA_data_clean <- KCCA_data_year %>%
-  mutate(survey_total = total) %>%
-  # just abalone sites (even though we know some have zeros)
-  filter(species == "Haliotis kamtschatkana") %>% #filter for just the abalone data
-  group_by(site_no, year, survey_total)%>%
-  select(site_no, site_name, survey_date, year, depth, method, species, size_class, survey_total) %>% #take relevant variables
-  mutate(search = "non_cryptic") #add search column, we will add method later once we dont overright the current method data
-
-
-
 #lets merge the data sets u#lets merge the data sets u#lets merge the data sets using rbind
 RLS_full <- rbind(RLS_new_clean, RLS_data_clean)
 
@@ -369,6 +323,63 @@ RLS_average_density <- RLS_data_means_filtered %>%
 
 # RLS KCCA data----
 #load data
+#lets add the KCCA data from 2022 that didnt make it into this data set
+RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
+
+#clean names
+RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
+
+#filter for sites over years that don't have abalone 
+KCCA_data_year <- RLS_KCCA2022_data %>%
+  mutate(survey_date = dmy(date)) %>%
+  mutate(year = year(survey_date)) %>% #first we make a year column
+  filter(method != 0) %>% # get rid of all method 0's
+  slice(2:n()) %>% # cuts the first blank row
+  mutate(date = parse_date_time(date, orders = c("dmy", "d-m-y"))) #make all dates in the same format
+
+#attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
+# All unique site-year-depth combinations
+KCCA_all_combos <- KCCA_data_year %>%
+  distinct(site_name, site_no, year, depth, time, date) #have to include time as some sites surveyed twice but had same depth...
+
+# Existing Haliotidae records
+KCCA_haliotidae <- KCCA_data_year %>%
+  filter(species == "Haliotis kamtschatkana") %>%
+  distinct(site_name, site_no, year, depth)
+
+# Find combinations missing Haliotidae
+KCCA_missing_haliotidae <- KCCA_all_combos %>%
+  anti_join(KCCA_haliotidae, by = c("site_name", "site_no", "year", "depth")) %>%
+  mutate(
+    species = "Haliotis kamtschatkana",
+    total = 0) 
+
+# Add the missing rows
+KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
+  filter(species == "Haliotis kamtschatkana",
+         site_name != "Sand Town") %>% #control site that wasn't over rocky reef
+  slice(-42) #remove row with KC misprint 28 abalone 
+
+#get density 
+KCCA_density <- KCCA_with_missing_abalone %>%
+  group_by(site_name, year) %>%
+  summarise(
+    total_abalone = sum(total, na.rm = TRUE),
+    n_surveys = n_distinct(date),
+    survey_area = n_surveys * 100,
+    .groups = "drop") %>%
+  mutate(site_mean_density = total_abalone / survey_area) %>% #calc density
+  mutate(method = "par_belt",  #add columns to highlight method, source, and search type
+         source = "KCCA_RLS",
+         search = "non_cryptic")
+
+#tidy names to match combined df of all average abalone density
+KCCA_RLS_abalone_density <- clean_names(KCCA_density) %>% #tidy the column names
+  rename(site = site_name) %>%
+  select(site, year, site_mean_density, method, search, source) %>% #remove site code to match other dfs
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", "")) 
+
 # Parks data ----
 #load 2007-2012 data
 Parks_data_2007 <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012.csv") %>% #size data
@@ -728,12 +739,12 @@ readr::write_csv(JW_abalone_density, file = "data-processed/JW_abalone_density.c
 # SubSci data ----
 
 # Combined sources ----
-abalone_density <- rbind(JW_abalone_density, DFO_abalone_density, RLS_abalone_density, KRI_abalone_density, SC_abalone_density)
+abalone_density <- rbind(JW_abalone_density, DFO_abalone_density, RLS_abalone_density, KRI_abalone_density, SC_abalone_density, KCCA_RLS_abalone_density)
 readr::write_csv(abalone_density, file = "data-processed/all_abalone_density.csv") #to save the processed data 
 
 #check site alignment
 unique(abalone_density$site)
 #figure out 1 year DFO sites (ask sandie if decided to be unsuitable habitat)
-#figure out naming convention in map for 100m proximity expcept if aspect changes (have to maybe filter wizard, clutus, folger, flemming, taylor/dodger/edking se complex, Sanford, ed_king all)
+#figure out naming convention in map for 100m proximity except if aspect changes (have to maybe filter wizard, clutus, folger, flemming, taylor/dodger/edking se complex, Sanford, ed_king all)
 
 #could do all this with pychno data across all data sets except subsci 2024
