@@ -187,6 +187,7 @@ Fig1_model_test <-lmer(site_mean_density ~ outplant + factor(year) + ( 1| site),
 #this is the model we think
 #interaction as outplant sites should vary dependant on the year in this data set (year since outplant being 2022) but this leaves a very non-normal check model fit... Additive does not because it shows that year and outplant are very co linear?
 check_model(Fig1_model_test, show_dots = FALSE) # will not let me check for normalicy 
+plot(simulateResiduals(Fig1_model_test))
 summary(Fig1_model_test)
 
 #the boundary (singular) fit: see help('isSingular') code is telling me that my random effect is estimated 0 varience in my data. This likely isnt because the parameters explain it all, instead its likely a result of having and inadequate amount of data at a site (one mean) in a given year
@@ -198,6 +199,8 @@ isSingular(Fig1_model_test)
 Fig1_model <-lm(site_mean_density ~ outplant * factor(year), data= Fig1_JW) #year as a factor to account for a non-continuous distribution. Although I expect abalone density to increase through time (continuous) I dont have enough data through time to meet assumptions of linearity 
 
 check_model(Fig1_model, show_dots = FALSE) #figure out how to run
+plot(simulateResiduals(Fig1_model))
+
 
 summary(Fig1_model)
 #Here I find that outplant sites in 1988 showed no evidence of being different than non outplant sites p =0.12 (great)

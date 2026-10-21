@@ -17,6 +17,9 @@ library(broom) # to run nested linear models
 library(performance) #to check assumptions of my regressions on normal data
 library(insight) #to "fix" performance package
 library(lme4)
+library(TMB)
+library(visreg)
+library(fitdistrplus)
 
 library(ggplot2) # Plotting data
 library(patchwork) # Arrange multiple plots together
@@ -221,3 +224,27 @@ Fig3_combined / slopes_Fig3_plot +
   plot_layout(guides = "collect")+ #bring legend to middle of the patchwork grid
   plot_annotation(tag_levels = list(c('(a)', '(b)', '(c)')))
 
+#model
+Fig3_model_test <-lmer(site_mean_density ~ outplant + factor(year) + ( 1| site), data= Fig3_rate)
+check_model(Fig3_model_test, show_dots = FALSE) # will not let me check for normalcy 
+plot(simulateResiduals(Fig3_model_test))
+
+
+Fig3_model <-lm(site_mean_density ~ outplant * year, data= Fig3_rate)
+check_model(Fig3_model_test, show_dots = FALSE) # will not let me check for normalcy 
+plot(simulateResiduals(Fig3_model_test))
+summary(Fig3_model)
+
+
+simulate_residuals(Fig3_model)
+
+#model
+descdist(Fig3_glm$site_mean_density) #looks like gamma but has 0s so try tweedie
+Fig3_glm <- Fig3_rate %>%
+  #filter(method != "perp_belt") %>% #remove annual data for modelling 
+  mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) #attempt to make year continuous and see "change per decade"
+Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
+#tweedie handles the 0s in the dataset, and can handle the random factor and the unbalanced survey design
+plot(simulateResiduals(Fig3_model_GLM))
+summary(Fig3_model_GLM)
+#use emmtrends to detedct differences between the year groupings? If split into just random sites could use emmeans and year as a factor? 
