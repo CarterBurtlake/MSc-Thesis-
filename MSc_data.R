@@ -324,41 +324,98 @@ RLS_average_density <- RLS_data_means_filtered %>%
 # RLS KCCA data----
 #load data
 #lets add the KCCA data from 2022 that didnt make it into this data set
-RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
+# RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
+# 
+# #clean names
+# RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
+# 
+# #filter for sites over years that don't have abalone 
+# KCCA_data_year <- RLS_KCCA2022_data %>%
+#   mutate(survey_date = dmy(date)) %>%
+#   mutate(year = year(survey_date)) %>% #first we make a year column
+#   filter(method != 0) %>% # get rid of all method 0's
+#   slice(2:n()) %>% # cuts the first blank row
+#   mutate(date = parse_date_time(date, orders = c("dmy", "d-m-y"))) #make all dates in the same format
+# 
+# #attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
+# # All unique site-year-depth combinations
+# KCCA_all_combos <- KCCA_data_year %>%
+#   distinct(site_name, site_no, year, depth, time, date) #have to include time as some sites surveyed twice but had same depth...
+# 
+# # Existing Haliotidae records
+# KCCA_haliotidae <- KCCA_data_year %>%
+#   filter(species == "Haliotis kamtschatkana") %>%
+#   distinct(site_name, site_no, year, depth)
+# 
+# # Find combinations missing Haliotidae
+# KCCA_missing_haliotidae <- KCCA_all_combos %>%
+#   anti_join(KCCA_haliotidae, by = c("site_name", "site_no", "year", "depth")) %>%
+#   mutate(
+#     species = "Haliotis kamtschatkana",
+#     total = 0) 
+# 
+# # Add the missing rows
+# KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
+#   filter(species == "Haliotis kamtschatkana",
+#          site_name != "Sand Town") %>% #control site that wasn't over rocky reef
+#   slice(-42) #remove row with KC misprint 28 abalone 
+# 
+# #get density 
+# KCCA_density <- KCCA_with_missing_abalone %>%
+#   group_by(site_name, year) %>%
+#   summarise(
+#     total_abalone = sum(total, na.rm = TRUE),
+#     n_surveys = n_distinct(date),
+#     survey_area = n_surveys * 100,
+#     .groups = "drop") %>%
+#   mutate(site_mean_density = total_abalone / survey_area) %>% #calc density
+#   mutate(method = "par_belt",  #add columns to highlight method, source, and search type
+#          source = "KCCA_RLS",
+#          search = "non_cryptic")
+# 
+# #tidy names to match combined df of all average abalone density
+# KCCA_RLS_abalone_density <- clean_names(KCCA_density) %>% #tidy the column names
+#   rename(site = site_name) %>%
+#   select(site, year, site_mean_density, method, search, source) %>% #remove site code to match other dfs
+#   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+#          site = str_replace_all(site, "'", "")) 
+
+#load full data set
+#lets add the KCCA data from 2022 & 2023 data that didnt make it into this data set
+RLS_KCCA2022_data <- read.csv("data-raw/KCCA_RLS_all.csv") 
 
 #clean names
 RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
 
-#filter for sites over years that don't have abalone 
 KCCA_data_year <- RLS_KCCA2022_data %>%
-  mutate(survey_date = dmy(date)) %>%
-  mutate(year = year(survey_date)) %>% #first we make a year column
-  filter(method != 0) %>% # get rid of all method 0's
-  slice(2:n()) %>% # cuts the first blank row
-  mutate(date = parse_date_time(date, orders = c("dmy", "d-m-y"))) #make all dates in the same format
+  mutate(
+    date = parse_date_time(date, orders = c("dmy", "ymd")),
+    year = year(date)
+  ) %>%
+  filter(method != 0) 
 
 #attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
 # All unique site-year-depth combinations
 KCCA_all_combos <- KCCA_data_year %>%
-  distinct(site_name, site_no, year, depth, time, date) #have to include time as some sites surveyed twice but had same depth...
+  distinct(site_name, unique_id, year, depth, date) #have to include date as some sites surveyed twice but had same depthbut these surveys were never on the same day...
 
 # Existing Haliotidae records
 KCCA_haliotidae <- KCCA_data_year %>%
-  filter(species == "Haliotis kamtschatkana") %>%
-  distinct(site_name, site_no, year, depth)
+  filter(species_name == "Haliotis kamtschatkana") %>%
+  distinct(site_name, unique_id, year, depth,date)
 
 # Find combinations missing Haliotidae
 KCCA_missing_haliotidae <- KCCA_all_combos %>%
-  anti_join(KCCA_haliotidae, by = c("site_name", "site_no", "year", "depth")) %>%
+  anti_join(KCCA_haliotidae, by = c("site_name", "unique_id", "year", "depth")) %>%
   mutate(
-    species = "Haliotis kamtschatkana",
+    species_name = "Haliotis kamtschatkana",
     total = 0) 
 
 # Add the missing rows
 KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
-  filter(species == "Haliotis kamtschatkana",
-         site_name != "Sand Town") %>% #control site that wasn't over rocky reef
-  slice(-42) #remove row with KC misprint 28 abalone 
+  filter(species_name == "Haliotis kamtschatkana",
+         site_name != "Sand Town")%>% #control site that wasn't over rocky reef
+  slice(-27) #remove row with KC misprint 28 abalone 
 
 #get density 
 KCCA_density <- KCCA_with_missing_abalone %>%
@@ -379,7 +436,6 @@ KCCA_RLS_abalone_density <- clean_names(KCCA_density) %>% #tidy the column names
   select(site, year, site_mean_density, method, search, source) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", "")) 
-
 # Parks data ----
 #load 2007-2012 data
 Parks_data_2007 <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012.csv") %>% #size data
