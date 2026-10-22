@@ -394,6 +394,9 @@ KCCA_data_year <- RLS_KCCA2022_data %>%
   ) %>%
   filter(method != 0) 
 
+KCCA_data_year %>%
+  distinct(site_name, year) #11 more surveys in 2023
+
 #attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
 # All unique site-year-depth combinations
 KCCA_all_combos <- KCCA_data_year %>%
