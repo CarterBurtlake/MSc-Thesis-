@@ -70,6 +70,30 @@ silhouette_df_abalone_3 <- data.frame(
   img_y = 0.06, 
   uuid = abalone_uuid_3)
 
+
+#Fig 1: Map ----
+## JW ----
+JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv")
+#must do this in order because of slice usage
+JW_coords <- clean_names(JW_coords)%>% 
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", ""))%>%
+  filter(site != "self_point") %>% #remove random site until get gps
+  slice(-20) #remove ed_king_? which only had data from one year
+
+## KRI ----
+KRI_coords <- read.csv("data-raw/KRI_coords.csv") 
+
+KRI_coords <- clean_names(KRI_coords) %>%
+  mutate(
+    site = str_to_lower(site),
+    site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
+    site = str_replace_all(site, "'", ""),
+    outplant = "no")
+  
+  
+
+
 #Fig 3: JW rate ----
 
 #first make df have site level outplant information
