@@ -81,7 +81,7 @@ JW_coords <- clean_names(JW_coords)%>%
   filter(site != "self_point") %>% #remove random site until get gps
   slice(-20) #remove ed_king_? which only had data from one year
 
-## KRI ----
+## KRI & Parks ----
 KRI_coords <- read.csv("data-raw/KRI_coords.csv") 
 
 KRI_coords <- clean_names(KRI_coords) %>%
@@ -90,8 +90,27 @@ KRI_coords <- clean_names(KRI_coords) %>%
     site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
     site = str_replace_all(site, "'", ""),
     outplant = "no")
-  
-  
+
+## StormCoast ----
+SC_coords <- read.csv("data-raw/StormCoast_coords.csv") 
+
+SC_coords <- janitor::clean_names(SC_coords) %>%
+  rename(site = site_id)%>%
+  mutate(
+    site = str_to_lower(site),
+    site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
+    site = str_replace_all(site, "'", ""),
+    outplant = "no")
+
+SC_coords_clean <- SC_coords %>%
+  dplyr::select(site, transect_id, latitude_decimal_degrees, longitude_decimal_degrees)%>%
+  mutate(outplant = case_when(str_detect(site, "eagle_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "aguilar") ~"yes",
+                              str_detect(transect_id, "GOT01") ~"yes",
+                              str_detect(transect_id, "EKE02") ~"yes",
+                              str_detect(transect_id, "HSW01") ~"yes",
+                              TRUE ~ "no")) #everything else = not outplant
+## RLS ----  
 
 
 #Fig 3: JW rate ----
@@ -268,14 +287,20 @@ descdist(Fig3_glm$site_mean_density) #looks like gamma but has 0s so try tweedie
 Fig3_glm <- Fig3_rate %>%
   #filter(method != "perp_belt") %>% #remove annual data for modelling 
   #notice that if you add the filter above you take a lot of the weight out of the non_outplant data that is rich in the annual surveys and this drives a non-significant pattern with the interaction but generates one with year
-  mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) #attempt to make year continuous and see "change per decade"
-Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
+  mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) %>% #attempt to make year continuous and see "change per decade"
+  mutate(pre_post = case_when(year > 2003 ~ "pre",
+                          TRUE ~ "post"))
+Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade * pre_post + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
 #tweedie handles the 0s in the dataset, and can handle the random factor and the unbalanced survey design
 plot(simulateResiduals(Fig3_model_GLM))
 summary(Fig3_model_GLM) #have to exp to interpret 
 exp(0.66322) #back transform the estimate for outplant_yes = 1.941032 1.94x higher density at outplant sites
 exp(0.25386) #back transform the estimate for decade = 1.288991 abs per m2 per decade growth at non-outplant sites
 
+#test site as main effect 
+Fig3_model_GLM <- glmmTMB(site_mean_density ~  year_decade + site, family = tweedie(link = "log"), data = Fig3_glm)
+plot(simulateResiduals(Fig3_model_GLM))
+summary(Fig3_model_GLM) 
 # Biggest question is don't I then want to calculate the slopes using this distribution not lm as done for the Fig 3C, so how do I do this?
 #test
 test <- Fig3_rate %>%

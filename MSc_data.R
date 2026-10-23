@@ -38,7 +38,7 @@ DFO_kelp_data_clean <- DFO_kelp_data %>%
 #Add the site data using the unique ID for each row
 DFO_abalone <- DFO_site_data %>%
   left_join(DFO_kelp_data_clean %>%
-              select(HKey, Quadrat, GaugeDepthFeet, Number, SpeciesCode, Measurement, Count, Comments),
+              dplyr::select(HKey, Quadrat, GaugeDepthFeet, Number, SpeciesCode, Measurement, Count, Comments),
             by = "HKey")
 
 #Next we need to add a total for each transect (WHICH I MUST CONFIRM ALL USED 3 QUADRATS TO GET THAT VALUE) for each year, add them up across the whole site, and then divide by the appropriate area of size surveyed to get density for a year (mean). 
@@ -58,7 +58,7 @@ DFO_abalone_density <- DFO_abalone %>%
 DFO_abalone_density <- clean_names(DFO_abalone_density) %>% #tidy the column names
   rename(site = site_name) %>% #rename site to match all dfs
   rename(site_mean_density = density) %>% #rename to match all dfs
-  select(site,year,site_mean_density,source,search,method) %>% #remove columns to match all dfs
+  dplyr::select(site,year,site_mean_density,source,search,method) %>% #remove columns to match all dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", "")) 
 
