@@ -184,7 +184,10 @@ DFO_coords <- janitor::clean_names(DFO_coords)
 DFO_coords <- DFO_coords%>% 
   rename(site = sites) %>%
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
-         site = str_replace_all(site, "'", "")) 
+         site = str_replace_all(site, "'", "")) %>%
+  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "grappler_mouth") ~"yes",
+                              TRUE ~ "no")) #everything else = not outplant
 # CHECK: NEED TO ASK SANDIE FOR GPS OF NEW SITES AND GENERAL RUN DOWN OF SURVEY AREA ETC
 #Fig 3: JW rate ----
 
