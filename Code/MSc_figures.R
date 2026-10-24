@@ -72,10 +72,10 @@ silhouette_df_abalone_3 <- data.frame(
 
 
 #Fig 1: Map ----
-## JW ----
+## JW + annual ----
 JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.csv")
 #must do this in order because of slice usage
-JW_coords <- clean_names(JW_coords)%>% 
+JW_coords <- janitor::clean_names(JW_coords)%>% 
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))%>%
   filter(site != "self_point") %>% #remove random site until get gps
@@ -84,14 +84,14 @@ JW_coords <- clean_names(JW_coords)%>%
 ## KRI & Parks ----
 KRI_coords <- read.csv("data-raw/KRI_coords.csv") 
 
-KRI_coords <- clean_names(KRI_coords) %>%
+KRI_coords <- janitor::clean_names(KRI_coords) %>%
   mutate(
     site = str_to_lower(site),
     site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
     site = str_replace_all(site, "'", ""),
     outplant = "no")
 
-## StormCoast ----
+## Storm Coast ----
 SC_coords <- read.csv("data-raw/StormCoast_coords.csv") 
 
 SC_coords <- janitor::clean_names(SC_coords) %>%
@@ -110,9 +110,82 @@ SC_coords_clean <- SC_coords %>%
                               str_detect(transect_id, "EKE02") ~"yes",
                               str_detect(transect_id, "HSW01") ~"yes",
                               TRUE ~ "no")) #everything else = not outplant
-## RLS ----  
+## RLS + KCCA ----  
+#load RLS 2026 data 
+RLS_coords_2026 <- read_csv("data-raw/RLS_2026_only_bonus.csv")
+
+#clean
+RLS_coords_2026 <- janitor::clean_names(RLS_coords_2026) %>%
+  slice(-1) #remove first RLS row that is remnant RLS formatting
+
+#identify unique site locations (effingham west and Baeria north island south side)
+RLS_coords_clean <- RLS_coords_2026 %>%
+  distinct(site_name, site_no, latitude, longitude) %>% #notice  even if two transects at a single site the lat, long stays same so dont need depth!
+  rename(site = site_name)%>%
+  mutate(
+    site = str_to_lower(site),
+    site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
+    site = str_replace_all(site, "'", ""),
+    outplant = "no")
+
+RLS_coords_2026 <- RLS_coords_clean %>%
+  mutate(outplant = case_when(str_detect(site, "eagle_bay") ~"yes", #add a column for outplant level
+                              str_detect(site, "aguilar_point") ~"yes",
+                              str_detect(site, "goby_town") ~"yes",
+                              str_detect(site, "EKE02") ~"yes",
+                              str_detect(site, "black_fish_rock") ~"yes",
+                              TRUE ~ "no")) #everything else = not outplant
+
+#load RLS data 2021-2025 which contains two sites not included in the above
+RLS_coords_2025 <- read_csv("data-raw/RLS_2025.csv")
+
+#clean
+RLS_coords_2025 <- janitor::clean_names(RLS_coords_2025) 
+
+#identify unique site locations (effingham west and Baeria north island south side)
+RLS_coords_clean_2025 <- RLS_coords_2025 %>%
+  distinct(site_name, site_code, latitude, longitude) %>% #notice  even if two transects at a single site the lat, long stays same so dont need depth!
+  rename(site = site_name)%>%
+  rename(site_no = site_code)%>%
+  mutate(
+    site = str_to_lower(site),
+    site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
+    site = str_replace_all(site, "'", ""),
+    outplant = "no")%>%
+  filter(site == "effingham_west" | site == "baeria_rocks_north_island_southside") 
+         
+RLS_coords <- bind_rows(RLS_coords_clean_2025, RLS_coords_2026)%>%
+  dplyr::select(site, latitude, longitude, outplant)
+
+#add KCCA RlS files
+KCCA_coords <- read_csv("data-raw/KCCA_RLS_all.csv")
+
+#clean
+KCCA_coords <- janitor::clean_names(KCCA_coords) 
+
+#identify unique site locations (effingham west and Baeria north island south side)
+KCCA_coords <- KCCA_coords %>%
+  distinct(site_name, latitude, longitude) %>%
+  rename(site = site_name)%>%
+  mutate(
+    site = str_to_lower(site),
+    site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
+    site = str_replace_all(site, "'", ""),
+    outplant = "no") %>%
+  filter(site != "sand_town")
 
 
+## DFO ----
+#load data
+DFO_coords <- read.csv("data-raw/DFOKelp2021-2025.csv")
+# clean
+DFO_coords <- janitor::clean_names(DFO_coords)
+
+DFO_coords <- DFO_coords%>% 
+  rename(site = sites) %>%
+  mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
+         site = str_replace_all(site, "'", "")) 
+# CHECK: NEED TO ASK SANDIE FOR GPS OF NEW SITES AND GENERAL RUN DOWN OF SURVEY AREA ETC
 #Fig 3: JW rate ----
 
 #first make df have site level outplant information
@@ -297,28 +370,13 @@ summary(Fig3_model_GLM) #have to exp to interpret
 exp(0.66322) #back transform the estimate for outplant_yes = 1.941032 1.94x higher density at outplant sites
 exp(0.25386) #back transform the estimate for decade = 1.288991 abs per m2 per decade growth at non-outplant sites
 
-#test site as main effect 
+#test site as main effect for better slope estimates!
 Fig3_model_GLM <- glmmTMB(site_mean_density ~  year_decade + site, family = tweedie(link = "log"), data = Fig3_glm)
 plot(simulateResiduals(Fig3_model_GLM))
 summary(Fig3_model_GLM) 
 # Biggest question is don't I then want to calculate the slopes using this distribution not lm as done for the Fig 3C, so how do I do this?
-#test
-test <- Fig3_rate %>%
-  mutate(site = case_when(site == "wizard" & method == "perp_belt" ~ "wizard_north",
-                          TRUE ~ site)) %>%
-  nest_by(site)%>% #like group by but gives it a key
-  mutate(fit = list(glmmTMB(site_mean_density ~ year, family = tweedie(link = "log"), data = data)))%>% #this should run multiple generalized mixed linear models with a log on the separate sites so we get a slope per site
-  reframe(tidy(fit)) %>%
-  filter(term == "year")%>%
-  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
-                              str_detect(site, "aguilar_point") ~"yes",
-                              str_detect(site, "grappler") ~"yes",
-                              str_detect(site, "ed_king_se") ~"yes",
-                              str_detect(site, "sandford_sw") ~"yes",
-                              str_detect(site, "helby_sw") ~"yes",
-                              TRUE ~ "no")) %>%
-  mutate(method = case_when(str_detect(site, "wizard_north") ~"perp_belt", #add a column for method level
-                            str_detect(site, "taylor") ~"perp_belt",
-                            TRUE ~ "par_quad"))
 
-#note cannot do this as basically not enough information at each site to appropriately assign glmmTMB information to it 
+#Isa model
+Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant + year_decade + pre_post + outplant*year_decade + outplant*pre_post + year_decade*pre_post + (1| site), family = tweedie(link = "log"), data = Fig3_glm)
+plot(simulateResiduals(Fig3_model_GLM))
+summary(Fig3_model_GLM) #have to exp to interpret
