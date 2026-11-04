@@ -272,7 +272,7 @@ Fig3_annual_sites <- Fig3_rate %>%
         axis.title.y = element_blank()) + #remove y title for combined plot
   scale_color_manual(values = c("grey65", "#CD64B5FF"))+
   scale_y_continuous(breaks = c(0,0.5,1,1.5,2,2.5, 3))+ #play with this so that we can see the full range of CI but also have real and relevant y axis limits (without we plot into -ve)+
-  scale_x_continuous(breaks = c(1987,2007,2026)) +
+  scale_x_continuous() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))+ #adjust angle to fit without overlap
   facet_wrap(~site, #show by site
              ncol = 2, #to get 7 plots across the 3 rows
@@ -291,6 +291,235 @@ Fig3_combined <- Fig3_random_sites | Fig3_annual_sites +
 Fig3_combined
 #ggsave("figures/MSc/Fig3a.png", device = "png", height = 9, width = 12, dpi = 400)
 #commented out so that when you run the code it doesn't save whats in your plot accidentally :)
+
+
+
+# Nov 1 check jane analysis
+
+Fig3_rate
+str(Fig3_rate)
+count(Fig3_rate, year)
+
+Fig3_glm <- Fig3_rate %>%
+  #filter(method != "perp_belt") %>% #remove annual data for modelling 
+  #notice that if you add the filter above you take a lot of the weight out of the non_outplant data that is rich in the annual surveys and this drives a non-significant pattern with the interaction but generates one with year
+  mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) %>% #attempt to make year continuous and see "change per decade"
+  mutate(pre_post = case_when(year > 2003 ~ "post",
+                              TRUE ~ "pre")) %>%
+  mutate(outplant = case_when(site == "ed_king_southeast" ~ "no",
+                              site == "aguilar_point" ~ "no",
+                              TRUE ~ outplant))
+
+str(Fig3_glm)
+JW_abalone_density_7year
+
+rate <- read.csv("data-processed/all_abalone_density.csv")
+str(rate)
+levels(as.factor(rate$method))
+count(rate,method,site)
+## par_quad
+## perp_belt
+
+str(Fig3_rate)
+JaneAnnual=Fig3_glm[Fig3_glm$method == "perp_belt", ]
+str(JaneAnnual)
+
+count(JaneAnnual,pre_post, year)
+
+levels(as.factor(JaneAnnual$pre_post))
+JaneAnnual$pre_post=as.factor(JaneAnnual$pre_post)
+# Make sure Pre/Post is ordered correctly
+JaneAnnual$pre_post <- factor(
+  JaneAnnual$pre_post,
+  levels = c("pre", "post"))
+
+#--------------------------------------------------
+# Calculate regression equations for each Site × Period
+#--------------------------------------------------
+
+Equation_Data <- JaneAnnual %>%
+  group_by(site, pre_post) %>%
+  summarise(
+    model = list(lm(site_mean_density ~ year)),
+    .groups = "drop"
+  ) %>%
+  rowwise() %>%
+  mutate(
+    intercept = coef(model)[1],
+    slope = coef(model)[2],
+    r2 = summary(model)$r.squared,
+    
+    equation = paste0(
+      pre_post,
+      ": y = ",
+      round(intercept, 2),
+      ifelse(slope >= 0, " + ", " - "),
+      abs(round(slope, 2)),
+      "x",
+      ", R² = ",
+      round(r2, 2)
+    )
+  ) %>%
+  ungroup()
+Equation_Data
+
+#--------------------------------------------------
+# Give equations different vertical positions
+#--------------------------------------------------
+
+Equation_Data <- Equation_Data %>%
+  group_by(site) %>%
+  mutate(
+    label_y = c(
+      max(JaneAnnual$site_mean_density, na.rm = TRUE),
+      max(JaneAnnual$site_mean_density, na.rm = TRUE) * 0.90
+    )
+  ) %>%
+  ungroup()
+
+
+#--------------------------------------------------
+# Plot
+#--------------------------------------------------
+
+ggplot(
+  JaneAnnual,
+  aes(
+    x = year,
+    y = site_mean_density,
+    colour = pre_post)) +
+  geom_point(
+    size = 2.5,
+    alpha = 0.8) +
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x,
+    se = FALSE,
+    linewidth = 1) +
+  geom_text(
+    data = Equation_Data,
+    aes(
+      x = -Inf,
+      y = label_y,
+      label = equation,
+      colour = pre_post),
+    inherit.aes = FALSE,
+    hjust = -0.05,
+    size = 4) +
+  facet_wrap(
+    ~ site,
+    nrow = 1) +
+  labs(
+    x = "X variable",
+    y = "Y variable",
+    colour = NULL) +
+  theme_classic() +
+  theme(
+    axis.text = element_text(size = 10),
+    axis.title = element_text(size = 11),
+    strip.text = element_text(
+      size = 11,
+      face = "bold"),
+    legend.position = "bottom")
+
+
+### jane annual surveys
+
+JaneRandom=Fig3_glm[Fig3_glm$method == "par_quad", ]
+count(JaneRandom,site,year_decade)
+str(JaneRandom)
+hist(JaneRandom$site_mean_density)
+
+JaneRandom_Model1 <- glmmTMB(site_mean_density ~ pre_post*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
+#can you bake in "in that pre category are outplant yes different than outplant no"
+#make a boxplot of these 4 variables to determine this
+
+summary(JaneRandom_Model1)
+emm=emmeans(JaneRandom_Model1,~pre_post|outplant,type="response")
+pairs(emm)
+
+
+#to maintain degrees of freedom but just compare the effect of quadrat vs belt 
+emmean_simple_pre_post <- emmeans(JaneRandom_Model1, pairwise ~ c(outplant, pre_post), simple = "pre_post")
+emmean_simple_pre_post
+#make a boxplot of these 4 variables
+
+JaneRandom$year=as.factor(JaneRandom$year)
+aggregate(site_mean_density~pre_post+outplant+year, data=JaneRandom,FUN=mean)
+
+aggregate(site_mean_density~pre_post+outplant+year, data=JaneRandom,FUN=mean)
+
+JaneRandom %>% 
+  group_by(pre_post,outplant,year)%>%
+summarise(
+  mean_density=mean(site_mean_density),
+  sd_density=sd(site_mean_density),
+  .groups="drop")
+  
+  
+JaneRandom %>% 
+  group_by(year)%>%
+  summarise(
+    mean_density=mean(site_mean_density),
+    sd_density=sd(site_mean_density),
+    .groups="drop")
+
+#check via boxplot with medium outplant sites (n=4)
+#make df without annual but with medium outplant sites
+medium_outplant_JW <- Fig3_rate %>%
+  #filter(method != "perp_belt") %>% #remove annual data for modelling 
+  #notice that if you add the filter above you take a lot of the weight out of the non_outplant data that is rich in the annual surveys and this drives a non-significant pattern with the interaction but generates one with year
+  mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) %>% #attempt to make year continuous and see "change per decade"
+  mutate(pre_post = case_when(year > 2003 ~ "post",
+                              TRUE ~ "pre")) %>%
+  filter(method == "par_quad")
+ggplot(medium_outplant_JW,
+       aes(x = factor(year), y = site_mean_density, fill = outplant)) +
+  geom_boxplot(position = position_dodge()) +
+  scale_fill_manual(values = c("yes" = "lightblue",
+                               "no" = "lightpink"), 
+                    breaks = c("yes", "no")) +
+  labs(
+    x = "Year",
+    y = expression("Abalone density (" ~m^-2*")"),
+    fill = "Outplant status"
+  ) +
+  theme_minimal()
+
+#check via boxplot with primary outplant sites (n=2)
+ggplot(JaneRandom, aes(x = year, y = site_mean_density, fill = outplant)) +
+  geom_boxplot(position = position_dodge()) +
+  scale_fill_manual(values = c("yes" = "lightblue",
+                               "no" = "lightpink"),
+                    breaks = c("yes", "no")) +
+  labs(
+    x = "Year",
+    y = expression("Abalone density (" ~m^-2*")"),
+    fill = "Outplant status"
+  ) +
+  theme_minimal()
+#based off this, it almost makes sense to not even consider pre / post as a grouping, and instead just have year and outplant
+
+
+#model based off main outplants
+JaneRandom_Model2 <- glmmTMB(site_mean_density ~ year*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
+plot(simulateResiduals(JaneRandom_Model2)) #looks good
+summary(JaneRandom_Model2)
+
+#model based off medium outplants
+JaneRandom_Model3 <- glmmTMB(site_mean_density ~ as.factor(year)*outplant+ (1| site), family = tweedie(link = "log"), data = medium_outplant_JW)
+plot(simulateResiduals(JaneRandom_Model3)) #looks good
+summary(JaneRandom_Model3)
+## Nov 1 Jane check end 
+
+
+
+
+
+
+
+
+
 
 #okay, lets now get the slope of each line in this plot to then plot change in density through time
 slopes_Fig3 <- Fig3_rate %>%
@@ -311,6 +540,29 @@ slopes_Fig3 <- Fig3_rate %>%
                               str_detect(site, "taylor") ~"perp_belt",
                               TRUE ~ "par_quad"))
   
+#test
+slopes_Fig3_plot <- slopes_Fig3 %>%
+  mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
+  ggplot(aes(x = estimate, y = site, colour = outplant, shape = method)) +
+  geom_point(size = 3)+
+  scale_shape_manual(values = c(16, 0)) +
+  geom_errorbar(
+    aes(
+      xmin = estimate - std.error,
+      xmax = estimate + std.error,
+      y = site), size = 1.2, width = 0.2)+
+  theme_classic()+
+  theme(axis.title = element_text(size = 19), #increase axis text size
+        legend.title = element_text(size = 17), #increase legend text size
+        legend.text = element_text(size = 15),
+        legend.position = "none") + #remove legend up so can have one legend in patched figure 1
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
+  labs(x = "Rate of abalone density change through time", y = "Site", colour = "Recieved outplants?")+
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
+  scale_x_continuous(breaks = c(-0.025, 0.00, 0.05)) + #add -ve x landmark 
+  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
+
 
 slopes_Fig3_plot <- slopes_Fig3 %>%
   mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
@@ -367,6 +619,10 @@ Fig3_glm <- Fig3_rate %>%
   mutate(pre_post = case_when(year > 2003 ~ "pre",
                           TRUE ~ "post"))
 Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant * year_decade * pre_post + (1| site), family = tweedie(link = "log"), data = Fig3_glm) 
+
+#test
+Fig3_model_GLM <- glmmTMB(site_mean_density ~ 0+pre_post + year_decade + outplant + (1| site), family = tweedie(link = "log"), data = Fig3_glm)
+
 #tweedie handles the 0s in the dataset, and can handle the random factor and the unbalanced survey design
 plot(simulateResiduals(Fig3_model_GLM))
 summary(Fig3_model_GLM) #have to exp to interpret 
