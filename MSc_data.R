@@ -114,7 +114,7 @@ RLS_data_clean <- RLS_data_year %>%
   # just abalone sites (even though we know some have zeros)
   filter(species_name == "Haliotis kamtschatkana") %>% #filter for just the abalone data
   group_by(site_code, year, survey_total)%>%
-  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevant variables
+  dplyr::select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevant variables
   mutate(search = "non_cryptic") #add search column, we will add method later once we dont overright the current method data
 
 # 2026 RLS data from spreadsheet as it is not on the up to date global repository
@@ -155,7 +155,7 @@ RLS_new_0ab <- RLS_new %>%
   pivot_longer(cols = `0`:`400`, names_to = "size_class", values_to = "total") %>% # size class 0 = unsized!!!!
   drop_na(total) %>%
   #filter(total > 0) %>%
-  select(-Total)
+  dplyr::select(-Total)
 
 # All unique site-year-depth combinations
 all_combos_2026 <- RLS_new_0ab %>%
@@ -213,7 +213,7 @@ RLS_new_clean <- RLS_new %>%
   # Pivot longer for biomass
   pivot_longer(cols = `0`:`400`, names_to = "size_class", values_to = "total") %>% # size class 0 = unsized!!!!
   drop_na(total) %>% #removing any n/a from the df
-  select(-Total) %>% #dropping previously named "Total"
+  dplyr::select(-Total) %>% #dropping previously named "Total"
   # group blocks 1 and 2
   group_by(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, common_name, size_class) %>%
   summarise(survey_total = sum(total)) %>% # sum blocks 1 and 2 (these are either side of the transect)
@@ -223,7 +223,7 @@ RLS_new_clean <- RLS_new %>%
          survey_den = case_when(method == 1 ~ survey_total/500,
                                 method == 2 ~ survey_total/100)) %>% #dont end up using this
   as.data.frame() %>%
-  select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>%
+  dplyr::select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>%
   mutate(year = year(survey_date)) %>% #add year column
   mutate(search = "non_cryptic") #add search column, again will include method later once no need for pre-exisiting method data referencing fish or invert counts in the df
 
@@ -301,7 +301,7 @@ RLS_data_means_filtered <- RLS_data_means %>%
 
 #tidy names to match combined df of all average abalone density
 RLS_abalone_density <- clean_names(RLS_data_means_filtered) %>% #tidy the column names
-  select(site, year, site_mean_density, method, search) %>% #remove site code to match other dfs
+  dplyr::select(site, year, site_mean_density, method, search) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""),
          source = "RLS") 

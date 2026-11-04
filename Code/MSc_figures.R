@@ -79,8 +79,17 @@ JW_coords <- janitor::clean_names(JW_coords)%>%
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))%>%
   filter(site != "self_point") %>% #remove random site until get gps
-  slice(-20) #remove ed_king_? which only had data from one year
-
+  slice(-20) %>% #remove ed_king_? which only had data from one year
+  mutate(source = "Jane_Watson") %>%
+  rename(latitude = latitude_decimal_degrees,  #change column names to match other dfs
+         longitude = longitude_decimal_degrees)
+  
+JW_coords <- JW_coords %>% #fix to match other dfs
+  mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", 
+                              #str_detect(site, "aguillar_point") ~"yes",      #not primary outplant
+                              str_detect(site, "grappler") ~"yes",
+                              #str_detect(site, "taylor_ed_king") ~"yes", #not primary outplant
+                              TRUE ~ "no")) #everything else = not outplant
 ## KRI & Parks ----
 KRI_coords <- read.csv("data-raw/KRI_coords.csv") 
 
@@ -89,7 +98,8 @@ KRI_coords <- janitor::clean_names(KRI_coords) %>%
     site = str_to_lower(site),
     site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
     site = str_replace_all(site, "'", ""),
-    outplant = "no")
+    outplant = "no") %>%
+  mutate(source = "KRI")
 
 ## Storm Coast ----
 SC_coords <- read.csv("data-raw/StormCoast_coords.csv") 
@@ -105,12 +115,19 @@ SC_coords <- janitor::clean_names(SC_coords) %>%
 SC_coords_clean <- SC_coords %>%
   dplyr::select(site, transect_id, latitude_decimal_degrees, longitude_decimal_degrees)%>%
   mutate(outplant = case_when(str_detect(site, "eagle_bay") ~"yes", #add a column for outplant level
-                              str_detect(site, "aguilar") ~"yes",
+                              #str_detect(site, "aguilar") ~"yes",      #not primary outplant
                               str_detect(transect_id, "GOT01") ~"yes",
-                              str_detect(transect_id, "EKE02") ~"yes",
+                              #str_detect(transect_id, "EKE02") ~"yes", #not primary outplant
                               str_detect(transect_id, "HSW01") ~"yes",
-                              TRUE ~ "no")) #everything else = not outplant
-## RLS + KCCA ----  
+                              TRUE ~ "no")) %>% #everything else = not outplant
+  mutate(source = "Storm_Coast") %>%
+  rename(latitude = latitude_decimal_degrees,
+         longitude = longitude_decimal_degrees)
+
+SC_coords <- SC_coords_clean[-2]
+#CHECK: one site missing???
+
+## RLS ----  
 #load RLS 2026 data 
 RLS_coords_2026 <- read_csv("data-raw/RLS_2026_only_bonus.csv")
 
@@ -130,9 +147,8 @@ RLS_coords_clean <- RLS_coords_2026 %>%
 
 RLS_coords_2026 <- RLS_coords_clean %>%
   mutate(outplant = case_when(str_detect(site, "eagle_bay") ~"yes", #add a column for outplant level
-                              str_detect(site, "aguilar_point") ~"yes",
+                              #str_detect(site, "aguilar_point") ~"yes", #not primary outplant
                               str_detect(site, "goby_town") ~"yes",
-                              str_detect(site, "EKE02") ~"yes",
                               str_detect(site, "black_fish_rock") ~"yes",
                               TRUE ~ "no")) #everything else = not outplant
 
@@ -155,9 +171,10 @@ RLS_coords_clean_2025 <- RLS_coords_2025 %>%
   filter(site == "effingham_west" | site == "baeria_rocks_north_island_southside") 
          
 RLS_coords <- bind_rows(RLS_coords_clean_2025, RLS_coords_2026)%>%
-  dplyr::select(site, latitude, longitude, outplant)
+  dplyr::select(site, latitude, longitude, outplant) %>%
+  mutate(source = "RLS")
 
-#add KCCA RlS files
+## KCCA ----
 KCCA_coords <- read_csv("data-raw/KCCA_RLS_all.csv")
 
 #clean
@@ -172,7 +189,8 @@ KCCA_coords <- KCCA_coords %>%
     site = str_replace_all(site, "\\s+", "_"), #changes all white spaces in the names 
     site = str_replace_all(site, "'", ""),
     outplant = "no") %>%
-  filter(site != "sand_town")
+  filter(site != "sand_town") %>%
+  mutate(source = "KCCA")
 
 
 ## DFO ----
@@ -187,8 +205,175 @@ DFO_coords <- DFO_coords%>%
          site = str_replace_all(site, "'", "")) %>%
   mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
                               str_detect(site, "grappler_mouth") ~"yes",
-                              TRUE ~ "no")) #everything else = not outplant
+                              TRUE ~ "no")) %>% #everything else = not outplant
+  mutate(source = "DFO") %>%
+  rename(latitude = latitude_decimal_degrees,  #change column names to match other dfs
+         longitude = longitude_decimal_degrees) %>%
+  filter(site != "new_taylor_island_2022", #remove for now while dont have GPS!
+         site != "new_flemming_112_2022",
+         site != "tzartus_116") #filter this site out as replaced in 2022
+
 # CHECK: NEED TO ASK SANDIE FOR GPS OF NEW SITES AND GENERAL RUN DOWN OF SURVEY AREA ETC
+
+## Combined coords ----
+coords <- rbind(JW_coords, DFO_coords, RLS_coords, KRI_coords, SC_coords, KCCA_coords)
+
+### Map ----
+# transform coords into actually mappable coords
+coords_clean <- coords %>%
+  st_as_sf(coords = c("longitude", "latitude"),
+           remove = FALSE) %>%
+  st_set_crs(4326)%>%
+  mutate(
+    site_label = stringr::str_to_title(gsub("_", " ", site)))
+
+# Convert to projected coordinates (metres)
+coords_projected <- coords_clean %>%
+  st_transform(32610)
+
+# Identify observations within 200 m
+nearby_sites <- st_is_within_distance(
+  coords_projected,
+  coords_projected,
+  dist = 200
+)
+
+nearby_pairs <- data.frame(
+  pair = rep(seq_along(nearby_sites),
+             lengths(nearby_sites)),
+  match = unlist(nearby_sites)
+) %>%
+  filter(pair < match) %>%
+  mutate(
+    site_1 = coords$site[pair],
+    site_2 = coords$site[match],
+    source_1 = coords$source[pair],
+    source_2 = coords$source[match]
+  )
+#okay lots are close... lets plot them all and then make adjustments from there
+# Load GREAT shapefile 
+hakai_map <- sf::st_read("data-raw/Hakai_coast/COAST_TEST2.shp") %>%
+  st_sf() %>%
+  st_set_crs(4326)
+
+# honestly not 100% sure what this does
+sf_use_s2(FALSE)
+
+# Define colours
+blue <- paste("#b9d1df", sep="")
+
+# Making RLS maps -----
+# make a map function
+map <- function(lat_min, lat_max, long_min, long_max, 
+                coord_data, nh4_var, kelp_var, point_size, map_file, 
+                white_background = TRUE, invert = FALSE) {
+  
+  # invert land and sea colours if I use the potato map
+  if(invert == FALSE){
+    sea <- blue
+    land <- "white"
+  }
+  if(invert == TRUE){
+    sea <- "white"
+    land <- blue
+  }
+  
+  # specify black or white background
+  if(white_background == TRUE){
+    background <- "white"
+    features <- "black"
+  }
+  if(white_background == FALSE){
+    background <- "black"
+    features <- "white"
+  }
+  
+  ggplot() +
+    geom_sf(data = map_file, fill = land, colour = sea) +
+    # add points
+    geom_sf(data = coord_data,
+            alpha = 0.9,
+            size = point_size,
+            stroke = 2,
+            aes(
+              fill = {{nh4_var}}, #use this fill later for desnity scores. Also nice to not have big dots over the map as we want to obscure exact site location
+              shape = {{kelp_var}},
+              colour = {{kelp_var}}))  +
+    viridis::scale_fill_viridis(option="magma", direction = -1,
+                                guide = guide_colorbar(frame.colour = features, ticks.colour = features)) + #this will be used later to have a continuous colour fill for density scores
+    coord_sf(xlim = c(lat_min, lat_max), ylim = c(long_min, long_max), expand = FALSE) + 
+    ggrepel::geom_text_repel(data = {{coord_data}},
+                             aes(x = longitude, y = latitude, 
+                                 label = site_label), nudge_x = 0.001, #get name beside symbol
+                             direction = "y",
+                             hjust = 0,
+                             size = 1,
+                             segment.color = NA) +
+    labs(fill = "Abalone density", pch = "Outplant site?") + #leave fill for later, for now keep to see map behind obscured data point. pch is for the shape
+    scale_shape_manual(
+      name = "Outplant site?",
+      values = c("yes" = 21, "no" = 21), #star and circle
+      breaks = c("yes", "no")
+    ) +
+    scale_colour_manual(
+      values = c("yes" = "#CD64B5FF", "no" = "grey65"),
+      breaks = c("yes", "no"),
+      guide = "none"
+    ) +
+    guides(pch = guide_legend(override.aes = 
+                                list(colour = c("#CD64B5FF", "grey65")))) +
+    # Themes
+    theme_bw() +
+    theme(
+      # panel stuff
+      panel.background = element_rect(fill = sea),
+      panel.grid.major = element_line(color = sea),
+      panel.border = element_rect(fill = NA, colour = features),
+      # remove axis
+      axis.title = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      axis.ticks.length = unit(0, "pt"),
+      plot.title = NULL,
+      plot.margin=grid::unit(c(0,0,0,0), "mm"),
+      # Specify legend options
+      legend.background = element_rect(color = NA, fill = background),  
+      legend.key = element_rect(color = background,  fill = background),  
+      legend.key.size = unit(1.2, "lines"),  
+      legend.key.height = NULL,  
+      legend.key.width = NULL,      
+      legend.text = element_text(size = 24, color = features),  
+      legend.title = element_text(size = 24, face = "bold", hjust = 0, color = features),  
+      legend.position = "right",  
+      legend.text.align = NULL,  
+      legend.title.align = NULL,  
+      legend.direction = "vertical",  
+      legend.box = NULL,
+      # Specify facetting options
+      strip.background = element_rect(fill = "grey30", color = "grey10"),  
+      strip.text.x = element_text(size = 30, color = features),  
+      strip.text.y = element_text(size = 30, color = features,angle = -90),  
+      # Specify plot options
+      plot.background = element_rect(color = background, fill = background),  
+    ) +
+    annotation_scale(location = "br", width_hint = 0.3) +
+    annotation_north_arrow(location = "br", which_north = "true", 
+                           pad_x = unit(0.0, "in"), pad_y = unit(0.2, "in"),
+                           style = north_arrow_fancy_orienteering)
+}
+
+
+# Make a map ----
+map(lat_min = -125.4, #set map boundary
+    lat_max = -124.99, 
+    long_min = 48.73, 
+    long_max = 49.00, 
+    coord_data = coords_clean, #add data
+    # nh4_var = mean_density, #use later for density
+    point_size = 1, #set size intentionally large to obscure sites
+    kelp_var = outplant, #label outplant sites
+    map_file = hakai_map) #pick map file
+
 #Fig 3: JW rate ----
 
 #first make df have site level outplant information

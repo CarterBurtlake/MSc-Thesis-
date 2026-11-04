@@ -36,7 +36,7 @@ JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.cs
       row_number() == 7 ~ "whittlestone",
       row_number() == 8 ~ "execution_rock",
       row_number() == 9 ~ "self_point", #this sites gps location is near effingham inlet?
-      row_number() == 10 ~ "helby_ne",  #call relevant to outplant location
+      row_number() == 10 ~ "helby_ne",  
       row_number() == 11 ~ "scotts_bay",
       row_number() == 12 ~ "aguilar_point",
       row_number() == 13 ~ "cia_rock",
@@ -58,7 +58,7 @@ JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.cs
 coords <- JW_coords %>%
   st_as_sf(coords = c("longitude_decimal_degrees", "latitude_decimal_degrees")) %>%
   st_set_crs(4326) %>%
-  left_join((JW_coords %>% select(site, latitude_decimal_degrees, longitude_decimal_degrees)), by = "site")%>%
+  left_join((JW_coords %>% dplyr::select(site, latitude_decimal_degrees, longitude_decimal_degrees)), by = "site")%>%
   rename(latitude = "latitude_decimal_degrees") %>%
   rename(longitude = "longitude_decimal_degrees") %>%
   mutate(
