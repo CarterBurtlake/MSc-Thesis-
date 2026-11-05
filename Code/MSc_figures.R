@@ -34,6 +34,7 @@ library(paletteer) #colour palette
 library(ggspatial)
 library(sf) #geospatial package for points, lines, and polygons: to map the min distance from an outplant site
 library(geosphere) #to map the min distance from an outplant site
+library(igraph) #visualization
 
 
 #Figure fluff ----
@@ -78,7 +79,8 @@ JW_coords <- read.csv("data-raw/Barkley_Sound_Sites_Decimal_Degrees_EDS_sites.cs
 JW_coords <- janitor::clean_names(JW_coords)%>% 
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))%>%
-  filter(site != "self_point") %>% #remove random site until get gps
+  filter(site != "self_point",  #remove random site until get gps
+         site != "helby_sw") %>% #remove place holder site for previous figure
   slice(-20) %>% #remove ed_king_? which only had data from one year
   mutate(source = "Jane_Watson") %>%
   rename(latitude = latitude_decimal_degrees,  #change column names to match other dfs
@@ -121,6 +123,8 @@ SC_coords_clean <- SC_coords %>%
                               str_detect(transect_id, "HSW01") ~"yes",
                               TRUE ~ "no")) %>% #everything else = not outplant
   mutate(source = "Storm_Coast") %>%
+  mutate(site = case_when(str_detect(transect_id, "EKE02") ~"edward_king_south", #change duplicate name of site that doesnt match up with any other sites
+                          TRUE ~ site))%>%
   rename(latitude = latitude_decimal_degrees,
          longitude = longitude_decimal_degrees)
 
@@ -192,6 +196,10 @@ KCCA_coords <- KCCA_coords %>%
   filter(site != "sand_town") %>%
   mutate(source = "KCCA")
 
+#fix helby north lat long error
+KCCA_coords <- KCCA_coords %>%
+  mutate(latitude = if_else(site == "north_helby_rock", 48.855087, latitude),
+         longitude = if_else(site == "north_helby_rock", -125.166609, longitude))
 
 ## DFO ----
 #load data
@@ -211,7 +219,9 @@ DFO_coords <- DFO_coords%>%
          longitude = longitude_decimal_degrees) %>%
   filter(site != "new_taylor_island_2022", #remove for now while dont have GPS!
          site != "new_flemming_112_2022",
-         site != "tzartus_116") #filter this site out as replaced in 2022
+         site != "tzartus_116",        #filter these sites out as replaced in 2022
+         site != "taylor_island_2021",
+         site != "flemming_112_2021") 
 
 # CHECK: NEED TO ASK SANDIE FOR GPS OF NEW SITES AND GENERAL RUN DOWN OF SURVEY AREA ETC
 
@@ -219,7 +229,18 @@ DFO_coords <- DFO_coords%>%
 coords <- rbind(JW_coords, DFO_coords, RLS_coords, KRI_coords, SC_coords, KCCA_coords)
 
 ### Map ----
-# transform coords into actually mappable coords
+# Load GREAT shapefile 
+hakai_map <- sf::st_read("data-raw/Hakai_coast/COAST_TEST2.shp") %>%
+  st_sf() %>%
+  st_set_crs(4326)
+
+# honestly not 100% sure what this does
+sf_use_s2(FALSE)
+
+# Define colours
+blue <- paste("#b9d1df", sep="")
+
+# transform coords into actually map-able coords
 coords_clean <- coords %>%
   st_as_sf(coords = c("longitude", "latitude"),
            remove = FALSE) %>%
@@ -227,9 +248,380 @@ coords_clean <- coords %>%
   mutate(
     site_label = stringr::str_to_title(gsub("_", " ", site)))
 
+###CHECK WHAT SITES ARE CLOSE TO EACHOTHER AND ON THE SAME ASPECT###
+
+
+# ============================================================
+# IDENTIFY POTENTIALLY MATCHING SITES WITHIN 200 METRES
+# ACCOUNTING FOR LAND BARRIERS
+# ============================================================
+
+# ------------------------------------------------------------
+# 1. PROJECT COORDINATES INTO METRES
+# ------------------------------------------------------------
+
+# Project site observations
+coords_projected <- coords_clean %>%
+  st_transform(32610)
+
+# Project coastline / land polygon
+hakai_projected <- hakai_map %>%
+  st_transform(32610)
+
+# Combine land polygons into one geometry
+land_union <- st_union(hakai_projected)
+
+
+# ------------------------------------------------------------
+# 2. IDENTIFY OBSERVATIONS WITHIN 200 METRES
+# ------------------------------------------------------------
+
+nearby_sites <- st_is_within_distance(
+  coords_projected,
+  coords_projected,
+  dist = 230 #This is roughly the size of wizard north and also happens to be the size where sites that are named differently start to be included in the same site df 
+)
+
+# Create dataframe of unique site pairs
+nearby_pairs <- data.frame(
+  pair = rep(
+    seq_along(nearby_sites),
+    lengths(nearby_sites)
+  ),
+  match = unlist(nearby_sites)
+) %>%
+  filter(pair < match) %>%
+  mutate(
+    site_1 = coords_clean$site[pair],
+    site_2 = coords_clean$site[match],
+    source_1 = coords_clean$source[pair],
+    source_2 = coords_clean$source[match]
+  )
+
+
+# ------------------------------------------------------------
+# 3. CALCULATE DISTANCE BETWEEN EACH PAIR
+# ------------------------------------------------------------
+
+if (nrow(nearby_pairs) > 0) {
+  
+  nearby_pairs <- nearby_pairs %>%
+    mutate(
+      distance_m = as.numeric(
+        st_distance(
+          coords_projected[pair, ],
+          coords_projected[match, ],
+          by_element = TRUE
+        )
+      )
+    )
+  
+} else {
+  
+  nearby_pairs$distance_m <- numeric(0)
+  
+}
+
+
+# ------------------------------------------------------------
+# 4. CREATE CONNECTING LINES BETWEEN SITE PAIRS
+# ------------------------------------------------------------
+
+if (nrow(nearby_pairs) > 0) {
+  
+  xy <- st_coordinates(coords_projected)
+  
+  site_lines <- st_sfc(
+    lapply(seq_len(nrow(nearby_pairs)), function(i) {
+      
+      st_linestring(
+        rbind(
+          xy[nearby_pairs$pair[i], ],
+          xy[nearby_pairs$match[i], ]
+        )
+      )
+      
+    }),
+    crs = st_crs(coords_projected)
+  )
+  
+  
+  # ----------------------------------------------------------
+  # 5. CALCULATE HOW MUCH LAND EACH LINE CROSSES
+  # ----------------------------------------------------------
+  
+  land_crossing <- vapply(
+    seq_along(site_lines),
+    function(i) {
+      
+      intersection <- st_intersection(
+        site_lines[i],
+        land_union
+      )
+      
+      if (length(intersection) == 0) {
+        return(0)
+      }
+      
+      sum(as.numeric(st_length(intersection)))
+      
+    },
+    numeric(1)
+  )
+  
+  
+  # ----------------------------------------------------------
+  # 6. CLASSIFY SITE PAIRS
+  # ----------------------------------------------------------
+  
+  nearby_pairs <- nearby_pairs %>%
+    mutate(
+      land_crossing_m = land_crossing,
+      
+      # Less than 5 m of land crossing = candidate
+      # for being on the same side
+      same_side = land_crossing_m < 5
+    )
+  
+} else {
+  
+  nearby_pairs <- nearby_pairs %>%
+    mutate(
+      land_crossing_m = numeric(0),
+      same_side = logical(0)
+    )
+  
+}
+
+
+# ------------------------------------------------------------
+# 7. SEPARATE POTENTIALLY MATCHING AND SEPARATED SITES
+# ------------------------------------------------------------
+
+same_side_sites <- nearby_pairs %>%
+  filter(same_side == TRUE) %>%
+  arrange(distance_m)
+
+opposite_side_sites <- nearby_pairs %>%
+  filter(same_side == FALSE) %>%
+  arrange(distance_m)
+
+
+# ------------------------------------------------------------
+# 8. VIEW RESULTS
+# ------------------------------------------------------------
+
+# Number of nearby pairs
+cat("Total pairs within 200 m:", nrow(nearby_pairs), "\n")
+
+# Number of potentially matching pairs
+cat("Potentially matching pairs:", nrow(same_side_sites), "\n")
+
+# Number of pairs separated by land
+cat("Pairs crossing land:", nrow(opposite_side_sites), "\n")
+
+# View tables
+View(same_side_sites)
+View(opposite_side_sites)
+
+##moving same source pairs to opposite_side_sites df
+# Identify pairs surveyed by the same source
+same_source_pairs <- same_side_sites %>%
+  filter(source_1 == source_2)
+
+# Remove these pairs from same_side_sites
+same_side_sites <- same_side_sites %>%
+  filter(
+    source_1 != source_2 |
+      grepl("wizard_islet_annual", site_1) |
+      grepl("wizard_islet_annual", site_2)
+  )
+
+# Add them to opposite_side_sites
+opposite_side_sites <- bind_rows(
+  opposite_side_sites,
+  same_source_pairs
+) %>%
+  arrange(distance_m)
+
+##manually move sites arranged as different to same that have gps locations too close to land such that the code above assesses them as "oppposite" despite having similar aspect and being of different source origins
+
+# Identify sites of problem to manually return to the "same site" df
+manual_assessment <- opposite_side_sites %>%
+  filter((grepl("taylor_rock", site_1) | grepl("taylor_rock", site_2)) &
+      !(grepl("annual", site_1) | grepl("annual", site_2)) &
+        (source_1 != source_2) |
+  (grepl("prasiola", site_1) | grepl("prasiola", site_2)) &
+      !(grepl("second_beach_south", site_1) | grepl("second_beach_south", site_2)) |
+    (grepl("swiss", site_1) | grepl("swiss", site_2)) |
+    (grepl("ship", site_1) | grepl("ship", site_2)) |
+    (grepl("grappler", site_1) | grepl("grappler", site_2)) |
+    (grepl("north_helby_rock", site_1) | grepl("north_helby_rock", site_2)) |
+    (grepl("ed_king", site_1) | grepl("ed_king", site_2)) &
+    (grepl("edward_king_se", site_1) | grepl("edward_king_se", site_2)))
+
+#add these to same site df
+same_side_sites <- bind_rows(
+  same_side_sites,
+  manual_assessment
+) %>%
+  distinct(pair, match, .keep_all = TRUE) %>%
+  arrange(distance_m)
+
+#remove from opposite site df (if that even matters)
+opposite_side_sites <- opposite_side_sites %>%
+  anti_join(
+    manual_assessment %>%
+      dplyr::select(pair, match),
+    by = c("pair", "match")
+  )
+
+# Create a list of all original observations
+
+# Start with every observation in its own group
+coords_grouped <- coords_clean %>%
+  mutate(
+    observation_id = row_number(),
+    location_group = observation_id
+  )
+
+# Order approved matching pairs by distance
+approved_pairs <- same_side_sites %>%
+  arrange(distance_m) %>%
+  dplyr::select(pair, match, distance_m)
+
+# Process approved pairs from closest to furthest
+for (i in seq_len(nrow(approved_pairs))) {
+  
+  id_1 <- approved_pairs$pair[i]
+  id_2 <- approved_pairs$match[i]
+  
+  # Identify current groups
+  group_1 <- coords_grouped$location_group[id_1]
+  group_2 <- coords_grouped$location_group[id_2]
+  
+  if (group_1 == group_2) next
+  
+  # Get all observations in each group
+  members_1 <- coords_grouped %>%
+    filter(location_group == group_1)
+  
+  members_2 <- coords_grouped %>%
+    filter(location_group == group_2)
+  
+  # Check for duplicate sources
+  duplicate_sources <- any(
+    members_1$source %in% members_2$source
+  )
+  
+  # Check whether BOTH groups belong to Wizard north
+  wizard_exception <- all(
+    grepl("wizard",
+          c(members_1$site, members_2$site),
+          ignore.case = TRUE)
+  )
+  
+  # Merge if sources are unique OR both groups are wizard north
+  if (!duplicate_sources || wizard_exception) {
+    
+    coords_grouped$location_group[
+      coords_grouped$location_group == group_2
+    ] <- group_1
+    
+  }
+}
+
+# Renumber groups consecutively
+coords_grouped <- coords_grouped %>%
+  mutate(
+    location_group = as.integer(
+      factor(location_group)
+    )
+  )
+
+#check and see if this worked
+group_check <- coords_grouped %>%
+  st_drop_geometry() %>%
+  group_by(location_group) %>%
+  summarise(
+    n_observations = n(),
+    n_sources = n_distinct(source),
+    sources = paste(sort(unique(source)), collapse = ", "),
+    sites = paste(sort(unique(site)), collapse = ", "),
+    .groups = "drop"
+  )
+
+View(group_check)
+
 # Convert to projected coordinates (metres)
 coords_projected <- coords_clean %>%
   st_transform(32610)
+
+# Project land polygon
+hakai_projected <- hakai_map %>%
+  st_transform(32610)
+
+# Combine land polygons into one geometry
+land_union <- st_union(hakai_projected)
+
+# Extract projected coordinates
+xy <- st_coordinates(coords_projected)
+
+# Create lines between nearby site pairs
+site_lines <- st_sfc(
+  lapply(seq_len(nrow(nearby_pairs)), function(i) {
+    st_linestring(
+      rbind(
+        xy[nearby_pairs$pair[i], ],
+        xy[nearby_pairs$match[i], ]
+      )
+    )
+  }),
+  crs = st_crs(coords_projected)
+)
+
+# Calculate length of each line that intersects land
+land_crossing <- vapply(
+  seq_along(site_lines),
+  function(i) {
+    intersection <- st_intersection(
+      site_lines[i],
+      land_union
+    )
+    
+    sum(as.numeric(st_length(intersection)))
+  },
+  numeric(1)
+)
+
+# Add results to nearby pairs
+nearby_pairs <- nearby_pairs %>%
+  mutate(
+    land_crossing_m = land_crossing,
+    same_side = land_crossing_m < 5
+  )
+
+# Calculate distance between each pair of observations
+nearby_pairs <- nearby_pairs %>%
+  mutate(
+    distance_m = as.numeric(
+      st_distance(
+        coords_projected[pair, ],
+        coords_projected[match, ],
+        by_element = TRUE
+      )
+    )
+  )
+
+# Potentially matching sites
+same_side_sites <- nearby_pairs %>%
+  filter(same_side == TRUE) %>%
+  arrange(distance_m)
+
+# Nearby sites separated by land
+opposite_side_sites <- nearby_pairs %>%
+  filter(same_side == FALSE) %>%
+  arrange(distance_m)
 
 # Identify observations within 200 m
 nearby_sites <- st_is_within_distance(
@@ -250,6 +642,9 @@ nearby_pairs <- data.frame(
     source_1 = coords$source[pair],
     source_2 = coords$source[match]
   )
+
+### END ###
+
 #okay lots are close... lets plot them all and then make adjustments from there
 # Load GREAT shapefile 
 hakai_map <- sf::st_read("data-raw/Hakai_coast/COAST_TEST2.shp") %>%
