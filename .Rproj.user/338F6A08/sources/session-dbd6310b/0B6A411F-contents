@@ -1,0 +1,2119 @@
+# Abalone code 
+# Em Lim
+# Sept 2024
+
+# Load packages ------
+library(tidyverse)
+library(ggplot2)
+library(TMB)
+library(glmmTMB)
+library(DHARMa)
+library(emmeans)
+library(ggeffects)
+library(patchwork)
+library(visreg)
+#install.packages("report")
+library(report)
+
+cite_packages()
+
+
+# Load data ------
+abalone <- read_csv("Data/Abalone_Data2.csv") %>% 
+  #rename(`2.5` = `<2.5cm`,
+   #      `5` = `2.5-5.0cm`,
+    #     `7.5` = `5.0-7.5cm`,
+     #    `10` = `7.5-10.0cm`,
+      #   `12.5` = `10.0-12.5cm`,
+       #  `15` = `12.5-15.0cm`,
+        # `NA` = unsized) %>% 
+  rename(`1.25` = `<2.5cm`,        #Testing to see if this is more appropriate
+         `3.75` = `2.5-5.0cm`,
+         `6.25` = `5.0-7.5cm`,
+         `8.75` = `7.5-10.0cm`,
+         `11.25` = `10.0-12.5cm`,
+         `13.75` = `12.5-15.0cm`,
+         `NA` = unsized) %>%
+  mutate(id = 1:n(),
+         buddy_pair = ifelse(buddy_pair == "LN_KS", "KS_LN", buddy_pair),
+         buddy_pair = ifelse(buddy_pair == "GS_VK", "VK_GS", buddy_pair),
+         survey_complete = ifelse(buddy_pair == "HS_ATV" & site == "second_beach" & survey_complete == "yes", "no", survey_complete), #to fix an error in HS_ATV raw data having one site with survey complete for one orientation but not the other
+         #total_abalone= `2.5`+`5`+`7.5`+`10`+`12.5`+`15`+`NA`,
+         total_abalone= `1.25`+`3.75`+`6.25`+`8.75`+`11.25`+`13.75`+`NA`,
+         survey_direction = as.factor(survey_direction),
+         survey_method = as.factor(survey_type),
+         substrate = as.factor(substrate)) %>%
+#Lets add the absolute difference in minutes here 
+  mutate(
+    start_time = as.POSIXct(start_time, format = "%H:%M:%S"),
+    end_time = as.POSIXct(end_time, format = "%H:%M:%S"),
+    diff_min = (as.numeric(difftime(end_time, start_time)))
+  )
+#there are several negative numbers or unusually large numbers - if want to use this for analysis will have to go back through all the raw data in an attempt to correct...
+
+#attempt on May 26th 2026
+time_clean <- abalone %>%
+  filter(!is.na(diff_min)) %>% #filter out surveys that forgot to record times (n/a's)
+  filter(survey_complete == "yes")%>% #filter out surveys that do not have full factorial completes (all 4 survey methods measured)
+  filter(survey_direction == "parallel")%>% #just get parallel data for now
+  filter(diff_min > 0) #%>% #filter out -ve survey time values (looking into fixing these mistakes by re-referencing raw data)
+  #group_by(buddy_pair, site, survey_direction, diff_min, surveyor, survey type) %>%
+  #filter(survey_type == "quadrat") %>%
+  #distinct(buddy_pair, site, diff_min)
+  
+time_bq <- bind_rows(
+  
+  # keep all non-quadrat rows
+  time_clean %>% 
+    filter(survey_type == "belt"),
+  
+  # reduce quadrat rows to 1 per buddy_pair/site
+  time_clean %>% 
+    filter(survey_type == "quadrat") %>%
+    distinct(surveyor, site, .keep_all = TRUE) #create one row for each surveyor at a site (each buddy pair can have different times it took them to survey)for the time diff in quads (reduced from 5 rows)
+  
+)
+
+time_small <- time_bq[, c("buddy_pair", "site", "survey_direction", "diff_min", "surveyor", "survey_type")] %>% #reduce the df
+  filter(diff_min < 50) #remove SL and SO data point that had time diff of 85 for quad 
+#think the filter above should be a product of a typo and time should actually be 15 and was a typo but until I can confirm should run with this
+
+time_clean <- time_clean[!duplicated(time_clean$site, fromLast = TRUE), ]
+
+#time level data manipulations
+time_area_belt <- abalone %>%
+  mutate(
+  #Change AK and EL belt parallel for Pyramid rock to the positive correct values and leave the     rest as they are
+  diff_min = case_when(diff_min == -11 & surveyor == "AK" ~ 9,  
+                       diff_min == -11 & surveyor == "EL" ~ 10,
+                       TRUE ~ diff_min))%>%
+  filter(survey_method== "belt", survey_complete=="yes", !is.na(diff_min), diff_min > 0, transect_length_m < 41) %>% #removed transects longer than 40m which feels like a miss with many between 41-44m but that was the methods. Remove -ve diff min calcs, remove na's representing surveys when time was not noted, remove surveys that weren't considered as complete
+  dplyr::select(buddy_pair, site, survey_direction, diff_min, surveyor, survey_method, transect_length_m) %>%
+  rename(total_area = transect_length_m)
+
+
+time_area_quad <- abalone %>%
+  mutate(
+    # must fix SO diver time values to get appropriate number of quadrats (these ones were mis-reported as -704, should be 16 mins)
+    #fix CB diver time as raw value in excel for par quad wizard_south is -2, data sheet shows 20mins
+    diff_min = case_when(diff_min == -704 ~ 16,
+                         diff_min == -2 ~ 20,
+    TRUE ~ diff_min)) %>% 
+  filter(survey_method== "quadrat", survey_complete=="yes", !is.na(diff_min), diff_min > 0, transect_length_m <41)%>% #removed transects longer than 40m which feels like a miss with many between 41-44m but that was the methods. Remove -ve diff min calcs, remove na's representing surveys when time was not noted, remove surveys that weren't considered as complete
+  group_by(buddy_pair, site, survey_direction, diff_min, surveyor, survey_method)%>%
+  summarise(total_area = n()) %>% # area = number of quads
+  # reduce quadrat rows to 1 per buddy_pair/site
+  distinct(surveyor, site, .keep_all = TRUE) #%>% 
+  #filter(n_quads <11) #leave these as its only more conservative to have more quadrats in this assessment 
+
+#bind quad and belt data together
+time_area <- bind_rows(time_area_belt, time_area_quad ) %>%
+  filter(diff_min <48) %>% #remove all outlier times as mentioned below. Removed associated quadrats with those long perp belts by filtering out transect length in the quad df.
+  mutate(time_diff_area = diff_min/total_area)
+#suspect that KC_ATV did two 50 minute dives at taylor perpendicular - No ATV data on data sheet -removed. No KC data sheet found.
+#review SO /SL data at 85 mins ohiaht - currently removed - data sheet remains unclear. SO information in parallel belt is incorrect based on data sheet let alone par quad. Perp quad for SO is 11 when it should be 16? SL lacking end time for par quad at ohiaht...
+
+
+#test to see if parallell data is 119 obs
+time_area_test <- time_area %>%
+  filter(survey_direction == "parallel")
+#confirmed, so 119 parallel and 88 perpendicular. Does that make sense: yes bunch of perps removed for running too long 
+
+
+
+# Quad/belt level data manipulations
+
+# calc mean sizes
+# df with one row per abalone!
+abalone_sizes <- abalone %>%
+  pivot_longer(cols = c(`1.25`:`NA`), names_to = "size",
+               values_to = "count", values_drop_na = FALSE) %>% 
+  mutate(size = as.numeric(size)) %>%
+  filter(count > 0) %>%
+  uncount(count) %>%
+  drop_na(size) # ignore warning we want those to be NA's it's ok!
+#at this point we could simply take the individual sizes and plot them rather than grouping them as an ID and getting the mean size for an individual transect. Only important difference in the model would be the need to nest transect as a random factor in site?
+
+#abalone per bin
+abalone_sizes_bin <- abalone %>%
+  pivot_longer(cols = c(`1.25`:`NA`), names_to = "size",
+               values_to = "count", values_drop_na = FALSE) %>% 
+  mutate(size = as.numeric(size)) %>%
+  filter(count > 0) %>% 
+  group_by(site, buddy_pair, survey_direction, survey_method, size) %>% 
+  summarise(total = sum(count))
+  
+# calc mean size for all belts and quads
+quad_level_size <- abalone_sizes %>%
+  group_by(id) %>%
+  summarise(mean_size = mean(size))
+
+# add quad level mean sizes to abalone data
+abalone_data <- abalone %>%
+  left_join(quad_level_size, by = "id")
+
+# Survey level data manipulations
+
+# calculate a survey level mean size and standard deviation 
+survey_level_size <- abalone_sizes %>%
+  group_by(buddy_pair, survey_method, survey_direction, site) %>%
+  summarise(mean_size = mean(size), std_dev = sd(size))
+#no data for mean size can be either a) the survey was not done at this site for that buddy pair or b) they found no abalone in that survey
+
+# calc belt density for each buddy pair at each site
+df_belt <- abalone_data %>%
+  filter(survey_method == "belt" & survey_complete=="yes") %>% 
+  group_by(buddy_pair, survey_method, site, survey_direction) %>% # group data frame such that there will only be one row with a unique value for buddy_pair, survey_method, site, and survey_direction 
+  summarise(area = sum(transect_length_m), 
+            total_abalone_survey = sum(total_abalone),
+            density = total_abalone_survey/area) %>%
+            #time_diff_area = diff_min/area)%>%
+  ungroup() %>%
+  dplyr:: select(-area)
+
+# now calc density for the quads (one density for each buddy pair for each site)
+df_quad <- abalone_data %>%
+  filter(survey_method == "quadrat" & survey_complete=="yes") %>% 
+  group_by(buddy_pair, site, survey_method, survey_direction) %>% 
+  summarise(n_quads= n(),
+            total_abalone_survey = sum(total_abalone),
+            density = total_abalone_survey/n_quads)%>% 
+  dplyr:: select(-n_quads)
+#Why do ATV and LN have 11 quads for parallel A: ATV and KS simply measured a quadrat at 0-4-8-12-16 and 20 everytime so they consistantly have 6 quads for their half of the transect. This won't change the density calculation as we used n().
+
+
+# rejoin belt and quad data and add size data
+aba <- rbind(df_belt, df_quad) %>% # combine both dataframes by rows
+  left_join(survey_level_size, by = c("buddy_pair", "survey_method", "survey_direction", "site"))
+
+# add CV (sd/mean size)
+aba_cv <- aba %>%
+  mutate(cv = std_dev/mean_size)
+
+hist(aba_cv$cv)
+
+# Q1: Survey direction and method --------------------------------------------------
+## Q1a: Does density vary with survey direction and method? ---------------------
+# Try tweedie, response is positive continuous but including 0's
+mod_q1a_tw <- glmmTMB(density ~ survey_method*survey_direction + 
+                        (1|site) + (1|buddy_pair),
+                         data = aba, 
+                         family = tweedie(link = "log"))
+plot(simulateResiduals(mod_q1a_tw)) # better than gaussian
+summary(mod_q1a_tw)
+exp(0.2571) #back transform the estimate for method = 1.293174
+exp(-0.2944) #back transform the estimate for direction = 0.7449784
+
+emmean <- pairs(regrid(emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction)))) #regrid and pairs changes the p-value
+emmean <- emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction)) #back transfer the values manually
+emmean$contrast
+emmean$emmeans # to get individual values for each factorial combo
+backtrans <- emmean$emmeans %>% as.data.frame() %>% mutate(trans = exp(emmean))
+(exp(-0.610) - exp(-1.161)) #quad par - belt perp = 0.230178 more abs
+(exp(-1.161) - exp(-0.784)) #belt perp - quad perp = -0.1434032 fewer abs
+
+#Aug 19th, 2026 update
+#to maintain degrees of freedom but just compare the effect of quadrat vs belt 
+emmean_simple_survey_method <- emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction), simple = "survey_method")
+emmean_simple_survey_method
+#back transfer the results manually (remove negative to change direction of effect (i.e., quads compared to belts))
+exp(0.257) #belt par - quad par = 1.293045 times more abs in quads
+exp(0.377) #belt perp - quad perp = 1.457904 times more abs in quads
+
+
+#to maintain degrees of freedom but just compare the effect of par vs perp
+emmean_simple_survey_direction <- emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction), simple = "survey_direction")
+emmean_simple_survey_direction
+#back transfer the results manually 
+exp(0.294) #belt par - belt perp = 1.293045 times more abs in par
+exp(0.174) #quad par - quad perp = 1.190056 times more abs in par #effect size not relevant as no evidence for significance 
+
+#Carters attempt to change the direction for our results written section (unsure of where we are getting the exponent values from though...):
+(exp(-0.784) - exp(-1.161)) #quad perp - belt perp = 0.1434032 more abs???? dont think so or maybe this is just the difference between an absolute value and a ratio, I guess I'm just skeptical that it would be the same value but reverse but that does make sense with simple add vs subtract
+#Get a ratio instead?
+emmean_testresponse <- emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction), type = 'response') #back transfer the values using this response function based on https://stats.stackexchange.com/questions/154775/how-to-backtransform-data-that-has-been-log-transformed-in-order-to-report-raw-v
+emmean_testresponse
+#hmm same p values but different estimate as ratios - can I then use simple algebra?
+#Quad parallel / belt perp = 1.736 times more abs
+#Belt perp / quad perp = 0.686 therefore Quad perp / Belt perp = 1/0.686 = 1.4577
+#Em's Wizardry 
+pair_backtrans <- function(emmean_df){
+  backtrans1 <- emmean_df$emmeans %>% 
+    as.data.frame() %>% 
+    mutate(trans = exp(emmean)) %>%
+    unite("method", survey_direction, survey_method, sep = "_") %>%
+    dplyr::select(method, trans)
+  
+  backtrans2 <- backtrans1 %>%
+    crossing(
+      backtrans1 %>%
+        rename(method_2 = method,
+               trans_2= trans)) %>%
+    filter(method != method_2) %>%
+    mutate(diff = trans - trans_2,
+           abs_diff = abs(diff)) %>%
+    distinct(abs_diff, .keep_all = TRUE) %>%
+    dplyr::select(method, method_2, diff)
+}
+
+d <- pair_backtrans(emmean)
+
+#since we have the function coded above, I can simply insert this code with the following model name, and main factors of comparison into the emmean code and then simply use the pair_backtrans function below it to get a table of back transformed estimates from log models
+emmean <- emmeans(mod_q1a_tw, pairwise ~ c(survey_method, survey_direction))
+pairwise_modq1a <- pair_backtrans(emmean)
+
+# Plot Q1a 
+sum_stat_q1a <- ggpredict(mod_q1a_tw, 
+                          terms = c("survey_direction","survey_method")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(density = predicted,
+                survey_direction = x,
+                survey_method = group) %>% 
+  as_tibble() 
+
+facet_labels <- c("parallel" = "Constant depth",
+                 "perpendicular" = "Varied depth")
+# plot
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_q1a <- 
+  ggplot(data= aba, aes(x = survey_method, y = density, colour = survey_direction)) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  geom_point(data = sum_stat_q1a, 
+             aes(x = survey_method, y = density),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1a, 
+                aes(x = survey_method,
+                    y = density,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, labeller = as_labeller(facet_labels)) +
+  #facet_grid(. ~ survey_direction) +  # Facet by column
+  theme(legend.position = "none",
+    axis.title.x = element_blank(),  # remove x-axis title here
+    axis.text.x = element_blank(),  # remove x-axis levels here
+    axis.ticks.x = element_blank()) + # remove x-axis ticks here
+  labs(y = expression("Abalone density (" ~m^-2*")"))+
+  scale_y_continuous(limits = c(0, 4), breaks = c(0, 1, 2, 3, 4))
+  
+plot_q1a
+
+## Q1b: Does size vary with survey direction and method? ----------------------
+mod_q1b <- glmmTMB(mean_size ~ survey_method*survey_direction +
+                      (1|site) + (1|buddy_pair), data = aba)
+plot(simulateResiduals(mod_q1b)) # Gaussian is better than gamma
+summary(mod_q1b) # no diff in size!
+#Since sizes are binned this reduced our ability to detect small differences
+
+emmeans(mod_q1b, pairwise ~ c(survey_method, survey_direction))
+
+# checking sizes 
+hist(abalone_sizes$size)
+hist(aba$mean_size)
+
+#changing size bins again for ordinal regression
+abalone_ordinal <- read_csv("Data/Abalone_Data.csv") %>% 
+  rename(`0` = `<2.5cm`,
+        `2.5` = `2.5-5.0cm`,
+       `5.0` = `5.0-7.5cm`,
+      `7.5` = `7.5-10.0cm`,
+     `10.0` = `10.0-12.5cm`,
+    `12.5` = `12.5-15.0cm`,
+   `NA` = unsized) %>% 
+  mutate(id = 1:n(),
+         buddy_pair = ifelse(buddy_pair == "LN_KS", "KS_LN", buddy_pair),
+         buddy_pair = ifelse(buddy_pair == "GS_VK", "VK_GS", buddy_pair),
+         total_abalone= `0`+`2.5`+`5.0`+`7.5`+`10.0`+`12.5`+`NA`,
+         survey_direction = as.factor(survey_direction),
+         survey_method = as.factor(survey_type),
+         substrate = as.factor(substrate))
+
+abalone_sizes_ordinal <- abalone_ordinal %>%
+  pivot_longer(cols = c(`0`:`NA`), names_to = "size",
+               values_to = "count", values_drop_na = FALSE) %>% 
+  mutate(size = as.numeric(size)) %>%
+  filter(count > 0) %>%
+  uncount(count) %>%
+  drop_na(size)
+
+# make size an ordered factor 
+abalone_sizes2 <- abalone_sizes_ordinal %>%
+  mutate(size = factor(size, 
+                       levels = c(0, 2.5, 5.0, 7.5, 10.0, 12.5, "NA"), 
+                       ordered = TRUE)) %>%
+  mutate( 
+    site = factor(site),
+    buddy_pair = factor(buddy_pair)) #make our random effects factors not characters
+library(ordinal)
+#install.packages("ordinal")
+
+# mod_q1b2_clmm <- clmm(
+#   size ~ survey_method * survey_direction +   # fixed effects
+#     (1|site) + (1|buddy_pair),           # random effects
+#   data = abalone_sizes2,
+#   link = "logit",                            # could also try "probit" or "cloglog"
+#   Hess = TRUE                                # returns Hessian for SEs
+# )
+#unsure why but I can't nest random effects - Fixed below
+
+
+mod_q1b2_clmm <- clmm(
+  size ~ survey_method * survey_direction +   # fixed effects
+    (1|site/buddy_pair),           # random effects
+  data = abalone_sizes2,
+  link = "logit",                            # could also try "probit" or "cloglog"
+  Hess = TRUE                                # returns Hessian for SEs
+)
+
+
+#testing fit
+summary(mod_q1b2_clmm)
+#how do I interpret this. Where is the intercept? 
+emmeans(mod_q1b2_clmm, pairwise~survey_method*survey_direction, simple="survey_direction")
+#survey direction still significant but dont get effect size
+emmeans(mod_q1b2_clmm, pairwise~survey_method*survey_direction, simple="survey_method")
+#survey method still insignificant but dont get effect size
+
+
+# REVISIT ORDINAL REGRESSION!
+# Use emmeans to get probabilities for size bins
+clmm_bin_prob <- emmeans(mod_q1b2_clmm, ~ size | survey_method*survey_direction, mode = "prob") %>%
+  as.data.frame() %>%
+  mutate(
+    # the emmeans just calls the bins 1:6, we have to rename them with the sizes
+    size_values = case_when(size == 1 ~ 1.25,
+                            size == 2 ~ 3.75,
+                            size == 3 ~ 6.25,
+                            size == 4 ~ 8.75,
+                            size == 5 ~ 11.25,
+                            size == 6 ~ 13.75),
+    # turn the probabilities into percents
+    prob_per = as.numeric(prob*100),
+    # name the size bins for future plots and reorder them
+    size_fct = case_when(size_values == "1.25" ~ "0 - 2.5",
+                         size_values == "3.75" ~ "2.5 - 5",
+                         size_values == "6.25" ~ "5 - 7.5",
+                         size_values == "8.75" ~ "7.5 - 10",
+                         size_values == "11.25" ~ "10 - 12.5",
+                         size_values == "13.75" ~ "12.5 - 15"),
+         size_fct = factor(size_fct, 
+                           levels = c("0 - 2.5",
+                                      "2.5 - 5",
+                                      "5 - 7.5",
+                                      "7.5 - 10",
+                                      "10 - 12.5",
+                                      "12.5 - 15")))
+
+# now we can use those probabilities and sizes to get a mean size
+clmm_bin_prob2 <- clmm_bin_prob %>%
+  # multiply the prob of each size bin by the centerpoint size of that bin
+  mutate(size_est = prob*size_values) %>%
+  # then group by survey method and direction...
+  group_by(survey_method, survey_direction) %>%
+  # and sum up those prob*sizes to get a mean size per method*direction!
+  summarise(size_sum = sum(size_est))
+# can say there's a greater probability of finding more abalone
+
+
+# plot the size bins as stacked bars
+ggplot() +
+  geom_bar(data = clmm_bin_prob, 
+           aes(x = survey_method, 
+               y = prob, 
+               fill = fct_rev(size_fct)),
+           position = "fill",
+           stat = "identity") +
+  scale_fill_viridis_d(option = "mako", name = "Abalone size bin") +
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, 
+            labeller = as_labeller(facet_labels)) +
+  labs(x = "Survey Method", y = "Estimated probability") +
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) #capitalize survey_method titles 
+
+#ggsave("Figures/FigureIndividualAbaloneSizeCLMM.png", device = "png", height = 9, width = 12, dpi = 400)
+
+# side by side bars instead
+ggplot() +
+  geom_bar(data = clmm_bin_prob, 
+           aes(x = survey_method, 
+               y = prob, 
+               fill = size_fct),
+           position = "dodge",
+           stat = "identity") +
+  scale_fill_viridis_d(option = "mako", name = "Abalone size bin",
+                       direction = -1) +
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, 
+             labeller = as_labeller(facet_labels)) +
+  labs(x = "Survey Method", y = "Estimated probability") +
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) #capitalize survey_method titles 
+
+#ggsave("Figures/FigureIndividualAbaloneSizeCLMM_multibar.png", device = "png", height = 9, width = 12, dpi = 400)
+
+# Plot Q1b
+sum_stat_q1b <- ggpredict(mod_q1b, terms = c("survey_direction", "survey_method")) %>%
+  dplyr::rename(mean_size = predicted,
+                survey_direction = x,
+                survey_method = group) %>%
+  as_tibble()
+
+# plot
+set.seed(123)
+plot_q1b <- ggplot(data = aba, aes(x = survey_method, y = mean_size, colour = survey_direction)) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  geom_point(data = sum_stat_q1b, 
+             aes(x = survey_method, y = mean_size),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1b, 
+                aes(x = survey_method,
+                    y = mean_size,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  theme_classic() +
+  facet_wrap(~survey_direction) +
+  theme(legend.position = "none", 
+        strip.text = element_blank(), #remove facet titles
+        axis.title.x = element_blank(), # remove x-axis title here
+        axis.text.x = element_blank(),  # remove x-axis levels here
+        axis.ticks.x = element_blank()) + # remove x-axis ticks here
+  labs(y = "Mean size (cm)", x = "Survey method")+
+  scale_y_continuous(limits = c(0, 15), breaks = c(0, 2.5, 5, 7.5, 10, 12.5, 15)) +
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) #capitalize survey_method titles 
+
+plot_q1b
+#10 N/As in dataset as they had no abalone in those surveys
+
+#for violoin half plot need to install see package
+#install.packages("see")
+
+sum_stat_q1b2 <- ggpredict(mod_q1b2_clmm, terms = c("survey_direction", "survey_method")) %>%
+  dplyr::rename(size = predicted,
+                survey_direction = x,
+                survey_method = group) %>%
+  as_tibble()
+
+library(see)
+size_plot_q1b <- ggplot(data = abalone_sizes %>% filter(survey_complete == "yes"), 
+                        aes(x = survey_method, y = size, colour = survey_method)) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 3) +
+  #geom_point(data = abalone_sizes, 
+            #aes(x = survey_method, y = size),
+             #size = 4) +
+  geom_errorbar(data = sum_stat_q1b2, 
+                aes(x = survey_method,
+                    y = size,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  theme_classic() +
+  facet_wrap(~survey_direction) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles
+  labs(y = "Mean size (cm)", x = "Survey method")+
+  scale_y_continuous(limits = c(0, 15), breaks = c(0, 2.5, 5, 7.5, 10, 12.5, 15)) +
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) #capitalize survey_method titles 
+
+size_plot_q1b
+
+## Q1c: Does CV of size vary with survey direction and method? ----------------------
+
+# can we model the spread of the data directly by modelling the raw size data???
+# help here: https://stats.stackexchange.com/questions/518013/varying-dispersion-parameter-dispformula-in-glmmtmb-in-r-to-account-for-heter
+
+mod_sigma <- glmmTMB(size ~ survey_method*survey_direction +
+                      (1|site) + (1|buddy_pair),
+                    dispformula = ~survey_method*survey_direction,
+                    data = abalone_sizes)
+plot(simulateResiduals(mod_sigma)) 
+summary(mod_sigma) 
+# we want to compute 4 sigma terms, one for each group
+# and then we could still do the "normal" emmeans comparisons on the sigma terms
+# the dispersion output is telling us whether there's differences in spread between groups!
+# there aren't differences in spread between groups!
+
+
+#make new data frame with sd / mean size 
+hist(aba_cv$cv)
+#normal better than tweedie distribution ("model convergence problem on tweedie")
+mod_q1c <- glmmTMB(cv ~ survey_method*survey_direction + 
+                        (1|site) + (1|buddy_pair),
+                      data = aba_cv)
+plot(simulateResiduals(mod_q1c)) 
+summary(mod_q1c)
+
+# Plot Q1c
+sum_stat_q1c <- ggpredict(mod_q1c, terms = c("survey_direction", "survey_method")) %>%
+  dplyr::rename(cv = predicted,
+                survey_direction = x,
+                survey_method = group) %>%
+  as_tibble()
+
+# plot
+plot_q1c <- ggplot(data = aba_cv, aes(x = survey_method, y = cv, colour = survey_direction)) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 3) +
+  geom_point(data = sum_stat_q1c, 
+             aes(x = survey_method, y = cv),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1c, 
+                aes(x = survey_method,
+                    y = cv,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  theme_classic() +
+  facet_wrap(~survey_direction) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles
+  labs(y = "Coefficient of variation", x = "Survey method")+
+  scale_y_continuous(limits = c(0, 1.5), breaks = c(0.5, 1, 1.5)) +
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) #capitalize survey_method titles 
+
+plot_q1c
+
+# try runnning Levene Test
+library(car)
+
+# make df of just abalone sizes from complete surveys
+abalone_sizes_complete <- abalone_sizes %>% 
+  filter(survey_complete == "yes")
+
+# run test
+with(abalone_sizes_complete, leveneTest(size, interaction(survey_method, survey_direction)))
+
+## Q1d: Does reproductive proportion vary with method or orientation --------------------
+
+abalone_reproductive <- abalone_sizes %>% 
+  filter(survey_complete == "yes") %>%
+  mutate(larger_than_5 = size >= 5)
+
+abalone_reproductive$larger_than_5 <- as.integer(abalone_reproductive$larger_than_5) #make numeric instead of boolean
+
+abalone_reproductive_prop <- abalone_reproductive %>%
+  group_by(survey_type, survey_direction) %>%
+  summarise(
+    prop_large = mean(larger_than_5 == 1),
+    prop_small = mean(larger_than_5 == 0),
+    n = n()
+  )
+#okay so why are we getting larger n values in perp if we know parallel has a slightly + trend? Is it because some size counts are from dropped surveys b/c they were missing parallel data??A: its just a larger sample size dummy because the perp transects are not bound to 20m
+
+#model
+#install.packages("MASS")
+library(MASS)
+#install.packages("fitdistrplus")
+library(fitdistrplus)
+descdist(abalone_reproductive$size, boot = 1000)
+is.numeric(abalone_reproductive$larger_than_5) #TRUE
+descdist(abalone_reproductive$larger_than_5) #doesn't seem to fit anything on the Cullen & Frey plot well
+
+mod_q1d_binomial <- glmmTMB(larger_than_5 ~ survey_method*survey_direction + 
+                        (1|site/buddy_pair), #nested because each individual size can be on a different transect line (buddy_pair) within the site
+                      data = abalone_reproductive, 
+                      family = binomial("logit")) 
+plot(simulateResiduals(mod_q1d_binomial)) # p value suggests poor fit but but this is due to large n. Seems to visually fit assumptions well
+testDispersion(mod_q1d_binomial) #seems fine
+summary(mod_q1d_binomial)
+
+emmeans(mod_q1d_binomial, pairwise ~ c(survey_method, survey_direction))
+
+
+#the proportion is slightly different because visual on graph doesn't account for random effects etc (bar graph, not on 0/1 whisker plot)
+#as I understand, the estimates are providing the effect size in "logit space" AKA some transformed space, and we must use plogis to back transform these values to appropriate effect sizes???
+plogis(1.28443) # proportion of intercept par belt
+#0.7832029
+plogis(1.28443 - 0.06349) # proportion survey quadrat (similar to intercept and no significant difference detected)
+#0.7722289
+plogis(1.28443 + 0.50028) # proportion survey perp (significantly larger than intercept)
+#0.8562775
+plogis(1.28443 - 0.03992) # proportion survey quad:perp (similar to intercept and no significant difference detected)
+#0.7763481
+
+#so is the effect size of perp = plogis(intercept - perp) - plogis(intercept) =  0.8562775 - 0.7832029 = 0.0730746?????????
+#or it had a 0.07 higher proportion?
+#or 0.8562775/0.7832029 = 1.093302
+# If so, main take away is that perp surveys find slightly more reproductive abalone than parallel surveys at 5m chart datum, but the method of detection or the interaction between the method and orientation doesn't seem to impact the proportion 
+#plot
+plot_q1d <- ggplot(abalone_reproductive_prop, aes(x = survey_type, y = prop_large, fill = survey_direction)) +
+  geom_col(position = "dodge") +
+  theme_classic() +
+  facet_wrap(~survey_direction) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) + #capitalize survey_method titles 
+  labs(
+    y = "Proportion reproductive ( \u2265 5cm )",  #\u2265 is greater than or equal to unicode character
+    x = "Survey method"
+  ) +
+  scale_y_continuous(
+    limits = c(0, 1),
+    breaks = c(0, 0.25, 0.5, 0.75, 1),
+    labels = scales::number_format(),
+    expand = c(0, 0))
+
+plot_q1d
+
+#plot 2 (with raaw data)
+sum_stat_q1d <- ggpredict(mod_q1d_binomial, terms = c("survey_method", "survey_direction")) %>%
+  dplyr::rename(larger_than_5 = predicted,
+                survey_method = x,
+                survey_direction = group) %>%
+  as_tibble()
+
+set.seed(123)
+plot_q1d <- ggplot(data= abalone_reproductive, aes(x = survey_method, y = larger_than_5, colour = survey_direction)) +
+  geom_jitter(width = 0.2, height = 0.02, alpha = 0.09, size = 3)+
+  geom_point(data = sum_stat_q1d, 
+             aes(x = survey_method, y = larger_than_5),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1d, 
+                aes(x = survey_method,
+                    y = larger_than_5,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  theme_classic() + #clean it up a bit
+  theme(legend.position = "none", 
+        strip.text = element_blank(), #remove facet titles
+        axis.title.x = element_blank(), # remove x-axis title here
+        axis.text.x = element_blank(),  # remove x-axis levels here
+        axis.ticks.x = element_blank()) + # remove x-axis ticks here
+  facet_wrap(~survey_direction, labeller = labeller(survey_direction = function(x) tools::toTitleCase(x)))+
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles 
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) + #capitalize survey_method titles 
+  labs(
+    y = "Proportion reproductive ( \u2265 5cm )",  #\u2265 is greater than or equal to unicode character
+    x = "Survey method") +
+  scale_y_continuous(
+    limits = c(-0.02, 1.02),
+    breaks = c(0, 1),
+    labels = scales::number_format())
+
+plot_q1d
+## Plot Q1 ---------------------------------------------------------------------
+set.seed(123)
+plot_q1a / plot_q1b / plot_q1d + 
+  plot_annotation(tag_levels = list(c('(a)', '(b)', '(c)')))
+#10 N/As in dataset for the mean size as they had no abalone in those surveys
+#x-axis details removed for time analysis. Review the theme axis details to recover the x-axis for this plot
+
+#individual sizes
+plot_q1a / size_plot_q1b+
+  plot_annotation(tag_levels = c('a'))
+
+#ggsave("Figures/Figure2.png", device = "png", height = 9, width = 12, dpi = 400)
+
+
+# Q2: Abalone vs environmental variables (quad data) ------------------------------
+
+# Compare which substrates are captured by perp vs paralell for quads
+quad2 <- abalone_data %>%
+  filter(survey_method == "quadrat") %>%
+  filter(survey_complete == "yes") %>%
+  mutate(depth_round = round(quad_depth_m, 0),
+         # round one quad that should have been rounded up (4.5)
+         depth_round = ifelse(depth_round == 4 & survey_direction == "parallel", 5, depth_round))
+
+# Can I calculate how many abalone are seen on each substrate at each depth?
+quad3 <- quad2 %>%
+ # filter(total_abalone > 0) %>%
+  group_by(survey_direction, depth_round) %>%
+  summarize(mean_aba = mean(total_abalone),
+            sd_aba = sd(total_abalone),
+            n = n()) %>%
+  ungroup() %>%
+  mutate(se = sd_aba/sqrt(n),
+         upper = se+mean_aba,
+         lower= mean_aba - se)
+
+n_quads <- quad2 %>% group_by(survey_direction) %>%
+  count(depth_round)
+
+# plot abundance of substrate
+scale_factor <- max(n_quads$n, na.rm = TRUE) / max(quad3$upper, na.rm = TRUE)
+
+# plot
+plot_sub_abund <- ggplot(quad2, aes(depth_round)) +
+  geom_bar(aes(fill = substrate), alpha = 0.75) +
+  # Points (scaled)
+  #geom_point(data = quad3,
+  #           aes(x = depth_round,
+  #               y = mean_aba * scale_factor),
+  #           size = 2) +
+  # Error bars (scaled correctly!)
+  #geom_errorbar(data = quad3,
+  #              aes(x = depth_round,
+  #                  ymin = lower * scale_factor,
+  #                  ymax = upper * scale_factor),
+  #              width = 0.1,
+  #              linewidth = 0.5) +
+  facet_wrap(~survey_direction, ncol = 1, labeller = as_labeller(facet_labels)) +
+  #facet_wrap(~survey_direction, ncol = 1) +
+  theme_classic() +
+  labs(y = "Number of quadrats",
+       x = "Depth (m)",
+       fill = "Substrate") +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  theme(legend.position = "none")
+  #scale_y_continuous(
+  #  name = "Number of quadrats",
+  #  #labels = scales::percent,
+  #  sec.axis = sec_axis(~ . / scale_factor, name = "Mean abalone density")
+  #) 
+plot_sub_abund
+
+# plot the frequency of substrate types
+scale_factor2 <- 1 / max(quad3$upper, na.rm = TRUE)
+
+plot_sub_freq <- ggplot() +
+  # Proportional stacked bars
+  geom_bar(data = quad2,
+           aes(x = depth_round, fill = substrate),
+           position = "fill",
+           alpha = 0.75) +
+  # Points (scaled)
+  #geom_point(data = quad3,
+  #           aes(x = depth_round,
+  #               y = mean_aba * scale_factor2),
+  #           size = 2) +
+  # Error bars (scaled correctly!)
+  #geom_errorbar(data = quad3,
+  #              aes(x = depth_round,
+  #                  ymin = lower * scale_factor2,
+  #                  ymax = upper * scale_factor2),
+  #              width = 0.1,
+  #              linewidth = 0.5) +
+  facet_wrap(~survey_direction,ncol = 1, labeller = as_labeller(facet_labels)) +
+  #facet_grid(. ~ survey_direction) +  # Facet by column
+  #facet_wrap(~survey_direction, ncol = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  #scale_y_continuous(
+  #  name = "Percent of quadrats",
+  #  labels = scales::percent,
+  #  sec.axis = sec_axis(~ . / scale_factor2, name = "Mean abalone density")
+  #) +
+  labs(y = "Proportion of quadrats",
+       x = "Depth (m)",
+       fill = "Substrate")+
+  theme_classic()
+
+# put them together
+plot_sub_abund + plot_sub_freq
+
+#ggsave("Figures/Figure4.png", device = "png", height = 9, width = 12, dpi = 400)
+
+
+## try to chi square -------
+
+# do survey directions have the same substrate categories
+quad2 %>% 
+  dplyr::select(survey_direction, substrate) %>% 
+  table() %>% 
+  chisq.test()
+
+# what % is that?
+d <- quad2 %>%
+  count(survey_direction, substrate) %>%
+  left_join(quad2 %>%
+              count(survey_direction), by = "survey_direction") %>%
+  ungroup() %>%
+  mutate(prop = n.x/n.y)
+
+# do different depths have the same substrate categories
+quad2 %>% 
+  dplyr::select(depth_round, substrate) %>% 
+  table() %>% 
+  chisq.test()
+
+# what % is that?
+d <- quad2 %>%
+  count(depth_round, substrate) %>%
+  left_join(quad2 %>%
+              count(depth_round), by = "depth_round") %>%
+  ungroup() %>%
+  mutate(prop = n.x/n.y)
+
+# just perp
+quad2 %>% 
+  filter(survey_direction == "perpendicular") %>%
+  dplyr::select(depth_round, substrate) %>% 
+  table() %>% 
+  chisq.test()
+
+# just par
+quad2 %>% 
+  filter(survey_direction == "parallel") %>%
+  dplyr::select(depth_round, substrate) %>% 
+  table() %>% 
+  chisq.test()
+
+
+
+# DO IT AGAIN FOR PERCENT PRESENCE 
+quad4 <- quad2 %>%
+  mutate(pres = ifelse(total_abalone > 0, 1, 0)) %>%
+  group_by(survey_direction, depth_round) %>%
+  summarize(mean_pres = mean(pres),
+            sd_pres = sd(pres),
+            n = n()) %>%
+  ungroup() %>%
+  mutate(se = sd_pres/sqrt(n),
+         upper = se+mean_pres,
+         lower= mean_pres - se)
+
+# plot the frequency of substrate types
+scale_factor3 <- 1 / max(quad4$upper, na.rm = TRUE)
+
+plot_sub_freq2 <- ggplot() +
+  # Proportional stacked bars
+  geom_bar(data = quad2,
+           aes(x = depth_round, fill = substrate),
+           position = "fill",
+           alpha = 0.75) +
+  # Points (scaled)
+  geom_point(data = quad4,
+             aes(x = depth_round,
+                 y = mean_pres * scale_factor3),
+             size = 2) +
+  # Error bars (scaled correctly!)
+  geom_errorbar(data = quad4,
+                aes(x = depth_round,
+                    ymin = lower * scale_factor3,
+                    ymax = upper * scale_factor3),
+                width = 0.1,
+                linewidth = 0.5) +
+  facet_wrap(~survey_direction, ncol = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  scale_y_continuous(
+    name = "Percent of quadrats",
+    labels = scales::percent,
+    sec.axis = sec_axis(~ . / scale_factor3, name = "Probability of abalone")
+  ) +
+  labs(x = "Depth (m)",
+       fill = "Substrate")+
+  theme_classic()
+plot_sub_freq2
+
+# put them together
+plot_sub_abund + plot_sub_freq2
+
+
+## Q2a: how does abalone presence vary across depth and substrate --------------
+
+# make a df with the perpendicular quad data
+quad <- abalone_data %>%
+  filter(survey_method == "quadrat") %>%
+  filter(survey_direction == "perpendicular") %>%
+  filter(survey_complete == "yes") %>%
+  mutate(aba_pres = ifelse(total_abalone > 0, 1, 0), #1 if abalone, 0 if none
+         quad_depth_centre = c(scale(quad_depth_m, scale = F))) 
+
+# determine % abalone overlooked if just assess 8m and shallower
+quad_all_depths <- abalone_data %>%
+  filter(survey_method == "quadrat")%>%
+  filter(survey_complete == "yes")
+#916 observations
+
+quad_shallow <- abalone_data %>%
+  filter(survey_method == "quadrat")%>%
+  filter(survey_complete == "yes") %>%
+  filter(quad_depth_m < 9)
+#676 observations 
+
+676/916 #8m cut off which removes some parallel survey data 
+735/916 #8.5m cut off which keeps all parallel surveys in the df
+779/916 #9m cut off
+# first step of the hurdle model: what impacts the probability that you find an abalone in a quad?
+mod_q2a <- glmmTMB(aba_pres ~ substrate*quad_depth_m + (1|site) + (1|buddy_pair),
+                       family = binomial(link = 'logit'),
+                       data = quad)
+plot(simulateResiduals(mod_q2a)) # perfect
+summary(mod_q2a)
+
+# calculate slopes for each substrate
+emtrends_q2a <- emtrends(mod_q2a, "substrate", var = "quad_depth_m")
+test(emtrends_q2a)
+
+# it's nuts that the model can't detect a difference for sand bc there's sooo few plots with abalone present on sand....
+sub_percents <- quad %>% 
+  group_by(aba_pres) %>% 
+  count(substrate) %>%
+  pivot_wider(names_from = aba_pres, values_from = n) %>%
+  mutate(percent = 100*`1`/(`0`+`1`))
+
+# Plot Q2a 
+
+# calculate min and max depths for each substrate
+sub_dep <- quad %>%
+  group_by(substrate) %>%
+  summarise(max = max(quad_depth_m) + 0.5,
+            min = min(quad_depth_m) - 0.5)
+
+# use model to predict probability of finding an abalone
+v <- seq(from = 0, to = 12,  length.out = 50)
+
+sum_stats_q2a <- ggpredict(mod_q2a, terms = c("quad_depth_m [v]", "substrate")) %>% 
+  dplyr::rename(quad_depth_m = x,
+                substrate = group,
+                aba_pres = predicted) %>% 
+  as.data.frame() %>%
+  # remove estimates for sand substrate under 4.6 meters
+  filter(!(substrate == "sand" & quad_depth_m < 4.6)) %>%
+  # trim all lines to available data
+  left_join(sub_dep, by = "substrate") %>%
+  rowwise() %>%
+  filter(quad_depth_m <= max &
+           quad_depth_m >= min)
+
+# make the plot
+set.seed(123)
+plot_q2a <- ggplot() +
+  annotate(geom = "rect",xmin = 5,xmax = 8,ymin = -Inf,ymax = +Inf,alpha = 0.2) +
+  geom_jitter(data = quad, 
+              aes(x = quad_depth_m, y = aba_pres, colour = substrate),
+              alpha = 0.8, size = 1.5, height = 0.02, width = 0.02) +
+  geom_line(data = sum_stats_q2a,
+            aes(x = quad_depth_m, y = aba_pres, colour = substrate), 
+            linewidth = 1) +
+  geom_ribbon(data = sum_stats_q2a,
+              aes(x = quad_depth_m, y = aba_pres, fill = substrate, 
+                  ymin = conf.low, ymax = conf.high), 
+              alpha = 0.3) +
+  scale_colour_viridis_d(begin = 0.3, end = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  facet_wrap(~substrate, ncol= 4, labeller = labeller(substrate = function(x) tools::toTitleCase(x))) +
+  theme_classic() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    #axis.ticks.x = element_blank(),
+    legend.position = "none") +
+  labs(y = "Presence probability") + #, x = "Depth (m)") 
+  scale_y_continuous(
+    limits = c(-0.02, 1.04),
+    breaks = c(0, 1),
+    labels = scales::number_format())+
+  xlim(0, 12)
+
+
+plot_q2a # 10 values missing. 
+sum(is.na(quad$aba_pres)) #no N/As...
+sum(is.na(quad$quad_depth_centre)) #10 N/As
+sum(is.na(quad$quad_depth_m)) #10 N/As
+
+## Q2b: how does density vary across depth and substrate -----------------------
+# second part of hurdle model: what impacts the number of abalone you find in a quad?
+
+# make df of only quads that had abalone
+quad_pres <- quad %>%
+  filter(aba_pres == 1)
+
+# run model
+mod_q2b <- glmmTMB(total_abalone ~ substrate*quad_depth_m +
+                         (1|site) + (1|buddy_pair), 
+                       family = poisson(link = "log"),
+                       data = quad_pres)
+
+plot(simulateResiduals(mod_q2b)) # not great but better than gaussian, gamma, or negative binomial
+
+# Poisson makes the most sense and has the best residuals, BUT the resulting model predictions think there might be 30 abalone per quad on shallow sand and that's a bit whack....
+# That's because there weren't any shallow quads on sand so there's no data to inform that estimate
+# Trim model estimates to the available data for the plots!
+summary(mod_q2b)
+
+emtrends_q2b <- emtrends(mod_q2b, "substrate", var = "quad_depth_m")
+pairs(emtrends_q2b)
+test(emtrends_q2b)
+
+# pairwise density comparisons
+emmeans(mod_q2b, pairwise ~ c(substrate))
+
+
+#maybe plot 2b should be blown up on the y axis, and should use emtrends to do pairwise comparisons??
+
+# Plot Q2b 
+# What was the shallowest sand quad?
+sand <- quad %>%
+  filter(substrate == "sand") 
+min_sand <- min(sand$quad_depth_m)
+
+# calculate min and max depths for each substrate
+sub_dep_pres <- quad_pres %>%
+  group_by(substrate) %>%
+  summarise(max = max(quad_depth_m) + 0.5,
+            min = min(quad_depth_m) - 0.5)
+
+# use model to predict probability of finding an abalone
+sum_stats_q2b <- ggpredict(mod_q2b, terms = c("quad_depth_m [v]", "substrate")) %>% 
+  dplyr::rename(quad_depth_m = x,
+                substrate = group,
+                total_abalone = predicted) %>% 
+  as.data.frame() %>%
+  # remove estimates for sand substrate under 4.6 meters
+  filter(!(substrate == "sand" & quad_depth_m < 4.6)) %>%
+  # trim all lines to available data
+  left_join(sub_dep_pres, by = "substrate") %>%
+  rowwise() %>%
+  filter(quad_depth_m <= max &
+           quad_depth_m >= min)
+
+
+# Plot Q2b
+set.seed(123)
+plot_q2b <- ggplot() +
+  annotate(geom = "rect",xmin = 5,xmax = 8,ymin = -Inf,ymax = +Inf,alpha = 0.2) +
+  geom_jitter(data = quad_pres, 
+              aes(x = quad_depth_m, y = total_abalone, colour = substrate),
+              alpha = 0.8, size = 1.5) +
+  geom_line(data = sum_stats_q2b,
+            aes(x = quad_depth_m, y = total_abalone, colour = substrate), 
+            linewidth = 1) +
+  geom_ribbon(data = sum_stats_q2b,
+              aes(x = quad_depth_m, y = total_abalone, fill = substrate, 
+                  ymin = conf.low, ymax = conf.high), 
+              alpha = 0.3) +
+  scale_colour_viridis_d(begin = 0.3, end = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  facet_wrap(~substrate, ncol= 4) +
+  theme_classic() +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        #axis.ticks.x = element_blank(),
+        strip.text = element_blank(),
+        legend.position = "none") +
+  labs(y = bquote("Abalone density (" ~m^-2*")")) + #, x = "Depth (m)")
+  xlim(0, 12)
+
+plot_q2b # 1 missing. 
+sum(is.na(quad_pres$total_abalone))
+sum(is.na(quad_pres$quad_depth_centre))# 1 N/A
+
+## Q2c: How does abalone size vary with depth and substrate? -------------------
+# run model
+mod_q2c <- glmmTMB(mean_size ~ substrate*quad_depth_m +
+                         (1|site) + (1|buddy_pair), 
+                   family = Gamma(link = "log"),
+                       data = quad_pres)
+
+plot(simulateResiduals(mod_q2c)) # better as gaussian
+summary(mod_q2c)
+
+emtrends_q2c <- emtrends(mod_q2c, "substrate", var = "quad_depth_m")
+pairs(emtrends_q2c)
+test(emtrends_q2c) # gives p-values for each slope
+
+# pairwise size comparisons
+emmeans(mod_q2c, pairwise ~ c(substrate))
+
+# Plot Q2c 
+# use model to predict probability of finding an abalone
+sum_stats_q2c <- ggpredict(mod_q2c, terms = c("quad_depth_m [v]", "substrate")) %>% 
+  dplyr::rename(quad_depth_m = x,
+                substrate = group,
+                mean_size = predicted) %>% 
+  as.data.frame() %>%
+  # remove estimates for sand substrate under 4.6 meters
+  filter(!(substrate == "sand" & quad_depth_m < 4.6)) %>%
+  # trim all lines to available data
+  left_join(sub_dep_pres, by = "substrate") %>%
+  rowwise() %>%
+  filter(quad_depth_m <= max &
+           quad_depth_m >= min)
+
+# plot
+set.seed(123)
+plot_q2c <- ggplot() +
+  annotate(geom = "rect",xmin = 5,xmax = 8,ymin = -Inf,ymax = +Inf,alpha = 0.2) +
+  geom_jitter(data = quad_pres, 
+              aes(x = quad_depth_m, y = mean_size, colour = substrate),
+              alpha = 0.8, size = 1.5) +
+  geom_line(data = sum_stats_q2c,
+            aes(x = quad_depth_m, y = mean_size, colour = substrate), 
+            linewidth = 1) +
+  geom_ribbon(data = sum_stats_q2c,
+              aes(x = quad_depth_m, y = mean_size, fill = substrate, 
+                  ymin = conf.low, ymax = conf.high), 
+              alpha = 0.3) +
+  scale_colour_viridis_d(begin = 0.3, end = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  facet_wrap(~substrate, ncol= 4) +
+  theme_classic() +
+  theme(axis.title.x = element_blank(),
+              axis.text.x = element_blank(),
+              #axis.ticks.x = element_blank(),
+              strip.text = element_blank(),
+              legend.position = "none") +
+  labs(y = "Mean size (cm)") + #, x = "Depth (m)")
+  scale_y_continuous(limits = c(0, 15), breaks = c(0, 2.5, 5, 7.5, 10, 12.5, 15)) +
+  xlim(0, 12)
+
+plot_q2c
+#for some reason when change y-axis a point gets removed???
+sum(is.na(quad_pres$mean_size)) # 2 missing but only 1 quad with all abalone inside unmeasured = N/A (in this case 1 abalone unmeasured). 
+sum(is.na(quad_pres$quad_depth_centre)) # 1 N/A so combine there are two total
+
+## Q2d: How does abalone reproductive proportion vary with depth and substrate? ----------------------
+#create df
+quad_reproductive <- abalone_sizes %>%
+  filter(survey_method == "quadrat") %>%
+  filter(survey_direction == "perpendicular") %>%
+  filter(survey_complete == "yes") %>%
+  mutate(aba_pres = ifelse(total_abalone > 0, 1, 0), #1 if abalone, 0 if none
+         quad_depth_centre = c(scale(quad_depth_m, scale = F))) %>%
+  filter(aba_pres == 1) %>% #filter for 0 count is already present in abalone_sizes
+  mutate(larger_than_5 = size >= 5)
+
+quad_reproductive$larger_than_5 <- as.integer(quad_reproductive$larger_than_5) #make numeric instead of boolean
+
+quad_reproductive_prop <- quad_reproductive %>%
+  group_by(survey_type, survey_direction) %>%
+  summarise(
+    prop_large = mean(larger_than_5 == 1),
+    prop_small = mean(larger_than_5 == 0),
+    n = n()
+  )
+
+#check df
+sum(quad_pres$total_abalone) #313? different than 303 individual size estimates from quad_reproductive? Reason: 10 of the total abalone that were counted were not sized. No need to make changes.
+
+#model
+mod_q2d_binomial <- glmmTMB(larger_than_5 ~ substrate*quad_depth_m + 
+                              (1|site/buddy_pair), #nested because each individual size can be on a different transect line (buddy_pair) within the site
+                            data = quad_reproductive, 
+                            family = binomial("logit")) 
+plot(simulateResiduals(mod_q2d_binomial)) 
+summary(mod_q2d_binomial) 
+# majority of individuals "large" in this df (75%), and sample size is large 
+
+emtrends_q2d <- emtrends(mod_q2d_binomial, "substrate", var = "quad_depth_m")
+test(emtrends_q2d) # get slopes for each substrate
+pairs(emtrends_q2d)
+
+# pairwise repro prop comparisons
+emmeans(mod_q2d_binomial, pairwise ~ c(substrate))
+
+#Plot Q2d 
+sum_stats_q2d <- ggpredict(mod_q2d_binomial, terms = c("quad_depth_m [v]", "substrate")) %>% 
+  dplyr::rename(quad_depth_m = x,
+                substrate = group,
+                larger_than_5 = predicted) %>% 
+  as.data.frame() %>%
+  # remove estimates for sand substrate under 4.6 meters
+  filter(!(substrate == "sand" & quad_depth_m < 4.6)) %>%
+  # trim all lines to available data
+  left_join(sub_dep_pres, by = "substrate") %>%
+  rowwise() %>%
+  filter(quad_depth_m <= max &
+           quad_depth_m >= min)
+
+# plot
+set.seed(123)
+plot_q2d <- ggplot() +
+  annotate(geom = "rect",xmin = 5,xmax = 8,ymin = -Inf,ymax = +Inf,alpha = 0.2) +
+  geom_jitter(data = quad_reproductive, 
+              aes(x = quad_depth_m, y = larger_than_5, colour = substrate),
+              width = 0.02, height = 0.02, alpha = 0.8, size = 1.5) +
+  geom_line(data = sum_stats_q2d,
+            aes(x = quad_depth_m, y = larger_than_5, colour = substrate), 
+            linewidth = 1) +
+  geom_ribbon(data = sum_stats_q2d,
+              aes(x = quad_depth_m, y = larger_than_5, fill = substrate, 
+                  ymin = conf.low, ymax = conf.high), 
+              alpha = 0.3) +
+  geom_col(position = "dodge") +
+  scale_colour_viridis_d(begin = 0.3, end = 1) +
+  scale_fill_viridis_d(begin = 0.3, end = 1) +
+  facet_wrap(~substrate, ncol= 4) +
+  theme_classic() +
+  theme(legend.position = "none", strip.text = element_blank()) +
+  labs(y = "Proportion reproductive ( \u2265 5cm )", x = "Depth (m)") +
+  scale_y_continuous(
+    limits = c(-0.02, 1.04),
+    breaks = c(0, 1),
+    labels = scales::number_format()) +
+  xlim(0, 12)
+
+plot_q2d #1 missing 
+sum(is.na(quad_reproductive$larger_than_5)) # 0 N/As. 
+sum(is.na(quad_reproductive$quad_depth_centre)) #1 N/A
+
+## Plot Q2 ---------------------------------------------------------------------
+plot_q2a / plot_q2b / plot_q2c / plot_q2d+
+  plot_annotation(tag_levels = list(c('(a)', '(b)', '(c)', '(d)'))) &
+  theme(legend.position = "none")
+
+#ggsave("Figures/Figure5.png", device = "png", height = 9, width = 12, dpi = 400)
+
+
+# Q3: Does substrate impact differences between site? --------------------------
+
+# this is where the delta density stuff starts..... 
+belt_substrate <- abalone_data %>% 
+  filter(survey_direction == "parallel" & survey_method == "belt" & survey_complete == "yes")  %>%
+  transmute(buddy_pair = buddy_pair, 
+            site = site, 
+            b_substrate = substrate) %>%
+  unique() # shoot, there's some disagreement 
+
+quad_substrate <- abalone_data %>% 
+  filter(survey_direction == "parallel" & survey_method == "quadrat" & survey_complete == "yes") %>%
+  # figure out which substrate was seen the most for each pair at each site
+  group_by(buddy_pair, site) %>%
+  count(substrate) %>%
+  mutate(top_sub = ifelse(n == max(n), "top", "drop")) %>%
+  filter(top_sub == "top") %>% # should just be the top substrates
+  # identify sites that had ties for the top substrate
+  mutate(tie = 1:n()) %>% # the tie = 2 rows are sites with a tie for top substrate
+  # the second row was numbered 2, let's just cut those to remove any bias 
+  filter(tie == 1) %>%
+  transmute(buddy_pair = buddy_pair, 
+            site = site, 
+            q_substrate = substrate) %>%
+  ungroup()
+
+# for curiosity, how well do the quad substrate types agree with the belts?
+substrate <- belt_substrate %>%
+  left_join(quad_substrate, by = c("site", "buddy_pair")) %>%
+  mutate(agree = ifelse(q_substrate == b_substrate, "yes", "no")) 
+# LOL not very well 
+
+# ok now let's make this cursed df
+
+# just belt surveys to make a new column for the belt measurements
+cursed_b <- aba %>% 
+  filter(survey_direction == "parallel" & survey_method == "belt") %>%
+  rename(b_den = density,
+         b_size = mean_size) %>%
+  dplyr::select(-c(total_abalone_survey, survey_direction, survey_method))
+
+# just quad surveys to make a new column for the quad measurements
+cursed_q <- aba %>% 
+  filter(survey_direction == "parallel" & survey_method == "quadrat") %>%
+  rename(q_den = density,
+         q_size = mean_size) %>%
+  dplyr::select(-c(total_abalone_survey, survey_direction, survey_method))
+
+# put them together with the quad substrate characterization
+delta <- quad_substrate %>%
+  rename(substrate = q_substrate) %>%
+  left_join(cursed_b, by = c("site", "buddy_pair")) %>%
+  left_join(cursed_q, by = c("site", "buddy_pair")) %>%
+  mutate(delta_den = b_den - q_den,
+         delta_size = b_size - q_size) %>%
+  # there's only one cobble survey I'm not going to try to estimate anything based on one survey
+  filter(substrate != "cobble")
+
+
+## Q3a: delta density vs substrate ----------------------------------------------
+# Try to do stats on this abomination
+mod_3a <- glmmTMB(delta_den ~ substrate + (1|site) + (1|buddy_pair), data = delta)
+plot(simulateResiduals(mod_3a)) # ehhhh not the worst, not the best
+summary(mod_3a)
+# absolutely no difference. cool cool coool cooooooool
+
+sum_stat_q3a <- ggpredict(mod_3a, terms = "substrate") %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(delta_den = predicted,
+                substrate = x) %>% 
+  as_tibble()
+
+# plot
+plot_q3a <- ggplot(data = delta, aes(y = substrate, x = delta_den)) +
+  geom_jitter(width = 0.2, height = 0.2, alpha = 0.3, size = 3, colour = "blue") +
+  geom_point(data = sum_stat_q3a, 
+             aes(y = substrate, x = delta_den),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q3a, 
+                aes(y = substrate,
+                    x = delta_den,
+                    xmin = conf.low,
+                    xmax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  geom_vline(xintercept = 0, lty = "dashed") +
+  xlab("Belt - quad density") +
+  theme_classic() #clean it up a bit
+
+plot_q3a
+
+## Q3b: delta size vs substrate -------------------------------------------------
+
+mod_3b <- glmmTMB(delta_size ~ substrate + (1|site) + (1|buddy_pair), data = delta)
+plot(simulateResiduals(mod_3b)) # good
+summary(mod_3b)
+# belt surveys found larger abalone on boulders, but smaller abalone on bedrock
+
+sum_stat_q3b <- ggpredict(mod_3b, terms = "substrate") %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(delta_size = predicted,
+                substrate = x) %>% 
+  as_tibble()
+
+# plot
+plot_q3b <- ggplot(data = delta, aes(y = substrate, x = delta_size)) +
+  geom_jitter(width = 0.2, height = 0.2, alpha = 0.3, size = 3, colour = "blue") +
+  geom_point(data = sum_stat_q3b, 
+             aes(y = substrate, x = delta_size),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q3b, 
+                aes(y = substrate,
+                    x = delta_size,
+                    xmin = conf.low,
+                    xmax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  geom_vline(xintercept = 0, lty = "dashed") +
+  xlab("Belt - quad size") +
+  theme_classic() #clean it up a bit
+
+plot_q3b
+
+## Plot Q3 ---------------------------------------------------------------------
+plot_q3a + plot_q3b +
+  plot_annotation(tag_levels = c('a'))
+
+# ggsave("Figures/Figure3.png", device = "png", height = 9, width = 12, dpi = 400)
+
+
+# Q4: Survey method comparison along same transect --------------------------------------------------------------------------
+#create df
+aba_wide <- aba_cv %>% 
+  # make direction names shorter
+  mutate(survey_direction = case_when(survey_direction == "perpendicular" ~ "perp",
+                                      survey_direction == "parallel" ~ "par")) %>%
+  # unite the two method columns
+  unite(col='method',
+        c('survey_direction', 'survey_method'), sep='_') %>%
+  # remove column we don't want to pivot
+  dplyr::select(-total_abalone_survey, -std_dev) %>%
+ # pivot wide so each density 
+  pivot_wider(names_from = method, values_from = c(density, mean_size, cv))
+
+# plots  
+q4a <- ggplot(data = aba_wide, aes(density_perp_belt, density_par_quadrat)) +
+  geom_point(aes(colour = buddy_pair)) +
+#  geom_smooth(method = "lm")+
+  theme(legend.position = "none") +
+  ggtitle("par quad vs perp belt") +
+  xlim(c(0,4)) +
+  ylim(c(0,4))+
+  geom_abline(intercept = 0, slope = 1)
+q4a
+
+q4b <- ggplot(data = aba_wide, aes(density_perp_quadrat, density_par_belt)) +
+  geom_point(aes(colour = buddy_pair)) +
+#  geom_smooth(method = "lm") +
+  theme(legend.position = "none") + 
+  ggtitle("par belt vs perp quad") +
+  xlim(c(0,4)) +
+  ylim(c(0,4)) +
+  geom_abline(intercept = 0, slope = 1)
+
+ # plot
+q4a + q4b
+
+# slope?
+#sim_mod <- glmmTMB(perp_quad ~ par_belt, aba_long2)
+#summary(sim_mod) # 0.67
+
+#diff_mod <- glmmTMB(paralell_quad ~ perp_belt, aba_long)
+#summary(diff_mod) # 1.1
+
+#model for figure 4a/b
+quad_aba <- aba %>%
+  # make sure you have one density value per method/site/direction
+  group_by(site, survey_direction, survey_method, buddy_pair) %>%
+  summarise(density = mean(density, na.rm = TRUE),
+          mean_size = ifelse(all(is.na(mean_size)), NA, mean(mean_size, na.rm = TRUE))) %>%
+  # pivot wider so both densities appear in the same row
+  pivot_wider(
+    id_cols = c(site, survey_direction, buddy_pair),
+    names_from = survey_method,
+    values_from = c(density, mean_size),
+    names_glue = "{survey_method}_{.value}"
+  )
+## Q4a: how does abalone density vary using different methods along the same transect ----------
+#model for density 
+mod_4a <- glmmTMB(quadrat_density ~ belt_density + (1|site) + (1| buddy_pair), data = quad_aba )
+plot(simulateResiduals(mod_4a))
+summary(mod_4a)
+
+# model with interaction for direction 
+mod_4a <- glmmTMB(quadrat_density ~ belt_density*survey_direction + (1|site) + (1| buddy_pair), 
+                  data = quad_aba)
+plot(simulateResiduals(mod_4a))
+summary(mod_4a)
+
+# can we calculate the confidence intervals for the slopes using emtrends?
+slopes_4a <- emtrends(mod_4a, "survey_direction", var = "belt_density")
+summary(slopes_4a, infer=TRUE)
+
+#testing if reverse the method as response variable
+testmod_4a <- glmmTMB(belt_density ~ quadrat_density*survey_direction + (1|site) +(1|buddy_pair), data = quad_aba)
+plot(simulateResiduals(testmod_4a))
+summary(testmod_4a)
+
+## Q4b: how does abalone mean size vary using different methods along the same transect ------------
+mod_4b <- glmmTMB(quadrat_mean_size ~ belt_mean_size*survey_direction + (1|site) + (1|buddy_pair),
+                  data = quad_aba)
+plot(simulateResiduals(mod_4b))
+summary(mod_4b)
+
+#calculate if slopes different than expected 1:1 relationship
+slopes_4b <- emtrends(mod_4b, "survey_direction", var = "belt_mean_size")
+summary(slopes_4b, infer=TRUE)
+
+#testing if reverse the method as response variable
+testmod_4b <- glmmTMB(belt_mean_size ~ quadrat_mean_size*survey_direction + (1|site) +(1|buddy_pair), data = quad_aba)
+plot(simulateResiduals(testmod_4b))
+summary(testmod_4b)
+#confused why a) the effect size changes so much when I change the response variable here and b) why method is being pulled out as significant as sizes across methods for the same transect are fairly similar but for different transects (survey_orientations) they seem to differ more...c) why does this break dARMA assumptions and the other one doesn't. 
+  #Answer a) remember our GLMTMB is testing if it is significantly different than 0 not 1 to 1 line!!!
+
+#Carter: I want to check parallel belt v quad I think this can visually show on the same transect line, as the absolute abalone density increased quadrat counts got increasingly larger. Theory is that when more abalone are present it is harder to accurately count in a belt given their cryptic nature, and infrequent abundance.  
+
+#New plotting with facet to represent model more accurately and tidy the titles (Nov 27th, 2025)
+#ggpredict simulates a data frame given your model that can generate confidence intervals etc 
+#density
+sum_stat_q4a <- ggpredict(mod_4a, 
+                          terms = c("belt_density","survey_direction")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(quadrat_density = predicted,
+                belt_density = x,
+                survey_direction = group) %>% 
+  as_tibble() 
+
+set.seed(123)
+q4a_new <- ggplot(data = quad_aba, aes(belt_density, quadrat_density)) +
+  geom_point(aes(colour = survey_direction))+
+  geom_smooth(data = sum_stat_q4a,
+             aes(x = belt_density,
+                 y= quadrat_density,
+                 ymin = conf.low,
+                 ymax = conf.high,
+                 colour = survey_direction),
+             width = 0.2,
+             linewidth = 1.2) +
+  geom_ribbon(data = sum_stat_q4a,
+              aes(x = belt_density,
+                  y= quadrat_density,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  fill = survey_direction),
+              alpha = 0.3)+
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, labeller = as_labeller(facet_labels)) +
+  theme(legend.position = "none") +
+  coord_cartesian(xlim = c(0, 2), ylim = c(0, 4)) +
+  scale_x_continuous(breaks = seq(0, 2, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 4, by = 0.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(
+    x = bquote("Belt density (abalone" ~ "\u00B7" ~ m^{-2} * ")"),
+    y = bquote("Quadrat density (abalone" ~ "\u00B7" ~ m^{-2} * ")")
+  )
+q4a_new
+
+#mean size
+sum_stat_q4b <- ggpredict(mod_4b, 
+                          terms = c("belt_mean_size","survey_direction")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(quadrat_mean_size = predicted,
+                belt_mean_size = x,
+                survey_direction = group) %>% 
+  as_tibble() 
+#are there more observations because the scale is larger???
+
+set.seed(123)
+q4b_new <- ggplot(data = quad_aba, aes(belt_mean_size, quadrat_mean_size)) +
+  geom_point(aes(colour = survey_direction))+
+  geom_smooth(data = sum_stat_q4b,
+              aes(x = belt_mean_size,
+                  y= quadrat_mean_size,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  colour = survey_direction),
+              width = 0.2,
+              linewidth = 1.2) +
+  geom_ribbon(data = sum_stat_q4b,
+              aes(x = belt_mean_size,
+                  y= quadrat_mean_size,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  fill = survey_direction),
+              alpha = 0.3)+
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, labeller = labeller(survey_direction = function(x) tools::toTitleCase(x))) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles 
+  coord_cartesian(xlim = c(0, 12.5), ylim = c(0, 12.5)) +
+  scale_x_continuous(breaks = seq(0, 12.5, by = 2.5)) +
+  scale_y_continuous(breaks = seq(0, 12.5, by = 2.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(
+    x = bquote("Belt mean size (cm)"),
+    y = bquote("Quadrat mean size (cm)")
+  )
+q4b_new
+
+
+## Q4c: how does percent repro vary using different methods ? ----------
+
+# calc % repro for each trans
+repro <- abalone_reproductive %>%
+  group_by(site, buddy_pair, survey_method, survey_direction) %>%
+  summarise(prop = mean(larger_than_5)) %>%
+  ungroup()  %>%
+  # pivot wider so both densities appear in the same row
+  pivot_wider(
+    id_cols = c(site, survey_direction, buddy_pair),
+    names_from = survey_method,
+    values_from = c(prop),
+    names_glue = "{survey_method}_{.value}"
+  )
+
+# model
+mod_4c <- glmmTMB(quadrat_prop ~ belt_prop*survey_direction + (1|site) + (1|buddy_pair),
+                  data = repro)
+plot(simulateResiduals(mod_4c))
+summary(mod_4c)
+
+#calculate if slopes different than expected 1:1 relationship
+slopes_4c <- emtrends(mod_4c, "survey_direction", var = "belt_prop")
+summary(slopes_4c, infer=TRUE)
+
+# plot repro
+sum_stat_q4c <- ggpredict(mod_4c, 
+                          terms = c("belt_prop [all]",
+                                    "survey_direction")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(quadrat_prop = predicted,
+                belt_prop = x,
+                survey_direction = group) %>% 
+  as_tibble() 
+
+set.seed(123)
+q4c_new <- ggplot() +
+  geom_point(data = repro, aes(belt_prop, quadrat_prop, colour = survey_direction))+
+  geom_smooth(data = sum_stat_q4c,
+              aes(x = belt_prop,
+                  y= quadrat_prop,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  colour = survey_direction),
+              #width = 0.2,
+              linewidth = 1.2) +
+  geom_ribbon(data = sum_stat_q4c,
+              aes(x = belt_prop,
+                  y= quadrat_prop,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  fill = survey_direction),
+              alpha = 0.3)+
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, labeller = labeller(survey_direction = function(x) tools::toTitleCase(x))) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles 
+  coord_cartesian(xlim = c(0, 1.1), ylim = c(0, 1.1)) +
+  scale_x_continuous(breaks = seq(0, 1, by = 0.25)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.25)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(
+    x = bquote("Belt proportion reproductive"),
+    y = bquote("Quadrat proportion reproductive")
+  )
+q4c_new
+#2 geom point N/As as some surveyed sites with no quadrat abalone measured but some belt abalone measured so 1/2 =N/A so cant be graphed
+
+
+## Q4d: how does time effort vary using different methods ? ----------
+#make df to model with
+time_area_aggregate_transect <- time_area_aggregate %>% 
+  # make direction names shorter
+  mutate(survey_direction = case_when(survey_direction == "perpendicular" ~ "perp",
+                                      survey_direction == "parallel" ~ "par")) %>%
+  # pivot wider so both time_diff_area_ags appear in the same row
+  pivot_wider(
+    id_cols = c(site, survey_direction, buddy_pair),
+    names_from = survey_method,
+    values_from = c(time_diff_area_ag),
+    names_glue = "{survey_method}_{.value}"
+  )
+#missing 6 observations if you multiplied the design level data set by 2 because 6 of those observations dont have both perp and par for a particular direction - Checked and makes sense
+
+# model with interaction for direction 
+mod_4d <- glmmTMB(quadrat_time_diff_area_ag ~ belt_time_diff_area_ag*survey_direction + (1|site) + (1| buddy_pair), 
+                  data = time_area_aggregate_transect)
+plot(simulateResiduals(mod_4d))
+mod_4d_gamma <- glmmTMB(quadrat_time_diff_area_ag ~ belt_time_diff_area_ag*survey_direction + (1|site) + (1| buddy_pair), 
+                  data = time_area_aggregate_transect, 
+                  family = Gamma(link = "log"))
+plot(simulateResiduals(mod_4d_gamma))
+mod_4d_test <- glmmTMB(belt_time_diff_area_ag ~ quadrat_time_diff_area_ag*survey_direction + (1|site) + (1| buddy_pair), 
+                  data = time_area_aggregate_transect)
+plot(simulateResiduals(mod_4d_test)) #doesn't look as good. What to do?
+shapiro.test(time_area_aggregate_transect$quadrat_time_diff_area_ag) #normal
+shapiro.test(time_area_aggregate_transect$belt_time_diff_area_ag) #non-normal?
+summary(mod_4d)
+#summary has different outcome for quadrat ~ belt but model of time area explained by survey method and survey direction pulls out survey direction??? what is happening here. How do these differ... Not a distribution product as gamma model still produces no evidence of significant effect of survey direction in this model
+#is it because we have less power to detect evidence as we are only comparing time_area_diff_quad_par vs time_area_diff_quad_perp???
+
+# can we calculate the confidence intervals for the slopes using emtrends?
+slopes_4d <- emtrends(mod_4d, "survey_direction", var = "belt_time_diff_area_ag")
+summary(slopes_4d, infer=TRUE)
+
+#sum stats
+is.factor(time_area_aggregate_transect$survey_direction) #FALSE 
+time_area_aggregate_transect$survey_direction <- as.factor(time_area_aggregate_transect$survey_direction)
+is.factor(time_area_aggregate_transect$survey_direction) #TRUE
+sum_stat_q4d <- ggpredict(mod_4d, 
+terms = c("belt_time_diff_area_ag","survey_direction")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(quadrat_time_diff_area_ag = predicted,
+                belt_time_diff_area_ag = x,
+                survey_direction = group) %>% 
+  as_tibble() 
+
+#plot
+set.seed(123)
+q4d <- ggplot(data = time_area_aggregate_transect, aes(belt_time_diff_area_ag, quadrat_time_diff_area_ag)) +
+  geom_point(aes(colour = survey_direction))+
+  geom_smooth(data = sum_stat_q4d,
+              aes(x = belt_time_diff_area_ag,
+                  y= quadrat_time_diff_area_ag,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  colour = survey_direction),
+             # width = 0.2,
+              linewidth = 1.2) +
+  geom_ribbon(data = sum_stat_q4d,
+              aes(x = belt_time_diff_area_ag,
+                  y= quadrat_time_diff_area_ag,
+                  ymin = conf.low,
+                  ymax = conf.high,
+                  fill = survey_direction),
+              alpha = 0.3)+
+  theme_classic() + #clean it up a bit
+  facet_wrap(~survey_direction, labeller = labeller(survey_direction = function(x) tools::toTitleCase(x))) +
+  theme(legend.position = "none", strip.text = element_blank()) + #remove facet titles 
+  coord_cartesian(xlim = c(0, 4), ylim = c(0, 5)) +
+  scale_x_continuous(breaks = seq(0, 4, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 5, by = 0.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(y = expression(paste("Quadrat time surveyed (", frac("minute", m^2), ")")), 
+       x = expression(paste("Belt time surveyed (", frac("minute", m^2), ")")))
+q4d
+#3 N/As so the missing values are attributed to the fact that some perps dont have matching par data (and vice versa)
+
+#plot
+# Combine with patchwork and add labels (a, b)
+set.seed(123)
+q4_final_plot <- (q4a_new / q4b_new/ q4c_new/ q4d) +
+  plot_annotation(tag_levels = list(c('(a)', '(b)', '(c)', '(d)')))
+
+q4_final_plot   #dataset has 6 N/As for no abalone measured hence the warning message (size)
+                #dataset has 2 N/As for missing proption values hence the warning message (reproductive size)
+                #data set has 3 N/As for missing perp and par times hence the warning message (time)
+#ggsave("Figures/Figure3.png", device = "png", height = 12, width = 12, dpi = 400)
+
+
+
+##Q4 plotting old ----------------
+
+q4c <- ggplot(data = aba_wide, aes(density_par_belt, density_par_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(), colour = "#00BFC4") +
+  geom_smooth(method = "lm", colour = "#00BFC4") +
+  theme_classic()+
+  theme(legend.position = "none") +
+  #ggtitle("Parallel quadrat vs parallel belt") +
+  #xlim(c(0, 4)) +
+  #ylim(c(0, 4)) +
+  coord_cartesian(xlim = c(0, 2), ylim = c(0, 4)) +
+  scale_x_continuous(breaks = seq(0, 2, by = 0.5)) +
+  scale_y_continuous(breaks = seq(0, 4, by = 0.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  #labs(x = "Perpendicular density (belt)", y = "Perpendicular density (quadrat)")+
+  labs(
+    x = bquote("Parallel belt density (abalone" ~ "\u00B7" ~ m^{-2} * ")"),
+    y = bquote("Parallel quadrat density (abalone" ~ "\u00B7" ~ m^{-2} * ")")
+  )
+#note "\u00B7" is the universal code for the multiplication dot. cdot wasn't working.
+q4c
+#Output of this graph says:Removed 2 rows containing missing values or values outside the scale range (`geom_smooth()`). Not sure why it does this... I used coord_cartesian to "keep all of the data points and zoom in on the plot" but when toggling through the two graphs I was unable to count different data points. The only difference I noticed was the error bar extends further towards 0 with coord_cartesian. The error does go away though... 
+
+
+#q4d to be complete as the above statement should also be true here
+q4d <- ggplot(data = aba_wide, aes(density_perp_belt, density_perp_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(),colour = "#F8766D") +
+  geom_smooth(method = "lm", colour = "#F8766D") +
+  theme_classic()+
+  theme(legend.position = "none")+
+  #ggtitle("Perpendicular quadrat vs Perpendicular belt") +
+  #xlim(c(0, 4)) +
+  #ylim(c(0, 4)) +
+  coord_cartesian(xlim = c(0, 2), ylim = c(0, 4)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  #labs(x = "Perpendicular density (belt)", y = "Perpendicular density (quadrat)") +
+  labs(
+    x = bquote("Perpendicular belt density (abalone" ~ "\u00B7" ~ m^{-2} * ")"),
+    y = bquote("Perpendicular quadrat density (abalone" ~ "\u00B7" ~ m^{-2} * ")")
+  )
+#note "\u00B7" is the universal code for the multiplication dot. cdot wasn't working.
+q4d
+
+#plot 
+
+q4a + q4b + q4c + q4d
+
+library(grid)
+label_a <- wrap_elements(grid::textGrob("a", x = unit(0, "npc"), y = unit(1, "npc"),
+                                        just = c("left", "top"),
+                                        gp = gpar(fontsize = 14)))
+
+label_b <- wrap_elements(grid::textGrob("b", x = unit(0, "npc"), y = unit(1, "npc"),
+                                        just = c("left", "top"),
+                                        gp = gpar(fontsize = 14)))
+
+label_c <- wrap_elements(grid::textGrob("c", x = unit(0, "npc"), y = unit(1, "npc"),
+                                        just = c("left", "top"),
+                                        gp = gpar(fontsize = 14)))
+
+plot_q4a <- label_a + (q4c + q4d) + plot_layout(widths = c(0.05, 0.95)) #+
+  #plot_annotation(tag_levels = c('a'))
+plot_q4a
+
+#ggsave("Figures/Figure4b.png", device = "png", height = 9, width = 12, dpi = 400)
+
+#repeat for mean size data
+
+par_q4ms <- ggplot(data = aba_wide, aes(mean_size_par_belt, mean_size_par_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(), colour = "#F8766D") +
+  geom_smooth(method = "lm", colour = "#F8766D") +
+  theme_classic()+
+  theme(legend.position = "none") +
+  xlim(c(1.25, 12.5)) +
+  ylim(c(1.25, 12.5)) + #narrowing the xlim will remove a 6th data point from the graph - set to 1.25 
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(x = "Parallel belt mean size (cm)", y = "Parallel quadrat mean size (cm)")
+#Looked at data with legend on - noticed all buddy pairs have a decent spread of data indicating that pairs were unlikely on average over or under sizing or only be seeing large individuals
+#Despite having <2.5 column mean size is heavily weighted in higher groups I think it would be more representative to have each average weighted around the mid end of the size bins. Changed! This will have to be explained in the discussion!
+
+par_q4ms
+#removes any data that have 0 in rows from lack of any recorded abalone. In the parallel data there are 5 rows removed, only 2 of these rows that have 0s in the quadrat count but not the belt count; The rest both have 0s
+
+perp_q4ms <- ggplot(data = aba_wide, aes(mean_size_perp_belt, mean_size_perp_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(), colour = "#00BFC4") +
+  geom_smooth(method = "lm", colour = "#00BFC4") +
+  theme_classic()+
+  theme(legend.position = "none") +
+  xlim(c(1.25, 12.5)) +
+  ylim(c(1.25, 12.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(x = "Perpendicular belt mean size (cm)", y = "Perpendicular quadrat mean size (cm)")
+#Looked at data with legend on - noticed the buddy pair distribution had less spread indicating that some groups could have been either or both over/under sizing and potentially missing small individuals
+
+perp_q4ms
+#1 row removed as no abalone recorded for either belt or quad
+
+#combine ms figs
+plot_q4b <- label_b + (par_q4ms + perp_q4ms) + plot_layout(widths = c(0.05, 0.95))  #+
+#plot_annotation(tag_levels = c('a'))
+plot_q4b
+
+#repeat for cv
+
+par_q4cv <- ggplot(data = aba_wide, aes(cv_par_belt, cv_par_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(), colour = "#F8766D") +
+  geom_smooth(method = "lm", colour = "#F8766D") +
+  theme_classic()+
+  theme(legend.position = "none") +
+  xlim(c(0, 1.5)) +
+  ylim(c(0, 1.5)) + #narrowing the xlim will remove a 6th data point from the graph - set to 1.25 
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(x = "Parallel belt coefficient of variation", y = "Parallel quadrat coefficient of variation")
+
+par_q4cv
+#9 values missing due to NA's (no mean size in one category)
+
+perp_q4cv <- ggplot(data = aba_wide, aes(cv_perp_belt, cv_perp_quadrat)) +
+  #geom_point(aes(colour = buddy_pair)) +
+  geom_point(aes(), colour = "#00BFC4") +
+  geom_smooth(method = "lm", colour = "#00BFC4") +
+  theme_classic()+
+  theme(legend.position = "none") +
+  xlim(c(0, 1.5)) +
+  ylim(c(0, 1.5)) +
+  geom_abline(intercept = 0, slope = 1, color = "grey", linetype = "dashed") +
+  labs(x = "Perpendicular belt coefficient of variation", y = "Perpendicular quadrat coefficient of variation")
+
+perp_q4cv
+#2 values missing due to NA's (no mean size in one category)
+
+#combine cv figs
+plot_q4c <- label_c + (par_q4cv + perp_q4cv) + plot_layout(widths = c(0.05, 0.95))  #+
+#plot_annotation(tag_levels = c('a'))
+plot_q4c
+
+#combine all into fig 4
+plot_4 <- (plot_q4a) / (plot_q4b) / (plot_q4c)+
+  plot_layout(heights = c(0.5, 0.5))
+plot_4
+#ew, lets facet this and maybe also change the colours to match q1. Not sure if this is correct match
+#hmm, how to facet without column that encompasses survey direction
+
+#ggsave("Figures/Figure4b.png", device = "png", height = 9, width = 12, dpi = 400)
+
+# TIME ANALYSES ---------
+hist(time_area$time_diff_area)
+shapiro.test(time_area$time_diff_area) #non-normal
+shapiro.test(time_area_aggregate$time_diff_area_ag) #non-normal
+descdist(time_area$time_diff_area) # try gamma and lognormal 
+
+#model Gamma 
+mod_q1e_gamma <- glmmTMB(time_diff_area ~ survey_method*survey_direction + 
+                              (1|site) + (1|surveyor), #not nested because each surveyor on one line in a site
+                            data = time_area, 
+                            family = Gamma(link = "log"))    
+
+plot(simulateResiduals(mod_q1e_gamma)) # p value suggests poor fit 
+testDispersion(mod_q1e_gamma) #seems fine
+
+#model Lognormal
+mod_q1e_lognormal <- glmmTMB(time_diff_area ~ survey_method*survey_direction + 
+                           (1|site) + (1|surveyor), #not nested because each surveyor on one line in a site
+                         data = time_area, 
+                         family = lognormal(link = "log")) 
+plot(simulateResiduals(mod_q1e_lognormal)) #pvalue suggests worse fit
+
+#compare fits (lower AIC better)
+AIC(mod_q1e_gamma, mod_q1e_lognormal)
+
+#Gamma output
+summary(mod_q1e_gamma)
+
+# try stats again on aggregated survey data
+
+# aggregate data
+time_area_aggregate <- time_area %>%
+  group_by(buddy_pair, site, survey_direction, survey_method) %>%
+  summarise(total_area_ag = sum(total_area),
+            diff_min_ag = sum(diff_min)) %>%
+  ungroup() %>%
+  mutate(time_diff_area_ag = diff_min_ag/total_area_ag)
+
+# build gamma model on aggregated data 
+mod_q1e_gamma_ag <- glmmTMB(time_diff_area_ag ~ survey_method*survey_direction + 
+                           (1|site) + (1|buddy_pair), 
+                         data = time_area_aggregate, 
+                         family = Gamma(link = "log"))    
+
+plot(simulateResiduals(mod_q1e_gamma_ag)) # p value suggests poor fit 
+testDispersion(mod_q1e_gamma_ag) #seems fine
+summary(mod_q1e_gamma_ag)
+
+#Now we want to generally compare the effect of method on survey effort so to do this using post-hoc comparisons while maintaining degrees of freedom we use emmeans with the simple function
+emmean_simple_survey_method_time <- emmeans(mod_q1e_gamma_ag, pairwise ~ c(survey_method, survey_direction), simple = "survey_method")
+emmean_simple_survey_method_time
+#back transfer the results manually (remove negative to change direction of effect (i.e., quads compared to belts))
+exp(1.25) #belt par - quad par = 3.490343 times more min per unit area survey in quads
+exp(1.35) #belt perp - quad perp = 3.857426 times more min per unit area survey in quads
+
+#Do the same with survey direction
+emmean_simple_survey_direction_time <- emmeans(mod_q1e_gamma_ag, pairwise ~ c(survey_method, survey_direction), simple = "survey_direction")
+emmean_simple_survey_direction_time
+#back transfer the results manually (remove negative to change direction of effect (i.e., quads compared to belts))
+exp(0.298) #belt par - belt perp = 1.347162 times more min per unit area survey in quads
+exp(0.202) #quad par - quad perp = 1.223848 times more min per unit area survey in quads
+
+# plot gamma model using aggregated data
+#sum stat ag
+sum_stat_q1e_ag <- ggpredict(mod_q1e_gamma_ag, 
+                          terms = c("survey_direction","survey_method")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(time_diff_area_ag = predicted,
+                survey_direction = x,
+                survey_method = group) %>% 
+  as_tibble()
+#plot ag per unit effort
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_time_area_direction_ag <- 
+  ggplot(data= time_area_aggregate, aes(x = survey_method, y = time_diff_area_ag, colour = survey_direction)) +
+  geom_point(data = sum_stat_q1e_ag, 
+             aes(x = survey_method, y = time_diff_area_ag),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1e_ag, 
+                aes(x = survey_method,
+                    y = time_diff_area_ag,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  theme(legend.position = "none", 
+        strip.text = element_blank())+ #remove facet titles
+  facet_wrap(~survey_direction, labeller = as_labeller(facet_labels))+ 
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) +
+  labs(
+    y = expression(
+      paste("Time surveyed (", frac("minute", m^2), ")")
+    ),
+    x = "Survey method"
+  )
+
+plot_time_area_direction_ag
+
+
+##Plot non-aggregated data
+sum_stat_q1e <- ggpredict(mod_q1e_gamma, 
+                          terms = c("survey_direction","survey_method")) %>% 
+  #and then we'll just rename one of the columns so it's easier to plot
+  dplyr::rename(time_diff_area = predicted,
+                survey_direction = x,
+                survey_method = group) %>% 
+  as_tibble()
+#plot how much time in general by method
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_timediff <- 
+  ggplot(data= time_area, aes(x = survey_method, y = diff_min, colour = survey_method)) +
+  geom_boxplot() + 
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  labs(y = expression("Time to survey (minutes)"), x = expression("Survey method")) #+
+  #scale_y_continuous(limits = c(0, 4), breaks = c(0, 1, 2, 3, 4))
+
+plot_timediff
+
+#does this relationship change depending between survey direction?
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_timediff_direction <- 
+  ggplot(data= time_area, aes(x = survey_method, y = diff_min, colour = survey_method)) +
+  geom_boxplot() + 
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  facet_wrap(~survey_direction, labeller = as_labeller(facet_labels))+
+  labs(y = expression("Time to survey (minutes)"), x = expression("Survey method")) #+
+#scale_y_continuous(limits = c(0, 4), breaks = c(0, 1, 2, 3, 4))
+
+plot_timediff_direction
+
+#per unit area df with direction
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_time_area_direction <- 
+  ggplot(data= time_area, aes(x = survey_method, y = time_diff_area, colour = survey_direction)) +
+  geom_point(data = sum_stat_q1e, 
+             aes(x = survey_method, y = time_diff_area),
+             size = 4) +
+  geom_errorbar(data = sum_stat_q1e, 
+                aes(x = survey_method,
+                    y = time_diff_area,
+                    ymin = conf.low,
+                    ymax = conf.high),
+                width = 0.2,
+                linewidth = 1.2) +
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  theme(legend.position = "none", 
+        strip.text = element_blank())+ #remove facet titles
+  facet_wrap(~survey_direction, labeller = as_labeller(facet_labels))+ 
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) +
+  labs(
+    y = expression(
+      paste("Time surveyed (", frac("minute", m^2), ")")
+    ),
+    x = "Survey method"
+  )
+
+plot_time_area_direction
+
+#ggsave("Figures/Figure6.png", device = "png", height = 9, width = 12, dpi = 400)
+
+set.seed(123)
+plot_q1a / plot_q1b / plot_q1d + plot_time_area_direction_ag +
+  plot_annotation(tag_levels = list(c('(a)', '(b)', '(c)', '(d)')))
+#10 N/As in dataset for the mean size as they had no abalone in those surveys
+
+#ggsave("Figures/Figure2Time.png", device = "png", height = 9, width = 12, dpi = 400)
+
+#per unit area df without direction
+set.seed(123) #setting the seed keeps all the data points in the same spot with jitter
+plot_time_area <- 
+  ggplot(data= time_area, aes(x = survey_method, y = time_diff_area, colour = survey_method)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(width = 0.2, height = 0, alpha = 0.3, size = 3) +
+  theme_classic() +
+  theme(legend.position = "none") + 
+  #facet_wrap(~survey_direction, labeller = as_labeller(facet_labels))+ 
+  scale_x_discrete(labels = function(x) tools::toTitleCase(x)) +
+  labs(
+    y = expression(
+      paste("Time surveyed (", frac("minute", m^2), ")")
+    ),
+    x = "Survey method"
+  )
+
+plot_time_area
+
+#ggsave("Figures/Figure6b.png", device = "png", height = 9, width = 12, dpi = 400)
+
+
+# CHECKING DATA ----------------------------------------------------------------
+ggplot(abalone_data %>% 
+         filter(survey_method == "quadrat") %>%
+         filter(buddy_pair == "VK_GS"), 
+       aes(site, total_abalone, colour = surveyor, pch = survey_direction)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  theme_bw()
+
+# check for Lachlan's wizardN data - Carter: Lachlan says he can't remember if he did anything for parallel quadrat or not = remove from dataset
+# double check how I'm calculating density when a buddy is missing data!!!
+
+#Attempt to tidy Q1 figure
+
+# Top Plot: Density
+plot_q1a <- ggplot(data = aba, aes(x = survey_method, y = density, colour = survey_method)) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 3) +
+  geom_point(data = sum_stat_q1a, aes(x = survey_method, y = density), size = 4) +
+  geom_errorbar(data = sum_stat_q1a, aes(x = survey_method, y = density, ymin = conf.low, ymax = conf.high),
+                width = 0.2, linewidth = 1.2) +
+  facet_grid(. ~ survey_direction) +  # Facet by column
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),  # Remove x-axis title (only on bottom)
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold")
+  ) +
+  labs(y = expression("Abalone density (" ~ m^-2 * ")"))
+
+# Bottom Plot: Mean Size
+plot_q1b <- ggplot(data = aba, aes(x = survey_method, y = mean_size, colour = survey_method)) +
+  geom_jitter(width = 0.2, alpha = 0.3, size = 3) +
+  geom_point(data = sum_stat_q1b, aes(x = survey_method, y = mean_size), size = 4) +
+  geom_errorbar(data = sum_stat_q1b, aes(x = survey_method, y = mean_size, ymin = conf.low, ymax = conf.high),
+                width = 0.2, linewidth = 1.2) +
+  facet_grid(. ~ survey_direction) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold")
+  ) +
+  labs(y = "Mean size (cm)", x = "Survey method")
+
+# Combine with patchwork and add labels (a, b)
+final_plot <- (plot_q1a / plot_q1b) +
+  plot_annotation(tag_levels = 'a')
+
+# Display the final plot
+final_plot

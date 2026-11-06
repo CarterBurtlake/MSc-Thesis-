@@ -1,0 +1,26 @@
+{
+    "id": "4886ABC7",
+    "path": "~/Documents/RProjects/MScChapter2/code/EDS_all_data.R",
+    "project_path": "code/EDS_all_data.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1791392460674.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "183,0",
+        "scrollLine": "0"
+    },
+    "folds": "28|18|82|0|\n83|23|129|44|\n130|15|136|0|\n",
+    "lastKnownWriteTime": 1791392662,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1792444406283,
+    "read_only": false,
+    "read_only_alternatives": []
+}
