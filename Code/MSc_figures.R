@@ -553,95 +553,144 @@ group_check <- coords_grouped %>%
 
 View(group_check)
 
-# Convert to projected coordinates (metres)
-coords_projected <- coords_clean %>%
+#Nov 6th - make code to join all the names of the grouped sites
+
+# ============================================================
+# CREATE ONE CONSOLIDATED COORDINATE PER LOCATION GROUP
+# ============================================================
+
+# 1. Project coordinates into metres for distance calculations
+
+coords_projected <- coords_grouped %>%
   st_transform(32610)
 
-# Project land polygon
-hakai_projected <- hakai_map %>%
-  st_transform(32610)
 
-# Combine land polygons into one geometry
-land_union <- st_union(hakai_projected)
+# 2. Find the most central observed GPS point in each group
+#    (spatial medoid = point with the smallest total distance
+#     to all other points in its group)
 
-# Extract projected coordinates
-xy <- st_coordinates(coords_projected)
-
-# Create lines between nearby site pairs
-site_lines <- st_sfc(
-  lapply(seq_len(nrow(nearby_pairs)), function(i) {
-    st_linestring(
-      rbind(
-        xy[nearby_pairs$pair[i], ],
-        xy[nearby_pairs$match[i], ]
-      )
-    )
-  }),
-  crs = st_crs(coords_projected)
-)
-
-# Calculate length of each line that intersects land
-land_crossing <- vapply(
-  seq_along(site_lines),
+central_sites <- lapply(
+  split(seq_len(nrow(coords_projected)),
+        coords_projected$location_group),
   function(i) {
-    intersection <- st_intersection(
-      site_lines[i],
-      land_union
+    
+    group <- coords_projected[i, ]
+    
+    distances <- units::drop_units(
+      st_distance(group)
     )
     
-    sum(as.numeric(st_length(intersection)))
-  },
-  numeric(1)
-)
-
-# Add results to nearby pairs
-nearby_pairs <- nearby_pairs %>%
-  mutate(
-    land_crossing_m = land_crossing,
-    same_side = land_crossing_m < 5
-  )
-
-# Calculate distance between each pair of observations
-nearby_pairs <- nearby_pairs %>%
-  mutate(
-    distance_m = as.numeric(
-      st_distance(
-        coords_projected[pair, ],
-        coords_projected[match, ],
-        by_element = TRUE
-      )
-    )
-  )
-
-# Potentially matching sites
-same_side_sites <- nearby_pairs %>%
-  filter(same_side == TRUE) %>%
-  arrange(distance_m)
-
-# Nearby sites separated by land
-opposite_side_sites <- nearby_pairs %>%
-  filter(same_side == FALSE) %>%
-  arrange(distance_m)
-
-# Identify observations within 200 m
-nearby_sites <- st_is_within_distance(
-  coords_projected,
-  coords_projected,
-  dist = 200
-)
-
-nearby_pairs <- data.frame(
-  pair = rep(seq_along(nearby_sites),
-             lengths(nearby_sites)),
-  match = unlist(nearby_sites)
+    group[which.min(rowSums(distances)), ]
+    
+  }
 ) %>%
-  filter(pair < match) %>%
-  mutate(
-    site_1 = coords$site[pair],
-    site_2 = coords$site[match],
-    source_1 = coords$source[pair],
-    source_2 = coords$source[match]
+  do.call(what = rbind)
+
+
+# 3. Keep track of which sources and original site names
+#    contributed to each consolidated location
+
+site_metadata <- coords_grouped %>%
+  st_drop_geometry() %>%
+  group_by(location_group) %>%
+  summarise(
+    n_observations = n(),
+    
+    sources = paste(
+      sort(unique(source)),
+      collapse = ", "
+    ),
+    
+    original_site_names = paste(
+      sort(unique(site)),
+      collapse = ", "
+    ),
+    
+    .groups = "drop"
   )
+
+
+# 4. Combine central GPS points with group metadata
+
+coords_consolidated <- central_sites %>%
+  rename(
+    central_point_source = source
+  ) %>%
+  left_join(
+    site_metadata,
+    by = "location_group"
+  ) %>%
+  st_transform(4326)
+
+
+# 5. Check results
+
+View(coords_consolidated)
+
+# 6. Order sites by nearest neighbour for mapping 
+
+# ============================================================
+# ORDER SITES BY NEAREST NEIGHBOUR
+# STARTING AT THE SOUTHERNMOST SITE
+# ============================================================
+
+# Project coordinates into metres
+coords_ordered <- coords_consolidated %>%
+  st_transform(32610)
+
+# Extract coordinates
+xy <- st_coordinates(coords_ordered)
+
+# Calculate distance between every pair of sites
+dist_matrix <- units::drop_units(
+  st_distance(coords_ordered)
+)
+
+# Identify southernmost site (smallest Y coordinate)
+current <- which.min(xy[, "Y"])
+
+# Create vector to store site numbering
+site_order <- integer(nrow(coords_ordered))
+
+# Keep track of sites already visited
+visited <- rep(FALSE, nrow(coords_ordered))
+
+# Start numbering at southernmost site
+for (i in seq_len(nrow(coords_ordered))) {
+  
+  site_order[current] <- i
+  
+  visited[current] <- TRUE
+  
+  # Stop if all sites have been numbered
+  if (i == nrow(coords_ordered)) break
+  
+  # Find the closest unvisited site
+  remaining <- which(!visited)
+  
+  current <- remaining[
+    which.min(dist_matrix[current, remaining])
+  ]
+}
+
+#check numbering 
+site_lookup <- coords_consolidated %>%
+  st_drop_geometry() %>%
+  dplyr::select(
+    site_number,
+    location_group,
+    site,
+    sources,
+    longitude,
+    latitude
+  ) %>%
+  arrange(site_number)
+
+View(site_lookup)
+# Add numbering back to original dataset
+coords_consolidated <- coords_consolidated %>%
+  mutate(site_number = site_order)
+
 
 ### END ###
 
@@ -796,15 +845,31 @@ map <- function(lat_min, lat_max, long_min, long_max,
       fill = land,
       colour = sea) +
     # Add points
+    # Non-outplant sites (background)
     geom_sf(
-      data = coord_data,
+      data = coord_data %>% filter(outplant == "no"),
       alpha = 0.9,
       size = point_size,
       stroke = 2,
       aes(
         fill = {{nh4_var}},
         shape = {{kelp_var}},
-        colour = {{kelp_var}})) +
+        colour = {{kelp_var}}
+      )
+    ) +
+    
+    # Outplant sites (add second so they are in foreground)
+    geom_sf(
+      data = coord_data %>% filter(outplant == "yes"),
+      alpha = 1,
+      size = point_size * 2.5, #make outplant sites larger
+      stroke = 2,
+      aes(
+        fill = {{nh4_var}},
+        shape = {{kelp_var}},
+        colour = {{kelp_var}}
+      )
+    ) +
     viridis::scale_fill_viridis(
       option = "magma",
       direction = -1,
@@ -815,17 +880,23 @@ map <- function(lat_min, lat_max, long_min, long_max,
       xlim = c(long_min, long_max),
       ylim = c(lat_min, lat_max),
       expand = FALSE) +
-    ggrepel::geom_text_repel(
-      data = coord_data,
-      aes(
-        x = longitude,
-        y = latitude,
-        label = site_label),
-      nudge_x = 0.001,
-      direction = "y",
-      hjust = 0,
-      size = 1,
-      segment.color = NA) +
+    # ggrepel::geom_text_repel(
+    #   data = coord_data,
+    #   aes(
+    #     x = longitude,
+    #     y = latitude
+    #     label = site_number),
+      # nudge_x = 0.001,
+      # direction = "y",
+      # hjust = 0,
+      # size = 1.5,
+      # box.padding = 0.15,
+      # point.padding = 0.1,
+      # max.overlaps = 5,
+      # max.iter = 5000,
+      # segment.colour = NA,
+      # seed = 123 ) +
+      #segment.color = NA) +
     labs(
       fill = "Abalone density",
       shape = "Outplant") +
@@ -894,9 +965,9 @@ Map_Figure <- map(
   lat_max = 49.00,
   long_min = -125.4,
   long_max = -124.99,
-  coord_data = coords_clean,
+  coord_data = coords_consolidated,
   # nh4_var = mean_density,
-  point_size = 1,
+  point_size = 0.5,
   kelp_var = outplant,
   map_file = hakai_map)
 Map_Figure
@@ -912,6 +983,207 @@ ggsave(
   bg = "white")
 ##
 
+#rewrite map function with labels for insets
+map_label <- function(lat_min, lat_max, long_min, long_max,
+                coord_data, nh4_var = NULL, kelp_var, point_size, map_file,
+                white_background = TRUE, invert = FALSE) {
+  # Invert land and sea colours
+  if(invert == FALSE){
+    sea <- blue
+    land <- "white"
+  }
+  if(invert == TRUE){
+    sea <- "white"
+    land <- blue
+  }
+  # Specify black or white background
+  if(white_background == TRUE){
+    background <- "white"
+    features <- "black"
+  }
+  if(white_background == FALSE){
+    background <- "black"
+    features <- "white"
+  }
+  coord_data <- coord_data %>%
+    mutate(
+      observation_group = case_when(
+        n_observations == 1 ~ "1",
+        n_observations == 2 ~ "2",
+        n_observations == 3 ~ "3",
+        n_observations == 4 ~ "4",
+        n_observations == 5 ~ "5",
+      )
+    )
+  # Create map
+  p <- ggplot() +
+    geom_sf(
+      data = map_file,
+      fill = land,
+      colour = sea) +
+    # Add points
+    # Non-outplant sites (background)
+    geom_sf(
+      data = coord_data %>% filter(outplant == "no"),
+      alpha = 0.9,
+      #size = point_size,
+      stroke = 2,
+      aes(
+        fill = {{nh4_var}},
+        shape = observation_group,
+        colour = {{kelp_var}},
+        size = n_observations
+      )
+    ) +
+    
+    # Outplant sites (add second so they are in foreground)
+    geom_sf(
+      data = coord_data %>% filter(outplant == "yes"),
+      alpha = 1,
+      #size = point_size * 2.5, #make outplant sites larger
+      stroke = 2,
+      aes(
+        fill = {{nh4_var}},
+        shape = observation_group,
+        colour = {{kelp_var}},
+        size = n_observations
+      )
+    ) +
+    viridis::scale_fill_viridis(
+      option = "magma",
+      direction = -1,
+      guide = guide_colorbar(
+        frame.colour = features,
+        ticks.colour = features)) +
+    scale_size_continuous(
+      name = "Number of observations",
+      range = c(1, 5)
+    ) +
+    scale_shape_manual(
+      name = "Number of observations",
+      values = c(
+        "1" = 16,
+        "2" = 17,
+        "3" = 15,
+        "4" = 18,
+        "5" = 19
+      )
+    ) +
+    coord_sf(
+      xlim = c(long_min, long_max),
+      ylim = c(lat_min, lat_max),
+      expand = FALSE) +
+    # ggrepel::geom_text_repel(
+    #   data = coord_data  %>%
+    #     filter(
+    #       longitude >= long_min,
+    #       longitude <= long_max,
+    #       latitude >= lat_min,
+    #       latitude <= lat_max
+    #     ),
+    #   aes(
+    #     x = longitude,
+    #     y = latitude,
+    #     label = site_label),
+    # nudge_x = 0.001,
+    # direction = "y",
+    # hjust = 0,
+    # size = 1.5,
+    # box.padding = 0.15,
+    # point.padding = 0.1,
+    # max.overlaps = 5,
+    # max.iter = 5000,
+    # segment.colour = NA,
+    # xlim = c(long_min, long_max),
+    # ylim = c(lat_min, lat_max),
+    # seed = 123 ) +
+    labs(
+      fill = "Abalone density",
+      shape = "Outplant") +
+    # #scale_shape_manual(
+    #   name = "Outplant",
+    #   values = c(
+    #     "yes" = 21,
+    #     "no" = 21),
+    #   breaks = c("yes", "no")) +
+    # scale_colour_manual(
+    #   values = c(
+    #     "yes" = "#CD64B5FF",
+    #     "no" = "grey65"),
+    #   breaks = c("yes", "no"),
+    #   guide = "none") +
+    # guides(
+    #   shape = guide_legend(
+    #     title.position = "left",
+    #     title.hjust = 0.5,
+    #     direction = "horizontal",
+    #     nrow = 1,
+    #     override.aes = list(
+    #       colour = c("#CD64B5FF", "grey65")))) +
+    # Themes
+    theme_bw() +
+    theme(
+      panel.background = element_rect(fill = sea),
+      panel.grid.major = element_line(color = sea),
+      panel.border = element_rect(fill = NA, colour = features),
+      axis.title = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      axis.ticks.length = grid::unit(0, "pt"),
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      legend.background = element_rect(color = NA, fill = background),
+      legend.key = element_rect(color = background, fill = background),
+      legend.key.size = grid::unit(1.2, "lines"),
+      legend.text = element_text(size = 24, color = features),
+      legend.title = element_text(size = 24, face = "bold", color = features),
+      legend.position = "bottom",
+      legend.direction = "horizontal",
+      legend.box = "horizontal",
+      strip.background = element_rect(fill = "grey30", color = "grey10"),
+      strip.text.x = element_text(size = 30, color = features),
+      strip.text.y = element_text(size = 30, color = features, angle = -90),
+      plot.background = element_rect(color = background, fill = background)) +
+    # Scale bar - bottom left
+    annotation_scale(
+      location = "br",
+      width_hint = 0.2,
+      pad_x = grid::unit(0.1, "in"),
+      pad_y = grid::unit(0.05, "in")) +
+    # North arrow - top left
+    annotation_north_arrow(
+      location = "br",
+      which_north = "true",
+      pad_x = grid::unit(0.01, "in"),
+      pad_y = grid::unit(0.15, "in"),
+      style = north_arrow_fancy_orienteering)
+  return(p)
+}
+
+#SW Deer Group#
+SWDEER_Map_Figure <- map_label(
+  lat_min = 48.79,
+  lat_max = 48.86,
+  long_min = -125.26,
+  long_max = -125.13,
+  coord_data = coords_consolidated,
+  # nh4_var = mean_density,
+  point_size = 0.5,
+  kelp_var = outplant,
+  map_file = hakai_map)
+SWDEER_Map_Figure
+
+#NE Deer Group#
+NEDEER_Map_Figure <- map_label(
+  lat_min = 48.8325, #flip these from SW so top = bottom (but add enough to see outplant sites?)
+  lat_max = 48.96, 
+  long_min = -125.18,
+  long_max = -125,
+  coord_data = coords_consolidated,
+  # nh4_var = mean_density,
+  point_size = 0.5,
+  kelp_var = outplant,
+  map_file = hakai_map)
+NEDEER_Map_Figure
 
 
 ## testing the idea of a distance out outplanting grid 
@@ -1785,3 +2057,4 @@ summary(Fig3_model_GLM)
 Fig3_model_GLM <- glmmTMB(site_mean_density ~ outplant + year_decade + pre_post + outplant*year_decade + outplant*pre_post + year_decade*pre_post + (1| site), family = tweedie(link = "log"), data = Fig3_glm)
 plot(simulateResiduals(Fig3_model_GLM))
 summary(Fig3_model_GLM) #have to exp to interpret
+
