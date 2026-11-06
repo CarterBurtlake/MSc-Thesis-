@@ -807,3 +807,4 @@ unique(abalone_density$site)
 #figure out naming convention in map for 100m proximity except if aspect changes (have to maybe filter wizard, clutus, folger, flemming, taylor/dodger/edking se complex, Sanford, ed_king all)
 
 #could do all this with pychno data across all data sets except subsci 2024
+

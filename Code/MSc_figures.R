@@ -758,16 +758,263 @@ map <- function(lat_min, lat_max, long_min, long_max,
 }
 
 
-# Make a map ----
-map(lat_min = -125.4, #set map boundary
-    lat_max = -124.99, 
-    long_min = 48.73, 
-    long_max = 49.00, 
-    coord_data = coords_clean, #add data
-    # nh4_var = mean_density, #use later for density
-    point_size = 1, #set size intentionally large to obscure sites
-    kelp_var = outplant, #label outplant sites
-    map_file = hakai_map) #pick map file
+## Kieran's minor map revisions
+# Legend to the bottom, smaller scale bar, and aligned north arrow
+## if you agree, just delete lins 666-762 and it'll flow the same as before
+
+## note- if you end of varying the outplanting site numbers you might need to go with a 3 class system
+## note- you've also got some names being double plotting cause they were sampled twice so can switch that easily
+# but maybe a version of this map without all site names would be good cause it gets the point across well
+
+## updating
+#### Map function ####
+map <- function(lat_min, lat_max, long_min, long_max,
+                coord_data, nh4_var = NULL, kelp_var, point_size, map_file,
+                white_background = TRUE, invert = FALSE) {
+  # Invert land and sea colours
+  if(invert == FALSE){
+    sea <- blue
+    land <- "white"
+  }
+  if(invert == TRUE){
+    sea <- "white"
+    land <- blue
+  }
+  # Specify black or white background
+  if(white_background == TRUE){
+    background <- "white"
+    features <- "black"
+  }
+  if(white_background == FALSE){
+    background <- "black"
+    features <- "white"
+  }
+  # Create map
+  p <- ggplot() +
+    geom_sf(
+      data = map_file,
+      fill = land,
+      colour = sea) +
+    # Add points
+    geom_sf(
+      data = coord_data,
+      alpha = 0.9,
+      size = point_size,
+      stroke = 2,
+      aes(
+        fill = {{nh4_var}},
+        shape = {{kelp_var}},
+        colour = {{kelp_var}})) +
+    viridis::scale_fill_viridis(
+      option = "magma",
+      direction = -1,
+      guide = guide_colorbar(
+        frame.colour = features,
+        ticks.colour = features)) +
+    coord_sf(
+      xlim = c(long_min, long_max),
+      ylim = c(lat_min, lat_max),
+      expand = FALSE) +
+    ggrepel::geom_text_repel(
+      data = coord_data,
+      aes(
+        x = longitude,
+        y = latitude,
+        label = site_label),
+      nudge_x = 0.001,
+      direction = "y",
+      hjust = 0,
+      size = 1,
+      segment.color = NA) +
+    labs(
+      fill = "Abalone density",
+      shape = "Outplant") +
+    scale_shape_manual(
+      name = "Outplant",
+      values = c(
+        "yes" = 21,
+        "no" = 21),
+      breaks = c("yes", "no")) +
+    scale_colour_manual(
+      values = c(
+        "yes" = "#CD64B5FF",
+        "no" = "grey65"),
+      breaks = c("yes", "no"),
+      guide = "none") +
+    guides(
+      shape = guide_legend(
+        title.position = "left",
+        title.hjust = 0.5,
+        direction = "horizontal",
+        nrow = 1,
+        override.aes = list(
+          colour = c("#CD64B5FF", "grey65")))) +
+    # Themes
+    theme_bw() +
+    theme(
+      panel.background = element_rect(fill = sea),
+      panel.grid.major = element_line(color = sea),
+      panel.border = element_rect(fill = NA, colour = features),
+      axis.title = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      axis.ticks.length = grid::unit(0, "pt"),
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      legend.background = element_rect(color = NA, fill = background),
+      legend.key = element_rect(color = background, fill = background),
+      legend.key.size = grid::unit(1.2, "lines"),
+      legend.text = element_text(size = 24, color = features),
+      legend.title = element_text(size = 24, face = "bold", color = features),
+      legend.position = "bottom",
+      legend.direction = "horizontal",
+      legend.box = "horizontal",
+      strip.background = element_rect(fill = "grey30", color = "grey10"),
+      strip.text.x = element_text(size = 30, color = features),
+      strip.text.y = element_text(size = 30, color = features, angle = -90),
+      plot.background = element_rect(color = background, fill = background)) +
+    # Scale bar - bottom left
+    annotation_scale(
+      location = "br",
+      width_hint = 0.2,
+      pad_x = grid::unit(0.1, "in"),
+      pad_y = grid::unit(0.05, "in")) +
+    # North arrow - top left
+    annotation_north_arrow(
+      location = "br",
+      which_north = "true",
+      pad_x = grid::unit(0.01, "in"),
+      pad_y = grid::unit(0.15, "in"),
+      style = north_arrow_fancy_orienteering)
+  return(p)
+}
+
+#### Make a map ####
+Map_Figure <- map(
+  lat_min = 48.73,
+  lat_max = 49.00,
+  long_min = -125.4,
+  long_max = -124.99,
+  coord_data = coords_clean,
+  # nh4_var = mean_density,
+  point_size = 1,
+  kelp_var = outplant,
+  map_file = hakai_map)
+Map_Figure
+
+#### Export map at 1200 DPI ####
+ggsave(
+  filename = "figures/MSc/Abalone_Study_Sites_Map.png",
+  plot = Map_Figure,
+  width = 20,
+  height = 18,
+  units = "cm",
+  dpi = 1200,
+  bg = "white")
+##
+
+
+
+## testing the idea of a distance out outplanting grid 
+## i'm not sure how you already determined distance to outplanting so don't let this superceed that
+## but if you think it's useful then this approach could be revised
+
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(ggspatial)
+
+#### 1. Prepare spatial data ####
+# UTM Zone 10N for distance calculations in metres
+sites <- st_transform(coords_clean, 26910)
+land <- st_transform(hakai_map, 26910)
+outplants <- sites %>% filter(outplant == "yes")
+
+#### 2. Distance from each site to nearest outplant ####
+nearest_site <- st_nearest_feature(sites, outplants)
+sites$distance_km <- as.numeric(
+  st_distance(sites, outplants[nearest_site, ], by_element = TRUE)
+) / 1000
+
+#### 3. Create a 250 m grid across the map ####
+map_extent <- st_as_sfc(st_bbox(c(
+  xmin = -125.4, xmax = -124.99,
+  ymin = 48.73, ymax = 49.00
+), crs = st_crs(4326))) %>% st_transform(26910)
+
+grid <- st_sf(geometry = st_make_grid(map_extent, cellsize = 100))
+grid_centres <- st_centroid(grid)
+
+#### 4. Calculate distance for each grid cell ####
+nearest_grid <- st_nearest_feature(grid_centres, outplants)
+grid$distance_km <- as.numeric(
+  st_distance(grid_centres, outplants[nearest_grid, ], by_element = TRUE)
+) / 1000
+
+#### 5. Prepare site labels ####
+sites_ll <- st_transform(sites, 4326)
+site_labels <- cbind(st_drop_geometry(sites_ll), st_coordinates(sites_ll))
+
+#### 6. Plot distance grid, land, and all sites ####
+Distance_Map <- ggplot() +
+  # Distance surface
+  geom_sf(
+    data = grid,
+    aes(fill = distance_km),
+    colour = NA,
+    linewidth = 0) +
+  scale_fill_viridis_c(
+    option = "magma",
+    direction = -1,
+    name = "Distance to nearest\noutplant (km)") +
+  # Land overlay
+  geom_sf(
+    data = land,
+    fill = "white",
+    colour = "grey55",
+    linewidth = 0.15) +
+  # Plot all monitoring sites
+  geom_sf(
+    data = sites,
+    aes(colour = outplant),
+    size = 2.5,
+    alpha = 0.9) +
+  scale_colour_manual(
+    values = c("yes" = "#CD64B5FF", "no" = "grey65"),
+    name = "Outplant",
+    breaks = c("yes", "no")) +
+  coord_sf(
+    crs = st_crs(4326),
+    default_crs = st_crs(4326),
+    xlim = c(-125.4, -124.99),
+    ylim = c(48.73, 49.00),
+    expand = FALSE) +
+  labs(x = NULL, y = NULL) +
+  theme_bw() +
+  theme(
+    panel.background = element_rect(fill = "white"),
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_text(size = 11, face = "bold"),
+    legend.text = element_text(size = 10),
+    plot.margin = margin(5, 5, 5, 5, "mm"))
+Distance_Map
+
+#### 7. Export at 600 DPI ####
+ggsave(
+  filename = "figures/MSc/Distance_To_Nearest_Outplant.png",
+  plot = Distance_Map,
+  width = 20,
+  height = 18,
+  units = "cm",
+  dpi = 600,
+  bg = "white")
+
+### test end
+
+
 
 #Fig 3: JW rate ----
 
@@ -874,7 +1121,9 @@ Fig3_combined
 
 
 
-# Nov 1 check jane analysis
+
+
+#### Nov 5th: Kieran adding models for analysis of Jane's data ####
 
 Fig3_rate
 str(Fig3_rate)
@@ -889,6 +1138,8 @@ Fig3_glm <- Fig3_rate %>%
   mutate(outplant = case_when(site == "ed_king_southeast" ~ "no",
                               site == "aguilar_point" ~ "no",
                               TRUE ~ outplant))
+
+count(Fig3_glm, outplant,site)  ## confirm that aguilar_point is also now a no
 
 str(Fig3_glm)
 JW_abalone_density_7year
@@ -913,10 +1164,8 @@ JaneAnnual$pre_post <- factor(
   JaneAnnual$pre_post,
   levels = c("pre", "post"))
 
-#--------------------------------------------------
+## First draft (will replace with model)
 # Calculate regression equations for each Site × Period
-#--------------------------------------------------
-
 Equation_Data <- JaneAnnual %>%
   group_by(site, pre_post) %>%
   summarise(
@@ -928,7 +1177,6 @@ Equation_Data <- JaneAnnual %>%
     intercept = coef(model)[1],
     slope = coef(model)[2],
     r2 = summary(model)$r.squared,
-    
     equation = paste0(
       pre_post,
       ": y = ",
@@ -943,10 +1191,7 @@ Equation_Data <- JaneAnnual %>%
   ungroup()
 Equation_Data
 
-#--------------------------------------------------
 # Give equations different vertical positions
-#--------------------------------------------------
-
 Equation_Data <- Equation_Data %>%
   group_by(site) %>%
   mutate(
@@ -957,12 +1202,8 @@ Equation_Data <- Equation_Data %>%
   ) %>%
   ungroup()
 
-
-#--------------------------------------------------
 # Plot
-#--------------------------------------------------
-
-ggplot(
+LinearRegression_JanesAnnual=ggplot(
   JaneAnnual,
   aes(
     x = year,
@@ -990,8 +1231,8 @@ ggplot(
     ~ site,
     nrow = 1) +
   labs(
-    x = "X variable",
-    y = "Y variable",
+    x = "Year",
+    y =   expression("Density (Abalone per" ~ m^2 * ") <-- Carter confirm this"),
     colour = NULL) +
   theme_classic() +
   theme(
@@ -1002,14 +1243,183 @@ ggplot(
       face = "bold"),
     legend.position = "bottom")
 
+#### Janes Annual Data, Model ####
+str(JaneAnnual)
 
-### jane annual surveys
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(glmmTMB)
+library(DHARMa)
+library(emmeans)
 
+# Keep the two sites and clean factor levels
+Model_Data <- JaneAnnual %>%
+  filter(site %in% c("taylor", "wizard"), !is.na(site_mean_density), !is.na(year), !is.na(pre_post)) %>%
+  droplevels() %>%
+  mutate(site = factor(site, levels = c("taylor", "wizard")), pre_post = factor(pre_post, levels = c("pre", "post")))
+
+# Find the first post year separately for each site
+Change_Years <- Model_Data %>%
+  filter(pre_post == "post") %>%
+  group_by(site) %>%
+  summarise(change_year = min(year), .groups = "drop")
+
+# Centre year around the pre/post transition for each site
+Model_Data <- Model_Data %>%
+  left_join(Change_Years, by = "site") %>%
+  mutate(year_rel = year - change_year)
+
+# Check numbers of observations
+count(Model_Data, site, pre_post)  ## carter confirm the minor difference makes sense
+
+# Fit one model with both intercepts and slopes to differ by site and pre/post
+Density_Model <- glmmTMB(site_mean_density ~ site * pre_post * year_rel, family = tweedie(link = "log"), data = Model_Data)
+summary(Density_Model)
+
+# Model diagnostics
+Density_Model_Residuals <- simulateResiduals(Density_Model, n = 1000)
+plot(Density_Model_Residuals) ## looks really good
+testDispersion(Density_Model_Residuals)
+testZeroInflation(Density_Model_Residuals)
+# Compare pre and post slopes within each site
+Slope_Comparison <- emtrends(Density_Model, pairwise ~ pre_post | site, var = "year_rel")
+Slope_Comparison
+Slope_Comparison$contrasts
+# Estimated pre/post values at the transition year
+Transition_Comparison <- emmeans(Density_Model, pairwise ~ pre_post | site, at = list(year_rel = 0), type = "response")
+Transition_Comparison
+# Create prediction ranges separately for each Site x Pre/Post combination
+Pred_Data <- Model_Data %>%
+  group_by(site, pre_post) %>%
+  summarise(year_min = min(year), year_max = max(year), .groups = "drop") %>%
+  rowwise() %>%
+  mutate(year = list(seq(year_min, year_max, length.out = 100))) %>%
+  unnest(year) %>%
+  dplyr::select(-year_min, -year_max) %>%
+  left_join(Change_Years, by = "site") %>%
+  mutate(year_rel = year - change_year, site = factor(site, levels = levels(Model_Data$site)), pre_post = factor(pre_post, levels = levels(Model_Data$pre_post)))
+# Predict on the model's link scale
+Predictions <- predict(Density_Model, newdata = Pred_Data, type = "link", se.fit = TRUE)
+# Back-transform predictions and 95% CI to the density scale
+Pred_Data <- Pred_Data %>%
+  mutate(pred = exp(Predictions$fit), lower = exp(Predictions$fit - 1.96 * Predictions$se.fit), upper = exp(Predictions$fit + 1.96 * Predictions$se.fit))
+# View the actual predicted dataset
+Pred_Data
+
+## We are going to plot some information on the graph
+# currently it's the SARA line, but anything can be added the same way
+
+# Plot raw data + model predictions + 95% CI
+SARA_Line1 <- data.frame(site = unique(Model_Data$site), x = 2003, xend = 2003, y = 0, yend = 1.2, label_y = 1.2)
+Density_Figure <- ggplot() +
+  geom_ribbon(data = Pred_Data, aes(x = year, ymin = lower, ymax = upper, fill = pre_post), alpha = 0.20, colour = NA) +
+  geom_line(data = Pred_Data, aes(x = year, y = pred, colour = pre_post), linewidth = 1.1) +
+  geom_point(data = Model_Data, aes(x = year, y = site_mean_density, colour = pre_post), size = 2.5, alpha = 0.75) +
+  geom_segment(data = SARA_Line1, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_text(data = SARA_Line1, aes(x = x, y = label_y, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 3.5) +
+  facet_wrap(~site, nrow = 1) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting"), name = NULL) +
+  scale_fill_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting"), name = NULL) +
+  labs(x = "Year", y = expression("Density (Abalone per" ~ m^2 * ")"), colour = NULL, fill = NULL) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), strip.text = element_text(size = 11, face = "bold"), legend.position = "bottom")
+Density_Figure
+
+
+#### If Isa wants predicted data points 
+# Generate one fitted/predicted value for every raw observation
+Model_Data <- Model_Data %>%
+  mutate(predicted_density = predict(Density_Model, newdata = Model_Data, type = "response"),
+         observation = row_number())
+# Check that predicted and observed have the same number of values
+nrow(Model_Data)
+length(Model_Data$predicted_density)
+# Compare observed and predicted values
+t.test(Model_Data$site_mean_density, Model_Data$predicted_density, paired = TRUE)
+## p-value is 0.97 so the take home is no difference between raw and predicted
+
+# One important note, technically, the predictions above a fitted expected values (so like given model predict this)
+# We can also generate a synthetic dataset 
+set.seed(123)
+Sim_Data <- simulate(Density_Model, nsim = 1)
+Model_Data$simulated_density <- Sim_Data$sim_1
+Model_Data$site_mean_density
+t.test(Model_Data$site_mean_density, Model_Data$simulated_density, paired = TRUE) ## again we'll test it
+## we'll also plot the t.test data
+## p-value is 0.94. 
+DataPredict <- Model_Data %>%
+  mutate(observation = row_number()) %>%
+  dplyr::select(observation, site, pre_post, site_mean_density, simulated_density) %>%
+  pivot_longer(cols = c(site_mean_density, simulated_density), names_to = "type", values_to = "density") %>%
+  mutate(type = recode(type, site_mean_density = "Observed", simulated_density = "Simulated"))
+Observed_Simulated_Plot <- ggplot(DataPredict, aes(x = observation, y = density, colour = type)) +
+  geom_point(size = 2, shape = 1) +
+  scale_colour_manual(values = c("Observed" = "red", "Simulated" = "black")) +
+  theme_classic() +
+  theme(legend.position = "top", legend.title = element_blank(), legend.text = element_text(size = 13, colour = "black"), axis.text = element_text(colour = "black"), text = element_text(size = 15, colour = "black")) +
+  labs(x = "Observation", y = expression("Density (Abalone per" ~ m^2 * ")"))
+# I feel like a take home of this approach is that raw date, predictions, expected, etc. should be similar if you do the modelling well
+
+
+## we can then plot these
+SARA_Line <- data.frame(site = c("taylor", "wizard"), x = c(2003, 2003), xend = c(2003, 2003), y = c(0, 0), yend = c(1.2, 1.2), label_y = c(2.08, 2.08))
+
+Simulated_Figure <- ggplot() +
+  geom_ribbon(data = Pred_Data, aes(x = year, ymin = lower, ymax = upper, fill = pre_post), alpha = 0.20, colour = NA) +
+  geom_line(data = Pred_Data, aes(x = year, y = pred, colour = pre_post), linewidth = 1.1) +
+  geom_point(data = Model_Data, aes(x = year, y = simulated_density, colour = pre_post), size = 2.5, alpha = 0.8) +
+  geom_segment(data = SARA_Line, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_text(data = SARA_Line, aes(x = x, y = 1.2, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 3.5) +
+  facet_wrap(~site, nrow = 1) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting")) +
+  scale_fill_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), guide = "none") +
+  labs(x = "Year", y = expression("Density (Abalone per" ~ m^2 * ")"), colour = NULL) +
+  theme_classic() +
+  theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), strip.text = element_text(size = 11, face = "bold"), legend.position = "bottom")
+Simulated_Figure
+
+
+## Summary
+LinearRegression_JanesAnnual ## initial linear model
+Density_Figure   ## modeled values with raw data plotted
+Simulated_Figure ## modeled values with prediced data plotted
+
+## The model is valid 
+plot(Density_Model_Residuals)
+testDispersion(Density_Model_Residuals)
+testZeroInflation(Density_Model_Residuals)
+t.test(Model_Data$site_mean_density, Model_Data$simulated_density, paired = TRUE) ## again we'll test it
+Observed_Simulated_Plot
+
+plot(Density_Model_Residuals)
+testDispersion(Density_Model_Residuals)
+testZeroInflation(Density_Model_Residuals)
+Observed_Simulated_Plot
+
+# Exporting
+## if you use this, you'll want to tinker the dimensions a bit cause I'm just guessing
+Diagnostics_Figure_2x2 <- DHARMa_Plot + Dispersion_Plot + ZeroInflation_Plot + Observed_Simulated_Plot
+ggsave("figures/MSc/Model_Diagnostics_2x2.png", Diagnostics_Figure_2x2, width = 18, height = 18, units = "in", dpi = 600)
+
+Simulated_Figure
+ggsave("figures/MSc/JaneAnnualSurvey_Simulated_Figure.png", Simulated_Figure, width = 9, height = 5, units = "in", dpi = 600)
+
+
+
+
+
+
+
+#### Jane Random Surveys #### 
 JaneRandom=Fig3_glm[Fig3_glm$method == "par_quad", ]
-count(JaneRandom,site,year_decade)
+count(JaneRandom,site,outplant)
 str(JaneRandom)
 hist(JaneRandom$site_mean_density)
 
+### Inital examination Nov 1st 2026
 JaneRandom_Model1 <- glmmTMB(site_mean_density ~ pre_post*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
 #can you bake in "in that pre category are outplant yes different than outplant no"
 #make a boxplot of these 4 variables to determine this
@@ -1017,7 +1427,6 @@ JaneRandom_Model1 <- glmmTMB(site_mean_density ~ pre_post*outplant+ (1| site), f
 summary(JaneRandom_Model1)
 emm=emmeans(JaneRandom_Model1,~pre_post|outplant,type="response")
 pairs(emm)
-
 
 #to maintain degrees of freedom but just compare the effect of quadrat vs belt 
 emmean_simple_pre_post <- emmeans(JaneRandom_Model1, pairwise ~ c(outplant, pre_post), simple = "pre_post")
@@ -1092,6 +1501,163 @@ plot(simulateResiduals(JaneRandom_Model3)) #looks good
 summary(JaneRandom_Model3)
 ## Nov 1 Jane check end 
 
+#### Nov 5 Kieran Addition, model of Jane Random Data ####
+str(JaneRandom)
+outplant
+count(JaneRandom,year,outplant)
+library(glmmTMB)
+library(DHARMa)
+library(emmeans)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+JaneRandom <- JaneRandom %>%
+  droplevels() %>%
+  mutate(year = factor(year, levels = c("1988", "1994", "2007", "2022")), outplant = factor(outplant, levels = c("no", "yes")))
+Density_Model_Jane <- glmmTMB(site_mean_density ~ year * outplant + (1 | site), family = tweedie(link = "log"), data = JaneRandom)
+summary(Density_Model_Jane)
+
+## testing the quality of the model
+Jane_Residuals <- simulateResiduals(Density_Model_Jane, n = 1000)
+plot(Jane_Residuals)
+testDispersion(Jane_Residuals)
+testZeroInflation(Jane_Residuals)
+
+Jane_Residuals <- simulateResiduals(Density_Model_Jane, n = 1000)
+plot(Jane_Residuals)
+testDispersion(Jane_Residuals)
+testZeroInflation(Jane_Residuals)
+# Generate one synthetic dataset from the fitted model
+set.seed(123)
+Jane_Sim <- simulate(Density_Model_Jane, nsim = 1)
+JaneRandom$simulated_density <- Jane_Sim$sim_1
+# Check that observed and simulated datasets have the same number of values
+nrow(JaneRandom)
+length(JaneRandom$simulated_density)
+# Compare observed and simulated values
+Jane_Sim_ttest <- t.test(JaneRandom$site_mean_density, JaneRandom$simulated_density, paired = TRUE)
+Jane_Sim_ttest ## again, no sign difference between raw and predicted data
+
+## let's plot it
+Jane_DataPredict <- JaneRandom %>%
+  mutate(observation = row_number()) %>%
+  dplyr::select(observation, year, outplant, site_mean_density, simulated_density) %>%
+  pivot_longer(cols = c(site_mean_density, simulated_density), names_to = "type", values_to = "density") %>%
+  mutate(type = recode(type, site_mean_density = "Observed", simulated_density = "Simulated"))
+Jane_Observed_Simulated_Plot <- ggplot(Jane_DataPredict, aes(x = observation, y = density, colour = type)) +
+  geom_point(size = 2, shape = 1) +
+  scale_colour_manual(values = c("Observed" = "red", "Simulated" = "black")) +
+  theme_classic() +
+  theme(legend.position = "top", legend.title = element_blank(), legend.text = element_text(size = 13, colour = "black"), axis.text = element_text(colour = "black"), text = element_text(size = 15, colour = "black")) +
+  labs(x = "Observation", y = expression("Abalone density (" * m^-2 * ")"))
+Jane_Observed_Simulated_Plot
+
+## running stats on this data
+Jane_EMM <- emmeans(Density_Model_Jane, ~ outplant | year, type = "response")
+Jane_Pred <- as.data.frame(Jane_EMM)
+Jane_Pred
+Jane_Contrasts <- pairs(Jane_EMM, adjust = "holm")
+Jane_Contrasts ## 2022 is sign different, while all other years aren't
+
+Jane_EMM_Year <- emmeans(Density_Model_Jane, ~ year | outplant, type = "response")
+Jane_Year_Contrasts <- pairs(Jane_EMM_Year, adjust = "tukey")
+Jane_Year_Contrasts ## this looks at within outplant status 
+
+Jane_Pred_Figure <- ggplot() +
+  geom_point(data = JaneRandom, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35), size = 2, alpha = 0.45) +
+  geom_errorbar(data = Jane_Pred, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35), width = 0.12, linewidth = 0.7) +
+  geom_point(data = Jane_Pred, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35), size = 3) +
+  scale_colour_manual(values = c("no" = "#F8766D", "yes" = "#00BFC4"), labels = c("no" = "No", "yes" = "Yes")) +
+  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant status") +
+  theme_classic() +
+  theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), legend.position = "bottom")
+Jane_Pred_Figure
+
+## matrix of linear relationships ##
+str(JaneRandom)
+
+## we'll do this as a first pass then come back to check the model in detail
+# I'm worried about so many predictions with min data (but lets see how it fits first)
+
+# numeric year and centre it for the model
+JaneRandom <- JaneRandom %>%
+  mutate(year_num = as.numeric(as.character(year)),
+         year_centered = (year_num - 2005) / 10)
+# Fit model: overall effect of outplant status, with site-specific intercepts and slopes
+Jane_Site_Model <- glmmTMB(site_mean_density ~ year_centered * outplant + (year_centered | site),
+                           family = tweedie(link = "log"),
+                           data = JaneRandom)
+summary(Jane_Site_Model)
+# Diagnostics
+Jane_Site_Residuals <- simulateResiduals(Jane_Site_Model, n = 1000)
+plot(Jane_Site_Residuals)  ## much better then I thought it would be
+testDispersion(Jane_Site_Residuals)
+testZeroInflation(Jane_Site_Residuals)
+# Create a continuous prediction sequence for every site
+Jane_Site_Pred <- JaneRandom %>%
+  dplyr::select(site, outplant) %>%
+  distinct() %>%
+  tidyr::crossing(year_num = seq(1988, 2022, length.out = 100)) %>%
+  mutate(year_centered = (year_num - 2005) / 10)
+# Generate site-specific predictions INCLUDING random effects
+Jane_Site_Predict <- predict(Jane_Site_Model,
+                             newdata = Jane_Site_Pred,
+                             type = "link",
+                             se.fit = TRUE,
+                             re.form = NULL)
+# Back-transform predictions and confidence intervals
+Jane_Site_Pred <- Jane_Site_Pred %>%
+  mutate(pred = exp(Jane_Site_Predict$fit),
+         lower = exp(Jane_Site_Predict$fit - 1.96 * Jane_Site_Predict$se.fit),
+         upper = exp(Jane_Site_Predict$fit + 1.96 * Jane_Site_Predict$se.fit))
+# Plot site-specific predictions + raw observations
+Jane_Site_Figure <- ggplot() +
+  geom_ribbon(data = Jane_Site_Pred, aes(x = year_num, ymin = lower, ymax = upper, fill = outplant), alpha = 0.20, colour = NA) +
+  geom_line(data = Jane_Site_Pred, aes(x = year_num, y = pred, colour = outplant), linewidth = 1.1) +
+  geom_point(data = JaneRandom, aes(x = year_num, y = site_mean_density, colour = outplant), size = 2.5, alpha = 0.8) +
+  facet_wrap(~site, ncol = 5) +
+  scale_colour_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
+                      labels = c("yes" = "yes", "no" = "no")) +
+  scale_fill_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
+                    guide = "none") +
+  scale_x_continuous(breaks = c(1988, 2007, 2022)) +
+  scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant") +
+  theme_classic() +
+  theme(axis.text = element_text(size = 8),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title = element_text(size = 11),
+        strip.text = element_text(size = 9),
+        legend.position = "right")
+Jane_Site_Figure
+##
+
+ggsave(
+  filename = "figures/MSc/Abalone_Jane_Site_Figure.png",
+  plot = Jane_Site_Figure,
+  width = 20,
+  height = 16,
+  units = "cm",
+  dpi = 900,
+  bg = "white")
+
+## note, the points are raw not predicted data but predictions are easy to add
+# although I think in this case (and really most cases) it's nice to have raw data
+# cause you then see if your model matches your raw data, if you have predictions 
+# you just see if your predictions match your prediction ahh
+
+
+
+
+
+##
+
+
+
+
+
+
+#
 
 
 
@@ -1099,7 +1665,7 @@ summary(JaneRandom_Model3)
 
 
 
-
+#
 
 #okay, lets now get the slope of each line in this plot to then plot change in density through time
 slopes_Fig3 <- Fig3_rate %>%
