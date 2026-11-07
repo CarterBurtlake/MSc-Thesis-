@@ -1062,11 +1062,11 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
     scale_shape_manual(
       name = "Number of observations",
       values = c(
-        "1" = 16,
-        "2" = 17,
-        "3" = 15,
-        "4" = 18,
-        "5" = 19
+        "1" = 15,
+        "2" = 18,
+        "3" = 16,
+        "4" = 10,
+        "5" = 13
       )
     ) +
     coord_sf(
@@ -1106,20 +1106,20 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
     #     "yes" = 21,
     #     "no" = 21),
     #   breaks = c("yes", "no")) +
-    # scale_colour_manual(
-    #   values = c(
-    #     "yes" = "#CD64B5FF",
-    #     "no" = "grey65"),
-    #   breaks = c("yes", "no"),
-    #   guide = "none") +
-    # guides(
-    #   shape = guide_legend(
-    #     title.position = "left",
-    #     title.hjust = 0.5,
-    #     direction = "horizontal",
-    #     nrow = 1,
-    #     override.aes = list(
-    #       colour = c("#CD64B5FF", "grey65")))) +
+    scale_colour_manual(
+      values = c(
+        "yes" = "#CD64B5FF",
+        "no" = "grey65"),
+      breaks = c("yes", "no"),
+      guide = "none") +
+    #guides(
+      # shape = guide_legend(
+      #   title.position = "left",
+      #   title.hjust = 0.5,
+      #   direction = "horizontal",
+      #   nrow = 1,
+      #   override.aes = list(
+      #     colour = c("#CD64B5FF", "grey65")))) +
     # Themes
     theme_bw() +
     theme(
@@ -1286,7 +1286,11 @@ ggsave(
 
 ### test end
 
-
+#FOR MONDAY FIGURE OUT HOW TO COMBINE THE COORDS_CONSOLIDATED DATASET WITH THE AVERAGE DENSITY SCORE BY A SITE, THEN ADD ALL THOSE DENSITIES TOGETHER TO GET AN AVERAGE. MAP WITH EACH POINT COLOUR SCALED BY GRADIENT OF DENSITY TO SEE IF THAT  IS SIMILAR IN A COLOUR PATTERN TO DISTNACE FROM OUTPLANT SITE
+###Nov 7th - add an average density score per the 94 sites on the map
+Average_density_2020s <- read.csv("data-processed/all_abalone_density.csv") %>%
+  filter(year > 2020)%>% 
+  
 
 #Fig 3: JW rate ----
 
