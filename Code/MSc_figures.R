@@ -862,7 +862,7 @@ map <- function(lat_min, lat_max, long_min, long_max,
     geom_sf(
       data = coord_data %>% filter(outplant == "yes"),
       alpha = 1,
-      size = point_size * 2.5, #make outplant sites larger
+      size = point_size, #* 2.5, #make outplant sites larger
       stroke = 2,
       aes(
         fill = {{nh4_var}},
@@ -965,9 +965,9 @@ Map_Figure <- map(
   lat_max = 49.00,
   long_min = -125.4,
   long_max = -124.99,
-  coord_data = coords_consolidated,
-  # nh4_var = mean_density,
-  point_size = 0.5,
+  coord_data = average_abalone_density_site,
+  nh4_var = average_density,
+  point_size = 3,
   kelp_var = outplant,
   map_file = hakai_map)
 Map_Figure
@@ -1286,10 +1286,66 @@ ggsave(
 
 ### test end
 
+## AVERAGE DENSITY MAP ----
 #FOR MONDAY FIGURE OUT HOW TO COMBINE THE COORDS_CONSOLIDATED DATASET WITH THE AVERAGE DENSITY SCORE BY A SITE, THEN ADD ALL THOSE DENSITIES TOGETHER TO GET AN AVERAGE. MAP WITH EACH POINT COLOUR SCALED BY GRADIENT OF DENSITY TO SEE IF THAT  IS SIMILAR IN A COLOUR PATTERN TO DISTNACE FROM OUTPLANT SITE
 ###Nov 7th - add an average density score per the 94 sites on the map
+
+# Create lookup table connecting original names to consolidated names
+site_lookup <- coords_consolidated %>%
+  dplyr::select(site_label, original_site_names, location_group, outplant, geometry) %>%
+  distinct() %>%
+  separate_rows(original_site_names, sep = ",\\s*") %>%
+  mutate(
+    original_site_names = str_trim(original_site_names),
+    original_site_names = str_to_lower(original_site_names)
+  ) %>%
+  distinct(original_site_names, .keep_all = TRUE)
+
+View(site_lookup)
+#128 observations because some of them directly named the same thing despite different sources
+
+#just use 2021-2026 data (past 5 years)
 Average_density_2020s <- read.csv("data-processed/all_abalone_density.csv") %>%
-  filter(year > 2020)%>% 
+  filter(year > 2020) %>%
+  filter(site != "new_taylor_island_2022", #remove for now while dont have GPS!
+         site != "new_flemming_112_2022",
+         site != "tzartus_116",        #filter these sites out permanently as replaced in 2022 
+         site != "taylor_island_2021",
+         site != "flemming_112_2021",
+         site != "ed_king_?", #site removed for patchy surveying
+         site != "self_point") #remove for now while dont have GPS
+
+#join the abalone data, note there should be 345 entries to match all the density scores in that data file
+abalone_density_consolidated_coords <- Average_density_2020s %>%
+  mutate(
+    site_original = site,
+    site_match = str_to_lower(str_trim(site))
+  ) %>%
+  left_join(
+    site_lookup,
+    by = c("site_match" = "original_site_names")
+  ) %>%
+  mutate(
+    site = coalesce(site_label, site_original)
+  ) %>%
+  dplyr::select(-site_match, -site_label)%>%
+  st_as_sf()
+
+View(abalone_density_consolidated_coords)
+#they match 345 observations so all data points are accounted for with GPS locations
+
+#Get an average abalone score across data sets for a given site
+# CHECK: THIS IS GOING TO BE MORE HEAVILY WEIGHTED BY RLS DATA AND DFO DATA THAN STORMCOAST AND JW DATA
+average_abalone_density_site <- abalone_density_consolidated_coords %>%
+  group_by(site, outplant) %>%
+  summarise(average_density = mean(site_mean_density), #calculate density average across all years of study across all studies
+            number_surveys = n(), #tell us how different surveys go into the average
+            number_surveyors = n_distinct(source), #tell us how different surveys go into the average
+            .groups = "drop")
+
+
+
+
   
 
 #Fig 3: JW rate ----

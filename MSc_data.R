@@ -589,7 +589,10 @@ KRI_abalone_density <- janitor::clean_names(KRI_density) %>% #tidy the column na
          site = str_replace_all(site, "'", ""),
          source = "KRI",
          method = "par_belt",
-         search = "non_cryptic") 
+         search = "non_cryptic") %>%
+  mutate(site = case_when(str_detect(site, "dodd") ~ "dodd_island",   #Nov9th change these names for mapping
+                          str_detect(site, "nettle") ~ "nettle_island",
+                          TRUE ~ site))
 
 #average density
 average_KRI_abalone <- KRI_density %>%
@@ -600,7 +603,12 @@ average_KRI_abalone <- KRI_density %>%
 
 # Parks + KRI data ----
 #lets merge all the density data for the Parks sites
-BGI_abalone_density <- rbind(Parks_abalone_density, KRI_abalone_density)
+BGI_abalone_density <- rbind(Parks_abalone_density, KRI_abalone_density) %>%
+  mutate(site = case_when(str_detect(site, "dodd") ~ "dodd_island",   #Nov9th change these names for mapping
+                          str_detect(site, "nettle") ~ "nettle_island",
+                          TRUE ~ site))
+  
+  
 
 #average density across all the years (just for fun)
 average_BrokenGroup_data <- BGI_abalone_density %>%
@@ -642,14 +650,14 @@ SC_data_clean <- SC_data%>%
   mutate(method = "perp_quad") %>% #method used 
   mutate(search = "non_cryptic") %>% #did not flip over rocks in search
   mutate(source = "Storm_Coast") %>% #add to match df convention
-  mutate(site_id = case_when(str_detect(transect_id, "EKE02") ~ "ed_king_se", #changing names relevant to outplanting information.
+  mutate(site_id = case_when(str_detect(transect_id, "EKE02") ~ "edward_king_south", #changing names relevant to outplanting information. (Nov 9th changing back to match gps location names for mapping. previously had: ed_king_se)
                              str_detect(transect_id, "EGB01") ~ "scotts_bay",
-                             str_detect(transect_id, "ELI01") ~ "ellis",
+                             str_detect(transect_id, "ELI01") ~ "ellis_bay", #(Nov 9th changing back to match gps location names for mapping. previously had: ellis)
                              str_detect(transect_id, "GOT01") ~ "grappler",
                              str_detect(transect_id, "HSW01") ~ "helby_sw",
-                             str_detect(transect_id, "SAN02") ~ "sandford_sw", #this site might be less accurate -> to review in CH thesis
+                             str_detect(transect_id, "SAN02") ~ "sanford_south", #this site might be less accurate -> to review in CH thesis (Nov 9th changing back to match gps location names for mapping. previously had: sandford_sw)
                              str_detect(transect_id, "AGU01") ~ "aguilar_point",
-                             str_detect(transect_id, "ESE01") ~ "ed_king_s",
+                             str_detect(transect_id, "ESE01") ~ "edward_king_se", #(Nov 9th changing back to match gps location names for mapping. previously had: ed_king_s)
                              TRUE ~ site_id)) 
 
 
@@ -692,19 +700,19 @@ JW_data_clean <- janitor::clean_names(JW_data) %>%
     code = as.integer(str_extract(site, "^\\d+")),
     site = case_when(
       code == 1 ~ "ship_islands",
-      code == 2 ~ "ed_king_sw", #call relevant to outplant location
-      code == 3 ~ "ed_king_nw", #call relevant to outplant location
+      code == 2 ~ "ed_king", #call relevant to outplant location (Nov 9th: change name from ed_king_sw for mapping)
+      code == 3 ~ "w_ed_king", #call relevant to outplant location (Nov 9th: change name from ed_king_nw for mapping)
       code == 4 ~ "seppings",
       code == 5 ~ "cape_beale",
       code == 6 ~ "lawton_point",
       code == 7 ~ "whittlestone",
       code == 8 ~ "execution_rock",
       code == 9 ~ "self_point", #this sites gps location is near effingham inlet?
-      code == 10 ~ "helby_ne",  #call relevant to outplant location
+      code == 10 ~ "helby_island",  #call relevant to outplant location (Nov 9th: change name from ed_king_nw for mapping)
       code == 11 ~ "scotts_bay",
       code == 12 ~ "aguilar_point",
       code == 13 ~ "cia_rock",
-      code == 14 ~ "ed_king_se", #for the purposes of this project I am renaming this site to align with the outplant location name (it is the closest site in this study)
+      code == 14 ~ "taylor_ed_king", #for the purposes of this project I am renaming this site to align with the outplant location name (it is the closest site in this study) (Nov 9th: change name from ed_king_se to orignal name for mapping purposes)
       code == 15 ~ "kirby_point",
       code == 16 ~ "village_bay",
       code == 17 ~ "blowhole",
@@ -762,7 +770,7 @@ JW_taylor_data_clean <- janitor::clean_names(JW_taylor_data)%>%
          year = if_else(year <= 26, year + 2000, year + 1900))%>%
   rename(mean_abalone = abalone) %>% #rename to be clear
   mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by indivudal transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
-         site = "taylor") 
+         site = "taylor_ed_king") 
 
 #density taylor
 JW_taylor_density <- JW_taylor_data_clean%>%
@@ -799,7 +807,8 @@ JW_abalone_density <- rbind(JW_abalone_density_7year, JW_annual_density)
 
 # Combined sources ----
 abalone_density <- rbind(JW_abalone_density, DFO_abalone_density, RLS_abalone_density, KRI_abalone_density, SC_abalone_density, KCCA_RLS_abalone_density)
-#readr::write_csv(abalone_density, file = "data-processed/all_abalone_density.csv") #to save the processed data 
+readr::write_csv(abalone_density, file = "data-processed/all_abalone_density.csv") #to save the processed data 
+#notice that parks data isn't in here but that is fine as we are only using 2021 - 2026 data thus far with this complete data set
 
 #check site alignment
 unique(abalone_density$site)
