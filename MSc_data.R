@@ -770,7 +770,7 @@ JW_taylor_data_clean <- janitor::clean_names(JW_taylor_data)%>%
          year = if_else(year <= 26, year + 2000, year + 1900))%>%
   rename(mean_abalone = abalone) %>% #rename to be clear
   mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by indivudal transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
-         site = "taylor_ed_king") 
+         site = "taylor") 
 
 #density taylor
 JW_taylor_density <- JW_taylor_data_clean%>%
