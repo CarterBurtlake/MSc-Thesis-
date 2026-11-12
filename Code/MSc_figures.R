@@ -1373,16 +1373,15 @@ Fig3_rate <- rate%>%
                        levels = c(
                          "scotts_bay",
                          "grappler",
-                         "taylor",
                          "aguilar_point",
                          "execution_rock",
                          "wizard",
-                         "helby_northeast",
+                         "helby_island",
                          "self_point",
                          "whittlestone",
                          "prasiola",
                          "cape_beale",
-                         "ed_king_northwest",
+                         "w_ed_king",
                          "ship_islands",
                          "seppings",
                          "lawton_point",
@@ -1390,8 +1389,8 @@ Fig3_rate <- rate%>%
                          "kirby_point",
                          "village_bay",
                          "blowhole",
-                         "ed_king_southeast",
-                         "ed_king_southwest")))
+                         "taylor_ed_king",
+                         "ed_king")))
 
 
 #lets plot density through time per site, we will get a linear relationship from this and extract the slope to get a change in density through time across a site
@@ -1587,9 +1586,9 @@ library(emmeans)
 
 # Keep the two sites and clean factor levels
 Model_Data <- JaneAnnual %>%
-  filter(site %in% c("taylor", "wizard"), !is.na(site_mean_density), !is.na(year), !is.na(pre_post)) %>%
+  filter(site %in% c("taylor_ed_king", "wizard"), !is.na(site_mean_density), !is.na(year), !is.na(pre_post)) %>%
   droplevels() %>%
-  mutate(site = factor(site, levels = c("taylor", "wizard")), pre_post = factor(pre_post, levels = c("pre", "post")))
+  mutate(site = factor(site, levels = c("taylor_ed_king", "wizard")), pre_post = factor(pre_post, levels = c("pre", "post")))
 
 # Find the first post year separately for each site
 Change_Years <- Model_Data %>%
@@ -1643,14 +1642,27 @@ Pred_Data
 # currently it's the SARA line, but anything can be added the same way
 
 # Plot raw data + model predictions + 95% CI
-SARA_Line1 <- data.frame(site = unique(Model_Data$site), x = 2003, xend = 2003, y = 0, yend = 1.2, label_y = 1.2)
+SARA_Line <- data.frame(site = unique(Model_Data$site), x = 2003, xend = 2003, y = 0, yend = 1.2, label_y = 1.2)
+Harvest_Line <- data.frame(site = unique(Model_Data$site), x = 1990, xend = 1990, y = 0, yend = 1.2, label_y = 1.2)
 Density_Figure <- ggplot() +
   geom_ribbon(data = Pred_Data, aes(x = year, ymin = lower, ymax = upper, fill = pre_post), alpha = 0.20, colour = NA) +
   geom_line(data = Pred_Data, aes(x = year, y = pred, colour = pre_post), linewidth = 1.1) +
   geom_point(data = Model_Data, aes(x = year, y = site_mean_density, colour = pre_post), size = 2.5, alpha = 0.75) +
-  geom_segment(data = SARA_Line1, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
-  geom_text(data = SARA_Line1, aes(x = x, y = label_y, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 3.5) +
-  facet_wrap(~site, nrow = 1) +
+  annotate("rect",
+           xmin = 2003, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey80", alpha = 0.3) +
+  annotate("text",
+           x = 2006.5, y = 2.1,
+           label = "Outplanting",
+           vjust = 1.5, size = 2.5)+
+  geom_segment(data = SARA_Line, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_segment(data = Harvest_Line, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_text(data = SARA_Line, aes(x = x, y = label_y, label = "SARA listed"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 2.5) +
+  geom_text(data = Harvest_Line, aes(x = x, y = label_y, label = "Harvest ban"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 2.5) +
+  facet_wrap(~site, nrow = 1,
+             labeller = as_labeller(c("taylor_ed_king" = "Taylor",
+                                      "wizard" = "Wizard"))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting"), name = NULL) +
   scale_fill_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting"), name = NULL) +
@@ -1660,7 +1672,7 @@ Density_Figure <- ggplot() +
 Density_Figure
 
 
-#### If Isa wants predicted data points 
+#### Predicted data points 
 # Generate one fitted/predicted value for every raw observation
 Model_Data <- Model_Data %>%
   mutate(predicted_density = predict(Density_Model, newdata = Model_Data, type = "response"),
@@ -1696,15 +1708,28 @@ Observed_Simulated_Plot <- ggplot(DataPredict, aes(x = observation, y = density,
 
 
 ## we can then plot these
-SARA_Line <- data.frame(site = c("taylor", "wizard"), x = c(2003, 2003), xend = c(2003, 2003), y = c(0, 0), yend = c(1.2, 1.2), label_y = c(2.08, 2.08))
+SARA_Line1 <- data.frame(site = c("taylor_ed_king", "wizard"), x = c(2003, 2003), xend = c(2003, 2003), y = c(0, 0), yend = c(1.2, 1.2), label_y = c(2.08, 2.08))
+Harvest_Line1 <- data.frame(site = c("taylor_ed_king", "wizard"), x = 1990, xend = 1990, y = 0, yend = 1.2, label_y = 1.2)
 
 Simulated_Figure <- ggplot() +
   geom_ribbon(data = Pred_Data, aes(x = year, ymin = lower, ymax = upper, fill = pre_post), alpha = 0.20, colour = NA) +
   geom_line(data = Pred_Data, aes(x = year, y = pred, colour = pre_post), linewidth = 1.1) +
   geom_point(data = Model_Data, aes(x = year, y = simulated_density, colour = pre_post), size = 2.5, alpha = 0.8) +
-  geom_segment(data = SARA_Line, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
-  geom_text(data = SARA_Line, aes(x = x, y = 1.2, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 3.5) +
-  facet_wrap(~site, nrow = 1) +
+  annotate("rect",
+           xmin = 2003, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey80", alpha = 0.3) +
+  annotate("text",
+           x = 2006.5, y = 2.1,
+           label = "Outplanting",
+           vjust = 1.5, size = 2.5)+
+  geom_segment(data = SARA_Line1, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_segment(data = Harvest_Line1, aes(x = x, xend = xend, y = y, yend = yend), inherit.aes = FALSE, linewidth = 0.6, colour = "black") +
+  geom_text(data = SARA_Line, aes(x = x, y = 1.2, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 2.5) +
+  geom_text(data = Harvest_Line1, aes(x = x, y = 1.2, label = "Harvest ban"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 2.5) +
+  facet_wrap(~site, nrow = 1,
+             labeller = as_labeller(c("taylor_ed_king" = "Taylor",
+                                      "wizard" = "Wizard"))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting")) +
   scale_fill_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), guide = "none") +
@@ -1947,20 +1972,22 @@ Jane_Site_Figure <- ggplot() +
   geom_ribbon(data = Jane_Site_Pred, aes(x = year_num, ymin = lower, ymax = upper, fill = outplant), alpha = 0.20, colour = NA) +
   geom_line(data = Jane_Site_Pred, aes(x = year_num, y = pred, colour = outplant), linewidth = 1.1) +
   geom_point(data = JaneRandom, aes(x = year_num, y = site_mean_density, colour = outplant), size = 2.5, alpha = 0.8) +
-  facet_wrap(~site, ncol = 5) +
+  facet_wrap(~site, ncol = 5, 
+             labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) + # edit names
   scale_colour_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
                       labels = c("yes" = "yes", "no" = "no")) +
   scale_fill_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
                     guide = "none") +
   scale_x_continuous(breaks = c(1988, 2007, 2022)) +
   scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.05))) +
-  labs(x = "", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant") +
+  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant") +
   theme_classic() +
   theme(axis.text = element_text(size = 8),
         axis.text.x = element_text(angle = 45, hjust = 1),
         axis.title = element_text(size = 11),
         strip.text = element_text(size = 9),
-        legend.position = "right")
+        legend.position = "right") +
+  guides(color = guide_legend(reverse = TRUE)) #reverse legend to get yes on top
 Jane_Site_Figure
 ##
 
