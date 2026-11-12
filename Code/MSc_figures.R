@@ -1355,7 +1355,7 @@ rate <- read.csv("data-processed/all_abalone_density.csv") %>%
   mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
                               str_detect(site, "aguilar_point") ~"yes",
                               str_detect(site, "grappler") ~"yes",
-                              str_detect(site, "ed_king_se") ~"yes",
+                              str_detect(site, "taylor_ed_king") ~"yes",
                               str_detect(site, "sandford_sw") ~"yes",
                               str_detect(site, "helby_sw") ~"yes",
                               TRUE ~ "no")) %>% #everything else = not outplant
@@ -1390,7 +1390,8 @@ Fig3_rate <- rate%>%
                          "village_bay",
                          "blowhole",
                          "taylor_ed_king",
-                         "ed_king")))
+                         "ed_king",
+                         "taylor")))
 
 
 #lets plot density through time per site, we will get a linear relationship from this and extract the slope to get a change in density through time across a site
@@ -1466,13 +1467,13 @@ Fig3_glm <- Fig3_rate %>%
   mutate(year_decade = (year - mean(year, na.rm = TRUE)) / 10) %>% #attempt to make year continuous and see "change per decade"
   mutate(pre_post = case_when(year > 2003 ~ "post",
                               TRUE ~ "pre")) %>%
-  mutate(outplant = case_when(site == "ed_king_southeast" ~ "no",
+  mutate(outplant = case_when(site == "taylor_ed_king" ~ "no",
                               site == "aguilar_point" ~ "no",
                               TRUE ~ outplant))
 
-count(Fig3_glm, outplant,site)  ## confirm that aguilar_point is also now a no
+count(Fig3_glm, outplant,site)  ## confirm that aguilar_point and taylor_ed_king is also now a no
 
-str(Fig3_glm)
+str(Fig3_glm) #makes sense as wizard is double named the same and has one more year of annual data = 5 more observations
 JW_abalone_density_7year
 
 rate <- read.csv("data-processed/all_abalone_density.csv")
@@ -1586,9 +1587,9 @@ library(emmeans)
 
 # Keep the two sites and clean factor levels
 Model_Data <- JaneAnnual %>%
-  filter(site %in% c("taylor_ed_king", "wizard"), !is.na(site_mean_density), !is.na(year), !is.na(pre_post)) %>%
+  filter(site %in% c("taylor", "wizard"), !is.na(site_mean_density), !is.na(year), !is.na(pre_post)) %>%
   droplevels() %>%
-  mutate(site = factor(site, levels = c("taylor_ed_king", "wizard")), pre_post = factor(pre_post, levels = c("pre", "post")))
+  mutate(site = factor(site, levels = c("taylor", "wizard")), pre_post = factor(pre_post, levels = c("pre", "post")))
 
 # Find the first post year separately for each site
 Change_Years <- Model_Data %>%
@@ -1661,7 +1662,7 @@ Density_Figure <- ggplot() +
   geom_text(data = SARA_Line, aes(x = x, y = label_y, label = "SARA listed"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 2.5) +
   geom_text(data = Harvest_Line, aes(x = x, y = label_y, label = "Harvest ban"), inherit.aes = FALSE, angle = 0, vjust = -0.15, hjust = 0.5, size = 2.5) +
   facet_wrap(~site, nrow = 1,
-             labeller = as_labeller(c("taylor_ed_king" = "Taylor",
+             labeller = as_labeller(c("taylor" = "Taylor",
                                       "wizard" = "Wizard"))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting"), name = NULL) +
@@ -1708,8 +1709,8 @@ Observed_Simulated_Plot <- ggplot(DataPredict, aes(x = observation, y = density,
 
 
 ## we can then plot these
-SARA_Line1 <- data.frame(site = c("taylor_ed_king", "wizard"), x = c(2003, 2003), xend = c(2003, 2003), y = c(0, 0), yend = c(1.2, 1.2), label_y = c(2.08, 2.08))
-Harvest_Line1 <- data.frame(site = c("taylor_ed_king", "wizard"), x = 1990, xend = 1990, y = 0, yend = 1.2, label_y = 1.2)
+SARA_Line1 <- data.frame(site = c("taylor", "wizard"), x = c(2003, 2003), xend = c(2003, 2003), y = c(0, 0), yend = c(1.2, 1.2), label_y = c(2.08, 2.08))
+Harvest_Line1 <- data.frame(site = c("taylor", "wizard"), x = 1990, xend = 1990, y = 0, yend = 1.2, label_y = 1.2)
 
 Simulated_Figure <- ggplot() +
   geom_ribbon(data = Pred_Data, aes(x = year, ymin = lower, ymax = upper, fill = pre_post), alpha = 0.20, colour = NA) +
@@ -1728,7 +1729,7 @@ Simulated_Figure <- ggplot() +
   geom_text(data = SARA_Line, aes(x = x, y = 1.2, label = "SARA Listed"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 2.5) +
   geom_text(data = Harvest_Line1, aes(x = x, y = 1.2, label = "Harvest ban"), inherit.aes = FALSE, angle = 0, vjust = -0.2, hjust = 0.5, size = 2.5) +
   facet_wrap(~site, nrow = 1,
-             labeller = as_labeller(c("taylor_ed_king" = "Taylor",
+             labeller = as_labeller(c("taylor" = "Taylor",
                                       "wizard" = "Wizard"))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   scale_colour_manual(values = c("pre" = "#F8766D", "post" = "#00BFC4"), labels = c("pre" = "Pre-outplanting", "post" = "Post-outplanting")) +
@@ -1787,7 +1788,9 @@ pairs(emm)
 
 #to maintain degrees of freedom but just compare the effect of quadrat vs belt 
 emmean_simple_pre_post <- emmeans(JaneRandom_Model1, pairwise ~ c(outplant, pre_post), simple = "pre_post")
+
 emmean_simple_pre_post
+
 #make a boxplot of these 4 variables
 
 JaneRandom$year=as.factor(JaneRandom$year)
@@ -2037,7 +2040,7 @@ slopes_Fig3 <- Fig3_rate %>%
   mutate(outplant = case_when(str_detect(site, "scotts_bay") ~"yes", #add a column for outplant level
                               str_detect(site, "aguilar_point") ~"yes",
                               str_detect(site, "grappler") ~"yes",
-                              str_detect(site, "ed_king_se") ~"yes",
+                              str_detect(site, "taylor_ed_king") ~"yes",
                               str_detect(site, "sandford_sw") ~"yes",
                               str_detect(site, "helby_sw") ~"yes",
                               TRUE ~ "no")) %>%
@@ -2065,7 +2068,7 @@ slopes_Fig3_plot <- slopes_Fig3 %>%
   labs(x = "Rate of abalone density change through time", y = "Site", colour = "Recieved outplants?")+
   scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   scale_x_continuous(breaks = c(-0.025, 0.00, 0.05)) + #add -ve x landmark 
-  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  geom_vline(xintercept = 0, linetype = "dotted")  #insert 0 line to show direction of slopes
   #scale_linetype_manual(name = "Recovery?",values = c("Recovering?" = "dotted"))+ # try to add legend item for dashed line - not working
 
 
