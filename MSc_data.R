@@ -708,7 +708,7 @@ JW_data_clean <- janitor::clean_names(JW_data) %>%
       code == 7 ~ "whittlestone",
       code == 8 ~ "execution_rock",
       code == 9 ~ "self_point", #this sites gps location is near effingham inlet?
-      code == 10 ~ "helby_island",  #call relevant to outplant location (Nov 9th: change name from ed_king_nw for mapping)
+      code == 10 ~ "helby_island",  #call relevant to outplant location (Nov 9th: change name from helby_sw for mapping)
       code == 11 ~ "scotts_bay",
       code == 12 ~ "aguilar_point",
       code == 13 ~ "cia_rock",
