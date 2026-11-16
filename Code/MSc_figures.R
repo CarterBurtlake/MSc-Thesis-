@@ -1008,11 +1008,11 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
   coord_data <- coord_data %>%
     mutate(
       observation_group = case_when(
-        n_observations == 1 ~ "1",
-        n_observations == 2 ~ "2",
-        n_observations == 3 ~ "3",
-        n_observations == 4 ~ "4",
-        n_observations == 5 ~ "5",
+        number_surveyors == 1 ~ "1",
+        number_surveyors == 2 ~ "2",
+        number_surveyors == 3 ~ "3",
+        number_surveyors == 4 ~ "4",
+        number_surveyors == 5 ~ "5",
       )
     )
   # Create map
@@ -1032,7 +1032,7 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
         fill = {{nh4_var}},
         shape = observation_group,
         colour = {{kelp_var}},
-        size = n_observations
+        size = number_surveyors
       )
     ) +
     
@@ -1046,7 +1046,7 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
         fill = {{nh4_var}},
         shape = observation_group,
         colour = {{kelp_var}},
-        size = n_observations
+        size = number_surveyors
       )
     ) +
     viridis::scale_fill_viridis(
@@ -1062,11 +1062,11 @@ map_label <- function(lat_min, lat_max, long_min, long_max,
     scale_shape_manual(
       name = "Number of observations",
       values = c(
-        "1" = 15,
-        "2" = 18,
-        "3" = 16,
-        "4" = 10,
-        "5" = 13
+        "1" = 21, #these shapes can take colour and fill! others cant
+        "2" = 22,
+        "3" = 23,
+        "4" = 24,
+        "5" = 25
       )
     ) +
     coord_sf(
@@ -1165,11 +1165,11 @@ SWDEER_Map_Figure <- map_label(
   lat_max = 48.86,
   long_min = -125.26,
   long_max = -125.13,
-  coord_data = coords_consolidated,
-  # nh4_var = mean_density,
+  coord_data = average_abalone_density_site,
+  nh4_var = average_density,
   point_size = 0.5,
   kelp_var = outplant,
-  map_file = hakai_map)
+  map_file = hakai_map) 
 SWDEER_Map_Figure
 
 #NE Deer Group#
@@ -1178,13 +1178,55 @@ NEDEER_Map_Figure <- map_label(
   lat_max = 48.96, 
   long_min = -125.18,
   long_max = -125,
-  coord_data = coords_consolidated,
-  # nh4_var = mean_density,
+  coord_data = average_abalone_density_site,
+  nh4_var = average_density,
   point_size = 0.5,
   kelp_var = outplant,
   map_file = hakai_map)
 NEDEER_Map_Figure
 
+#Maps filtered for >1 surveyors#
+average_abalone_density_site_over1 <- average_abalone_density_site %>%
+  filter(number_surveyors >1)
+
+#south
+subset_SWDEER_Map_Figure <- map_label(
+  lat_min = 48.79,
+  lat_max = 48.86,
+  long_min = -125.26,
+  long_max = -125.13,
+  coord_data = average_abalone_density_site_over1,
+  nh4_var = average_density,
+  point_size = 0.5,
+  kelp_var = outplant,
+  map_file = hakai_map) 
+subset_SWDEER_Map_Figure
+
+#north
+subset_NEDEER_Map_Figure <- map_label(
+  lat_min = 48.8325, #flip these from SW so top = bottom (but add enough to see outplant sites?)
+  lat_max = 48.96, 
+  long_min = -125.18,
+  long_max = -125,
+  coord_data = average_abalone_density_site_over1,
+  nh4_var = average_density,
+  point_size = 0.5,
+  kelp_var = outplant,
+  map_file = hakai_map)
+subset_NEDEER_Map_Figure
+
+#all deer group (all other sites removed)
+subset_Map_Figure <- map_label(
+  lat_min = 48.79,
+  lat_max = 48.96,
+  long_min = -125.26,
+  long_max = -125,
+  coord_data = average_abalone_density_site_over1,
+  nh4_var = average_density,
+  point_size = 0.5,
+  kelp_var = outplant,
+  map_file = hakai_map)
+subset_Map_Figure
 
 ## testing the idea of a distance out outplanting grid 
 ## i'm not sure how you already determined distance to outplanting so don't let this superceed that
@@ -1861,7 +1903,7 @@ plot(simulateResiduals(JaneRandom_Model3)) #looks good
 summary(JaneRandom_Model3)
 ## Nov 1 Jane check end 
 
-#### Nov 5 Kieran Addition, model of Jane Random Data ####
+#### Nov 5 Update, model of Jane Random Data ####
 str(JaneRandom)
 outplant
 count(JaneRandom,year,outplant)
@@ -1891,7 +1933,7 @@ testZeroInflation(Jane_Residuals)
 set.seed(123)
 Jane_Sim <- simulate(Density_Model_Jane, nsim = 1)
 JaneRandom$simulated_density <- Jane_Sim$sim_1
-# Check that observed and simulated datasets have the same number of values
+# Check that observed and simulated data sets have the same number of values
 nrow(JaneRandom)
 length(JaneRandom$simulated_density)
 # Compare observed and simulated values
@@ -1942,12 +1984,14 @@ str(JaneRandom)
 # numeric year and centre it for the model
 JaneRandom <- JaneRandom %>%
   mutate(year_num = as.numeric(as.character(year)),
-         year_centered = (year_num - 2005) / 10)
+         year_centered = (year_num - min(year_num, na.rm = TRUE)) / 10) #sets intercept as time 1988 (previously had this centered and it showed a nearly significant effect in 2005 for the outplantyes intercept, which would be misleading)
 # Fit model: overall effect of outplant status, with site-specific intercepts and slopes
-Jane_Site_Model <- glmmTMB(site_mean_density ~ year_centered * outplant + (year_centered | site),
+Jane_Site_Model <- glmmTMB(site_mean_density ~ year_centered * outplant + (1| site),
                            family = tweedie(link = "log"),
                            data = JaneRandom)
 summary(Jane_Site_Model)
+
+
 # Diagnostics
 Jane_Site_Residuals <- simulateResiduals(Jane_Site_Model, n = 1000)
 plot(Jane_Site_Residuals)  ## much better then I thought it would be
