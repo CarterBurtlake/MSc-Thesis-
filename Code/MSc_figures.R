@@ -4,11 +4,15 @@
 #load packages
 library(readr)
 library(tidyr)
+library(purrr) # for functions and loops (bootstrapping)
 library(dplyr) # for general data wrangling
 library(lubridate) # for looking at dates
 library(janitor) #to clean data frames
 library(stringr) #to clean data frames
 library(forcats) #to order factors
+library(tibble) #for tabulated data
+
+
 
 library(glmmTMB) # The swiss army knife of modeling packages
 library(DHARMa) # inspect model residuals/check assumptions
@@ -1373,7 +1377,7 @@ abalone_density_consolidated_coords <- Average_density_2020s %>%
   dplyr::select(-site_match, -site_label)%>%
   st_as_sf()
 
-View(abalone_density_consolidated_coords)
+#View(abalone_density_consolidated_coords)
 #they match 345 observations so all data points are accounted for with GPS locations
 
 #Get an average abalone score across data sets for a given site
@@ -1969,7 +1973,8 @@ Jane_Pred_Figure <- ggplot() +
   geom_point(data = JaneRandom, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35), size = 2, alpha = 0.45) +
   geom_errorbar(data = Jane_Pred, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35), width = 0.12, linewidth = 0.7) +
   geom_point(data = Jane_Pred, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35), size = 3) +
-  scale_colour_manual(values = c("no" = "#F8766D", "yes" = "#00BFC4"), labels = c("no" = "No", "yes" = "Yes")) +
+  scale_colour_manual(values = c("no" = "grey60", "yes" = "#CD64B5"), labels = c("no" = "No", "yes" = "Yes")) +
+  #guides(color = guide_legend(reverse = TRUE)) + #reverse legend to get yes on top
   labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant status") +
   theme_classic() +
   theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), legend.position = "bottom")
@@ -2002,7 +2007,7 @@ Jane_Site_Pred <- JaneRandom %>%
   dplyr::select(site, outplant) %>%
   distinct() %>%
   tidyr::crossing(year_num = seq(1988, 2022, length.out = 100)) %>%
-  mutate(year_centered = (year_num - 2005) / 10)
+  mutate(year_centered = (year_num - 1988) / 10) #previously (year_centered = (year_num - 2005) / 10) which made the error bars look a lot cleaner but it doesn't match our modeled time frame
 # Generate site-specific predictions INCLUDING random effects
 Jane_Site_Predict <- predict(Jane_Site_Model,
                              newdata = Jane_Site_Pred,
@@ -2036,6 +2041,7 @@ Jane_Site_Figure <- ggplot() +
         legend.position = "right") +
   guides(color = guide_legend(reverse = TRUE)) #reverse legend to get yes on top
 Jane_Site_Figure
+#CHECK: data points are half showing on margins (fix)
 ##
 
 ggsave(
@@ -2052,7 +2058,325 @@ ggsave(
 # cause you then see if your model matches your raw data, if you have predictions 
 # you just see if your predictions match your prediction ahh
 
+#attempt slope figure Nov 16th, 2026
+#Explanation: Because we are modelling on the Log scale we have altered our relationship to match linear predictions from our exponential growth ones! All the log transformation does is change the absolute value between our relationship, not the proportion of change (this is why we can back transform (exponent) our estimates to get "real life" values of effect). So, all this is to say because we are modelling in "log land" we can get a fixed slope in log space using emtrends from our real model.
+Time_Slopes <- emtrends(
+  Jane_Site_Model,
+  specs = ~ outplant, #getting a coefficient for each category (then we will apply to the aboslute density at the selected year to get a slope of the line at that modeled time period)
+  var = "year_centered")
 
+Time_Slopes <- as.data.frame(Time_Slopes)
+
+#2022
+Jane_2022 <- JaneRandom %>%
+  filter(year_num == 2022)
+
+Jane_2022_Slopes <- Jane_2022 %>%
+  left_join(
+    Time_Slopes %>%
+      dplyr::select(outplant, year_centered.trend),
+    by = "outplant"
+  ) %>%
+  mutate(
+    site_slope = site_mean_density *
+      year_centered.trend / 10
+  )
+
+ggplot(Jane_2022_Slopes,
+       aes(x = site_slope, y = site)) +
+  geom_vline(xintercept = 0,
+             linetype = "dashed",
+             colour = "grey50") +
+  geom_point(size = 2.5) +
+  theme_classic() +
+  labs(
+    x = "Instantaneous density change (abalone/m²/year)",
+    y = "Site"
+  )
+
+#2007
+Jane_2007 <- JaneRandom %>%
+  filter(year_num == 2007)
+
+Jane_2007_Slopes <- Jane_2007 %>%
+  left_join(
+    Time_Slopes %>%
+      dplyr::select(outplant, year_centered.trend),
+    by = "outplant"
+  ) %>%
+  mutate(
+    site_slope = site_mean_density *
+      year_centered.trend / 10
+  )
+
+ggplot(Jane_2007_Slopes,
+       aes(x = site_slope, y = site)) +
+  geom_vline(xintercept = 0,
+             linetype = "dashed",
+             colour = "grey50") +
+  geom_point(size = 2.5) +
+  theme_classic() +
+  labs(
+    x = "Instantaneous density change (abalone/m²/year)",
+    y = "Site"
+  )
+#it takes the average slope which is -ve for outplant sites and applies it to the coefficient for each site... so all non-ouptlant sites essentially forced to have -ve recovery... Not super accurate 
+
+#Trying to add random effects of site considered by year_centered so that each site can have a calculated temporal slope with its own baseline density and we can measure rate change through time across sites and outplant categories 
+
+Jane_Site_Model_Rate <- glmmTMB(
+  site_mean_density ~ year_centered * outplant +
+    (year_centered | site),
+  family = tweedie(link = "log"),
+  data = JaneRandom)
+
+summary(Jane_Site_Model_Rate) #output remains the same (but we loose df? so its capacity to detect differences should be reduced?)
+
+#Alternatively 
+Jane_Site_Model_Rate_2 <- glmmTMB(
+  site_mean_density ~ year_centered * outplant +
+    (1 + year_centered || site),
+  family = tweedie(link = "log"),
+  data = JaneRandom)
+
+summary(Jane_Site_Model_Rate_2)
+
+#compare all models 
+AIC(Jane_Site_Model, Jane_Site_Model_Rate, Jane_Site_Model_Rate_2, Density_Model_Jane)
+
+VarCorr(Jane_Site_Model_Rate)
+
+glmmTMB::diagnose(Jane_Site_Model_Rate)
+
+performance::check_singularity(Jane_Site_Model_Rate)
+
+performance::check_model(Jane_Site_Model_Rate) #looks good
+
+# Extract fixed effects
+fixed_effects <- fixef(Jane_Site_Model_Rate)$cond
+
+# Extract site-specific random effects
+site_effects <- ranef(Jane_Site_Model_Rate)$cond$site
+
+# Extract site-specific slopes
+Site_Slopes <- tibble(
+  site = rownames(site_effects),
+  random_slope = site_effects[, "year_centered"]
+) %>%
+  left_join(
+    JaneRandom %>% distinct(site, outplant),
+    by = "site"
+  ) %>%
+  mutate(
+    slope = fixed_effects["year_centered"] +
+      random_slope +
+      if_else(
+        outplant == "yes",
+        fixed_effects["year_centered:outplantyes"],
+        0
+      )
+  )
+
+Site_Slopes <- Site_Slopes %>%
+  mutate(
+    percent_change_decade = 100 * (exp(slope) - 1),
+    trend = case_when(
+      slope > 0 ~ "Increasing",
+      slope < 0 ~ "Decreasing",
+      TRUE ~ "No change"
+    )
+  ) %>%
+  arrange(slope)
+
+ggplot(Site_Slopes,
+       aes(x = percent_change_decade,
+           y = reorder(site, percent_change_decade),
+           colour = outplant)) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey50"
+  ) +
+  geom_point(size = 3) +
+  scale_colour_manual(
+    values = c(
+      "no" = "grey65",
+      "yes" = "#CD64B5FF"
+    ),
+    labels = c("No", "Yes")
+  ) +
+  labs(
+    x = "Estimated change in density per decade (%)",
+    y = "Site",
+    colour = "Received outplants?"
+  ) +
+  theme_classic()
+
+#lets add CI's -> we must bootstrap to do so
+
+get_site_slopes <- function(model, data) {
+  
+  # Extract population-level (fixed) coefficients
+  fixed_effects <- fixef(model)$cond
+  
+  # Extract each site's random intercept and random slope
+  site_effects <- ranef(model)$cond$site
+  
+  # Calculate the complete slope for every site
+  tibble(
+    site = rownames(site_effects),
+    random_slope = site_effects[, "year_centered"]
+  ) %>%
+    left_join(
+      data %>% distinct(site, outplant),
+      by = "site"
+    ) %>%
+    mutate(
+      slope = unname(fixed_effects["year_centered"]) +
+        random_slope +
+        if_else(
+          outplant == "yes",
+          unname(fixed_effects["year_centered:outplantyes"]),
+          0
+        )
+    )
+}
+
+#extract slopes from original model
+Site_Slopes <- get_site_slopes(
+  Jane_Site_Model_Rate,
+  JaneRandom)
+
+Site_Slopes #why is the grappler random slope -ve?
+
+#set seed 
+set.seed(123)
+
+# Number of bootstrap simulations
+B <- 1000
+
+# Simulate new response datasets from the fitted model
+Simulated_Data_Carter <- simulate(
+  Jane_Site_Model_Rate,
+  nsim = B)
+
+Bootstrap_Slopes <- map_dfr(seq_len(B), function(i) {
+  
+  # Replace the original response with the simulated response
+  Boot_Data <- JaneRandom
+  Boot_Data$site_mean_density <- Simulated_Data_Carter[[i]]
+  
+  # Refit the original model
+  Boot_Model <- tryCatch(
+    update(Jane_Site_Model_Rate, data = Boot_Data),
+    error = function(e) NULL)
+  
+  # Skip failed model fits
+  if (is.null(Boot_Model)) return(NULL)
+  
+  # Skip fits with a non-positive-definite Hessian
+  if (!isTRUE(Boot_Model$sdr$pdHess)) return(NULL)
+  
+  # Extract the site-specific slopes
+  get_site_slopes(Boot_Model, Boot_Data) %>%
+    mutate(iteration = i)
+  
+})
+
+#calculate the CIs
+Site_Slope_CI <- Bootstrap_Slopes %>%
+  group_by(site) %>%
+  summarise(
+    lower_slope = quantile(slope, 0.025, na.rm = TRUE),
+    upper_slope = quantile(slope, 0.975, na.rm = TRUE),
+    successful_bootstraps = n(),
+    .groups = "drop"
+  ) %>%
+  left_join(Site_Slopes, by = "site") %>%
+  mutate(
+    percent_change = 100 * (exp(slope) - 1),
+    lower_percent = 100 * (exp(lower_slope) - 1),
+    upper_percent = 100 * (exp(upper_slope) - 1)
+  ) %>%
+  arrange(slope)
+
+Site_Slope_CI
+
+#plot
+ggplot(
+  Site_Slope_CI,
+  aes(
+    x = percent_change,
+    y = reorder(site, percent_change),
+    colour = outplant
+  )
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey50"
+  ) +
+  geom_segment(
+    aes(
+      x = lower_percent,
+      xend = upper_percent,
+      y = reorder(site, percent_change),
+      yend = reorder(site, percent_change)
+    ),
+    linewidth = 0.8
+  ) +
+  geom_point(size = 3) +
+  scale_colour_manual(
+    values = c(
+      "no" = "grey65",
+      "yes" = "#CD64B5FF"
+    ),
+    labels = c(
+      "no" = "No",
+      "yes" = "Yes"
+    )
+  ) +
+  labs(
+    x = "Estimated change in density per decade (%)",
+    y = "Site",
+    colour = "Received outplants?"
+  ) +
+  theme_classic()
+#isolate time period I want = 2009.293
+Jane_Random_Forest <- Jane_Site_Pred %>%
+  filter(abs(year_num - 2009.980) < 0.001) %>% #have to add a tiny range as cant isolate data under the exact decimal point
+  ggplot(aes(x = pred, y = site, colour = outplant)) +
+  geom_point(size = 2.5)+
+  geom_errorbar(
+    aes(
+      xmin = lower,
+      xmax = upper,
+      y = site), size = 1.2, width = 0.2)+
+  theme_classic()+
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
+  labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  theme(axis.title = element_text(size = 18))+
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
+  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  guides(color = guide_legend(reverse = TRUE))
+
+Jane_Random_Forest
+
+  mutate(site = fct_reorder(site, estimate)) %>% #this orders the sites by largest estimate to smallest estimate
+  ggplot(aes(x = estimate, y = site, colour = outplant)) +
+  geom_point(size = 2.5)+
+  geom_errorbar(
+    aes(
+      xmin = estimate - std.error,
+      xmax = estimate + std.error,
+      y = site), size = 1.2, width = 0.2)+
+  theme_classic()+
+  scale_color_manual(values = c("grey65", "#CD64B5FF"))+
+  labs(x = "Rate of recovery", y = "Site", colour = "Recieved outplants?")+
+  theme(axis.title = element_text(size = 18))+
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
+  geom_vline(xintercept = 0, linetype = "dotted") + #insert 0 line to show direction of slopes
+  guides(color = guide_legend(reverse = TRUE))
 
 
 
