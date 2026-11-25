@@ -1621,6 +1621,8 @@ LinearRegression_JanesAnnual=ggplot(
       face = "bold"),
     legend.position = "bottom")
 
+LinearRegression_JanesAnnual
+
 #### Janes Annual Data, Model ####
 str(JaneAnnual)
 
@@ -1897,7 +1899,7 @@ ggplot(JaneRandom, aes(x = year, y = site_mean_density, fill = outplant)) +
 
 
 #model based off main outplants
-JaneRandom_Model2 <- glmmTMB(site_mean_density ~ year*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
+JaneRandom_Model2 <- glmmTMB(site_mean_density ~ as.factor(year)*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
 plot(simulateResiduals(JaneRandom_Model2)) #looks good
 summary(JaneRandom_Model2)
 
@@ -1909,14 +1911,8 @@ summary(JaneRandom_Model3)
 
 #### Nov 5 Update, model of Jane Random Data ####
 str(JaneRandom)
-outplant
 count(JaneRandom,year,outplant)
-library(glmmTMB)
-library(DHARMa)
-library(emmeans)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+
 JaneRandom <- JaneRandom %>%
   droplevels() %>%
   mutate(year = factor(year, levels = c("1988", "1994", "2007", "2022")), outplant = factor(outplant, levels = c("no", "yes")))
@@ -2031,7 +2027,7 @@ Jane_Site_Figure <- ggplot() +
   scale_fill_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
                     guide = "none") +
   scale_x_continuous(breaks = c(1988, 2007, 2022)) +
-  scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, 0.05))) +
+  scale_y_continuous(limits = c(-0.2, NA), expand = expansion(mult = c(0, 0.05))) +
   labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant") +
   theme_classic() +
   theme(axis.text = element_text(size = 8),
@@ -2041,17 +2037,16 @@ Jane_Site_Figure <- ggplot() +
         legend.position = "right") +
   guides(color = guide_legend(reverse = TRUE)) #reverse legend to get yes on top
 Jane_Site_Figure
-#CHECK: data points are half showing on margins (fix)
 ##
 
-ggsave(
-  filename = "figures/MSc/Abalone_Jane_Site_Figure.png",
-  plot = Jane_Site_Figure,
-  width = 20,
-  height = 16,
-  units = "cm",
-  dpi = 900,
-  bg = "white")
+# #ggsave(
+#   filename = "figures/MSc/Abalone_Jane_Site_Figure.png",
+#   plot = Jane_Site_Figure,
+#   width = 20,
+#   height = 16,
+#   units = "cm",
+#   dpi = 900,
+#   bg = "white")
 
 ## note, the points are raw not predicted data but predictions are easy to add
 # although I think in this case (and really most cases) it's nice to have raw data
@@ -2129,6 +2124,12 @@ Jane_Site_Model_Rate <- glmmTMB(
     (year_centered | site),
   family = tweedie(link = "log"),
   data = JaneRandom)
+
+# Diagnostics
+Jane_Site_Residuals2 <- simulateResiduals(Jane_Site_Model_Rate, n = 1000)
+plot(Jane_Site_Residuals2)  ## much better then I thought it would be
+testDispersion(Jane_Site_Residuals2)
+testZeroInflation(Jane_Site_Residuals2)
 
 summary(Jane_Site_Model_Rate) #output remains the same (but we loose df? so its capacity to detect differences should be reduced?)
 
@@ -2283,7 +2284,7 @@ Bootstrap_Slopes <- map_dfr(seq_len(B), function(i) {
   
 })
 
-#calculate the CIs
+# Calculate 95% CIs and convert slopes to annual percentage change
 Site_Slope_CI <- Bootstrap_Slopes %>%
   group_by(site) %>%
   summarise(
@@ -2294,11 +2295,17 @@ Site_Slope_CI <- Bootstrap_Slopes %>%
   ) %>%
   left_join(Site_Slopes, by = "site") %>%
   mutate(
-    percent_change = 100 * (exp(slope) - 1),
-    lower_percent = 100 * (exp(lower_slope) - 1),
-    upper_percent = 100 * (exp(upper_slope) - 1)
+    # Convert decade slopes to annual slopes
+    annual_slope = slope / 10,
+    lower_annual = lower_slope / 10,
+    upper_annual = upper_slope / 10,
+    
+    # Convert to percentage change per year
+    percent_change = 100 * (exp(annual_slope) - 1),
+    lower_percent = 100 * (exp(lower_annual) - 1),
+    upper_percent = 100 * (exp(upper_annual) - 1)
   ) %>%
-  arrange(slope)
+  arrange(annual_slope)
 
 Site_Slope_CI
 
@@ -2337,11 +2344,140 @@ ggplot(
     )
   ) +
   labs(
-    x = "Estimated change in density per decade (%)",
+    x = "Estimated change in density per year (%)",
     y = "Site",
     colour = "Received outplants?"
   ) +
   theme_classic()
+
+#looking on log scale
+Site_Slope_CI %>%
+  dplyr::select(
+    site,
+    slope,
+    lower_slope,
+    upper_slope
+  )
+
+#plot on log scale 
+ggplot(
+  Site_Slope_CI,
+  aes(
+    x = slope,
+    y = reorder(site, slope),
+    colour = outplant
+  )
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey50"
+  ) +
+  geom_segment(
+    aes(
+      x = lower_slope,
+      xend = upper_slope,
+      y = reorder(site, slope),
+      yend = reorder(site, slope)
+    ),
+    linewidth = 0.8
+  ) +
+  geom_point(size = 3) +
+  scale_colour_manual(
+    values = c(
+      "no" = "grey65",
+      "yes" = "#CD64B5FF"
+    )
+  ) +
+  labs(
+    x = "Site-specific temporal slope (log-density scale, per decade)",
+    y = "Site",
+    colour = "Received outplants?"
+  ) +
+  theme_classic()
+
+#check boot straps of all sites (notice outplants have the only real discrepancy)
+Bootstrap_Slopes %>%
+  #filter(site %in% c("scotts_bay", "grappler")) %>%
+  ggplot(aes(x = slope, fill = site)) +
+  geom_density(alpha = 0.4) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  facet_wrap(~site, scales = "free_y") +
+  theme_classic() +
+  labs(
+    x = "Site-specific temporal slope (log-density scale)",
+    y = "Bootstrap density"
+  )
+
+#now make a grouped forest plot rather than a by site comparison
+Group_Slopes <- emtrends(
+  Jane_Site_Model_Rate,
+  specs = ~ outplant,
+  var = "year_centered"
+)
+
+summary(Group_Slopes, infer = c(TRUE, TRUE))
+
+#convert slope into change per year rather than decade
+Group_Slope_Data <- Group_Slope_CI %>%
+  mutate(
+    annual_slope = year_centered.trend / 10,
+    lower_annual = asymp.LCL / 10,
+    upper_annual = asymp.UCL / 10,
+    
+    percent_change = 100 * (exp(annual_slope) - 1),
+    lower_percent = 100 * (exp(lower_annual) - 1),
+    upper_percent = 100 * (exp(upper_annual) - 1),
+    
+    outplant = factor(
+      outplant,
+      levels = c("no", "yes"),
+      labels = c("Non-outplant", "Outplant")
+    )
+  )
+
+Group_Slope_Data
+
+#grouped forest plot
+ggplot(
+  Group_Slope_Data,
+  aes(
+    x = percent_change,
+    y = outplant,
+    colour = outplant
+  )
+) +
+  geom_vline(
+    xintercept = 0,
+    linetype = "dashed",
+    colour = "grey50"
+  ) +
+  geom_segment(
+    aes(
+      x = lower_percent,
+      xend = upper_percent,
+      yend = outplant
+    ),
+    linewidth = 1
+  ) +
+  geom_point(size = 4) +
+  scale_colour_manual(
+    values = c(
+      "Non-outplant" = "grey65",
+      "Outplant" = "#CD64B5FF"
+    )
+  ) +
+  labs(
+    x = "Estimated change in density per year (%)",
+    y = NULL,
+    colour = "Site group"
+  ) +
+  theme_classic() +
+  theme(
+    legend.position = "none"
+  )
+
+
 #isolate time period I want = 2009.293
 Jane_Random_Forest <- Jane_Site_Pred %>%
   filter(abs(year_num - 2009.980) < 0.001) %>% #have to add a tiny range as cant isolate data under the exact decimal point
