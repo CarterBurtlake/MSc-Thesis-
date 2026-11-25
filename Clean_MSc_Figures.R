@@ -292,6 +292,12 @@ JaneRandom=Fig3_glm[Fig3_glm$method == "par_quad", ]
 hist(JaneRandom$site_mean_density)
 JaneRandom$year=as.factor(JaneRandom$year)
 
+#assign outplant levels as factor for graphing and more useful model comparisons
+#NOTE IF YOU SHIFT THIS THE MODEL OUTPUT FOR YEAR CHANGES AS THE INTERCEPT EITHER COMPARES NON-OUTPLANTS ACROSS YEARS OR OUTPLANTS ACROSS YEARS
+#if you dont run this code the model reports a significant -ve decline in density at non-outplant sites in 2007 relative to 1988. If you do it reports a significant +ve increase in density at outplant sites in 2022 relative to 1988 (despite the average effect being non-significant / no change across all years)
+JaneRandom<- JaneRandom %>%
+  mutate(outplant = factor(outplant, levels = c("yes", "no")))
+
 #make df without annual but with medium outplant sites
 medium_outplant_JW <- Fig3_rate %>%
   #filter(method != "perp_belt") %>% #remove annual data for modelling 
@@ -300,7 +306,13 @@ medium_outplant_JW <- Fig3_rate %>%
   mutate(pre_post = case_when(year > 2003 ~ "post",
                               TRUE ~ "pre")) %>%
   filter(method == "par_quad")
+
+#assign year as factor 
 medium_outplant_JW$year=as.factor(medium_outplant_JW$year)
+
+#assign outplant levels as factor for graphing
+medium_outplant_JW<- medium_outplant_JW %>%
+  mutate(outplant = factor(outplant, levels = c("yes", "no")))
 
 ####model year as factor based off main outplants####
 Main_JaneRandom_Model <- glmmTMB(site_mean_density ~ as.factor(year)*outplant+ (1| site), family = tweedie(link = "log"), data = JaneRandom)
@@ -354,12 +366,12 @@ Main_Jane_Year_Contrasts <- pairs(Main_JaneRanom_Emmeans_year, adjust = "tukey")
 Main_Jane_Year_Contrasts ## this looks at within outplant status 
 
 Main_Jane_Pred_Figure <- ggplot() +
-  geom_point(data = JaneRandom, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35), size = 2, alpha = 0.45) +
-  geom_errorbar(data = Jane_Pred1, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35), width = 0.12, linewidth = 0.7) +
-  geom_point(data = Jane_Pred1, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35), size = 3) +
-  scale_colour_manual(values = c("no" = "grey60", "yes" = "#CD64B5"), labels = c("no" = "No", "yes" = "Yes")) +
+  geom_point(data = JaneRandom, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35, reverse =TRUE), size = 2, alpha = 0.45) +
+  geom_errorbar(data = Jane_Pred1, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35, reverse = FALSE), width = 0.12, linewidth = 0.7) +
+  geom_point(data = Jane_Pred1, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35, reverse = FALSE), size = 3) +
+  scale_colour_manual(values = c("no" = "grey60", "yes" = "#CD64B5"), labels = c("no" = "Non-outplant", "yes" = "Outplant")) +
   #guides(color = guide_legend(reverse = TRUE)) + #reverse legend to get yes on top
-  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant status") +
+  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "") +
   theme_classic() +
   theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), legend.position = "bottom")
 Main_Jane_Pred_Figure
@@ -408,7 +420,8 @@ Jane_Observed_Simulated_Plot
 
 ## running stats on this data
 Medium_JaneRanom_Emmeans <- emmeans(Medium_JaneRandom_Model, ~ outplant | year, type = "response")
-Jane_Pred2 <- as.data.frame(Medium_JaneRanom_Emmeans)
+Jane_Pred2 <- as.data.frame(Medium_JaneRanom_Emmeans)%>%
+  mutate(outplant = factor(outplant, levels = c("yes", "no")))
 Jane_Pred2
 Jane_Contrasts2 <- pairs(Medium_JaneRanom_Emmeans, adjust = "holm")
 Jane_Contrasts2 ## 2022 is sign different, while all other years aren't. Maybe moderate evidence for a -ve effect in 1994 at outplant = yes sites
@@ -418,12 +431,12 @@ Medium_Jane_Year_Contrasts <- pairs(Medium_JaneRanom_Emmeans_year, adjust = "tuk
 Medium_Jane_Year_Contrasts ## this looks at within outplant status 
 
 Medium_Jane_Pred_Figure <- ggplot() +
-  geom_point(data = medium_outplant_JW, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35), size = 2, alpha = 0.45) +
-  geom_errorbar(data = Jane_Pred2, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35), width = 0.12, linewidth = 0.7) +
-  geom_point(data = Jane_Pred2, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35), size = 3) +
-  scale_colour_manual(values = c("no" = "grey60", "yes" = "#CD64B5"), labels = c("no" = "No", "yes" = "Yes")) +
+  geom_point(data = medium_outplant_JW, aes(x = year, y = site_mean_density, colour = outplant), position = position_jitterdodge(jitter.width = 0.08, dodge.width = 0.35, reverse = TRUE), size = 2, alpha = 0.45) +
+  geom_errorbar(data = Jane_Pred2, aes(x = year, ymin = asymp.LCL, ymax = asymp.UCL, colour = outplant, group = outplant), position = position_dodge(width = 0.35, reverse = FALSE), width = 0.12, linewidth = 0.7) +
+  geom_point(data = Jane_Pred2, aes(x = year, y = response, colour = outplant, group = outplant), position = position_dodge(width = 0.35, reverse = FALSE), size = 3) +
+  scale_colour_manual(values = c("no" = "grey60", "yes" = "#CD64B5"), labels = c("no" = "Non-outplant", "yes" = "Outplant")) +
   #guides(color = guide_legend(reverse = TRUE)) + #reverse legend to get yes on top
-  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant status") +
+  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "") +
   theme_classic() +
   theme(axis.text = element_text(size = 10), axis.title = element_text(size = 11), legend.position = "bottom")
 Medium_Jane_Pred_Figure
@@ -498,19 +511,19 @@ Jane_Site_Figure <- ggplot() +
   facet_wrap(~site, ncol = 5, 
              labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) + # edit names
   scale_colour_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
-                      labels = c("yes" = "Yes", "no" = "No")) +
+                      labels = c("yes" = "Outplant", "no" = "Non-outplant")) +
   scale_fill_manual(values = c("yes" = "#CD64B5", "no" = "grey60"),
                     guide = "none") +
   scale_x_continuous(breaks = c(1988, 2007, 2022)) +
   scale_y_continuous(limits = c(-0.2, NA), expand = expansion(mult = c(0, 0.05))) + #set a -0.2 y so points dont get cut off
-  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "Outplant") +
+  labs(x = "Year", y = expression("Abalone density (" * m^-2 * ")"), colour = "") +
   theme_classic() +
   theme(axis.text = element_text(size = 8),
         axis.text.x = element_text(angle = 45, hjust = 1),
         axis.title = element_text(size = 11),
         strip.text = element_text(size = 9),
         legend.position = "right") +
-  guides(color = guide_legend(reverse = TRUE)) #reverse legend to get yes on top
+  guides(color = guide_legend(reverse = FALSE)) #reverse legend to get yes on top
 Jane_Site_Figure
 
 #save fig
@@ -591,13 +604,26 @@ ggplot(Site_Slopes,
 
 get_site_slopes <- function(model, data) {
   
-  # Extract population-level (fixed) coefficients
+  # Extract fixed effects
   fixed_effects <- fixef(model)$cond
   
-  # Extract each site's random intercept and random slope
+  # Extract site-specific random slopes
   site_effects <- ranef(model)$cond$site
   
-  # Calculate the complete slope for every site
+  # Identify the non-reference outplant category
+  non_reference <- levels(data$outplant)[2]
+  
+  # Identify the interaction coefficient automatically
+  interaction_name <- names(fixed_effects)[
+    grepl("year_centered", names(fixed_effects)) &
+      grepl("outplant", names(fixed_effects)) &
+      grepl(":", names(fixed_effects))
+  ]
+  
+  # Extract interaction estimate
+  interaction_effect <- unname(fixed_effects[interaction_name])
+  
+  # Calculate site-specific slopes
   tibble(
     site = rownames(site_effects),
     random_slope = site_effects[, "year_centered"]
@@ -610,8 +636,8 @@ get_site_slopes <- function(model, data) {
       slope = unname(fixed_effects["year_centered"]) +
         random_slope +
         if_else(
-          outplant == "yes",
-          unname(fixed_effects["year_centered:outplantyes"]),
+          outplant == non_reference,
+          interaction_effect,
           0
         )
     )
@@ -683,7 +709,6 @@ Site_Slope_CI <- Bootstrap_Slopes %>%
 
 Site_Slope_CI
 
-#CHECK: make these names nice
 #plot
 ggplot(
   Site_Slope_CI,
@@ -692,36 +717,40 @@ ggplot(
   geom_segment(aes(x = lower_percent, xend = upper_percent, y = reorder(site, percent_change), yend = reorder(site, percent_change)), linewidth = 0.8) +
   geom_point(size = 3) +
   scale_colour_manual(values = c("no" = "grey65", "yes" = "#CD64B5FF"),
-    labels = c(
-      "no" = "No",
-      "yes" = "Yes")) +
-  labs(
-    x = "Estimated change in density per year (%)",
-    y = "Site",
-    colour = "Received outplants?") +
+    labels = c("no" = "Non-outplant", "yes" = "Outplant")) +
+  guides(color = guide_legend(reverse = FALSE)) + #reverse legend to get yes on top
+  labs(x = "Estimated change in density per year (%)", y = "Site", colour = "") +
+  scale_y_discrete(labels = \(x) str_to_title(str_replace_all(x, "_", " ")))+
   theme_classic()
 #CI's are too large to detect which is unsurprising given the limitted temporal data, notice even if we shift to the medium outplant dataset we dont increase observations so this wont fix that...
 
-#CHECK: make these names nice and order correctly
 #check boot straps of all sites (notice outplants have the only real discrepancy)
+Bootstrap_Slopes <- Bootstrap_Slopes %>%
+  group_by(site) %>%
+  mutate(site_mean_slope = mean(slope, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(site = fct_reorder(site, site_mean_slope, .desc = TRUE)) #reorder names so that most +ve values appear first
+
 Bootstrap_Slopes %>%
-  #filter(site %in% c("scotts_bay", "grappler")) %>%
-  ggplot(aes(x = slope, fill = site)) +
+  ggplot(aes(x = slope, fill = outplant)) +
   geom_density(alpha = 0.4) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  facet_wrap(~site, scales = "free_y") +
+  facet_wrap(~site, scales = "free_y",
+             labeller = labeller(site = \(x) str_to_title(str_replace_all(x, "_", " ")))) + # edit names) +
   theme_classic() +
-  labs(
-    x = "Site-specific temporal slope (log-density scale)",
-    y = "Bootstrap density"
-  )
+  scale_fill_manual(values = c("yes" = "#CD64B5FF",  # Outplant sites
+                               "no" = "grey65"),       # Non-outplant sites
+                    labels = c("yes" = "Outplant", "no" = "Non-outplant"))+
+  guides(fill = guide_legend(reverse = FALSE)) + #reverse legend to get yes first
+  labs(x = "Site-specific temporal slope (log-density scale)", y = "Bootstrap density", fill = "")+
+  theme(legend.position = "bottom")
+#This fig explains why the CIs all overlap with 0. Sample size too small for the simulated data to generate smaller CIs
 
 #now make a grouped forest plot rather than a by site comparison
 Group_Slopes <- emtrends(
   Jane_Site_Model,
   specs = ~ outplant,
-  var = "year_centered"
-)
+  var = "year_centered")
 
 summary(Group_Slopes, infer = c(TRUE, TRUE))
 Group_Slope_CI <- as.data.frame(confint(Group_Slopes)) #make df to call
@@ -752,35 +781,10 @@ ggplot(
   aes(
     x = percent_change,
     y = outplant,
-    colour = outplant
-  )
-) +
-  geom_vline(
-    xintercept = 0,
-    linetype = "dashed",
-    colour = "grey50"
-  ) +
-  geom_segment(
-    aes(
-      x = lower_percent,
-      xend = upper_percent,
-      yend = outplant
-    ),
-    linewidth = 1
-  ) +
+    colour = outplant)) + geom_vline(xintercept = 0, linetype = "dashed", colour = "grey50") +
+  geom_segment(aes(x = lower_percent, xend = upper_percent, yend = outplant), linewidth = 1) +
   geom_point(size = 4) +
-  scale_colour_manual(
-    values = c(
-      "Non-outplant" = "grey65",
-      "Outplant" = "#CD64B5FF"
-    )
-  ) +
-  labs(
-    x = "Estimated rate of change in density per year (%)",
-    y = NULL,
-    colour = "Site group"
-  ) +
+  scale_colour_manual(values = c("Non-outplant" = "grey65", "Outplant" = "#CD64B5FF")) +
+  labs(x = "Estimated rate of change in density per year (%)", y = NULL, colour = "Site group") +
   theme_classic() +
-  theme(
-    legend.position = "none"
-  )
+  theme(legend.position = "none")
