@@ -713,14 +713,15 @@ JW_taylor_data_clean <- janitor::clean_names(JW_taylor_data)%>%
   mutate(year = as.numeric(str_extract(year, "\\d{2}$")), #extract number at end of name, then add appropriate year
          year = if_else(year <= 26, year + 2000, year + 1900))%>%
   rename(mean_abalone = abalone) %>% #rename to be clear
-  mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by individual transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
-         site = "taylor") 
+  mutate(transect_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by individual transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
+         site = "taylor") %>%
+  mutate(survey_area_m2 = 100) #this represents the total area surveyed for this site but since the mean we took is derived from each 20m transects total, we must / the mean by transect area to get a site mean
 
 #density taylor
 JW_taylor_density <- JW_taylor_data_clean%>%
   filter(!year == "1991")%>% #remove year that has no data
   mutate(mean_abalone = as.numeric(mean_abalone))%>% #make these mean values numeric so can calculate density
-  mutate(site_mean_density = mean_abalone/survey_area) #calc density per year 
+  mutate(site_mean_density = mean_abalone/transect_area) #calc density per year 
   
 #do the same with Wizard
 JW_wizard_data_clean <- janitor::clean_names(JW_wizard_data)%>%
@@ -729,16 +730,17 @@ JW_wizard_data_clean <- janitor::clean_names(JW_wizard_data)%>%
   mutate(year = as.numeric(str_extract(year, "\\d{2}$")), #extract number at end of name, then add appropriate year
          year = if_else(year <= 26, year + 2000, year + 1900))%>%
   rename(mean_abalone = abalone) %>% #rename to be clear
-  mutate(survey_area = 20,
-         site = "wizard") 
+  mutate(transect_area = 20,
+         site = "wizard") %>%
+  mutate(survey_area_m2 = 100) #this represents the total area surveyed for this site but since the mean we took is derived from each 20m transects total, we must / the mean by transect area to get a site mean
 
 #density wizard
 JW_wizard_density <- JW_wizard_data_clean%>%
-  mutate(site_mean_density = mean_abalone/survey_area) #calc density per year 
+  mutate(site_mean_density = mean_abalone/transect_area) #calc density per year 
 
 #annual surveys combined and get in same format as other dfs
 JW_annual_density <- rbind(JW_wizard_density, JW_taylor_density) %>%
-  dplyr::select(site,year,site_mean_density) %>% #remove columns to keep dfs consistent
+  dplyr::select(site,year,site_mean_density, survey_area_m2) %>% #remove columns to keep dfs consistent
   mutate(search = "non_cryptic",
          source = "Jane_Watson",
          method = "perp_belt")
