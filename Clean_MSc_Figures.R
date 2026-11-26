@@ -537,8 +537,6 @@ Jane_Site_Figure
 #   bg = "white")
 
 ####rate calculation####
-#attempt slope figure 
-#Explanation: Because we are modelling on the Log scale we have altered our relationship to match linear predictions from our exponential growth ones! All the log transformation does is change the absolute value between our relationship, not the proportion of change (this is why we can back transform (exponent) our estimates to get "real life" values of effect). So, all this is to say because we are modelling in "log land" we can get a fixed slope in log space using emtrends from our real model.
 
 # Extract fixed effects
 fixed_effects <- fixef(Jane_Site_Model)$cond

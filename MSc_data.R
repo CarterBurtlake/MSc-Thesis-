@@ -41,15 +41,15 @@ DFO_abalone <- DFO_site_data %>%
               dplyr::select(HKey, Quadrat, GaugeDepthFeet, Number, SpeciesCode, Measurement, Count, Comments),
             by = "HKey")
 
-#Next we need to add a total for each transect (WHICH I MUST CONFIRM ALL USED 3 QUADRATS TO GET THAT VALUE) for each year, add them up across the whole site, and then divide by the appropriate area of size surveyed to get density for a year (mean). 
+#Next we need to add a total for each transect (CHECK: WHICH I MUST CONFIRM ALL USED 3 QUADRATS TO GET THAT VALUE) for each year, add them up across the whole site, and then divide by the appropriate area of size surveyed to get density for a year (mean). 
 
 DFO_abalone_density <- DFO_abalone %>%
   group_by(Year, SiteName) %>%
   summarise(total_abalone = sum(Count, na.rm = TRUE),
             n_transects = n_distinct(Transect[!is.na(Transect)]), #to capture the number of transects that go into a site for a particular year
             .groups = "drop") %>%
-  mutate(Area = n_transects * 3) %>% #take the number of transects at that site and * them by the number of quadrats used along a transect = 3 *COFNRIM THIS WITH SANDIE*
-  mutate(Density = total_abalone / Area) %>% #calc density
+  mutate(survey_area_m2 = n_transects * 3) %>% #take the number of transects at that site and * them by the number of quadrats used along a transect = 3 *COFNRIM THIS WITH SANDIE*
+  mutate(Density = total_abalone / survey_area_m2) %>% #calc density
   mutate(method = "par_quad",  #add columns to highlight method, source, and search type
          source = "DFO",
          search = "non_cryptic")
@@ -58,7 +58,7 @@ DFO_abalone_density <- DFO_abalone %>%
 DFO_abalone_density <- janitor::clean_names(DFO_abalone_density) %>% #tidy the column names
   rename(site = site_name) %>% #rename site to match all dfs
   rename(site_mean_density = density) %>% #rename to match all dfs
-  dplyr::select(site,year,site_mean_density,source,search,method) %>% #remove columns to match all dfs
+  dplyr::select(site,year,site_mean_density,survey_area_m2,source,search,method) %>% #remove columns to match all dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", "")) 
 
@@ -115,7 +115,8 @@ RLS_data_clean <- RLS_data_year %>%
   filter(species_name == "Haliotis kamtschatkana") %>% #filter for just the abalone data
   group_by(site_code, year, survey_total)%>%
   dplyr::select(site_code, site_name, survey_date, date_time_survey, depth, method, species_name, size_class, survey_total) %>% #take relevant variables
-  mutate(search = "non_cryptic") #add search column, we will add method later once we dont overright the current method data
+  mutate(search = "non_cryptic") %>% #add search column, we will add method later once we dont overright the current method data
+  filter(site_name != "Slug Islets Ross Island" & survey_date != "2023-06-14") #remove KCCA data... pull in later
 
 # 2026 RLS data from spreadsheet as it is not on the up to date global repository
 RLS_new <- read_csv("data-raw/RLS_2026_only_bonus.csv")
@@ -252,6 +253,10 @@ RLS_data_totals_missing <- RLS_data_totals %>%
           site_code = "BMSC26",
           year = 2026,
           total = 0) %>%
+  add_row(site_name = "Hosie South", #add second survey data that says none were found here in 2026 as this survey has two depths (removed when filtered for abalone)
+          site_code = "BMSC26",
+          year = 2026,
+          total = 0) %>%
   add_row(site_name = "Wizard Island South", #add survey data that says none were found at this depth in 2022 (removed when filtered for abalone, not in 2022 one survey found abalone but there are two surveys so if I want the calculation to appropriately score density below I need to add another row that has a 0 total)
           site_code = "BMSC11",
           year = 2022,
@@ -260,15 +265,11 @@ RLS_data_totals_missing <- RLS_data_totals %>%
 RLS_data_means <- RLS_data_totals_missing %>%
   group_by(site_name, site_code, year) %>%
   summarise(
-    site_mean_density = if (n() == 2) {
-      sum(total, na.rm = TRUE) / 200
-    } else {
-      first(total) / 100
-    },
+    total_abalone = sum(total, na.rm = TRUE),
+    survey_area_m2 = n() * 100,
+    site_mean_density = total_abalone / survey_area_m2,
     .groups = "drop"
   )
-
-#TO DO check against how many should drop from RLS_data_totals (have an expectation based on knowledge of sites and years for a CYU)
 
 #Now we create rows that adds zero for BMSC26, year = 26, density =0
 #remove sites that aren't repeated, Kieran cox studies on subtidal kelp beds, or broken group sites
@@ -301,7 +302,7 @@ RLS_data_means_filtered <- RLS_data_means %>%
 
 #tidy names to match combined df of all average abalone density
 RLS_abalone_density <- janitor::clean_names(RLS_data_means_filtered) %>% #tidy the column names
-  dplyr::select(site, year, site_mean_density, method, search) %>% #remove site code to match other dfs
+  dplyr::select(site, year, site_mean_density, survey_area_m2, method, search) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""),
          source = "RLS") 
@@ -319,68 +320,8 @@ RLS_average_density <- RLS_data_means_filtered %>%
             .groups = "drop")
 #Reviewed all sites and all have the correct number of years of data contributing to their average
 # CHECK: worth investigating density by depth 
-# CHECK: see if its worth adding KCCA data...
 
 # RLS KCCA data----
-#load data
-#lets add the KCCA data from 2022 that didnt make it into this data set
-# RLS_KCCA2022_data <- read.csv("data-raw/RLS_KCCA_2022.csv") 
-# 
-# #clean names
-# RLS_KCCA2022_data <- clean_names(RLS_KCCA2022_data) 
-# 
-# #filter for sites over years that don't have abalone 
-# KCCA_data_year <- RLS_KCCA2022_data %>%
-#   mutate(survey_date = dmy(date)) %>%
-#   mutate(year = year(survey_date)) %>% #first we make a year column
-#   filter(method != 0) %>% # get rid of all method 0's
-#   slice(2:n()) %>% # cuts the first blank row
-#   mutate(date = parse_date_time(date, orders = c("dmy", "d-m-y"))) #make all dates in the same format
-# 
-# #attempt to clean this for surveys in a specific year, at a site, at a depth that do or dont have abalone
-# # All unique site-year-depth combinations
-# KCCA_all_combos <- KCCA_data_year %>%
-#   distinct(site_name, site_no, year, depth, time, date) #have to include time as some sites surveyed twice but had same depth...
-# 
-# # Existing Haliotidae records
-# KCCA_haliotidae <- KCCA_data_year %>%
-#   filter(species == "Haliotis kamtschatkana") %>%
-#   distinct(site_name, site_no, year, depth)
-# 
-# # Find combinations missing Haliotidae
-# KCCA_missing_haliotidae <- KCCA_all_combos %>%
-#   anti_join(KCCA_haliotidae, by = c("site_name", "site_no", "year", "depth")) %>%
-#   mutate(
-#     species = "Haliotis kamtschatkana",
-#     total = 0) 
-# 
-# # Add the missing rows
-# KCCA_with_missing_abalone <- bind_rows(KCCA_data_year, KCCA_missing_haliotidae) %>%
-#   filter(species == "Haliotis kamtschatkana",
-#          site_name != "Sand Town") %>% #control site that wasn't over rocky reef
-#   slice(-42) #remove row with KC misprint 28 abalone 
-# 
-# #get density 
-# KCCA_density <- KCCA_with_missing_abalone %>%
-#   group_by(site_name, year) %>%
-#   summarise(
-#     total_abalone = sum(total, na.rm = TRUE),
-#     n_surveys = n_distinct(date),
-#     survey_area = n_surveys * 100,
-#     .groups = "drop") %>%
-#   mutate(site_mean_density = total_abalone / survey_area) %>% #calc density
-#   mutate(method = "par_belt",  #add columns to highlight method, source, and search type
-#          source = "KCCA_RLS",
-#          search = "non_cryptic")
-# 
-# #tidy names to match combined df of all average abalone density
-# KCCA_RLS_abalone_density <- clean_names(KCCA_density) %>% #tidy the column names
-#   rename(site = site_name) %>%
-#   select(site, year, site_mean_density, method, search, source) %>% #remove site code to match other dfs
-#   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
-#          site = str_replace_all(site, "'", "")) 
-
-#load full data set
 #lets add the KCCA data from 2022 & 2023 data that didnt make it into this data set
 RLS_KCCA2022_data <- read.csv("data-raw/KCCA_RLS_all.csv") 
 
@@ -426,9 +367,9 @@ KCCA_density <- KCCA_with_missing_abalone %>%
   summarise(
     total_abalone = sum(total, na.rm = TRUE),
     n_surveys = n_distinct(date),
-    survey_area = n_surveys * 100,
+    survey_area_m2 = n_surveys * 100,
     .groups = "drop") %>%
-  mutate(site_mean_density = total_abalone / survey_area) %>% #calc density
+  mutate(site_mean_density = total_abalone / survey_area_m2) %>% #calc density
   mutate(method = "par_belt",  #add columns to highlight method, source, and search type
          source = "KCCA_RLS",
          search = "non_cryptic")
@@ -436,9 +377,10 @@ KCCA_density <- KCCA_with_missing_abalone %>%
 #tidy names to match combined df of all average abalone density
 KCCA_RLS_abalone_density <- janitor::clean_names(KCCA_density) %>% #tidy the column names
   rename(site = site_name) %>%
-  dplyr::select(site, year, site_mean_density, method, search, source) %>% #remove site code to match other dfs
+  dplyr::select(site, year, site_mean_density, survey_area_m2, method, search, source) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", "")) 
+
 # Parks data ----
 #load 2007-2012 data
 Parks_data_2007 <- read.csv("data-raw/PRNPR-Northern-Abalone-2007-2012.csv") %>% #size data
@@ -456,7 +398,7 @@ Parks_clean_data_2007 <- janitor::clean_names(Parks_data_2007) %>%
 Parks_clean_sites_2007 <- janitor::clean_names(Parks_data_2007_sites) %>%
   group_by(site, year)%>%
   summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
-            survey_area = survey_total_transect * 3.75) #number of transects * area surveyed in a single transect
+            survey_area_m2 = survey_total_transect * 3.75) #number of transects * area surveyed in a single transect
 
 #join datasets together and get density
 Parks_abalone_2007 <- Parks_clean_sites_2007 %>%
@@ -464,7 +406,7 @@ Parks_abalone_2007 <- Parks_clean_sites_2007 %>%
               dplyr::select(site, year, total_abalone), #add the total ab data to the site data
             by = c("site", "year")) %>% #combining the dataset by year and site
   mutate(total_abalone = replace_na(total_abalone, 0)) %>% #N/A -> 0s for years when abalone wasnt seen at a site
-  mutate(density = total_abalone / survey_area) #calc density
+  mutate(density = total_abalone / survey_area_m2) #calc density
 
 #average density
 average_Parks_abalone_2007 <- Parks_abalone_2007 %>%
@@ -489,14 +431,14 @@ Parks_clean_sites_2013 <- janitor::clean_names(Parks_data_2013_sites) %>%
   mutate(site = trimws(site)) %>% #one of the 2016 transects had a space after the name "Dodd " so use trimws to fix
   group_by(site, year)%>%
   summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
-            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+            survey_area_m2 = survey_total_transect * 60) #number of transects * area surveyed in a single transect
 
 #join datasets together and get density
 Parks_abalone_2013 <- Parks_clean_sites_2013 %>%
   left_join(Parks_clean_data_2013 %>%
               dplyr::select(site, year, total_abalone), #add the total ab data to the site data
             by = c("site", "year")) %>% #combining the dataset by year and site
-  mutate(density = total_abalone / survey_area) #calc density
+  mutate(density = total_abalone / survey_area_m2) #calc density
 
 #average density
 average_Parks_abalone_2013 <- Parks_abalone_2013 %>%
@@ -515,7 +457,7 @@ Parks_full_abalone <- rbind(Parks_abalone_2013, Parks_abalone_2007) %>%
 #tidy names to match combined df of all average abalone density
 Parks_abalone_density <- janitor::clean_names(Parks_full_abalone) %>% #tidy the column names
   rename(site_mean_density = density) %>% #rename to match other dfs naming convention
-  dplyr::select(site, year, site_mean_density) %>% #remove site code to match other dfs
+  dplyr::select(site, year, site_mean_density, survey_area_m2) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""),
          source = "Parks",
@@ -550,7 +492,7 @@ KRI_data_clean <- KRI_data_clean %>%
 KRI_data_survey_area <- KRI_data_clean %>%
   group_by(site, year)%>%
   summarise(survey_total_transect = (n_distinct(transect)), #number of transects at each site in a given year
-            survey_area = survey_total_transect * 60) #number of transects * area surveyed in a single transect
+            survey_area_m2 = survey_total_transect * 60) #number of transects * area surveyed in a single transect
 
 KRI_abalone_total <- KRI_data_clean %>%
   filter(size_cm > 0)%>% #remove rows where size = 0 as there were no abalone
@@ -579,12 +521,12 @@ KRI_density <- KRI_data_survey_area %>%
   left_join(KRI_abalone_totals_with_0s %>%
               dplyr::select(site, year, total_abalone), #add the total ab data to the site data
             by = c("site", "year")) %>% #combining the dataset by year and site
-  mutate(density = total_abalone / survey_area) #calc density
+  mutate(density = total_abalone / survey_area_m2) #calc density
 
 #tidy names to match combined df of all average abalone density
 KRI_abalone_density <- janitor::clean_names(KRI_density) %>% #tidy the column names
   rename(site_mean_density = density) %>% #rename to match other dfs naming convention
-  dplyr::select(site, year, site_mean_density) %>% #remove site code to match other dfs
+  dplyr::select(site, year, site_mean_density, survey_area_m2) %>% #remove site code to match other dfs
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""),
          source = "KRI",
@@ -630,13 +572,12 @@ test
 
 # Storm Coast data ----
 #load data
-SC_data <- read.csv("data-raw/StormCoast_Abalone_2025.csv")
+SC_data <- read.csv("data-raw/StormCoast_Abalone_2025_edit.csv")
 
 #View(SC_data)#commented out to run all code easily
 #Flemming NW4 is actually the site we have to edit! Here all the abalone measured are alive so as long as size >0 then it can = alive
 #Dixon inside has some counted as dead vs alive and others not... for this we must have a condition wherein if size >0 and alive vs dead is blank then make it = alive
 is.character(SC_data$date)
-# CHECK: review dixon inside on datasheets -> for now filter the site out
 
 #clean data
 SC_data <- SC_data %>%
@@ -673,7 +614,8 @@ SC_data_quad <- SC_data_clean %>%
   summarise(n_quadrats = n_distinct(quadrat)) #then we get number of quads per site
 
 SC_data_join <- left_join(SC_data_alive, SC_data_quad, by = c("site_id", "year", "method", "search", "source")) %>%
-  mutate(site_mean_density = total_alive/n_quadrats) %>% #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads
+  mutate(survey_area_m2 = n_quadrats, 
+         site_mean_density = total_alive/survey_area_m2) %>% #finally we join them together and calculate the site mean using the number of alive individuals at the site by the number of 1m2 surveyed quads = survey area (which we need to maintain to calculate a weighted average)
   rename(site = site_id) #rename to match other data sets
 
 unique((SC_data_join$site))
@@ -681,7 +623,7 @@ unique((SC_data_join$site))
 
 #tidy names to match combined df of all average abalone density
 SC_abalone_density <- janitor::clean_names(SC_data_join) %>% #tidy the column names
-  dplyr::select(site, year, site_mean_density,method,source,search) %>% #remove other variables to match dfs 
+  dplyr::select(site, year, site_mean_density, survey_area_m2,method,source,search) %>% #remove other variables to match dfs 
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))
 
@@ -731,7 +673,9 @@ JW_data_clean <- janitor::clean_names(JW_data) %>%
   mutate(method = "par_quad") %>% #add the method of search used (in this case it was parallel to shore at a depth between 5-12m with quads a certain number of fin kicks away (Watson & Estes, 2011))
   mutate(search = "non_cryptic") %>% #add the search type
   mutate(source = "Jane_Watson") %>% #add the source 
-  mutate(year = if_else(is.na(year), 1994, year)) #add year in places when they weren't directly pasted into the raw file but they were in the document titled 1994
+  mutate(year = if_else(is.na(year), 1994, year)) %>% #add year in places when they weren't directly pasted into the raw file but they were in the document titled 1994
+  mutate(survey_area_m2 = case_when(density_sample_size == "20" ~ 9.8,
+                                    density_sample_size == "30" ~ 14.7))
 
 # CHECK: confirm with Jane that the methods used for these surveys different than the wizard and taylor dataset?
 # CHECK: important to stress that I am just taking Janes mean data and we could recalculate these data
@@ -742,7 +686,7 @@ JW_data_clean <- janitor::clean_names(JW_data) %>%
 
 #tidy names to match combined df of all average abalone density
 JW_abalone_density_7year <- janitor::clean_names(JW_data_clean) %>% #tidy the column names
-  dplyr::select(site, year, site_mean_density,method,source,search) %>% #remove other variables to match dfs 
+  dplyr::select(site, year, site_mean_density, survey_area_m2,method,source,search) %>% #remove other variables to match dfs 
   mutate(site = str_to_lower(str_replace_all(site, " ", "_")), #tidy the site names
          site = str_replace_all(site, "'", ""))
 
@@ -769,7 +713,7 @@ JW_taylor_data_clean <- janitor::clean_names(JW_taylor_data)%>%
   mutate(year = as.numeric(str_extract(year, "\\d{2}$")), #extract number at end of name, then add appropriate year
          year = if_else(year <= 26, year + 2000, year + 1900))%>%
   rename(mean_abalone = abalone) %>% #rename to be clear
-  mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by indivudal transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
+  mutate(survey_area = 20, #each survey has 5 transect lines of 10m that is surveyed 1m on either side ((2x10)x5) = 100m of survey area *but since pulling means already just need to divide by individual transect and get the same value (i.e, total abalone counted across 5 transects / 100m2 = mean abalone counted across all 5 surveys / 20m2)
          site = "taylor") 
 
 #density taylor
